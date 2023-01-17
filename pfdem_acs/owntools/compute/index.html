@@ -1,0 +1,906 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>Owntools.Compute API documentation</title>
+<meta name="description" content="@author: Alexandre Sac--Morane
+alexandre.sac-morane@uclouvain.be …" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>Owntools.Compute</code></h1>
+</header>
+<section id="section-intro">
+<p>@author: Alexandre Sac&ndash;Morane
+alexandre.sac-morane@uclouvain.be</p>
+<p>This file contains the different functions used to compute parameters or variables in the simulation.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python"># -*- coding: utf-8 -*-
+&#34;&#34;&#34;
+@author: Alexandre Sac--Morane
+alexandre.sac-morane@uclouvain.be
+
+This file contains the different functions used to compute parameters or variables in the simulation.
+&#34;&#34;&#34;
+
+#-------------------------------------------------------------------------------
+#Librairy
+#-------------------------------------------------------------------------------
+
+import numpy as np
+import math
+import random
+from scipy.ndimage import binary_dilation
+
+#-------------------------------------------------------------------------------
+
+def Compute_S_int(dict_sample):
+    &#39;&#39;&#39;
+    Searching Surface,
+    Monte Carlo Method
+    A box is defined, we take a random point and we look if it is inside or outside the grain
+    Properties are the statistic times the box properties
+
+
+        Input :
+            a sample dictionnary (a dict)
+        Output :
+            Nothing but the dictionnary gets an updated value for the intersection surface (a float)
+    &#39;&#39;&#39;
+    #Defining the limit
+    box_min_x = min(dict_sample[&#39;L_g&#39;][1].l_border_x)
+    box_max_x = max(dict_sample[&#39;L_g&#39;][0].l_border_x)
+    box_min_y = min(dict_sample[&#39;L_g&#39;][0].l_border_y)
+    box_max_y = max(dict_sample[&#39;L_g&#39;][0].l_border_y)
+
+    #Compute the intersection surface
+    N_MonteCarlo = 5000 #The larger it is, the more accurate it is
+    sigma = 1
+    M_Mass = 0
+
+    for i in range(N_MonteCarlo):
+        P = np.array([random.uniform(box_min_x,box_max_x),random.uniform(box_min_y,box_max_y)])
+        if dict_sample[&#39;L_g&#39;][0].P_is_inside(P) and dict_sample[&#39;L_g&#39;][1].P_is_inside(P):
+            M_Mass = M_Mass + sigma
+
+    Mass = (box_max_x-box_min_x)*(box_max_y-box_min_y)/N_MonteCarlo*M_Mass
+    Surface = Mass/sigma
+
+    #Update element in dictionnary
+    dict_sample[&#39;S_int&#39;] = Surface
+
+#-------------------------------------------------------------------------------
+
+def Compute_sum_min_etai(dict_sample, dict_sollicitation):
+    &#39;&#39;&#39;
+    Compute the sum over the sample of the minimum of etai.
+
+    This variable is used for Compute_Emec().
+
+        Input :
+            a sample dictionnary (a dict)
+        Output :
+            Nothing but the dictionnary gets an updated value (a float)
+            If it is the first call of the function, dictionnaries gets new value (2 floats)
+    &#39;&#39;&#39;
+    #Initialisation
+    sum_min_etai = 0
+    #compute the sum over the sample of the minimum of etai
+    for l in range(len(dict_sample[&#39;y_L&#39;])):
+        for c in range(len(dict_sample[&#39;x_L&#39;])):
+            sum_min_etai = sum_min_etai + min(dict_sample[&#39;L_g&#39;][0].etai_M[-1-l][c],dict_sample[&#39;L_g&#39;][1].etai_M[-1-l][c])
+
+    #Update element in dictionnary
+    dict_sample[&#39;sum_min_etai&#39;] = sum_min_etai
+    #create element in dictionnary if not already created
+    if &#39;sum_min_etai0&#39; not in dict_sample.keys():
+        dict_sample[&#39;sum_min_etai0&#39;] = sum_min_etai
+        dict_sollicitation[&#39;alpha&#39;] = 0.2*sum_min_etai
+
+#-------------------------------------------------------------------------------
+
+def Compute_Emec(dict_sample, dict_sollicitation):
+    &#39;&#39;&#39;
+    Compute the mechanical energy field in the sample.
+
+        Input :
+            a sample dictionnary (a dict)
+        Output :
+            Nothing but the dictionnary gets an updated value for the mechanical energy map (a nx x ny numpy array)
+    &#39;&#39;&#39;
+    #Initialisation
+    Emec_M = np.array(np.zeros((len(dict_sample[&#39;y_L&#39;]),len(dict_sample[&#39;x_L&#39;]))))
+    #compute the variable e_mec
+    e_mec = dict_sollicitation[&#39;alpha&#39;]/dict_sample[&#39;sum_min_etai&#39;]
+    #compute the distribution of the mechanical energy
+    for l in range(len(dict_sample[&#39;y_L&#39;])):
+        for c in range(len(dict_sample[&#39;x_L&#39;])):
+            Emec_M[-1-l][c] = e_mec*min(dict_sample[&#39;L_g&#39;][0].etai_M[-1-l][c],dict_sample[&#39;L_g&#39;][1].etai_M[-1-l][c])
+
+    #Update element in dictionnary
+    dict_sample[&#39;Emec_M&#39;] = Emec_M
+
+#-------------------------------------------------------------------------------
+
+def Compute_kc_dil(dict_material, dict_sample):
+    &#39;&#39;&#39;
+    Compute the solute diffusion coefficient field in the sample.
+
+    Here, a dilation method is applied. For all node, a Boolean variable is defined.
+    This variable is True if eta_i and eta_j are greater than 0.5 (in the contact zone).
+                  is True if eta_i and eta_j are lower than 0.5 (in the pore zone).
+                  is False else.
+
+    A dilation method is applied, the size of the structural element is the main case.
+
+    The diffusion map is built on the Boolean map. If the variable is True, the diffusion is kc, else 0.
+
+        Input :
+            a material dictionnary (a dict)
+            a sample dictionnary (a dict)
+        Output :
+            Nothing but the dictionnary gets an updated value for the solute diffusion coefficient map (a nx x ny numpy array)
+    &#39;&#39;&#39;
+    #Initialisation
+    on_off_M = np.array(np.zeros((len(dict_sample[&#39;y_L&#39;]),len(dict_sample[&#39;x_L&#39;]))), dtype = bool)
+
+    #compute the on off map
+    for l in range(len(dict_sample[&#39;y_L&#39;])):
+        for c in range(len(dict_sample[&#39;x_L&#39;])):
+            #at the contact
+            if dict_sample[&#39;L_g&#39;][0].etai_M[-1-l][c] &gt; 0.5 and dict_sample[&#39;L_g&#39;][1].etai_M[-1-l][c] &gt; 0.5:
+                on_off_M[-l-1][c] = True
+            #in the pore space
+            elif dict_sample[&#39;L_g&#39;][0].etai_M[-1-l][c] &lt; 0.5 and dict_sample[&#39;L_g&#39;][1].etai_M[-1-l][c] &lt; 0.5:
+                on_off_M[-l-1][c] = True
+
+    #dilatation
+    struct_element = np.array(np.ones((8,8)), dtype = bool)
+    dilated_M = binary_dilation(on_off_M, struct_element)
+
+    #compute the map of the solute diffusion coefficient
+    kc_M = np.array(np.zeros((len(dict_sample[&#39;y_L&#39;]),len(dict_sample[&#39;x_L&#39;]))))
+    for l in range(len(dict_sample[&#39;y_L&#39;])):
+        for c in range(len(dict_sample[&#39;x_L&#39;])):
+            if dilated_M[-1-l][c] :
+                kc_M[-1-l][c] = dict_material[&#39;kappa_c&#39;]
+
+    #Update element in dictionnary
+    dict_sample[&#39;kc_M&#39;] = kc_M
+
+#-------------------------------------------------------------------------------
+
+def Compute_kc_wfd(dict_material, dict_sample):
+    &#39;&#39;&#39;
+    Compute the solute diffusion coefficient field in the sample.
+
+    Here, a water film diffusion is assumed. For all node, a Boolean variable is defined.
+    This variable is True if eta_i and eta_j are greater than 0.5 (in the contact zone).
+                  is True if eta_i and eta_j are lower than 0.5 (in the pore zone).
+                  is False else.
+
+    Then, the nodes inside the water film diffusion are searched. This film is assumed centered on x = 0 (approximately the contact center).
+    All nodes in this film get a variable True.
+
+    The diffusion map is built on the Boolean map. If the variable is True, the diffusion is kc, else 0.
+
+        Input :
+            a material dictionnary (a dict)
+            a sample dictionnary (a dict)
+        Output :
+            Nothing but the dictionnary gets an updated value for the solute diffusion coefficient map (a nx x ny numpy array)
+    &#39;&#39;&#39;
+    #Initialisation
+    on_off_M = np.array(np.zeros((len(dict_sample[&#39;y_L&#39;]),len(dict_sample[&#39;x_L&#39;]))), dtype = bool)
+
+    #compute the on off map
+    for l in range(len(dict_sample[&#39;y_L&#39;])):
+        for c in range(len(dict_sample[&#39;x_L&#39;])):
+            #at the contact
+            if dict_sample[&#39;L_g&#39;][0].etai_M[-1-l][c] &gt; 0.5 and dict_sample[&#39;L_g&#39;][1].etai_M[-1-l][c] &gt; 0.5:
+                on_off_M[-l-1][c] = True
+            #in the pore space
+            elif dict_sample[&#39;L_g&#39;][0].etai_M[-1-l][c] &lt; 0.5 and dict_sample[&#39;L_g&#39;][1].etai_M[-1-l][c] &lt; 0.5:
+                on_off_M[-l-1][c] = True
+
+    #look for nodes delimiting the wfd
+    c = 0
+    search_limits_wfd = True
+    search_first = True
+    while search_limits_wfd :
+        if search_first and dict_sample[&#39;x_L&#39;][c] &gt; -dict_material[&#39;width_wfd&#39;]/2:
+            c_start = c - 1
+            search_first = False
+        elif dict_sample[&#39;x_L&#39;][c] &gt; dict_material[&#39;width_wfd&#39;]/2:
+            c_end = c
+            search_limits_wfd = False
+        c = c + 1
+
+    #force diffusion in the wter film diffusion
+    for c in range(c_start,c_end+1):
+        for l in range(len(dict_sample[&#39;y_L&#39;])):
+            on_off_M[-l-1][c] = True
+
+    #compute the map of the solute diffusion coefficient
+    kc_M = np.array(np.zeros((len(dict_sample[&#39;y_L&#39;]),len(dict_sample[&#39;x_L&#39;]))))
+    for l in range(len(dict_sample[&#39;y_L&#39;])):
+        for c in range(len(dict_sample[&#39;x_L&#39;])):
+            if dilated_M[-1-l][c] :
+                kc_M[-1-l][c] = dict_material[&#39;kappa_c&#39;]
+
+    #Update element in dictionnary
+    dict_sample[&#39;kc_M&#39;] = kc_M
+
+#-------------------------------------------------------------------------------
+
+def Compute_kc_int(dict_material, dict_sample):
+    &#39;&#39;&#39;
+    Compute the solute diffusion coefficient field in the sample.
+
+    For all nodes in the mesh a diffusion coefficient is computed.
+    If eta_i and eta_j are greater than 0.5 (in the contact zone), the diffusion is kc0.
+    If eta_i and eta_j are lower than 0.5 (in the pore zone), the diffusion is kc0.
+    If eta_i (resp. eta_j) is greater than 0.5 and eta_j (resp. eta_i) is lower than 0.5 (in one grain but not the other), an interpolated diffusion is used.
+
+    This interpolated diffusion is kc = kc0*exp(tau*(d_to_center_i-radius_i)/radius_i).
+
+        Input :
+            a material dictionnary (a dict)
+            a sample dictionnary (a dict)
+        Output :
+            Nothing but the dictionnary gets an updated value for the solute diffusion coefficient map (a nx x ny numpy array)
+    &#39;&#39;&#39;
+    #Initialisation
+    kc_M = np.array(np.zeros((len(dict_sample[&#39;y_L&#39;]),len(dict_sample[&#39;x_L&#39;]))))
+
+    #compute the distribution of the solute diffusion coefficient
+    for l in range(len(dict_sample[&#39;y_L&#39;])):
+        for c in range(len(dict_sample[&#39;x_L&#39;])):
+            #at the contact
+            if dict_sample[&#39;L_g&#39;][0].etai_M[-1-l][c] &gt; 0.5 and dict_sample[&#39;L_g&#39;][1].etai_M[-1-l][c] &gt; 0.5:
+                kc_M[-l-1][c] = dict_material[&#39;kappa_c&#39;]
+            #inside g1 and not g2
+            elif dict_sample[&#39;L_g&#39;][0].etai_M[-1-l][c] &gt; 0.5 and dict_sample[&#39;L_g&#39;][1].etai_M[-1-l][c] &lt; 0.5:
+                P = np.array([dict_sample[&#39;x_L&#39;][c], dict_sample[&#39;y_L&#39;][-1-l]])
+                Distance = np.linalg.norm(P - dict_sample[&#39;L_g&#39;][0].center)
+                #exponential decrease
+                kappa_c_trans = dict_material[&#39;kappa_c&#39;]*math.exp(-(dict_sample[&#39;L_g&#39;][0].r_mean-Distance)/(dict_sample[&#39;L_g&#39;][0].r_mean/dict_material[&#39;tau_kappa_c&#39;]))
+                kc_M[-l-1][c] = kappa_c_trans
+            #inside g2 and not g1
+            elif dict_sample[&#39;L_g&#39;][0].etai_M[-1-l][c] &lt; 0.5 and dict_sample[&#39;L_g&#39;][1].etai_M[-1-l][c] &gt; 0.5:
+                #compute the distance to g1
+                P = np.array([dict_sample[&#39;x_L&#39;][c], dict_sample[&#39;y_L&#39;][-1-l]])
+                Distance = np.linalg.norm(P - dict_sample[&#39;L_g&#39;][1].center)
+                #exponential decrease
+                kappa_c_trans = dict_material[&#39;kappa_c&#39;]*math.exp(-(dict_sample[&#39;L_g&#39;][1].r_mean-Distance)/(dict_sample[&#39;L_g&#39;][1].r_mean/dict_material[&#39;tau_kappa_c&#39;]))
+                kc_M[-l-1][c] = kappa_c_trans
+            #outside
+            else :
+                kc_M[-l-1][c] = dict_material[&#39;kappa_c&#39;]
+
+    #Update element in dictionnary
+    dict_sample[&#39;kc_M&#39;] = kc_M
+
+#-------------------------------------------------------------------------------
+
+def Compute_sum_c(dict_sample):
+    &#39;&#39;&#39;
+    Compute the quantity of the solute.
+
+        Input :
+            a sample dictionnary (a dict)
+        Output :
+            Nothing but the dictionnary gets an updated value for the intersection surface (a float)
+    &#39;&#39;&#39;
+    sum_c = 0
+    for l in range(len(dict_sample[&#39;y_L&#39;])):
+        for c in range(len(dict_sample[&#39;x_L&#39;])):
+            sum_c = sum_c + dict_sample[&#39;solute_M&#39;][l][c]
+
+    #update element in dict
+    dict_sample[&#39;sum_c&#39;] = sum_c
+
+#-------------------------------------------------------------------------------
+
+def Compute_sum_eta(dict_sample):
+    &#39;&#39;&#39;
+    Compute the quantity of the grain.
+
+        Input :
+            a sample dictionnary (a dict)
+        Output :
+            Nothing but the dictionnary gets an updated value for the intersection surface (a float)
+    &#39;&#39;&#39;
+    sum_eta = 0
+    for grain in dict_sample[&#39;L_g&#39;]:
+        for l in range(len(dict_sample[&#39;y_L&#39;])):
+            for c in range(len(dict_sample[&#39;x_L&#39;])):
+                sum_eta = sum_eta + grain.etai_M[l][c]
+
+    #update element in dict
+    dict_sample[&#39;sum_eta&#39;] = sum_eta
+
+#-------------------------------------------------------------------------------
+
+def Compute_sum_Ed_plus_minus(dict_sample, dict_sollicitation):
+    &#39;&#39;&#39;
+    Compute the total energy in the sample. This energy is divided in a plus term and a minus term.
+
+        Input :
+            a sample dictionnary (a dict)
+        Output :
+            Nothing but the dictionnary gets an updated value for energy inside the sample (three floats)
+    &#39;&#39;&#39;
+    sum_ed_plus = 0
+    sum_ed_minus = 0
+    sum_ed = 0
+    sum_Ed_mec = 0
+    sum_Ed_che = 0
+    for l in range(len(dict_sample[&#39;y_L&#39;])):
+        for c in range(len(dict_sample[&#39;x_L&#39;])):
+
+            #Emec
+            Ed_mec = dict_sample[&#39;Emec_M&#39;][-1-l][c]
+
+            #Eche
+            Ed_che = dict_sollicitation[&#39;chi&#39;]*dict_sample[&#39;solute_M&#39;][-1-l][c]*(3*dict_sample[&#39;L_g&#39;][0].etai_M[-1-l][c]**2-2*dict_sample[&#39;L_g&#39;][0].etai_M[-1-l][c]**3+\
+                                                                                 3*dict_sample[&#39;L_g&#39;][1].etai_M[-1-l][c]**2-2*dict_sample[&#39;L_g&#39;][1].etai_M[-1-l][c]**3)
+
+            #Ed
+            Ed = Ed_mec - Ed_che
+
+            #sum actualisation
+            sum_ed = sum_ed + Ed
+            sum_Ed_mec = sum_Ed_mec + Ed_mec
+            sum_Ed_che = sum_Ed_che + Ed_che
+            if Ed &gt; 0 :
+                sum_ed_plus = sum_ed_plus + Ed
+            else :
+                sum_ed_minus = sum_ed_minus - Ed
+
+    #update elements in dict
+    dict_sample[&#39;sum_ed&#39;] = sum_ed
+    dict_sample[&#39;sum_Ed_mec&#39;] = sum_Ed_mec
+    dict_sample[&#39;sum_Ed_che&#39;] = sum_Ed_che
+    dict_sample[&#39;sum_ed_plus&#39;] = sum_ed_plus
+    dict_sample[&#39;sum_ed_minus&#39;] = sum_ed_minus</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="Owntools.Compute.Compute_Emec"><code class="name flex">
+<span>def <span class="ident">Compute_Emec</span></span>(<span>dict_sample, dict_sollicitation)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Compute the mechanical energy field in the sample.</p>
+<pre><code>Input :
+    a sample dictionnary (a dict)
+Output :
+    Nothing but the dictionnary gets an updated value for the mechanical energy map (a nx x ny numpy array)
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def Compute_Emec(dict_sample, dict_sollicitation):
+    &#39;&#39;&#39;
+    Compute the mechanical energy field in the sample.
+
+        Input :
+            a sample dictionnary (a dict)
+        Output :
+            Nothing but the dictionnary gets an updated value for the mechanical energy map (a nx x ny numpy array)
+    &#39;&#39;&#39;
+    #Initialisation
+    Emec_M = np.array(np.zeros((len(dict_sample[&#39;y_L&#39;]),len(dict_sample[&#39;x_L&#39;]))))
+    #compute the variable e_mec
+    e_mec = dict_sollicitation[&#39;alpha&#39;]/dict_sample[&#39;sum_min_etai&#39;]
+    #compute the distribution of the mechanical energy
+    for l in range(len(dict_sample[&#39;y_L&#39;])):
+        for c in range(len(dict_sample[&#39;x_L&#39;])):
+            Emec_M[-1-l][c] = e_mec*min(dict_sample[&#39;L_g&#39;][0].etai_M[-1-l][c],dict_sample[&#39;L_g&#39;][1].etai_M[-1-l][c])
+
+    #Update element in dictionnary
+    dict_sample[&#39;Emec_M&#39;] = Emec_M</code></pre>
+</details>
+</dd>
+<dt id="Owntools.Compute.Compute_S_int"><code class="name flex">
+<span>def <span class="ident">Compute_S_int</span></span>(<span>dict_sample)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Searching Surface,
+Monte Carlo Method
+A box is defined, we take a random point and we look if it is inside or outside the grain
+Properties are the statistic times the box properties</p>
+<pre><code>Input :
+    a sample dictionnary (a dict)
+Output :
+    Nothing but the dictionnary gets an updated value for the intersection surface (a float)
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def Compute_S_int(dict_sample):
+    &#39;&#39;&#39;
+    Searching Surface,
+    Monte Carlo Method
+    A box is defined, we take a random point and we look if it is inside or outside the grain
+    Properties are the statistic times the box properties
+
+
+        Input :
+            a sample dictionnary (a dict)
+        Output :
+            Nothing but the dictionnary gets an updated value for the intersection surface (a float)
+    &#39;&#39;&#39;
+    #Defining the limit
+    box_min_x = min(dict_sample[&#39;L_g&#39;][1].l_border_x)
+    box_max_x = max(dict_sample[&#39;L_g&#39;][0].l_border_x)
+    box_min_y = min(dict_sample[&#39;L_g&#39;][0].l_border_y)
+    box_max_y = max(dict_sample[&#39;L_g&#39;][0].l_border_y)
+
+    #Compute the intersection surface
+    N_MonteCarlo = 5000 #The larger it is, the more accurate it is
+    sigma = 1
+    M_Mass = 0
+
+    for i in range(N_MonteCarlo):
+        P = np.array([random.uniform(box_min_x,box_max_x),random.uniform(box_min_y,box_max_y)])
+        if dict_sample[&#39;L_g&#39;][0].P_is_inside(P) and dict_sample[&#39;L_g&#39;][1].P_is_inside(P):
+            M_Mass = M_Mass + sigma
+
+    Mass = (box_max_x-box_min_x)*(box_max_y-box_min_y)/N_MonteCarlo*M_Mass
+    Surface = Mass/sigma
+
+    #Update element in dictionnary
+    dict_sample[&#39;S_int&#39;] = Surface</code></pre>
+</details>
+</dd>
+<dt id="Owntools.Compute.Compute_kc_dil"><code class="name flex">
+<span>def <span class="ident">Compute_kc_dil</span></span>(<span>dict_material, dict_sample)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Compute the solute diffusion coefficient field in the sample.</p>
+<p>Here, a dilation method is applied. For all node, a Boolean variable is defined.
+This variable is True if eta_i and eta_j are greater than 0.5 (in the contact zone).
+is True if eta_i and eta_j are lower than 0.5 (in the pore zone).
+is False else.</p>
+<p>A dilation method is applied, the size of the structural element is the main case.</p>
+<p>The diffusion map is built on the Boolean map. If the variable is True, the diffusion is kc, else 0.</p>
+<pre><code>Input :
+    a material dictionnary (a dict)
+    a sample dictionnary (a dict)
+Output :
+    Nothing but the dictionnary gets an updated value for the solute diffusion coefficient map (a nx x ny numpy array)
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def Compute_kc_dil(dict_material, dict_sample):
+    &#39;&#39;&#39;
+    Compute the solute diffusion coefficient field in the sample.
+
+    Here, a dilation method is applied. For all node, a Boolean variable is defined.
+    This variable is True if eta_i and eta_j are greater than 0.5 (in the contact zone).
+                  is True if eta_i and eta_j are lower than 0.5 (in the pore zone).
+                  is False else.
+
+    A dilation method is applied, the size of the structural element is the main case.
+
+    The diffusion map is built on the Boolean map. If the variable is True, the diffusion is kc, else 0.
+
+        Input :
+            a material dictionnary (a dict)
+            a sample dictionnary (a dict)
+        Output :
+            Nothing but the dictionnary gets an updated value for the solute diffusion coefficient map (a nx x ny numpy array)
+    &#39;&#39;&#39;
+    #Initialisation
+    on_off_M = np.array(np.zeros((len(dict_sample[&#39;y_L&#39;]),len(dict_sample[&#39;x_L&#39;]))), dtype = bool)
+
+    #compute the on off map
+    for l in range(len(dict_sample[&#39;y_L&#39;])):
+        for c in range(len(dict_sample[&#39;x_L&#39;])):
+            #at the contact
+            if dict_sample[&#39;L_g&#39;][0].etai_M[-1-l][c] &gt; 0.5 and dict_sample[&#39;L_g&#39;][1].etai_M[-1-l][c] &gt; 0.5:
+                on_off_M[-l-1][c] = True
+            #in the pore space
+            elif dict_sample[&#39;L_g&#39;][0].etai_M[-1-l][c] &lt; 0.5 and dict_sample[&#39;L_g&#39;][1].etai_M[-1-l][c] &lt; 0.5:
+                on_off_M[-l-1][c] = True
+
+    #dilatation
+    struct_element = np.array(np.ones((8,8)), dtype = bool)
+    dilated_M = binary_dilation(on_off_M, struct_element)
+
+    #compute the map of the solute diffusion coefficient
+    kc_M = np.array(np.zeros((len(dict_sample[&#39;y_L&#39;]),len(dict_sample[&#39;x_L&#39;]))))
+    for l in range(len(dict_sample[&#39;y_L&#39;])):
+        for c in range(len(dict_sample[&#39;x_L&#39;])):
+            if dilated_M[-1-l][c] :
+                kc_M[-1-l][c] = dict_material[&#39;kappa_c&#39;]
+
+    #Update element in dictionnary
+    dict_sample[&#39;kc_M&#39;] = kc_M</code></pre>
+</details>
+</dd>
+<dt id="Owntools.Compute.Compute_kc_int"><code class="name flex">
+<span>def <span class="ident">Compute_kc_int</span></span>(<span>dict_material, dict_sample)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Compute the solute diffusion coefficient field in the sample.</p>
+<p>For all nodes in the mesh a diffusion coefficient is computed.
+If eta_i and eta_j are greater than 0.5 (in the contact zone), the diffusion is kc0.
+If eta_i and eta_j are lower than 0.5 (in the pore zone), the diffusion is kc0.
+If eta_i (resp. eta_j) is greater than 0.5 and eta_j (resp. eta_i) is lower than 0.5 (in one grain but not the other), an interpolated diffusion is used.</p>
+<p>This interpolated diffusion is kc = kc0<em>exp(tau</em>(d_to_center_i-radius_i)/radius_i).</p>
+<pre><code>Input :
+    a material dictionnary (a dict)
+    a sample dictionnary (a dict)
+Output :
+    Nothing but the dictionnary gets an updated value for the solute diffusion coefficient map (a nx x ny numpy array)
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def Compute_kc_int(dict_material, dict_sample):
+    &#39;&#39;&#39;
+    Compute the solute diffusion coefficient field in the sample.
+
+    For all nodes in the mesh a diffusion coefficient is computed.
+    If eta_i and eta_j are greater than 0.5 (in the contact zone), the diffusion is kc0.
+    If eta_i and eta_j are lower than 0.5 (in the pore zone), the diffusion is kc0.
+    If eta_i (resp. eta_j) is greater than 0.5 and eta_j (resp. eta_i) is lower than 0.5 (in one grain but not the other), an interpolated diffusion is used.
+
+    This interpolated diffusion is kc = kc0*exp(tau*(d_to_center_i-radius_i)/radius_i).
+
+        Input :
+            a material dictionnary (a dict)
+            a sample dictionnary (a dict)
+        Output :
+            Nothing but the dictionnary gets an updated value for the solute diffusion coefficient map (a nx x ny numpy array)
+    &#39;&#39;&#39;
+    #Initialisation
+    kc_M = np.array(np.zeros((len(dict_sample[&#39;y_L&#39;]),len(dict_sample[&#39;x_L&#39;]))))
+
+    #compute the distribution of the solute diffusion coefficient
+    for l in range(len(dict_sample[&#39;y_L&#39;])):
+        for c in range(len(dict_sample[&#39;x_L&#39;])):
+            #at the contact
+            if dict_sample[&#39;L_g&#39;][0].etai_M[-1-l][c] &gt; 0.5 and dict_sample[&#39;L_g&#39;][1].etai_M[-1-l][c] &gt; 0.5:
+                kc_M[-l-1][c] = dict_material[&#39;kappa_c&#39;]
+            #inside g1 and not g2
+            elif dict_sample[&#39;L_g&#39;][0].etai_M[-1-l][c] &gt; 0.5 and dict_sample[&#39;L_g&#39;][1].etai_M[-1-l][c] &lt; 0.5:
+                P = np.array([dict_sample[&#39;x_L&#39;][c], dict_sample[&#39;y_L&#39;][-1-l]])
+                Distance = np.linalg.norm(P - dict_sample[&#39;L_g&#39;][0].center)
+                #exponential decrease
+                kappa_c_trans = dict_material[&#39;kappa_c&#39;]*math.exp(-(dict_sample[&#39;L_g&#39;][0].r_mean-Distance)/(dict_sample[&#39;L_g&#39;][0].r_mean/dict_material[&#39;tau_kappa_c&#39;]))
+                kc_M[-l-1][c] = kappa_c_trans
+            #inside g2 and not g1
+            elif dict_sample[&#39;L_g&#39;][0].etai_M[-1-l][c] &lt; 0.5 and dict_sample[&#39;L_g&#39;][1].etai_M[-1-l][c] &gt; 0.5:
+                #compute the distance to g1
+                P = np.array([dict_sample[&#39;x_L&#39;][c], dict_sample[&#39;y_L&#39;][-1-l]])
+                Distance = np.linalg.norm(P - dict_sample[&#39;L_g&#39;][1].center)
+                #exponential decrease
+                kappa_c_trans = dict_material[&#39;kappa_c&#39;]*math.exp(-(dict_sample[&#39;L_g&#39;][1].r_mean-Distance)/(dict_sample[&#39;L_g&#39;][1].r_mean/dict_material[&#39;tau_kappa_c&#39;]))
+                kc_M[-l-1][c] = kappa_c_trans
+            #outside
+            else :
+                kc_M[-l-1][c] = dict_material[&#39;kappa_c&#39;]
+
+    #Update element in dictionnary
+    dict_sample[&#39;kc_M&#39;] = kc_M</code></pre>
+</details>
+</dd>
+<dt id="Owntools.Compute.Compute_kc_wfd"><code class="name flex">
+<span>def <span class="ident">Compute_kc_wfd</span></span>(<span>dict_material, dict_sample)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Compute the solute diffusion coefficient field in the sample.</p>
+<p>Here, a water film diffusion is assumed. For all node, a Boolean variable is defined.
+This variable is True if eta_i and eta_j are greater than 0.5 (in the contact zone).
+is True if eta_i and eta_j are lower than 0.5 (in the pore zone).
+is False else.</p>
+<p>Then, the nodes inside the water film diffusion are searched. This film is assumed centered on x = 0 (approximately the contact center).
+All nodes in this film get a variable True.</p>
+<p>The diffusion map is built on the Boolean map. If the variable is True, the diffusion is kc, else 0.</p>
+<pre><code>Input :
+    a material dictionnary (a dict)
+    a sample dictionnary (a dict)
+Output :
+    Nothing but the dictionnary gets an updated value for the solute diffusion coefficient map (a nx x ny numpy array)
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def Compute_kc_wfd(dict_material, dict_sample):
+    &#39;&#39;&#39;
+    Compute the solute diffusion coefficient field in the sample.
+
+    Here, a water film diffusion is assumed. For all node, a Boolean variable is defined.
+    This variable is True if eta_i and eta_j are greater than 0.5 (in the contact zone).
+                  is True if eta_i and eta_j are lower than 0.5 (in the pore zone).
+                  is False else.
+
+    Then, the nodes inside the water film diffusion are searched. This film is assumed centered on x = 0 (approximately the contact center).
+    All nodes in this film get a variable True.
+
+    The diffusion map is built on the Boolean map. If the variable is True, the diffusion is kc, else 0.
+
+        Input :
+            a material dictionnary (a dict)
+            a sample dictionnary (a dict)
+        Output :
+            Nothing but the dictionnary gets an updated value for the solute diffusion coefficient map (a nx x ny numpy array)
+    &#39;&#39;&#39;
+    #Initialisation
+    on_off_M = np.array(np.zeros((len(dict_sample[&#39;y_L&#39;]),len(dict_sample[&#39;x_L&#39;]))), dtype = bool)
+
+    #compute the on off map
+    for l in range(len(dict_sample[&#39;y_L&#39;])):
+        for c in range(len(dict_sample[&#39;x_L&#39;])):
+            #at the contact
+            if dict_sample[&#39;L_g&#39;][0].etai_M[-1-l][c] &gt; 0.5 and dict_sample[&#39;L_g&#39;][1].etai_M[-1-l][c] &gt; 0.5:
+                on_off_M[-l-1][c] = True
+            #in the pore space
+            elif dict_sample[&#39;L_g&#39;][0].etai_M[-1-l][c] &lt; 0.5 and dict_sample[&#39;L_g&#39;][1].etai_M[-1-l][c] &lt; 0.5:
+                on_off_M[-l-1][c] = True
+
+    #look for nodes delimiting the wfd
+    c = 0
+    search_limits_wfd = True
+    search_first = True
+    while search_limits_wfd :
+        if search_first and dict_sample[&#39;x_L&#39;][c] &gt; -dict_material[&#39;width_wfd&#39;]/2:
+            c_start = c - 1
+            search_first = False
+        elif dict_sample[&#39;x_L&#39;][c] &gt; dict_material[&#39;width_wfd&#39;]/2:
+            c_end = c
+            search_limits_wfd = False
+        c = c + 1
+
+    #force diffusion in the wter film diffusion
+    for c in range(c_start,c_end+1):
+        for l in range(len(dict_sample[&#39;y_L&#39;])):
+            on_off_M[-l-1][c] = True
+
+    #compute the map of the solute diffusion coefficient
+    kc_M = np.array(np.zeros((len(dict_sample[&#39;y_L&#39;]),len(dict_sample[&#39;x_L&#39;]))))
+    for l in range(len(dict_sample[&#39;y_L&#39;])):
+        for c in range(len(dict_sample[&#39;x_L&#39;])):
+            if dilated_M[-1-l][c] :
+                kc_M[-1-l][c] = dict_material[&#39;kappa_c&#39;]
+
+    #Update element in dictionnary
+    dict_sample[&#39;kc_M&#39;] = kc_M</code></pre>
+</details>
+</dd>
+<dt id="Owntools.Compute.Compute_sum_Ed_plus_minus"><code class="name flex">
+<span>def <span class="ident">Compute_sum_Ed_plus_minus</span></span>(<span>dict_sample, dict_sollicitation)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Compute the total energy in the sample. This energy is divided in a plus term and a minus term.</p>
+<pre><code>Input :
+    a sample dictionnary (a dict)
+Output :
+    Nothing but the dictionnary gets an updated value for energy inside the sample (three floats)
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def Compute_sum_Ed_plus_minus(dict_sample, dict_sollicitation):
+    &#39;&#39;&#39;
+    Compute the total energy in the sample. This energy is divided in a plus term and a minus term.
+
+        Input :
+            a sample dictionnary (a dict)
+        Output :
+            Nothing but the dictionnary gets an updated value for energy inside the sample (three floats)
+    &#39;&#39;&#39;
+    sum_ed_plus = 0
+    sum_ed_minus = 0
+    sum_ed = 0
+    sum_Ed_mec = 0
+    sum_Ed_che = 0
+    for l in range(len(dict_sample[&#39;y_L&#39;])):
+        for c in range(len(dict_sample[&#39;x_L&#39;])):
+
+            #Emec
+            Ed_mec = dict_sample[&#39;Emec_M&#39;][-1-l][c]
+
+            #Eche
+            Ed_che = dict_sollicitation[&#39;chi&#39;]*dict_sample[&#39;solute_M&#39;][-1-l][c]*(3*dict_sample[&#39;L_g&#39;][0].etai_M[-1-l][c]**2-2*dict_sample[&#39;L_g&#39;][0].etai_M[-1-l][c]**3+\
+                                                                                 3*dict_sample[&#39;L_g&#39;][1].etai_M[-1-l][c]**2-2*dict_sample[&#39;L_g&#39;][1].etai_M[-1-l][c]**3)
+
+            #Ed
+            Ed = Ed_mec - Ed_che
+
+            #sum actualisation
+            sum_ed = sum_ed + Ed
+            sum_Ed_mec = sum_Ed_mec + Ed_mec
+            sum_Ed_che = sum_Ed_che + Ed_che
+            if Ed &gt; 0 :
+                sum_ed_plus = sum_ed_plus + Ed
+            else :
+                sum_ed_minus = sum_ed_minus - Ed
+
+    #update elements in dict
+    dict_sample[&#39;sum_ed&#39;] = sum_ed
+    dict_sample[&#39;sum_Ed_mec&#39;] = sum_Ed_mec
+    dict_sample[&#39;sum_Ed_che&#39;] = sum_Ed_che
+    dict_sample[&#39;sum_ed_plus&#39;] = sum_ed_plus
+    dict_sample[&#39;sum_ed_minus&#39;] = sum_ed_minus</code></pre>
+</details>
+</dd>
+<dt id="Owntools.Compute.Compute_sum_c"><code class="name flex">
+<span>def <span class="ident">Compute_sum_c</span></span>(<span>dict_sample)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Compute the quantity of the solute.</p>
+<pre><code>Input :
+    a sample dictionnary (a dict)
+Output :
+    Nothing but the dictionnary gets an updated value for the intersection surface (a float)
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def Compute_sum_c(dict_sample):
+    &#39;&#39;&#39;
+    Compute the quantity of the solute.
+
+        Input :
+            a sample dictionnary (a dict)
+        Output :
+            Nothing but the dictionnary gets an updated value for the intersection surface (a float)
+    &#39;&#39;&#39;
+    sum_c = 0
+    for l in range(len(dict_sample[&#39;y_L&#39;])):
+        for c in range(len(dict_sample[&#39;x_L&#39;])):
+            sum_c = sum_c + dict_sample[&#39;solute_M&#39;][l][c]
+
+    #update element in dict
+    dict_sample[&#39;sum_c&#39;] = sum_c</code></pre>
+</details>
+</dd>
+<dt id="Owntools.Compute.Compute_sum_eta"><code class="name flex">
+<span>def <span class="ident">Compute_sum_eta</span></span>(<span>dict_sample)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Compute the quantity of the grain.</p>
+<pre><code>Input :
+    a sample dictionnary (a dict)
+Output :
+    Nothing but the dictionnary gets an updated value for the intersection surface (a float)
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def Compute_sum_eta(dict_sample):
+    &#39;&#39;&#39;
+    Compute the quantity of the grain.
+
+        Input :
+            a sample dictionnary (a dict)
+        Output :
+            Nothing but the dictionnary gets an updated value for the intersection surface (a float)
+    &#39;&#39;&#39;
+    sum_eta = 0
+    for grain in dict_sample[&#39;L_g&#39;]:
+        for l in range(len(dict_sample[&#39;y_L&#39;])):
+            for c in range(len(dict_sample[&#39;x_L&#39;])):
+                sum_eta = sum_eta + grain.etai_M[l][c]
+
+    #update element in dict
+    dict_sample[&#39;sum_eta&#39;] = sum_eta</code></pre>
+</details>
+</dd>
+<dt id="Owntools.Compute.Compute_sum_min_etai"><code class="name flex">
+<span>def <span class="ident">Compute_sum_min_etai</span></span>(<span>dict_sample, dict_sollicitation)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Compute the sum over the sample of the minimum of etai.</p>
+<p>This variable is used for Compute_Emec().</p>
+<pre><code>Input :
+    a sample dictionnary (a dict)
+Output :
+    Nothing but the dictionnary gets an updated value (a float)
+    If it is the first call of the function, dictionnaries gets new value (2 floats)
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def Compute_sum_min_etai(dict_sample, dict_sollicitation):
+    &#39;&#39;&#39;
+    Compute the sum over the sample of the minimum of etai.
+
+    This variable is used for Compute_Emec().
+
+        Input :
+            a sample dictionnary (a dict)
+        Output :
+            Nothing but the dictionnary gets an updated value (a float)
+            If it is the first call of the function, dictionnaries gets new value (2 floats)
+    &#39;&#39;&#39;
+    #Initialisation
+    sum_min_etai = 0
+    #compute the sum over the sample of the minimum of etai
+    for l in range(len(dict_sample[&#39;y_L&#39;])):
+        for c in range(len(dict_sample[&#39;x_L&#39;])):
+            sum_min_etai = sum_min_etai + min(dict_sample[&#39;L_g&#39;][0].etai_M[-1-l][c],dict_sample[&#39;L_g&#39;][1].etai_M[-1-l][c])
+
+    #Update element in dictionnary
+    dict_sample[&#39;sum_min_etai&#39;] = sum_min_etai
+    #create element in dictionnary if not already created
+    if &#39;sum_min_etai0&#39; not in dict_sample.keys():
+        dict_sample[&#39;sum_min_etai0&#39;] = sum_min_etai
+        dict_sollicitation[&#39;alpha&#39;] = 0.2*sum_min_etai</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="Owntools" href="index.html">Owntools</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="Owntools.Compute.Compute_Emec" href="#Owntools.Compute.Compute_Emec">Compute_Emec</a></code></li>
+<li><code><a title="Owntools.Compute.Compute_S_int" href="#Owntools.Compute.Compute_S_int">Compute_S_int</a></code></li>
+<li><code><a title="Owntools.Compute.Compute_kc_dil" href="#Owntools.Compute.Compute_kc_dil">Compute_kc_dil</a></code></li>
+<li><code><a title="Owntools.Compute.Compute_kc_int" href="#Owntools.Compute.Compute_kc_int">Compute_kc_int</a></code></li>
+<li><code><a title="Owntools.Compute.Compute_kc_wfd" href="#Owntools.Compute.Compute_kc_wfd">Compute_kc_wfd</a></code></li>
+<li><code><a title="Owntools.Compute.Compute_sum_Ed_plus_minus" href="#Owntools.Compute.Compute_sum_Ed_plus_minus">Compute_sum_Ed_plus_minus</a></code></li>
+<li><code><a title="Owntools.Compute.Compute_sum_c" href="#Owntools.Compute.Compute_sum_c">Compute_sum_c</a></code></li>
+<li><code><a title="Owntools.Compute.Compute_sum_eta" href="#Owntools.Compute.Compute_sum_eta">Compute_sum_eta</a></code></li>
+<li><code><a title="Owntools.Compute.Compute_sum_min_etai" href="#Owntools.Compute.Compute_sum_min_etai">Compute_sum_min_etai</a></code></li>
+</ul>
+</li>
+</ul>
+<form>
+ <input type="button" value="Go back!" onclick="history.back()">
+</form>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>
