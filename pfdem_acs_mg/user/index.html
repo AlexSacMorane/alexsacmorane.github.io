@@ -1,0 +1,968 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>User API documentation</title>
+<meta name="description" content="@author: Alexandre Sac--Morane
+alexandre.sac-morane@uclouvain.be …" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>User</code></h1>
+</header>
+<section id="section-intro">
+<p>@author: Alexandre Sac&ndash;Morane
+alexandre.sac-morane@uclouvain.be</p>
+<p>This is the file where the user can change the different parameters for the simulation.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python"># -*- coding: utf-8 -*-
+&#34;&#34;&#34;
+@author: Alexandre Sac--Morane
+alexandre.sac-morane@uclouvain.be
+
+This is the file where the user can change the different parameters for the simulation.
+&#34;&#34;&#34;
+
+#-------------------------------------------------------------------------------
+#Librairy
+#-------------------------------------------------------------------------------
+
+import math
+import numpy as np
+from pathlib import Path
+
+#Own functions and classes
+import Grain
+
+#-------------------------------------------------------------------------------
+#User
+#-------------------------------------------------------------------------------
+
+def All_parameters():
+    &#39;&#39;&#39;
+    This function is called in main.py to have all the parameters needed in the simulation.
+
+        Input :
+            Nothing
+        Output :
+            an algorithm dictionnary (a dictionnary)
+            a material dictionnary (a dictionnary)
+            a sample dictionnary (a dictionnary)
+            a sollicitation dictionnary (a dictionnary)
+    &#39;&#39;&#39;
+    #---------------------------------------------------------------------------
+    #Geometry parameters
+
+    N_grain = 40 #total number of grains
+
+    R0 = 350 #µm radius to compute the grain distribution
+    L_R = [1.2*R0,1.1*R0,0.9*R0,0.8*R0] #from larger to smaller
+    L_percentage_R = [1/6,1/3,1/3,1/6] #distribution of the different radius
+    #Recompute the mean radius
+    R_mean = 0
+    for i in range(len(L_R)):
+        R_mean = R_mean + L_R[i]*L_percentage_R[i]
+
+    #write dict
+    dict_geometry = {
+    &#39;R_mean&#39; : R_mean,
+    &#39;L_R&#39; : L_R,
+    &#39;L_percentage_R&#39; : L_percentage_R,
+    &#39;N_grain&#39; : N_grain
+    }
+
+    #---------------------------------------------------------------------------
+    #Sample parameters
+
+    #Box définition
+    x_box_min = 0 #µm
+    x_box_max = 2*R_mean*math.sqrt(N_grain*0.6) #µm
+    y_box_min = 0 #µm
+
+    #spatial discretisation
+    nx = int(60*math.sqrt(N_grain*0.6)) #approx n nodes per grain with a mean radius
+    ny = int(0.6*nx)
+
+    #approximatively the number of vertices for one grain during DEM simulation
+    grain_discretisation = 40
+
+    dict_sample = {
+    &#39;nx&#39; : nx,
+    &#39;ny&#39; : ny,
+    &#39;grain_discretisation&#39; : grain_discretisation,
+    &#39;x_box_min&#39; : x_box_min,
+    &#39;x_box_max&#39; : x_box_max,
+    &#39;y_box_min&#39; : y_box_min
+    }
+
+    #---------------------------------------------------------------------------
+    #Material parameters
+
+    #phase field
+    Mobility = 1 #L1, L2 in .i
+    #Diffusion of etai
+    kappa_eta = 0.01
+    #Diffusion of c, the solute generated by the dissolution
+    kappa_c = 50
+    #Definition of the evolution of the penalty term inside a grain (for interpolation)
+    tau_kappa_c = 5 #kc = kc0 e(-(R_i-d)/R_i/tau_kappa_c)
+    #DEM
+    Y = 70*(10**9)*(10**6)*(10**(-12)) #Young Modulus µN/µm2
+    nu = 0.3 #Poisson&#39;s ratio
+    rho = 2500*10**(-6*3) #density kg/µm3
+    rho_surf = 4/3*rho*R_mean #kg/µm2
+    mu_friction_gg = 0.5 #grain-grain
+    mu_friction_gw = 0 #grain-wall
+    coeff_restitution = 0.2 #1 is perfect elastic
+
+    dict_material = {
+    &#39;M&#39; : Mobility,
+    &#39;kappa_eta&#39; : kappa_eta,
+    &#39;kappa_c&#39; : kappa_c,
+    &#39;tau_kappa_c&#39; : tau_kappa_c,
+    &#39;Y&#39; : Y,
+    &#39;nu&#39; : nu,
+    &#39;rho&#39; : rho,
+    &#39;rho_surf&#39; : rho_surf,
+    &#39;mu_friction_gg&#39; : mu_friction_gg,
+    &#39;mu_friction_gw&#39; : mu_friction_gw,
+    &#39;coeff_restitution&#39; : coeff_restitution
+    }
+
+    #---------------------------------------------------------------------------
+    #Algorithm parameters
+
+    np_proc = 4 #number of processor used
+    n_t_PFDEM = 50 #number of cycle PF-DEM
+
+    #Time step for phase field
+    n_t_PF = 8
+    dt_PF_init = 0.05
+    dt_PF_level1 = dt_PF_init/2
+    dt_PF_level2 = dt_PF_level1/2
+    dt_PF_level3 = dt_PF_level2/2
+    #criteria to switch level
+    Ed_level1 = 10
+    Ed_level2 = 20
+    Ed_level3 = 25
+
+    #PF parameters
+    factor_etai = 1.7 #factor reltaed to the minimal distance between grains with same eta
+
+    #DEM parameters
+    dt_DEM_crit = math.pi*min(L_R)/(0.16*nu+0.88)*math.sqrt(rho*(2+2*nu)/Y) #s critical time step from O&#39;Sullivan 2011
+    dt_DEM = dt_DEM_crit/7 #s time step during DEM simulation
+    factor_neighborhood = 1.5 #margin to detect a grain into a neighborhood
+    i_update_neighborhoods = 100 #the frequency of the update of the neighborhood of the grains and the walls
+    #Stop criteria of the DEM
+    i_DEM_stop = 5000 #maximum iteration for one DEM simulation
+    Ecin_ratio = 0.0001
+    n_window_stop = 100
+    dy_box_max_stop = 35
+
+    #Margin for sphericity study
+    sphericity_margin = 0.05
+    #Discretisation to find the inscribing (number of nodes in one direction)
+    n_spatial_inscribing = 100
+
+    #List of plot to do
+    Debug = True #plot configuration before and after DEM simulation
+    Debug_DEM = False #plot configuration inside DEM
+    i_print_plot = 100 #frenquency of the print and plot (if Debug_DEM) in DEM step
+    # Config, DEM_tracker, DEM_txt, Diff_Solute, dt, Ed, Etai_distribution, Eta_c, Init_Current_Shape, Kc, Movie (need Config to work), Mesh, Porosity, Sphericity, sum_Ed, YBoxMax
+    L_flag_plot = [&#39;Config&#39;, &#39;DEM_txt&#39;, &#39;Kc&#39;, &#39;DEM_tracker&#39;, &#39;Sphericity&#39;, &#39;Porosity&#39;, &#39;YBoxMax&#39;]
+    #Visual parameters (for plot Config)
+    c_min = 0
+    c_max = 0.1
+
+    #structural matrix to build diffusion map and available node map
+    struct_element = np.array(np.ones((6,6)), dtype = bool)
+
+    #Save the simulation
+    SaveData = True #Save data or not
+    clean_memory = True #delete Data, Input, Output at the end of the simulation
+    foldername = &#39;Data_MG_ACS&#39; #name of the folder where data are saved
+    template = &#39;PS_MG&#39; #template of the name of the simulation
+    if SaveData :
+        i_run = 1
+        folderpath = Path(&#39;../&#39;+foldername+&#39;/&#39;+template+&#39;_&#39;+str(i_run))
+        while folderpath.exists():
+            i_run = i_run + 1
+            folderpath = Path(&#39;../&#39;+foldername+&#39;/&#39;+template+&#39;_&#39;+str(i_run))
+        namefile = template+&#39;_&#39;+str(i_run)
+    else :
+        namefile = template
+
+    dict_algorithm = {
+    &#39;c_min&#39; : c_min,
+    &#39;c_max&#39; : c_max,
+    &#39;sphericity_margin&#39; : sphericity_margin,
+    &#39;n_spatial_inscribing&#39; : n_spatial_inscribing,
+    &#39;np_proc&#39; : np_proc,
+    &#39;Debug&#39; : Debug,
+    &#39;Debug_DEM&#39; : Debug_DEM,
+    &#39;i_print_plot&#39; : i_print_plot,
+    &#39;factor_neighborhood&#39; : factor_neighborhood,
+    &#39;factor_etai&#39;: factor_etai,
+    &#39;clean_memory&#39; : clean_memory,
+    &#39;SaveData&#39; : SaveData,
+    &#39;namefile&#39; : namefile,
+    &#39;dt_PF&#39; : dt_PF_init,
+    &#39;dt_PF_init&#39; : dt_PF_init,
+    &#39;dt_PF_level1&#39; : dt_PF_level1,
+    &#39;dt_PF_level2&#39; : dt_PF_level2,
+    &#39;dt_PF_level3&#39; : dt_PF_level3,
+    &#39;Ed_level1&#39; : Ed_level1,
+    &#39;Ed_level2&#39; : Ed_level2,
+    &#39;Ed_level3&#39; : Ed_level3,
+    &#39;n_t_PF&#39; : n_t_PF,
+    &#39;dt_DEM&#39; : dt_DEM,
+    &#39;i_update_neighborhoods&#39;: i_update_neighborhoods,
+    &#39;i_DEM_stop&#39; : i_DEM_stop,
+    &#39;Ecin_ratio&#39; : Ecin_ratio,
+    &#39;n_window_stop&#39; : n_window_stop,
+    &#39;dy_box_max_stop&#39; : dy_box_max_stop,
+    &#39;foldername&#39; : foldername,
+    &#39;n_t_PFDEM&#39; : n_t_PFDEM,
+    &#39;L_flag_plot&#39; : L_flag_plot,
+    &#39;struct_element&#39; : struct_element
+    }
+
+    #---------------------------------------------------------------------------
+    #External sollicitation parameters
+
+    chi = 0.5 #coefficient applied to the chemical energy
+    gravity = 0
+    Vertical_Confinement_Linear_Force = Y*2*R_mean/1000 #µN/µm used to compute the Vertical_Confinement_Force
+    Vertical_Confinement_Force = Vertical_Confinement_Linear_Force*(x_box_max-x_box_min) #µN
+    contact_gw_for_Emec = False #consider the contact grain - wall to compute Emec
+
+    dict_sollicitation = {
+    &#39;chi&#39; : chi,
+    &#39;gravity&#39; : gravity,
+    &#39;contact_gw_for_Emec&#39; : contact_gw_for_Emec,
+    &#39;Vertical_Confinement_Force&#39; : Vertical_Confinement_Force
+    }
+
+    #---------------------------------------------------------------------------
+    #Initial condition parameters
+
+    n_generation = 1 #number of grains generation
+    factor_ymax_box = 1.6 #margin to generate grains
+    N_test_max = 5000 # maximum number of tries to generate a grain without overlap
+    i_DEM_stop_IC = 3000 #stop criteria for DEM during IC
+    Debug_DEM_IC = False #plot configuration inside DEM during IC
+    i_print_plot_IC = 200 #frenquency of the print and plot (if Debug_DEM_IC) for IC
+    dt_DEM_IC = dt_DEM_crit/5 #s time step during IC
+    Ecin_ratio_IC = 0.0005
+    factor_neighborhood_IC = 1.5 #margin to detect a grain into a neighborhood
+    i_update_neighborhoods_gen = 5 #the frequency of the update of the neighborhood of the grains and the walls during IC generations
+    i_update_neighborhoods_com = 100 #the frequency of the update of the neighborhood of the grains and the walls during IC combination
+
+    #write dict
+    dict_ic = {
+    &#39;n_generation&#39; : n_generation,
+    &#39;i_update_neighborhoods_gen&#39;: i_update_neighborhoods_gen,
+    &#39;i_update_neighborhoods_com&#39;: i_update_neighborhoods_com,
+    &#39;factor_ymax_box&#39; : factor_ymax_box,
+    &#39;i_DEM_stop_IC&#39; : i_DEM_stop_IC,
+    &#39;Debug_DEM&#39; : Debug_DEM_IC,
+    &#39;dt_DEM_IC&#39; : dt_DEM_IC,
+    &#39;Ecin_ratio_IC&#39; : Ecin_ratio_IC,
+    &#39;i_print_plot_IC&#39; : i_print_plot_IC,
+    &#39;factor_neighborhood_IC&#39; : factor_neighborhood_IC,
+    &#39;N_test_max&#39; : N_test_max
+    }
+
+    #---------------------------------------------------------------------------
+
+    return dict_algorithm, dict_geometry, dict_ic, dict_material, dict_sample, dict_sollicitation
+
+#-------------------------------------------------------------------------------
+
+def Add_mesh(dict_geometry, dict_sample):
+    &#39;&#39;&#39;
+    Generate the mesh in the sample.
+
+        Input :
+            a geometry dictionnary (a dict)
+            a sample dictionnary (a dictionnary)
+        Output :
+            Nothing but the sample dictionnary gets a new grains configuration (a list)
+    &#39;&#39;&#39;
+    #spatial discretisation
+    x_min = dict_sample[&#39;x_box_min&#39;] - 0.1*dict_geometry[&#39;R_mean&#39;]
+    x_max = dict_sample[&#39;x_box_max&#39;] + 0.1*dict_geometry[&#39;R_mean&#39;]
+    x_L = np.linspace(x_min,x_max,dict_sample[&#39;nx&#39;])
+    y_min = dict_sample[&#39;y_box_min&#39;] - 0.1*dict_geometry[&#39;R_mean&#39;]
+    y_max = dict_sample[&#39;y_box_max&#39;] + 0.1*dict_geometry[&#39;R_mean&#39;]
+    y_L = np.linspace(y_min,y_max,dict_sample[&#39;nx&#39;])
+
+    #add element in dict
+    dict_sample[&#39;x_L&#39;] = x_L
+    dict_sample[&#39;y_L&#39;] = y_L
+
+#-------------------------------------------------------------------------------
+
+def Add_variables_needed(dict_geometry, dict_material, dict_sample, dict_sollicitation):
+    &#39;&#39;&#39;
+    Add some variables needed in the simulation.
+
+    3 arrays are generated to represent the mechanical, chemical and total energy.
+    The phase field interface width is computed.
+    The phase field energy barrier is computed.
+    The coefficient alpha applied to the merchanical energy term is computed.
+
+        Input :
+            a geometry dictionnary (a dict)
+            a material dictionnary (a dict)
+            a sample dictionnary (a dict)
+            a sollicitation dictionnary (a dict)
+        Output :
+            Nothing but dictionnaries get new variables
+    &#39;&#39;&#39;
+    #Arrays with only 0
+    dict_sample[&#39;Emec_M&#39;] = np.array(np.zeros((len(dict_sample[&#39;y_L&#39;]),len(dict_sample[&#39;x_L&#39;]))))
+    dict_sample[&#39;Eche_M&#39;] = np.array(np.zeros((len(dict_sample[&#39;y_L&#39;]),len(dict_sample[&#39;x_L&#39;]))))
+    dict_sample[&#39;Ed_M&#39;] = np.array(np.zeros((len(dict_sample[&#39;y_L&#39;]),len(dict_sample[&#39;x_L&#39;]))))
+
+    #compute the phase field width interface
+    dict_material[&#39;w&#39;] = math.sqrt((dict_sample[&#39;x_L&#39;][4]-dict_sample[&#39;x_L&#39;][0])**2+(dict_sample[&#39;y_L&#39;][4]-dict_sample[&#39;y_L&#39;][0])**2)
+
+    #Energy barrier of etai
+    dict_material[&#39;Energy_barrier&#39;] = 20*dict_material[&#39;kappa_eta&#39;]/(dict_material[&#39;w&#39;])**2
+
+    #Compute the coefficient applied to mechanical energy term
+    #this term is computed considering 2 disk grains under the sollicitation force
+    k = 4/3*dict_material[&#39;Y&#39;]/2/(1-dict_material[&#39;nu&#39;]**2)
+    overlap = (dict_sollicitation[&#39;Vertical_Confinement_Force&#39;]/k)**(2/3)
+    #g1
+    center_1 = np.array([np.mean(dict_sample[&#39;x_L&#39;])-dict_geometry[&#39;R_mean&#39;]+overlap/2, np.mean(dict_sample[&#39;y_L&#39;])])
+    L_r_1 = []
+    L_theta_R_1 = []
+    L_border_1 = []
+    L_border_x_1 = []
+    L_border_y_1 = []
+    for i in range(90):
+        theta = 2*math.pi*i/90
+        L_r_1.append(dict_geometry[&#39;R_mean&#39;])
+        L_theta_R_1.append(theta)
+        L_border_1.append(np.array(center_1)+np.array([dict_geometry[&#39;R_mean&#39;]*math.cos(theta),dict_geometry[&#39;R_mean&#39;]*math.sin(theta)]))
+        L_border_x_1.append(center_1[0]+dict_geometry[&#39;R_mean&#39;]*math.cos(theta))
+        L_border_y_1.append(center_1[1]+dict_geometry[&#39;R_mean&#39;]*math.sin(theta))
+    L_border_1.append(L_border_1[0])
+    L_border_x_1.append(L_border_x_1[0])
+    L_border_y_1.append(L_border_y_1[0])
+    dict_ic_to_g1_tempo =  {&#39;Center&#39; : center_1,&#39;L_r&#39; : L_r_1,&#39;L_theta_r&#39; : L_theta_R_1,&#39;L_border&#39; : L_border_1,&#39;L_border_x&#39; : L_border_x_1,&#39;L_border_y&#39; : L_border_y_1,
+                            &#39;Id&#39; : None,&#39;Y&#39; : None,&#39;Nu&#39; : None,&#39;Rho_surf&#39; : None,&#39;Surface&#39; : None,&#39;Mass&#39; : None,&#39;Inertia&#39; : None}
+    g1_tempo = Grain.Grain(dict_ic_to_g1_tempo, dict_material, dict_sample)
+    #g2
+    center_2 = np.array([np.mean(dict_sample[&#39;x_L&#39;])+dict_geometry[&#39;R_mean&#39;]-overlap/2, np.mean(dict_sample[&#39;y_L&#39;])])
+    L_r_2 = []
+    L_theta_R_2 = []
+    L_border_2 = []
+    L_border_x_2 = []
+    L_border_y_2 = []
+    for i in range(90):
+        theta = 2*math.pi*i/90
+        L_r_2.append(dict_geometry[&#39;R_mean&#39;])
+        L_theta_R_2.append(theta)
+        L_border_2.append(np.array(center_2)+np.array([dict_geometry[&#39;R_mean&#39;]*math.cos(theta),dict_geometry[&#39;R_mean&#39;]*math.sin(theta)]))
+        L_border_x_2.append(center_2[0]+dict_geometry[&#39;R_mean&#39;]*math.cos(theta))
+        L_border_y_2.append(center_2[1]+dict_geometry[&#39;R_mean&#39;]*math.sin(theta))
+    L_border_2.append(L_border_2[0])
+    L_border_x_2.append(L_border_x_2[0])
+    L_border_y_2.append(L_border_y_2[0])
+    dict_ic_to_g2_tempo =  {&#39;Center&#39; : center_2,&#39;L_r&#39; : L_r_2,&#39;L_theta_r&#39; : L_theta_R_2,&#39;L_border&#39; : L_border_2,&#39;L_border_x&#39; : L_border_x_2,&#39;L_border_y&#39; : L_border_y_2,
+                            &#39;Id&#39; : None,&#39;Y&#39; : None,&#39;Nu&#39; : None,&#39;Rho_surf&#39; : None,&#39;Surface&#39; : None,&#39;Mass&#39; : None,&#39;Inertia&#39; : None}
+    g2_tempo = Grain.Grain(dict_ic_to_g2_tempo, dict_material, dict_sample)
+    #compute the sum_min_etai
+    #extract a spatial zone
+    x_min = center_1[0]-dict_geometry[&#39;R_mean&#39;]-dict_material[&#39;w&#39;]
+    x_max = center_2[0]+dict_geometry[&#39;R_mean&#39;]+dict_material[&#39;w&#39;]
+    y_min = center_1[1]-dict_geometry[&#39;R_mean&#39;]-dict_material[&#39;w&#39;]
+    y_max = center_1[1]+dict_geometry[&#39;R_mean&#39;]+dict_material[&#39;w&#39;]
+    #look for this part inside the global mesh
+    #create search list
+    x_L_search_min = abs(np.array(dict_sample[&#39;x_L&#39;])-x_min)
+    x_L_search_max = abs(np.array(dict_sample[&#39;x_L&#39;])-x_max)
+    y_L_search_min = abs(np.array(dict_sample[&#39;y_L&#39;])-y_min)
+    y_L_search_max = abs(np.array(dict_sample[&#39;y_L&#39;])-y_max)
+    #get index
+    i_x_min = list(x_L_search_min).index(min(x_L_search_min))
+    i_x_max = list(x_L_search_max).index(min(x_L_search_max))
+    i_y_min = list(y_L_search_min).index(min(y_L_search_min))
+    i_y_max = list(y_L_search_max).index(min(y_L_search_max))
+    #Initialisation
+    sum_min_etai = 0
+    #compute the sum over the sample of the minimum of etai
+    for l in range(i_y_min, i_y_max):
+        for c in range(i_x_min, i_x_max):
+            sum_min_etai = sum_min_etai + min(g1_tempo.etai_M[-1-l][c],g2_tempo.etai_M[-1-l][c])
+    #Add element in dict
+    dict_sollicitation[&#39;alpha&#39;] = 0.06*sum_min_etai
+
+#-------------------------------------------------------------------------------
+
+def Add_solute(dict_sample):
+    &#39;&#39;&#39;
+    Generate solute in the sample.
+
+        Input :
+            a sample dictionnary (a dictionnary)
+        Output :
+            Nothing but the sample dictionnary gets a new solute configuration (a n_y x n_x numpy array)
+    &#39;&#39;&#39;
+    #solute
+    solute_M = np.zeros((len(dict_sample[&#39;y_L&#39;]),len(dict_sample[&#39;x_L&#39;])))
+
+    #add element in dict
+    dict_sample[&#39;solute_M&#39;] = solute_M
+
+#-------------------------------------------------------------------------------
+
+def Criteria_StopSimulation(dict_algorithm):
+    &#39;&#39;&#39;
+    Define a stop criteria for the PFDEM simulation.
+
+    The simulation stops if the number of iterations reaches a maximum value.
+
+        Input :
+            an algorithm dictionnary (a dictionnary)
+        Output :
+            The result depends on the fact if the stop criteria is reached or not (a bool)
+    &#39;&#39;&#39;
+    Criteria_Verified = False
+    if dict_algorithm[&#39;i_PFDEM&#39;] &gt;= dict_algorithm[&#39;n_t_PFDEM&#39;]:
+        Criteria_Verified = True
+    return Criteria_Verified</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="User.Add_mesh"><code class="name flex">
+<span>def <span class="ident">Add_mesh</span></span>(<span>dict_geometry, dict_sample)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Generate the mesh in the sample.</p>
+<pre><code>Input :
+    a geometry dictionnary (a dict)
+    a sample dictionnary (a dictionnary)
+Output :
+    Nothing but the sample dictionnary gets a new grains configuration (a list)
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def Add_mesh(dict_geometry, dict_sample):
+    &#39;&#39;&#39;
+    Generate the mesh in the sample.
+
+        Input :
+            a geometry dictionnary (a dict)
+            a sample dictionnary (a dictionnary)
+        Output :
+            Nothing but the sample dictionnary gets a new grains configuration (a list)
+    &#39;&#39;&#39;
+    #spatial discretisation
+    x_min = dict_sample[&#39;x_box_min&#39;] - 0.1*dict_geometry[&#39;R_mean&#39;]
+    x_max = dict_sample[&#39;x_box_max&#39;] + 0.1*dict_geometry[&#39;R_mean&#39;]
+    x_L = np.linspace(x_min,x_max,dict_sample[&#39;nx&#39;])
+    y_min = dict_sample[&#39;y_box_min&#39;] - 0.1*dict_geometry[&#39;R_mean&#39;]
+    y_max = dict_sample[&#39;y_box_max&#39;] + 0.1*dict_geometry[&#39;R_mean&#39;]
+    y_L = np.linspace(y_min,y_max,dict_sample[&#39;nx&#39;])
+
+    #add element in dict
+    dict_sample[&#39;x_L&#39;] = x_L
+    dict_sample[&#39;y_L&#39;] = y_L</code></pre>
+</details>
+</dd>
+<dt id="User.Add_solute"><code class="name flex">
+<span>def <span class="ident">Add_solute</span></span>(<span>dict_sample)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Generate solute in the sample.</p>
+<pre><code>Input :
+    a sample dictionnary (a dictionnary)
+Output :
+    Nothing but the sample dictionnary gets a new solute configuration (a n_y x n_x numpy array)
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def Add_solute(dict_sample):
+    &#39;&#39;&#39;
+    Generate solute in the sample.
+
+        Input :
+            a sample dictionnary (a dictionnary)
+        Output :
+            Nothing but the sample dictionnary gets a new solute configuration (a n_y x n_x numpy array)
+    &#39;&#39;&#39;
+    #solute
+    solute_M = np.zeros((len(dict_sample[&#39;y_L&#39;]),len(dict_sample[&#39;x_L&#39;])))
+
+    #add element in dict
+    dict_sample[&#39;solute_M&#39;] = solute_M</code></pre>
+</details>
+</dd>
+<dt id="User.Add_variables_needed"><code class="name flex">
+<span>def <span class="ident">Add_variables_needed</span></span>(<span>dict_geometry, dict_material, dict_sample, dict_sollicitation)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Add some variables needed in the simulation.</p>
+<p>3 arrays are generated to represent the mechanical, chemical and total energy.
+The phase field interface width is computed.
+The phase field energy barrier is computed.
+The coefficient alpha applied to the merchanical energy term is computed.</p>
+<pre><code>Input :
+    a geometry dictionnary (a dict)
+    a material dictionnary (a dict)
+    a sample dictionnary (a dict)
+    a sollicitation dictionnary (a dict)
+Output :
+    Nothing but dictionnaries get new variables
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def Add_variables_needed(dict_geometry, dict_material, dict_sample, dict_sollicitation):
+    &#39;&#39;&#39;
+    Add some variables needed in the simulation.
+
+    3 arrays are generated to represent the mechanical, chemical and total energy.
+    The phase field interface width is computed.
+    The phase field energy barrier is computed.
+    The coefficient alpha applied to the merchanical energy term is computed.
+
+        Input :
+            a geometry dictionnary (a dict)
+            a material dictionnary (a dict)
+            a sample dictionnary (a dict)
+            a sollicitation dictionnary (a dict)
+        Output :
+            Nothing but dictionnaries get new variables
+    &#39;&#39;&#39;
+    #Arrays with only 0
+    dict_sample[&#39;Emec_M&#39;] = np.array(np.zeros((len(dict_sample[&#39;y_L&#39;]),len(dict_sample[&#39;x_L&#39;]))))
+    dict_sample[&#39;Eche_M&#39;] = np.array(np.zeros((len(dict_sample[&#39;y_L&#39;]),len(dict_sample[&#39;x_L&#39;]))))
+    dict_sample[&#39;Ed_M&#39;] = np.array(np.zeros((len(dict_sample[&#39;y_L&#39;]),len(dict_sample[&#39;x_L&#39;]))))
+
+    #compute the phase field width interface
+    dict_material[&#39;w&#39;] = math.sqrt((dict_sample[&#39;x_L&#39;][4]-dict_sample[&#39;x_L&#39;][0])**2+(dict_sample[&#39;y_L&#39;][4]-dict_sample[&#39;y_L&#39;][0])**2)
+
+    #Energy barrier of etai
+    dict_material[&#39;Energy_barrier&#39;] = 20*dict_material[&#39;kappa_eta&#39;]/(dict_material[&#39;w&#39;])**2
+
+    #Compute the coefficient applied to mechanical energy term
+    #this term is computed considering 2 disk grains under the sollicitation force
+    k = 4/3*dict_material[&#39;Y&#39;]/2/(1-dict_material[&#39;nu&#39;]**2)
+    overlap = (dict_sollicitation[&#39;Vertical_Confinement_Force&#39;]/k)**(2/3)
+    #g1
+    center_1 = np.array([np.mean(dict_sample[&#39;x_L&#39;])-dict_geometry[&#39;R_mean&#39;]+overlap/2, np.mean(dict_sample[&#39;y_L&#39;])])
+    L_r_1 = []
+    L_theta_R_1 = []
+    L_border_1 = []
+    L_border_x_1 = []
+    L_border_y_1 = []
+    for i in range(90):
+        theta = 2*math.pi*i/90
+        L_r_1.append(dict_geometry[&#39;R_mean&#39;])
+        L_theta_R_1.append(theta)
+        L_border_1.append(np.array(center_1)+np.array([dict_geometry[&#39;R_mean&#39;]*math.cos(theta),dict_geometry[&#39;R_mean&#39;]*math.sin(theta)]))
+        L_border_x_1.append(center_1[0]+dict_geometry[&#39;R_mean&#39;]*math.cos(theta))
+        L_border_y_1.append(center_1[1]+dict_geometry[&#39;R_mean&#39;]*math.sin(theta))
+    L_border_1.append(L_border_1[0])
+    L_border_x_1.append(L_border_x_1[0])
+    L_border_y_1.append(L_border_y_1[0])
+    dict_ic_to_g1_tempo =  {&#39;Center&#39; : center_1,&#39;L_r&#39; : L_r_1,&#39;L_theta_r&#39; : L_theta_R_1,&#39;L_border&#39; : L_border_1,&#39;L_border_x&#39; : L_border_x_1,&#39;L_border_y&#39; : L_border_y_1,
+                            &#39;Id&#39; : None,&#39;Y&#39; : None,&#39;Nu&#39; : None,&#39;Rho_surf&#39; : None,&#39;Surface&#39; : None,&#39;Mass&#39; : None,&#39;Inertia&#39; : None}
+    g1_tempo = Grain.Grain(dict_ic_to_g1_tempo, dict_material, dict_sample)
+    #g2
+    center_2 = np.array([np.mean(dict_sample[&#39;x_L&#39;])+dict_geometry[&#39;R_mean&#39;]-overlap/2, np.mean(dict_sample[&#39;y_L&#39;])])
+    L_r_2 = []
+    L_theta_R_2 = []
+    L_border_2 = []
+    L_border_x_2 = []
+    L_border_y_2 = []
+    for i in range(90):
+        theta = 2*math.pi*i/90
+        L_r_2.append(dict_geometry[&#39;R_mean&#39;])
+        L_theta_R_2.append(theta)
+        L_border_2.append(np.array(center_2)+np.array([dict_geometry[&#39;R_mean&#39;]*math.cos(theta),dict_geometry[&#39;R_mean&#39;]*math.sin(theta)]))
+        L_border_x_2.append(center_2[0]+dict_geometry[&#39;R_mean&#39;]*math.cos(theta))
+        L_border_y_2.append(center_2[1]+dict_geometry[&#39;R_mean&#39;]*math.sin(theta))
+    L_border_2.append(L_border_2[0])
+    L_border_x_2.append(L_border_x_2[0])
+    L_border_y_2.append(L_border_y_2[0])
+    dict_ic_to_g2_tempo =  {&#39;Center&#39; : center_2,&#39;L_r&#39; : L_r_2,&#39;L_theta_r&#39; : L_theta_R_2,&#39;L_border&#39; : L_border_2,&#39;L_border_x&#39; : L_border_x_2,&#39;L_border_y&#39; : L_border_y_2,
+                            &#39;Id&#39; : None,&#39;Y&#39; : None,&#39;Nu&#39; : None,&#39;Rho_surf&#39; : None,&#39;Surface&#39; : None,&#39;Mass&#39; : None,&#39;Inertia&#39; : None}
+    g2_tempo = Grain.Grain(dict_ic_to_g2_tempo, dict_material, dict_sample)
+    #compute the sum_min_etai
+    #extract a spatial zone
+    x_min = center_1[0]-dict_geometry[&#39;R_mean&#39;]-dict_material[&#39;w&#39;]
+    x_max = center_2[0]+dict_geometry[&#39;R_mean&#39;]+dict_material[&#39;w&#39;]
+    y_min = center_1[1]-dict_geometry[&#39;R_mean&#39;]-dict_material[&#39;w&#39;]
+    y_max = center_1[1]+dict_geometry[&#39;R_mean&#39;]+dict_material[&#39;w&#39;]
+    #look for this part inside the global mesh
+    #create search list
+    x_L_search_min = abs(np.array(dict_sample[&#39;x_L&#39;])-x_min)
+    x_L_search_max = abs(np.array(dict_sample[&#39;x_L&#39;])-x_max)
+    y_L_search_min = abs(np.array(dict_sample[&#39;y_L&#39;])-y_min)
+    y_L_search_max = abs(np.array(dict_sample[&#39;y_L&#39;])-y_max)
+    #get index
+    i_x_min = list(x_L_search_min).index(min(x_L_search_min))
+    i_x_max = list(x_L_search_max).index(min(x_L_search_max))
+    i_y_min = list(y_L_search_min).index(min(y_L_search_min))
+    i_y_max = list(y_L_search_max).index(min(y_L_search_max))
+    #Initialisation
+    sum_min_etai = 0
+    #compute the sum over the sample of the minimum of etai
+    for l in range(i_y_min, i_y_max):
+        for c in range(i_x_min, i_x_max):
+            sum_min_etai = sum_min_etai + min(g1_tempo.etai_M[-1-l][c],g2_tempo.etai_M[-1-l][c])
+    #Add element in dict
+    dict_sollicitation[&#39;alpha&#39;] = 0.06*sum_min_etai</code></pre>
+</details>
+</dd>
+<dt id="User.All_parameters"><code class="name flex">
+<span>def <span class="ident">All_parameters</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>This function is called in main.py to have all the parameters needed in the simulation.</p>
+<pre><code>Input :
+    Nothing
+Output :
+    an algorithm dictionnary (a dictionnary)
+    a material dictionnary (a dictionnary)
+    a sample dictionnary (a dictionnary)
+    a sollicitation dictionnary (a dictionnary)
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def All_parameters():
+    &#39;&#39;&#39;
+    This function is called in main.py to have all the parameters needed in the simulation.
+
+        Input :
+            Nothing
+        Output :
+            an algorithm dictionnary (a dictionnary)
+            a material dictionnary (a dictionnary)
+            a sample dictionnary (a dictionnary)
+            a sollicitation dictionnary (a dictionnary)
+    &#39;&#39;&#39;
+    #---------------------------------------------------------------------------
+    #Geometry parameters
+
+    N_grain = 40 #total number of grains
+
+    R0 = 350 #µm radius to compute the grain distribution
+    L_R = [1.2*R0,1.1*R0,0.9*R0,0.8*R0] #from larger to smaller
+    L_percentage_R = [1/6,1/3,1/3,1/6] #distribution of the different radius
+    #Recompute the mean radius
+    R_mean = 0
+    for i in range(len(L_R)):
+        R_mean = R_mean + L_R[i]*L_percentage_R[i]
+
+    #write dict
+    dict_geometry = {
+    &#39;R_mean&#39; : R_mean,
+    &#39;L_R&#39; : L_R,
+    &#39;L_percentage_R&#39; : L_percentage_R,
+    &#39;N_grain&#39; : N_grain
+    }
+
+    #---------------------------------------------------------------------------
+    #Sample parameters
+
+    #Box définition
+    x_box_min = 0 #µm
+    x_box_max = 2*R_mean*math.sqrt(N_grain*0.6) #µm
+    y_box_min = 0 #µm
+
+    #spatial discretisation
+    nx = int(60*math.sqrt(N_grain*0.6)) #approx n nodes per grain with a mean radius
+    ny = int(0.6*nx)
+
+    #approximatively the number of vertices for one grain during DEM simulation
+    grain_discretisation = 40
+
+    dict_sample = {
+    &#39;nx&#39; : nx,
+    &#39;ny&#39; : ny,
+    &#39;grain_discretisation&#39; : grain_discretisation,
+    &#39;x_box_min&#39; : x_box_min,
+    &#39;x_box_max&#39; : x_box_max,
+    &#39;y_box_min&#39; : y_box_min
+    }
+
+    #---------------------------------------------------------------------------
+    #Material parameters
+
+    #phase field
+    Mobility = 1 #L1, L2 in .i
+    #Diffusion of etai
+    kappa_eta = 0.01
+    #Diffusion of c, the solute generated by the dissolution
+    kappa_c = 50
+    #Definition of the evolution of the penalty term inside a grain (for interpolation)
+    tau_kappa_c = 5 #kc = kc0 e(-(R_i-d)/R_i/tau_kappa_c)
+    #DEM
+    Y = 70*(10**9)*(10**6)*(10**(-12)) #Young Modulus µN/µm2
+    nu = 0.3 #Poisson&#39;s ratio
+    rho = 2500*10**(-6*3) #density kg/µm3
+    rho_surf = 4/3*rho*R_mean #kg/µm2
+    mu_friction_gg = 0.5 #grain-grain
+    mu_friction_gw = 0 #grain-wall
+    coeff_restitution = 0.2 #1 is perfect elastic
+
+    dict_material = {
+    &#39;M&#39; : Mobility,
+    &#39;kappa_eta&#39; : kappa_eta,
+    &#39;kappa_c&#39; : kappa_c,
+    &#39;tau_kappa_c&#39; : tau_kappa_c,
+    &#39;Y&#39; : Y,
+    &#39;nu&#39; : nu,
+    &#39;rho&#39; : rho,
+    &#39;rho_surf&#39; : rho_surf,
+    &#39;mu_friction_gg&#39; : mu_friction_gg,
+    &#39;mu_friction_gw&#39; : mu_friction_gw,
+    &#39;coeff_restitution&#39; : coeff_restitution
+    }
+
+    #---------------------------------------------------------------------------
+    #Algorithm parameters
+
+    np_proc = 4 #number of processor used
+    n_t_PFDEM = 50 #number of cycle PF-DEM
+
+    #Time step for phase field
+    n_t_PF = 8
+    dt_PF_init = 0.05
+    dt_PF_level1 = dt_PF_init/2
+    dt_PF_level2 = dt_PF_level1/2
+    dt_PF_level3 = dt_PF_level2/2
+    #criteria to switch level
+    Ed_level1 = 10
+    Ed_level2 = 20
+    Ed_level3 = 25
+
+    #PF parameters
+    factor_etai = 1.7 #factor reltaed to the minimal distance between grains with same eta
+
+    #DEM parameters
+    dt_DEM_crit = math.pi*min(L_R)/(0.16*nu+0.88)*math.sqrt(rho*(2+2*nu)/Y) #s critical time step from O&#39;Sullivan 2011
+    dt_DEM = dt_DEM_crit/7 #s time step during DEM simulation
+    factor_neighborhood = 1.5 #margin to detect a grain into a neighborhood
+    i_update_neighborhoods = 100 #the frequency of the update of the neighborhood of the grains and the walls
+    #Stop criteria of the DEM
+    i_DEM_stop = 5000 #maximum iteration for one DEM simulation
+    Ecin_ratio = 0.0001
+    n_window_stop = 100
+    dy_box_max_stop = 35
+
+    #Margin for sphericity study
+    sphericity_margin = 0.05
+    #Discretisation to find the inscribing (number of nodes in one direction)
+    n_spatial_inscribing = 100
+
+    #List of plot to do
+    Debug = True #plot configuration before and after DEM simulation
+    Debug_DEM = False #plot configuration inside DEM
+    i_print_plot = 100 #frenquency of the print and plot (if Debug_DEM) in DEM step
+    # Config, DEM_tracker, DEM_txt, Diff_Solute, dt, Ed, Etai_distribution, Eta_c, Init_Current_Shape, Kc, Movie (need Config to work), Mesh, Porosity, Sphericity, sum_Ed, YBoxMax
+    L_flag_plot = [&#39;Config&#39;, &#39;DEM_txt&#39;, &#39;Kc&#39;, &#39;DEM_tracker&#39;, &#39;Sphericity&#39;, &#39;Porosity&#39;, &#39;YBoxMax&#39;]
+    #Visual parameters (for plot Config)
+    c_min = 0
+    c_max = 0.1
+
+    #structural matrix to build diffusion map and available node map
+    struct_element = np.array(np.ones((6,6)), dtype = bool)
+
+    #Save the simulation
+    SaveData = True #Save data or not
+    clean_memory = True #delete Data, Input, Output at the end of the simulation
+    foldername = &#39;Data_MG_ACS&#39; #name of the folder where data are saved
+    template = &#39;PS_MG&#39; #template of the name of the simulation
+    if SaveData :
+        i_run = 1
+        folderpath = Path(&#39;../&#39;+foldername+&#39;/&#39;+template+&#39;_&#39;+str(i_run))
+        while folderpath.exists():
+            i_run = i_run + 1
+            folderpath = Path(&#39;../&#39;+foldername+&#39;/&#39;+template+&#39;_&#39;+str(i_run))
+        namefile = template+&#39;_&#39;+str(i_run)
+    else :
+        namefile = template
+
+    dict_algorithm = {
+    &#39;c_min&#39; : c_min,
+    &#39;c_max&#39; : c_max,
+    &#39;sphericity_margin&#39; : sphericity_margin,
+    &#39;n_spatial_inscribing&#39; : n_spatial_inscribing,
+    &#39;np_proc&#39; : np_proc,
+    &#39;Debug&#39; : Debug,
+    &#39;Debug_DEM&#39; : Debug_DEM,
+    &#39;i_print_plot&#39; : i_print_plot,
+    &#39;factor_neighborhood&#39; : factor_neighborhood,
+    &#39;factor_etai&#39;: factor_etai,
+    &#39;clean_memory&#39; : clean_memory,
+    &#39;SaveData&#39; : SaveData,
+    &#39;namefile&#39; : namefile,
+    &#39;dt_PF&#39; : dt_PF_init,
+    &#39;dt_PF_init&#39; : dt_PF_init,
+    &#39;dt_PF_level1&#39; : dt_PF_level1,
+    &#39;dt_PF_level2&#39; : dt_PF_level2,
+    &#39;dt_PF_level3&#39; : dt_PF_level3,
+    &#39;Ed_level1&#39; : Ed_level1,
+    &#39;Ed_level2&#39; : Ed_level2,
+    &#39;Ed_level3&#39; : Ed_level3,
+    &#39;n_t_PF&#39; : n_t_PF,
+    &#39;dt_DEM&#39; : dt_DEM,
+    &#39;i_update_neighborhoods&#39;: i_update_neighborhoods,
+    &#39;i_DEM_stop&#39; : i_DEM_stop,
+    &#39;Ecin_ratio&#39; : Ecin_ratio,
+    &#39;n_window_stop&#39; : n_window_stop,
+    &#39;dy_box_max_stop&#39; : dy_box_max_stop,
+    &#39;foldername&#39; : foldername,
+    &#39;n_t_PFDEM&#39; : n_t_PFDEM,
+    &#39;L_flag_plot&#39; : L_flag_plot,
+    &#39;struct_element&#39; : struct_element
+    }
+
+    #---------------------------------------------------------------------------
+    #External sollicitation parameters
+
+    chi = 0.5 #coefficient applied to the chemical energy
+    gravity = 0
+    Vertical_Confinement_Linear_Force = Y*2*R_mean/1000 #µN/µm used to compute the Vertical_Confinement_Force
+    Vertical_Confinement_Force = Vertical_Confinement_Linear_Force*(x_box_max-x_box_min) #µN
+    contact_gw_for_Emec = False #consider the contact grain - wall to compute Emec
+
+    dict_sollicitation = {
+    &#39;chi&#39; : chi,
+    &#39;gravity&#39; : gravity,
+    &#39;contact_gw_for_Emec&#39; : contact_gw_for_Emec,
+    &#39;Vertical_Confinement_Force&#39; : Vertical_Confinement_Force
+    }
+
+    #---------------------------------------------------------------------------
+    #Initial condition parameters
+
+    n_generation = 1 #number of grains generation
+    factor_ymax_box = 1.6 #margin to generate grains
+    N_test_max = 5000 # maximum number of tries to generate a grain without overlap
+    i_DEM_stop_IC = 3000 #stop criteria for DEM during IC
+    Debug_DEM_IC = False #plot configuration inside DEM during IC
+    i_print_plot_IC = 200 #frenquency of the print and plot (if Debug_DEM_IC) for IC
+    dt_DEM_IC = dt_DEM_crit/5 #s time step during IC
+    Ecin_ratio_IC = 0.0005
+    factor_neighborhood_IC = 1.5 #margin to detect a grain into a neighborhood
+    i_update_neighborhoods_gen = 5 #the frequency of the update of the neighborhood of the grains and the walls during IC generations
+    i_update_neighborhoods_com = 100 #the frequency of the update of the neighborhood of the grains and the walls during IC combination
+
+    #write dict
+    dict_ic = {
+    &#39;n_generation&#39; : n_generation,
+    &#39;i_update_neighborhoods_gen&#39;: i_update_neighborhoods_gen,
+    &#39;i_update_neighborhoods_com&#39;: i_update_neighborhoods_com,
+    &#39;factor_ymax_box&#39; : factor_ymax_box,
+    &#39;i_DEM_stop_IC&#39; : i_DEM_stop_IC,
+    &#39;Debug_DEM&#39; : Debug_DEM_IC,
+    &#39;dt_DEM_IC&#39; : dt_DEM_IC,
+    &#39;Ecin_ratio_IC&#39; : Ecin_ratio_IC,
+    &#39;i_print_plot_IC&#39; : i_print_plot_IC,
+    &#39;factor_neighborhood_IC&#39; : factor_neighborhood_IC,
+    &#39;N_test_max&#39; : N_test_max
+    }
+
+    #---------------------------------------------------------------------------
+
+    return dict_algorithm, dict_geometry, dict_ic, dict_material, dict_sample, dict_sollicitation</code></pre>
+</details>
+</dd>
+<dt id="User.Criteria_StopSimulation"><code class="name flex">
+<span>def <span class="ident">Criteria_StopSimulation</span></span>(<span>dict_algorithm)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Define a stop criteria for the PFDEM simulation.</p>
+<p>The simulation stops if the number of iterations reaches a maximum value.</p>
+<pre><code>Input :
+    an algorithm dictionnary (a dictionnary)
+Output :
+    The result depends on the fact if the stop criteria is reached or not (a bool)
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def Criteria_StopSimulation(dict_algorithm):
+    &#39;&#39;&#39;
+    Define a stop criteria for the PFDEM simulation.
+
+    The simulation stops if the number of iterations reaches a maximum value.
+
+        Input :
+            an algorithm dictionnary (a dictionnary)
+        Output :
+            The result depends on the fact if the stop criteria is reached or not (a bool)
+    &#39;&#39;&#39;
+    Criteria_Verified = False
+    if dict_algorithm[&#39;i_PFDEM&#39;] &gt;= dict_algorithm[&#39;n_t_PFDEM&#39;]:
+        Criteria_Verified = True
+    return Criteria_Verified</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="User.Add_mesh" href="#User.Add_mesh">Add_mesh</a></code></li>
+<li><code><a title="User.Add_solute" href="#User.Add_solute">Add_solute</a></code></li>
+<li><code><a title="User.Add_variables_needed" href="#User.Add_variables_needed">Add_variables_needed</a></code></li>
+<li><code><a title="User.All_parameters" href="#User.All_parameters">All_parameters</a></code></li>
+<li><code><a title="User.Criteria_StopSimulation" href="#User.Criteria_StopSimulation">Criteria_StopSimulation</a></code></li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>
