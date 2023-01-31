@@ -47,7 +47,34 @@ import pickle
 
 #-------------------------------------------------------------------------------
 
-def save_dicts_tempo(dict_algorithm, dict_material, dict_sample, dict_sollicitation, dict_tracker):
+def save_dicts_tempo_before_pf(dict_algorithm, dict_material, dict_sample, dict_sollicitation, dict_tracker, simulation_report):
+    &#39;&#39;&#39;
+    Save dictionnaries at each PFDEM interations before PF simulation.
+
+        Input :
+            an algorithm dictionnary (a dictionnary)
+            a material dictionnary (a dictionnary)
+            a sample dictionnary (a dictionnary)
+            a sollicitation dictionnary (a dictionnary)
+            a tracker dictionnary (a dictionnary)
+            a simulation report (a report)
+        Output :
+            Nothing but a save file is generated (a file)
+    &#39;&#39;&#39;
+    outfile = open(dict_algorithm[&#39;namefile&#39;]+&#39;_save_tempo_before_pf&#39;,&#39;wb&#39;)
+    dict_save = {}
+    dict_save[&#39;algorithm&#39;] = dict_algorithm
+    dict_save[&#39;material&#39;] = dict_material
+    dict_save[&#39;sample&#39;] = dict_sample
+    dict_save[&#39;sollicitation&#39;] = dict_sollicitation
+    dict_save[&#39;tracker&#39;] = dict_tracker
+    dict_save[&#39;report&#39;] = simulation_report
+    pickle.dump(dict_save,outfile)
+    outfile.close()
+
+#-------------------------------------------------------------------------------
+
+def save_dicts_tempo(dict_algorithm, dict_material, dict_sample, dict_sollicitation, dict_tracker, simulation_report):
     &#39;&#39;&#39;
     Save dictionnaries at the end of each PFDEM interations.
 
@@ -57,22 +84,24 @@ def save_dicts_tempo(dict_algorithm, dict_material, dict_sample, dict_sollicitat
             a sample dictionnary (a dictionnary)
             a sollicitation dictionnary (a dictionnary)
             a tracker dictionnary (a dictionnary)
+            a simulation report (a report)
         Output :
             Nothing but a save file is generated (a file)
     &#39;&#39;&#39;
-    outfile = open(&#39;../&#39;+dict_algorithm[&#39;foldername&#39;]+&#39;/&#39;+dict_algorithm[&#39;namefile&#39;]+&#39;_save_tempo&#39;,&#39;wb&#39;)
+    outfile = open(dict_algorithm[&#39;namefile&#39;]+&#39;_save_tempo&#39;,&#39;wb&#39;)
     dict_save = {}
     dict_save[&#39;algorithm&#39;] = dict_algorithm
     dict_save[&#39;material&#39;] = dict_material
     dict_save[&#39;sample&#39;] = dict_sample
     dict_save[&#39;sollicitation&#39;] = dict_sollicitation
     dict_save[&#39;tracker&#39;] = dict_tracker
+    dict_save[&#39;report&#39;] = simulation_report
     pickle.dump(dict_save,outfile)
     outfile.close()
 
 #-------------------------------------------------------------------------------
 
-def save_dicts_final(dict_algorithm, dict_material, dict_sample, dict_sollicitation, dict_tracker):
+def save_dicts_final(dict_algorithm, dict_material, dict_sample, dict_sollicitation, dict_tracker, simulation_report):
     &#39;&#39;&#39;
     Save dictionnaries at the end of the simulation.
 
@@ -82,10 +111,12 @@ def save_dicts_final(dict_algorithm, dict_material, dict_sample, dict_sollicitat
             a sample dictionnary (a dictionnary)
             a sollicitation dictionnary (a dictionnary)
             a tracker dictionnary (a dictionnary)
+            a simulation report (a report)
         Output :
             Nothing but a save file is generated (a file)
     &#39;&#39;&#39;
-    os.remove(&#39;../&#39;+dict_algorithm[&#39;foldername&#39;]+&#39;/&#39;+dict_algorithm[&#39;namefile&#39;]+&#39;_save_tempo&#39;)
+    os.remove(dict_algorithm[&#39;namefile&#39;]+&#39;_save_tempo&#39;)
+    os.remove(dict_algorithm[&#39;namefile&#39;]+&#39;_save_tempo_before_pf&#39;)
     outfile = open(&#39;../&#39;+dict_algorithm[&#39;foldername&#39;]+&#39;/&#39;+dict_algorithm[&#39;namefile&#39;]+&#39;_save&#39;,&#39;wb&#39;)
     dict_save = {}
     dict_save[&#39;algorithm&#39;] = dict_algorithm
@@ -93,6 +124,7 @@ def save_dicts_final(dict_algorithm, dict_material, dict_sample, dict_sollicitat
     dict_save[&#39;sample&#39;] = dict_sample
     dict_save[&#39;sollicitation&#39;] = dict_sollicitation
     dict_save[&#39;tracker&#39;] = dict_tracker
+    dict_save[&#39;report&#39;] = simulation_report
     pickle.dump(dict_save,outfile)
     outfile.close()</code></pre>
 </details>
@@ -122,7 +154,7 @@ Output :
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def save_dicts_final(dict_algorithm, dict_material, dict_sample, dict_sollicitation, dict_tracker):
+<pre><code class="python">def save_dicts_final(dict_algorithm, dict_material, dict_sample, dict_sollicitation, dict_tracker, simulation_report):
     &#39;&#39;&#39;
     Save dictionnaries at the end of the simulation.
 
@@ -132,6 +164,7 @@ Output :
             a sample dictionnary (a dictionnary)
             a sollicitation dictionnary (a dictionnary)
             a tracker dictionnary (a dictionnary)
+            a simulation report (a report)
         Output :
             Nothing but a save file is generated (a file)
     &#39;&#39;&#39;
@@ -143,12 +176,13 @@ Output :
     dict_save[&#39;sample&#39;] = dict_sample
     dict_save[&#39;sollicitation&#39;] = dict_sollicitation
     dict_save[&#39;tracker&#39;] = dict_tracker
+    dict_save[&#39;report&#39;] = simulation_report
     pickle.dump(dict_save,outfile)
     outfile.close()</code></pre>
 </details>
 </dd>
 <dt id="Owntools.Save.save_dicts_tempo"><code class="name flex">
-<span>def <span class="ident">save_dicts_tempo</span></span>(<span>dict_algorithm, dict_material, dict_sample, dict_sollicitation, dict_tracker)</span>
+<span>def <span class="ident">save_dicts_tempo</span></span>(<span>dict_algorithm, dict_material, dict_sample, dict_sollicitation, dict_tracker, simulation_report)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Save dictionnaries at the end of each PFDEM interations.</p>
@@ -158,6 +192,7 @@ Output :
     a sample dictionnary (a dictionnary)
     a sollicitation dictionnary (a dictionnary)
     a tracker dictionnary (a dictionnary)
+    a simulation report (a report)
 Output :
     Nothing but a save file is generated (a file)
 </code></pre></div>
@@ -165,7 +200,7 @@ Output :
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def save_dicts_tempo(dict_algorithm, dict_material, dict_sample, dict_sollicitation, dict_tracker):
+<pre><code class="python">def save_dicts_tempo(dict_algorithm, dict_material, dict_sample, dict_sollicitation, dict_tracker, simulation_report):
     &#39;&#39;&#39;
     Save dictionnaries at the end of each PFDEM interations.
 
@@ -175,6 +210,7 @@ Output :
             a sample dictionnary (a dictionnary)
             a sollicitation dictionnary (a dictionnary)
             a tracker dictionnary (a dictionnary)
+            a simulation report (a report)
         Output :
             Nothing but a save file is generated (a file)
     &#39;&#39;&#39;
@@ -185,6 +221,52 @@ Output :
     dict_save[&#39;sample&#39;] = dict_sample
     dict_save[&#39;sollicitation&#39;] = dict_sollicitation
     dict_save[&#39;tracker&#39;] = dict_tracker
+    dict_save[&#39;report&#39;] = simulation_report
+    pickle.dump(dict_save,outfile)
+    outfile.close()</code></pre>
+</details>
+</dd>
+<dt id="Owntools.Save.save_dicts_tempo_before_pf"><code class="name flex">
+<span>def <span class="ident">save_dicts_tempo_before_pf</span></span>(<span>dict_algorithm, dict_material, dict_sample, dict_sollicitation, dict_tracker, simulation_report)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Save dictionnaries at each PFDEM interations before PF simulation.</p>
+<pre><code>Input :
+    an algorithm dictionnary (a dictionnary)
+    a material dictionnary (a dictionnary)
+    a sample dictionnary (a dictionnary)
+    a sollicitation dictionnary (a dictionnary)
+    a tracker dictionnary (a dictionnary)
+    a simulation report (a report)
+Output :
+    Nothing but a save file is generated (a file)
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def save_dicts_tempo_before_pf(dict_algorithm, dict_material, dict_sample, dict_sollicitation, dict_tracker, simulation_report):
+    &#39;&#39;&#39;
+    Save dictionnaries at each PFDEM interations before PF simulation.
+
+        Input :
+            an algorithm dictionnary (a dictionnary)
+            a material dictionnary (a dictionnary)
+            a sample dictionnary (a dictionnary)
+            a sollicitation dictionnary (a dictionnary)
+            a tracker dictionnary (a dictionnary)
+            a simulation report (a report)
+        Output :
+            Nothing but a save file is generated (a file)
+    &#39;&#39;&#39;
+    outfile = open(dict_algorithm[&#39;namefile&#39;]+&#39;_save_tempo_before_pf&#39;,&#39;wb&#39;)
+    dict_save = {}
+    dict_save[&#39;algorithm&#39;] = dict_algorithm
+    dict_save[&#39;material&#39;] = dict_material
+    dict_save[&#39;sample&#39;] = dict_sample
+    dict_save[&#39;sollicitation&#39;] = dict_sollicitation
+    dict_save[&#39;tracker&#39;] = dict_tracker
+    dict_save[&#39;report&#39;] = simulation_report
     pickle.dump(dict_save,outfile)
     outfile.close()</code></pre>
 </details>
@@ -209,12 +291,14 @@ Output :
 <ul class="">
 <li><code><a title="Owntools.Save.save_dicts_final" href="#Owntools.Save.save_dicts_final">save_dicts_final</a></code></li>
 <li><code><a title="Owntools.Save.save_dicts_tempo" href="#Owntools.Save.save_dicts_tempo">save_dicts_tempo</a></code></li>
+<li><code><a title="Owntools.Save.save_dicts_tempo_before_pf" href="#Owntools.Save.save_dicts_tempo_before_pf">save_dicts_tempo_before_pf</a></code></li>
 </ul>
 </li>
 </ul>
-<form>
- <input type="button" value="Go back!" onclick="history.back()">
-</form>
+<br>
+<a href="https://alexsacmorane.github.io/pfdem_acs/owntools">Owntools</a>
+<br>
+<a href="https://alexsacmorane.github.io/pfdem_acs">PFDEM_ACS</a>
 <br>
 <a href="https://alexsacmorane.github.io">Home</a>
 </nav>
