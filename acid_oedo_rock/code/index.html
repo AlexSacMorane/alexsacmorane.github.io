@@ -1190,6 +1190,143 @@ def pdf_lognormal(x,m_log,s_log):
 </code></pre>
 </details>
 </dd>
+<dt id="main.cementation"><code class="name flex">
+<span>def <span class="ident">cementation</span></span>()
+</code></dt>
+<dd>
+<div class="desc"><p>Generate cementation between grains.</p>
+</div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def cementation():
+    '''
+    Generate cementation between grains.
+    '''
+    # generate the list of cohesive surface area and its list of weight
+    x_min = 1e2 # µm2
+    x_max = 4e4 # µm2
+    n_x = 20000
+    x_L = np.linspace(x_min, x_max, n_x)
+    p_x_L = []
+    for x in x_L :
+        p_x_L.append(pdf_lognormal(x,m_log,s_log))
+    # counter
+    global counter_bond, counter_bond0, counter_bond_broken_diss, counter_bond_broken_load
+    counter_bond = 0
+    counter_bond_broken_diss = 0
+    counter_bond_broken_load = 0
+    # iterate on interactions
+    for i in O.interactions:
+        # only grain-grain contact can be cemented
+        if isinstance(O.bodies[i.id1].shape, Sphere) and isinstance(O.bodies[i.id2].shape, Sphere) :
+            # only a fraction of the contact is cemented
+            if random.uniform(0,1) < f_cemented :
+                counter_bond = counter_bond + 1
+                # creation of cohesion
+                i.phys.cohesionBroken = False
+                # determine the cohesive surface
+                cohesiveSurface = random.choices(x_L,p_x_L)[0]*1e-12 # µm2
+                # set normal and shear adhesions
+                i.phys.normalAdhesion = tensileCohesion*cohesiveSurface
+                i.phys.shearAdhesion = shearCohesion*cohesiveSurface
+    counter_bond0 = counter_bond
+    # write in the report
+    simulation_report = open(simulation_report_name, 'a')
+    simulation_report.write(str(counter_bond)+" contacts cemented\n\n")
+    simulation_report.close()
+    print('\n'+str(counter_bond)+" contacts cemented\n")
+
+    # next time, do not call this function anymore, but the next one instead
+    checker.command = 'checkUnbalanced_load_confinement_ic()'
+    checker.iterPeriod = 200
+    # activate Young reduction
+    if considerYoungReduction :
+        O.engines = O.engines[:-1] + [PyRunner(command='YoungReduction()', iterPeriod = 100)] + [O.engines[-1]]
+    # change the vertical pressure applied
+    O.engines = O.engines[:-1] + [PyRunner(command='controlTopWall()', iterPeriod = 1)]
+</code></pre>
+</details>
+</dd>
+<dt id="main.checkUnbalanced_load_confinement_ic"><code class="name flex">
+<span>def <span class="ident">checkUnbalanced_load_confinement_ic</span></span>()
+</code></dt>
+<dd>
+<div class="desc"><p>Wait to reach the vertical pressure targetted for confinement.</p>
+</div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def checkUnbalanced_load_confinement_ic():
+    '''
+    Wait to reach the vertical pressure targetted for confinement.
+    '''
+    addPlotData_confinement_ic()
+    saveData_ic()
+    # check the force applied
+    if abs(O.forces.f(upper_plate.id)[2]-P_load*Dx*Dy)/(P_load*Dx*Dy) > 0.005:
+        return
+    if unbalancedForce() > unbalancedForce_criteria :
+        return
+    # characterize the ic algorithm
+    global tic
+    tac = time.perf_counter()
+    hours = (tac-tic)//(60*60)
+    minutes = (tac-tic -hours*60*60)//(60)
+    seconds = int(tac-tic -hours*60*60 -minutes*60)
+    tic = tac
+    # report
+    simulation_report = open(simulation_report_name, 'a')
+    simulation_report.write("Pressure (Confinement) applied : "+str(hours)+" hours "+str(minutes)+" minutes "+str(seconds)+" seconds\n")
+    simulation_report.write(str(n_grains)+' grains\n\n')
+    simulation_report.close()
+    print("\nPressure (Confinement) applied : "+str(hours)+" hours "+str(minutes)+" minutes "+str(seconds)+" seconds\n")
+
+    # next time, do not call this function anymore, but the next one instead
+    checker.command = 'checkUnbalanced_load_k0_ic()'
+    # control lateral wall
+    O.engines = O.engines + [PyRunner(command='controlLateralWall_ic()', iterPeriod = 1, label='k0_checker')]
+</code></pre>
+</details>
+</dd>
+<dt id="main.controlLateralWall_ic"><code class="name flex">
+<span>def <span class="ident">controlLateralWall_ic</span></span>()
+</code></dt>
+<dd>
+<div class="desc"><p>Control the lateral wall to applied a defined confinement force.</p>
+<pre><code>The displacement of the wall depends on the force difference. A maximum value is defined.
+</code></pre>
+</div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def controlLateralWall_ic():
+    '''
+    Control the lateral wall to applied a defined confinement force.
+
+    The displacement of the wall depends on the force difference. A maximum value is defined.
+    '''
+    Fx = O.forces.f(lateral_plate.id)[0]
+    if Fx == 0:
+        lateral_plate.state.pos =  (max([b.state.pos[0]+0.99*b.shape.radius for b in O.bodies if isinstance(b.shape, Sphere)]), Dy/2, upper_plate.state.pos[2]/2)
+    else :
+        dF = Fx - k0_target*P_load*upper_plate.state.pos[2]*Dy
+        v_plate_max = rMean*0.00002/O.dt
+        v_try_abs = abs(kp*dF)/O.dt
+        # maximal speed is applied to top wall
+        if v_try_abs < v_plate_max :
+            lateral_plate.state.vel = (np.sign(dF)*v_try_abs, 0, 0)
+        else :
+            lateral_plate.state.vel = (np.sign(dF)*v_plate_max, 0, 0)
+</code></pre>
+</details>
+</dd>
 </dl>
 </section>
 <section>
@@ -1208,6 +1345,9 @@ def pdf_lognormal(x,m_log,s_log):
 <li><code><a title="main.checkUnbalanced_load_cementation_ic" href="#main.checkUnbalanced_load_cementation_ic">checkUnbalanced_load_cementation_ic</a></code></li>
 <li><code><a title="main.checkUnbalanced_param_ic" href="#main.checkUnbalanced_param_ic">checkUnbalanced_param_ic</a></code></li>
 <li><code><a title="main.pdf_lognormal" href="#main.pdf_lognormal">pdf_lognormal</a></code></li>
+<li><code><a title="main.cementation" href="#main.cementation">cementation</a></code></li>
+<li><code><a title="main.checkUnbalanced_load_confinement_ic" href="#main.checkUnbalanced_load_confinement_ic">checkUnbalanced_load_confinement_ic</a></code></li>
+<li><code><a title="main.controlLateralWall_ic" href="#main.controlLateralWall_ic">controlLateralWall_ic</a></code></li>
 </ul>
 </li>
 </ul>
