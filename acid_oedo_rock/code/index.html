@@ -1480,73 +1480,187 @@ def addPlotData_confinement_ic():
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">
-  def saveData_ic():
-      """
-      Save data in .txt file during the ic.
-      """
-      plot.saveDataTxt('data/IC_'+O.tags['d.id']+'.txt')
-      # post-proccess
-      L_sigma_x = []
-      L_sigma_z = []
-      L_confinement = []
-      L_coordination = []
-      L_unbalanced = []
-      L_ite  = []
-      L_vert_strain = []
-      L_lat_strain = []
-      L_porosity = []
-      L_n_bond = []
-      file = 'data/IC_'+O.tags['d.id']+'.txt'
-      data = np.genfromtxt(file, skip_header=1)
-      file_read = open(file, 'r')
-      lines = file_read.readlines()
-      file_read.close()
-      if len(lines) >= 3:
-          for i in range(len(data)):
-              L_sigma_x.append(abs(data[i][0]))
-              L_sigma_z.append(abs(data[i][1]))
-              L_confinement.append(data[i][2])
-              L_coordination.append(data[i][3])
-              L_ite.append(data[i][4])
-              L_lat_strain.append(data[i][5])
-              L_n_bond.append(data[i][6])
-              L_porosity.append(data[i][7])
-              L_unbalanced.append(data[i][8])
-              L_vert_strain.append(data[i][9])
+def saveData_ic():
+    """
+    Save data in .txt file during the ic.
+    """
+    plot.saveDataTxt('data/IC_'+O.tags['d.id']+'.txt')
+    # post-proccess
+    L_sigma_x = []
+    L_sigma_z = []
+    L_confinement = []
+    L_coordination = []
+    L_unbalanced = []
+    L_ite  = []
+    L_vert_strain = []
+    L_lat_strain = []
+    L_porosity = []
+    L_n_bond = []
+    file = 'data/IC_'+O.tags['d.id']+'.txt'
+    data = np.genfromtxt(file, skip_header=1)
+    file_read = open(file, 'r')
+    lines = file_read.readlines()
+    file_read.close()
+    if len(lines) >= 3:
+        for i in range(len(data)):
+            L_sigma_x.append(abs(data[i][0]))
+            L_sigma_z.append(abs(data[i][1]))
+            L_confinement.append(data[i][2])
+            L_coordination.append(data[i][3])
+            L_ite.append(data[i][4])
+            L_lat_strain.append(data[i][5])
+            L_n_bond.append(data[i][6])
+            L_porosity.append(data[i][7])
+            L_unbalanced.append(data[i][8])
+            L_vert_strain.append(data[i][9])
 
-          # plot
-          fig, ((ax1, ax2, ax3), (ax4, ax5, ax6)) = plt.subplots(2,3, figsize=(20,10),num=1)
+        # plot
+        fig, ((ax1, ax2, ax3), (ax4, ax5, ax6)) = plt.subplots(2,3, figsize=(20,10),num=1)
 
-          ax1.plot(L_ite, L_sigma_x, label = r'$\sigma_x$')
-          ax1.plot(L_ite, L_sigma_z, label = r'$\sigma_z$')
-          ax1.legend()
-          ax1.set_title('Stresses (Pa)')
+        ax1.plot(L_ite, L_sigma_x, label = r'$\sigma_x$')
+        ax1.plot(L_ite, L_sigma_z, label = r'$\sigma_z$')
+        ax1.legend()
+        ax1.set_title('Stresses (Pa)')
 
-          ax2.plot(L_ite, L_unbalanced, 'b')
-          ax2.set_ylabel('Unbalanced (-)', color='b')
-          ax2.set_ylim(ymin=0, ymax=2*unbalancedForce_criteria)
-          ax2b = ax2.twinx()
-          ax2b.plot(L_ite, L_confinement, 'r')
-          ax2b.set_ylabel('Confinement (%)', color='r')
-          ax2b.set_title('Steady-state indices')
+        ax2.plot(L_ite, L_unbalanced, 'b')
+        ax2.set_ylabel('Unbalanced (-)', color='b')
+        ax2.set_ylim(ymin=0, ymax=2*unbalancedForce_criteria)
+        ax2b = ax2.twinx()
+        ax2b.plot(L_ite, L_confinement, 'r')
+        ax2b.set_ylabel('Confinement (%)', color='r')
+        ax2b.set_title('Steady-state indices')
 
-          ax3.plot(L_ite, L_n_bond)
-          ax3.set_title('Number of bond (-)')
+        ax3.plot(L_ite, L_n_bond)
+        ax3.set_title('Number of bond (-)')
 
-          ax4.plot(L_ite, L_lat_strain, label=r'$\epsilon_x$ (%)')
-          ax4.plot(L_ite, L_vert_strain, label=r'$\epsilon_z$ (%)')
-          ax4.legend()
-          ax4.set_title('Strains (%)')
+        ax4.plot(L_ite, L_lat_strain, label=r'$\epsilon_x$ (%)')
+        ax4.plot(L_ite, L_vert_strain, label=r'$\epsilon_z$ (%)')
+        ax4.legend()
+        ax4.set_title('Strains (%)')
 
-          ax5.plot(L_ite, L_porosity)
-          ax5.set_title('Porosity (-)')
+        ax5.plot(L_ite, L_porosity)
+        ax5.set_title('Porosity (-)')
 
-          ax6.plot(L_ite, L_coordination)
-          ax6.set_title('Coordination number (-)')
+        ax6.plot(L_ite, L_coordination)
+        ax6.set_title('Coordination number (-)')
 
-          plt.savefig('plot/IC_'+O.tags['d.id']+'.png')
+        plt.savefig('plot/IC_'+O.tags['d.id']+'.png')
 
-          plt.close()
+        plt.close()
+</code></pre>
+</details>
+</dd>
+<dt id="main.YoungReduction"><code class="name flex">
+<span>def <span class="ident">YoungReduction</span></span>()
+</code></dt>
+<dd>
+<div class="desc"><p>Reduce the Young modulus with the number of bond dissolved.</p>
+<pre><code>E = (E0-E1)*f_diss + E1
+</code></pre>
+</div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def YoungReduction():
+    '''
+    Reduce the Young modulus with the number of bond dissolved.
+
+    E = (E0-E1)*f_diss + E1
+    '''
+    # count the number of bond dissolved
+    global counter_bond, counter_bond_broken_load
+    counter_bond = 0
+    # iterate on interactions
+    for i in O.interactions:
+        # only grain-grain contact can be cemented
+        if isinstance(O.bodies[i.id1].shape, Sphere) and isinstance(O.bodies[i.id2].shape, Sphere) :
+            if not i.phys.cohesionBroken :
+                counter_bond = counter_bond + 1
+    counter_bond_broken_load = (counter_bond0-counter_bond) - counter_bond_broken_diss
+    # compute the new Young modulus
+    f_bond_diss = (counter_bond_broken_diss+counter_bond_broken_load)/counter_bond0
+    NewYoungModulus = (YoungModulus-80e6)*(1-f_bond_diss) + 80e6
+    # update material
+    for mat in O.materials :
+        mat.young = NewYoungModulus
+    # update the interactions
+    for inter in O.interactions :
+        if isinstance(O.bodies[inter.id1].shape, Sphere) and isinstance(O.bodies[inter.id2].shape, Sphere):
+            inter.phys.kn = NewYoungModulus*(O.bodies[inter.id1].shape.radius*2*O.bodies[inter.id2].shape.radius*2)/(O.bodies[inter.id1].shape.radius*2+O.bodies[inter.id2].shape.radius*2)
+            inter.phys.ks = 0.25*NewYoungModulus*(O.bodies[inter.id1].shape.radius*2*O.bodies[inter.id2].shape.radius*2)/(O.bodies[inter.id1].shape.radius*2+O.bodies[inter.id2].shape.radius*2) # 0.25 is the Poisson ratio
+            inter.phys.kr = inter.phys.ks*alphaKrReal*O.bodies[inter.id1].shape.radius*O.bodies[inter.id2].shape.radius
+            inter.phys.ktw = inter.phys.ks*alphaKtwReal*O.bodies[inter.id1].shape.radius*O.bodies[inter.id2].shape.radius
+        else : # Sphere-Wall contact
+            if isinstance(O.bodies[inter.id1].shape, Sphere):
+                grain = O.bodies[inter.id1]
+            else:
+                grain = O.bodies[inter.id2]
+            # diameter of the wall is equivalent of the diameter of the sphere
+            inter.phys.kn = NewYoungModulus*(grain.shape.radius*2*grain.shape.radius*2)/(grain.shape.radius*2+grain.shape.radius*2)
+            inter.phys.ks = 0.25*NewYoungModulus*(grain.shape.radius*2*grain.shape.radius*2)/(grain.shape.radius*2+grain.shape.radius*2) # 0.25 is the Poisson ratio
+            # no moment/twist for sphere-wall
+    # update time step because the Young modulus change
+    O.dt = factor_dt_crit * PWaveTimeStep()
+</code></pre>
+</details>
+</dd>
+<dt id="main.controlTopWall"><code class="name flex">
+<span>def <span class="ident">controlTopWall</span></span>()
+</code></dt>
+<dd>
+<div class="desc"><p>Control the upper wall to applied a defined confinement force.</p>
+<pre><code>The displacement of the wall depends on the force difference. A maximum value is defined.
+</code></pre>
+</div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def controlTopWall():
+    '''
+    Control the upper wall to applied a defined confinement force.
+
+    The displacement of the wall depends on the force difference. A maximum value is defined.
+    '''
+    Fz = O.forces.f(upper_plate.id)[2]
+    if Fz == 0:
+        upper_plate.state.pos =  (lateral_plate.state.pos[0]/2, Dy/2, max([b.state.pos[2]+0.99*b.shape.radius for b in O.bodies if isinstance(b.shape, Sphere)]))
+    else :
+        dF = Fz - P_load*lateral_plate.state.pos[0]*Dy
+        v_plate_max = rMean*0.00005/O.dt
+        v_try_abs = abs(kp*dF)/O.dt
+        # maximal speed is applied to top wall
+        if v_try_abs < v_plate_max :
+            upper_plate.state.vel = (0, 0, np.sign(dF)*v_try_abs)
+        else :
+            upper_plate.state.vel = (0, 0, np.sign(dF)*v_plate_max)
+</code></pre>
+</details>
+</dd>
+<dt id="main.count_bond"><code class="name flex">
+<span>def <span class="ident">count_bond</span></span>()
+</code></dt>
+<dd>
+<div class="desc"><p>Count the number of bond.</p>
+</div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def count_bond():
+    '''
+    Count the number of bond.
+    '''
+    counter_bond = 0
+    for i in O.interactions:
+        if isinstance(O.bodies[i.id1].shape, Sphere) and isinstance(O.bodies[i.id2].shape, Sphere):
+            if not i.phys.cohesionBroken :
+                counter_bond = counter_bond + 1
+    return counter_bond
 </code></pre>
 </details>
 </dd>
@@ -1576,6 +1690,9 @@ def addPlotData_confinement_ic():
 <li><code><a title="main.addPlotData_cementation_ic" href="#main.addPlotData_cementation_ic">addPlotData_cementation_ic</a></code></li>
 <li><code><a title="main.addPlotData_confinement_ic" href="#main.addPlotData_confinement_ic">addPlotData_confinement_ic</a></code></li>
 <li><code><a title="main.saveData_ic" href="#main.saveData_ic">saveData_ic</a></code></li>
+<li><code><a title="main.YoungReduction" href="#main.YoungReduction">YoungReduction</a></code></li>
+<li><code><a title="main.controlTopWall" href="#main.controlTopWall">controlTopWall</a></code></li>
+<li><code><a title="main.count_bond" href="#main.count_bond">count_bond</a></code></li>
 </ul>
 </li>
 </ul>
