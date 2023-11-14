@@ -1327,6 +1327,26 @@ def controlLateralWall_ic():
 </code></pre>
 </details>
 </dd>
+<dt id="main.DoNotControlLateralWall_ic"><code class="name flex">
+<span>def <span class="ident">DoNotControlLateralWall_ic</span></span>()
+</code></dt>
+<dd>
+<div class="desc"><p>Switch off the control of the lateral wall.</p>
+</div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def DoNotControlLateralWall_ic():
+    '''
+    Switch off the control of the lateral wall.
+    '''
+    lateral_plate.state.vel = (0,0,0)
+    O.engines = O.engines[:-1]
+</code></pre>
+</details>
+</dd>
 </dl>
 </section>
 <section>
@@ -1348,6 +1368,7 @@ def controlLateralWall_ic():
 <li><code><a title="main.cementation" href="#main.cementation">cementation</a></code></li>
 <li><code><a title="main.checkUnbalanced_load_confinement_ic" href="#main.checkUnbalanced_load_confinement_ic">checkUnbalanced_load_confinement_ic</a></code></li>
 <li><code><a title="main.controlLateralWall_ic" href="#main.controlLateralWall_ic">controlLateralWall_ic</a></code></li>
+<li><code><a title="main.DoNotControlLateralWall_ic" href="#main.DoNotControlLateralWall_ic">DoNotControlLateralWall_ic</a></code></li>
 </ul>
 </li>
 </ul>
