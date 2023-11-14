@@ -1664,6 +1664,176 @@ def count_bond():
 </code></pre>
 </details>
 </dd>
+<dt id="main.checkUnbalanced"><code class="name flex">
+<span>def <span class="ident">checkUnbalanced</span></span>()
+</code></dt>
+<dd>
+<div class="desc"><p>Look for the equilibrium during the loading phase.</p>
+</div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def checkUnbalanced():
+    """
+    Look for the equilibrium during the loading phase.
+    """
+    global L_unbalanced_ite, L_k0_ite, L_confinement_ite, L_count_bond, n_try
+    # count the number of tries
+    n_try = n_try + 1
+    # track and plot unbalanced
+    L_unbalanced_ite.append(unbalancedForce())
+    if O.forces.f(upper_plate.id)[2] != 0:
+        k0 = abs(O.forces.f(lateral_plate.id)[0]/(upper_plate.state.pos[2]*Dy)*(lateral_plate.state.pos[0]*Dy)/O.forces.f(upper_plate.id)[2])
+    else :
+        k0 = 0
+    L_k0_ite.append(k0)
+    L_confinement_ite.append(O.forces.f(upper_plate.id)[2]/(P_load*lateral_plate.state.pos[0]*Dy)*100)
+    L_count_bond.append(count_bond())
+
+    fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2,2, figsize=(16,9),num=1)
+
+    ax1.plot(L_unbalanced_ite)
+    ax1.set_title('unbalanced force (-)')
+
+    ax2.plot(L_k0_ite)
+    ax2.set_title(r'$k_0$ (-)')
+
+    ax3.plot(L_confinement_ite)
+    ax3.set_title('confinement (%)')
+
+    ax4.plot(L_count_bond)
+    ax4.set_title('Number of bond (-)')
+
+    fig.savefig('plot/tracking_ite.png')
+    plt.close()
+
+    # verify confinement pressure applied
+    if not abs(O.forces.f(upper_plate.id)[2]-P_load*lateral_plate.state.pos[0]*Dy) < 0.005*P_load*lateral_plate.state.pos[0]*Dy:
+        return
+    # verify unbalanced force criteria
+    # a limit is set for number of tries
+    if unbalancedForce() < unbalancedForce_criteria or n_try > 30:
+
+        # reset trackers
+        n_try = 0
+        L_unbalanced_ite = []
+        L_k0_ite = []
+        L_confinement_ite = []
+        L_count_bond = []
+
+        if counter_bond0*f_n_bond_stop < counter_bond:
+            dissolve()
+        else :
+            stopLoad()
+</code></pre>
+</details>
+</dd>
+<dt id="main.dissolve"><code class="name flex">
+<span>def <span class="ident">dissolve</span></span>()
+</code></dt>
+<dd>
+<div class="desc"><p>Dissolve bond with a constant surface reduction.</p>
+</div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def dissolve():
+    """
+    Dissolve bond with a constant surface reduction.
+    """
+    O.tags['Current Step'] = str(int(O.tags['Current Step'])+1)
+    # save at the end
+    saveData()
+    # count the number of bond
+    global counter_bond, counter_bond_broken_diss, s_bond_diss
+    counter_bond = 0
+    counter_bond_broken = 0
+    # iterate on interactions
+    for i in O.interactions:
+        # only grain-grain contact can be cemented
+        if isinstance(O.bodies[i.id1].shape, Sphere) and isinstance(O.bodies[i.id2].shape, Sphere) :
+            if not i.phys.cohesionBroken :
+                counter_bond = counter_bond + 1
+                # set normal and shear adhesions
+                if (counter_bond_broken_diss+counter_bond_broken_load)/counter_bond0 < diss_level_1_2 :
+                    i.phys.normalAdhesion = i.phys.normalAdhesion - tensileCohesion*dSc_dissolved_1
+                    i.phys.shearAdhesion = i.phys.shearAdhesion - shearCohesion*dSc_dissolved_1
+                else :
+                    i.phys.normalAdhesion = i.phys.normalAdhesion - tensileCohesion*dSc_dissolved_2
+                    i.phys.shearAdhesion = i.phys.shearAdhesion - shearCohesion*dSc_dissolved_2
+                if i.phys.normalAdhesion <= 0 or i.phys.shearAdhesion <=0 :
+                    # bond brokes
+                    counter_bond = counter_bond - 1
+                    counter_bond_broken = counter_bond_broken + 1
+                    i.phys.cohesionBroken = True
+                    i.phys.normalAdhesion = 0
+                    i.phys.shearAdhesion = 0
+    # update bond surface dissolved tracker
+    if (counter_bond_broken_diss+counter_bond_broken_load)/counter_bond0 < diss_level_1_2 :
+        s_bond_diss = s_bond_diss + dSc_dissolved_1
+    else :
+        s_bond_diss = s_bond_diss + dSc_dissolved_2
+    # update the counter of bond dissolved during the dissolution step
+    counter_bond_broken_diss = counter_bond_broken_diss + counter_bond_broken
+</code></pre>
+</details>
+</dd>
+<dt id="main.dissolve"><code class="name flex">
+<span>def <span class="ident">dissolve</span></span>()
+</code></dt>
+<dd>
+<div class="desc"><p>Dissolve bond with a constant surface reduction.</p>
+</div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def dissolve():
+    """
+    Dissolve bond with a constant surface reduction.
+    """
+    O.tags['Current Step'] = str(int(O.tags['Current Step'])+1)
+    # save at the end
+    saveData()
+    # count the number of bond
+    global counter_bond, counter_bond_broken_diss, s_bond_diss
+    counter_bond = 0
+    counter_bond_broken = 0
+    # iterate on interactions
+    for i in O.interactions:
+        # only grain-grain contact can be cemented
+        if isinstance(O.bodies[i.id1].shape, Sphere) and isinstance(O.bodies[i.id2].shape, Sphere) :
+            if not i.phys.cohesionBroken :
+                counter_bond = counter_bond + 1
+                # set normal and shear adhesions
+                if (counter_bond_broken_diss+counter_bond_broken_load)/counter_bond0 < diss_level_1_2 :
+                    i.phys.normalAdhesion = i.phys.normalAdhesion - tensileCohesion*dSc_dissolved_1
+                    i.phys.shearAdhesion = i.phys.shearAdhesion - shearCohesion*dSc_dissolved_1
+                else :
+                    i.phys.normalAdhesion = i.phys.normalAdhesion - tensileCohesion*dSc_dissolved_2
+                    i.phys.shearAdhesion = i.phys.shearAdhesion - shearCohesion*dSc_dissolved_2
+                if i.phys.normalAdhesion <= 0 or i.phys.shearAdhesion <=0 :
+                    # bond brokes
+                    counter_bond = counter_bond - 1
+                    counter_bond_broken = counter_bond_broken + 1
+                    i.phys.cohesionBroken = True
+                    i.phys.normalAdhesion = 0
+                    i.phys.shearAdhesion = 0
+    # update bond surface dissolved tracker
+    if (counter_bond_broken_diss+counter_bond_broken_load)/counter_bond0 < diss_level_1_2 :
+        s_bond_diss = s_bond_diss + dSc_dissolved_1
+    else :
+        s_bond_diss = s_bond_diss + dSc_dissolved_2
+    # update the counter of bond dissolved during the dissolution step
+    counter_bond_broken_diss = counter_bond_broken_diss + counter_bond_broken
+</code></pre>
+</details>
+</dd>
 </dl>
 </section>
 <section>
@@ -1693,6 +1863,8 @@ def count_bond():
 <li><code><a title="main.YoungReduction" href="#main.YoungReduction">YoungReduction</a></code></li>
 <li><code><a title="main.controlTopWall" href="#main.controlTopWall">controlTopWall</a></code></li>
 <li><code><a title="main.count_bond" href="#main.count_bond">count_bond</a></code></li>
+<li><code><a title="main.checkUnbalanced" href="#main.checkUnbalanced">checkUnbalanced</a></code></li>
+<li><code><a title="main.dissolve" href="#main.dissolve">dissolve</a></code></li>
 </ul>
 </li>
 </ul>
