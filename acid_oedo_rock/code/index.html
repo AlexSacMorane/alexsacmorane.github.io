@@ -1782,55 +1782,222 @@ def dissolve():
 </code></pre>
 </details>
 </dd>
-<dt id="main.dissolve"><code class="name flex">
-<span>def <span class="ident">dissolve</span></span>()
+<dt id="main.stopLoad"><code class="name flex">
+<span>def <span class="ident">stopLoad</span></span>()
 </code></dt>
 <dd>
-<div class="desc"><p>Dissolve bond with a constant surface reduction.</p>
+<div class="desc"><p>Close simulation.</p>
 </div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">
-def dissolve():
+def stopLoad():
     """
-    Dissolve bond with a constant surface reduction.
+    Close simulation.
     """
-    O.tags['Current Step'] = str(int(O.tags['Current Step'])+1)
-    # save at the end
+    # save at the converged iteration
     saveData()
-    # count the number of bond
-    global counter_bond, counter_bond_broken_diss, s_bond_diss
-    counter_bond = 0
-    counter_bond_broken = 0
-    # iterate on interactions
-    for i in O.interactions:
-        # only grain-grain contact can be cemented
-        if isinstance(O.bodies[i.id1].shape, Sphere) and isinstance(O.bodies[i.id2].shape, Sphere) :
-            if not i.phys.cohesionBroken :
-                counter_bond = counter_bond + 1
-                # set normal and shear adhesions
-                if (counter_bond_broken_diss+counter_bond_broken_load)/counter_bond0 < diss_level_1_2 :
-                    i.phys.normalAdhesion = i.phys.normalAdhesion - tensileCohesion*dSc_dissolved_1
-                    i.phys.shearAdhesion = i.phys.shearAdhesion - shearCohesion*dSc_dissolved_1
-                else :
-                    i.phys.normalAdhesion = i.phys.normalAdhesion - tensileCohesion*dSc_dissolved_2
-                    i.phys.shearAdhesion = i.phys.shearAdhesion - shearCohesion*dSc_dissolved_2
-                if i.phys.normalAdhesion <= 0 or i.phys.shearAdhesion <=0 :
-                    # bond brokes
-                    counter_bond = counter_bond - 1
-                    counter_bond_broken = counter_bond_broken + 1
-                    i.phys.cohesionBroken = True
-                    i.phys.normalAdhesion = 0
-                    i.phys.shearAdhesion = 0
-    # update bond surface dissolved tracker
-    if (counter_bond_broken_diss+counter_bond_broken_load)/counter_bond0 < diss_level_1_2 :
-        s_bond_diss = s_bond_diss + dSc_dissolved_1
+    # close yade
+    O.pause()
+    # characterize the dem step
+    tac = time.perf_counter()
+    hours = (tac-tic)//(60*60)
+    minutes = (tac-tic -hours*60*60)//(60)
+    seconds = int(tac-tic -hours*60*60 -minutes*60)
+    # report
+    simulation_report = open(simulation_report_name, 'a')
+    simulation_report.write("Oedometric test : "+str(hours)+" hours "+str(minutes)+" minutes "+str(seconds)+" seconds\n")
+    simulation_report.close()
+    print("Oedometric test : "+str(hours)+" hours "+str(minutes)+" minutes "+str(seconds)+" seconds")
+    # characterize the last DEM step and the simulation
+    hours = (tac-tic_0)//(60*60)
+    minutes = (tac-tic_0 -hours*60*60)//(60)
+    seconds = int(tac-tic_0 -hours*60*60 -minutes*60)
+    # report
+    simulation_report = open(simulation_report_name, 'a')
+    simulation_report.write("Simulation time : "+str(hours)+" hours "+str(minutes)+" minutes "+str(seconds)+" seconds\n\n")
+    simulation_report.close()
+    print("\nSimulation time : "+str(hours)+" hours "+str(minutes)+" minutes "+str(seconds)+" seconds\n")
+
+    # give final values
+    simulation_report = open(simulation_report_name, 'a')
+    simulation_report.write("k0 initial: "+str(round(k0_target,3))+" / k0 final: "+str(round(abs(O.forces.f(lateral_plate.id)[0]/(upper_plate.state.pos[2]*Dy)*(lateral_plate.state.pos[0]*Dy)/O.forces.f(upper_plate.id)[2]),3))+"\n")
+    simulation_report.write(str(int(counter_bond_broken_diss))+" bonds broken during dissolution steps ("+str(int(counter_bond_broken_diss/counter_bond0*100))+" % of initial number of bonds)\n")
+    simulation_report.write(str(int(counter_bond_broken_load))+" bonds broken during loading steps ("+str(int(counter_bond_broken_load/counter_bond0*100))+" % of initial number of bonds)\n")
+    simulation_report.close()
+    print("k0 initial:",round(k0_target,3)," / k0 final:",round(abs(O.forces.f(lateral_plate.id)[0]/(upper_plate.state.pos[2]*Dy)*(lateral_plate.state.pos[0]*Dy)/O.forces.f(upper_plate.id)[2]),3))
+    print(int(counter_bond_broken_diss),"bonds broken during dissolution steps ("+str(int(counter_bond_broken_diss/counter_bond0*100)),"% of initial number of bonds)")
+    print(int(counter_bond_broken_load),"bonds broken during loading steps ("+str(int(counter_bond_broken_load/counter_bond0*100)),"% of initial number of bonds)")
+
+    # save simulation
+    os.mkdir('../AcidOedo_Rock_data/'+O.tags['d.id'])
+    shutil.copytree('data','../AcidOedo_Rock_data/'+O.tags['d.id']+'/data')
+    shutil.copytree('plot','../AcidOedo_Rock_data/'+O.tags['d.id']+'/plot')
+    shutil.copytree('save','../AcidOedo_Rock_data/'+O.tags['d.id']+'/save')
+    shutil.copy('AcidOedo_Rock.py','../AcidOedo_Rock_data/'+O.tags['d.id']+'/AcidOedo_Rock.py')
+    shutil.copy(O.tags['d.id']+'_report.txt','../AcidOedo_Rock_data/'+O.tags['d.id']+'/'+O.tags['d.id']+'_report.txt')
+</code></pre>
+</details>
+</dd>
+<dt id="main.addPlotData"><code class="name flex">
+<span>def <span class="ident">addPlotData</span></span>()
+</code></dt>
+<dd>
+<div class="desc"><p>Save data in plot.</p>
+</div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def addPlotData():
+    """
+    Save data in plot.
+    """
+    # add forces applied on wall x and z
+    sz = O.forces.f(upper_plate.id)[2]/(Dy*lateral_plate.state.pos[0])
+    sx = O.forces.f(lateral_plate.id)[0]/(Dy*upper_plate.state.pos[2])
+    # compute the k0 = sigma_x/sigma_z, = 0 if no sigma_z
+    if sz != 0:
+        k0 = abs(sx/sz)
     else :
-        s_bond_diss = s_bond_diss + dSc_dissolved_2
-    # update the counter of bond dissolved during the dissolution step
-    counter_bond_broken_diss = counter_bond_broken_diss + counter_bond_broken
+        k0 = 0
+    # add data
+    plot.addData(i=O.iter-iter_0, porosity=porosity(), coordination=avgNumInteractions(), unbalanced=unbalancedForce(), \
+                counter_bond=counter_bond, counter_bond_broken_diss=counter_bond_broken_diss, counter_bond_broken_load=counter_bond_broken_load,\
+                Sx=sx, Sz=sz, Z_plate=upper_plate.state.pos[2], conf_verified=sz/P_load*100, k0=k0,\
+                w=upper_plate.state.pos[2]-upper_plate.state.refPos[2], vert_strain=100*(upper_plate.state.pos[2]-upper_plate.state.refPos[2])/upper_plate.state.refPos[2],
+                s_bond_diss=s_bond_diss)
+</code></pre>
+</details>
+</dd>
+<dt id="main.saveData"><code class="name flex">
+<span>def <span class="ident">saveData</span></span>()
+</code></dt>
+<dd>
+<div class="desc"><p>Save data in .txt file during the steps.</p>
+</div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def saveData():
+    """
+    Save data in .txt file during the steps.
+    """
+    addPlotData()
+    plot.saveDataTxt('data/'+O.tags['d.id']+'.txt')
+    # post-proccess
+    L_s_bond_diss = []
+    L_k0 = []
+    L_counter_bond = []
+    L_counter_bond_broken_diss = []
+    L_counter_bond_broken_load = []
+    L_vert_strain = []
+    L_porosity = []
+    L_coordination = []
+    file = 'data/'+O.tags['d.id']+'.txt'
+    data = np.genfromtxt(file, skip_header=1)
+    file_read = open(file, 'r')
+    lines = file_read.readlines()
+    file_read.close()
+    if len(lines) >= 3:
+        for i in range(len(data)):
+            L_coordination.append(data[i][4])
+            L_counter_bond.append(data[i][5])
+            L_counter_bond_broken_diss.append(data[i][6])
+            L_counter_bond_broken_load.append(data[i][7])
+            L_k0.append(data[i][9])
+            L_porosity.append(data[i][10])
+            L_s_bond_diss.append(data[i][11])
+            L_vert_strain.append(data[i][13])
+
+        # plot
+        fig, ((ax1, ax2, ax3), (ax4, ax5, ax6)) = plt.subplots(2,3, figsize=(16,9),num=1)
+
+        ax1.plot(L_s_bond_diss, L_k0)
+        ax1.set_title(r'$k_0$ (-)')
+
+        ax2.plot(L_s_bond_diss, L_counter_bond)
+        ax2.set_title('Number of bond (-)')
+
+        ax3.plot(L_s_bond_diss, L_counter_bond_broken_diss, label='during dissolution')
+        ax3.plot(L_s_bond_diss, L_counter_bond_broken_load, label='during loading')
+        ax3.set_title('Number of bonds broken (-)')
+        ax3.legend()
+
+        ax4.plot(L_s_bond_diss, L_vert_strain)
+        ax4.set_title(r'$\epsilon_z$ (%)')
+
+        ax5.plot(L_s_bond_diss, L_porosity)
+        ax5.set_title('Porosity (-)')
+
+        ax6.plot(L_s_bond_diss, L_coordination)
+        ax6.set_title('Coordination (-)')
+
+        plt.suptitle(r'Trackers - bond surface reduction (m$^2$)')
+        plt.savefig('plot/'+O.tags['d.id']+'.png')
+        plt.close()
+</code></pre>
+</details>
+</dd>
+<dt id="main.plotPSD"><code class="name flex">
+<span>def <span class="ident">plotPSD</span></span>()
+</code></dt>
+<dd>
+<div class="desc"><p>This function can be called to plot the evolution of the psd.</p>
+</div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def plotPSD():
+    """
+    This function can be called to plot the evolution of the psd.
+    """
+    plt.figure(1, figsize=(16,9))
+    for i_psd in range(len(L_L_psd_binsSizes)):
+        binsSizes = L_L_psd_binsSizes[i_psd]
+        binsProc = L_L_psd_binsProc[i_psd]
+        plt.plot(binsSizes, binsProc)
+    plt.title('Particle Size Distribution')
+    plt.savefig('plot/PSD.png')
+    plt.close()
+</code></pre>
+</details>
+</dd>
+<dt id="main.whereAmI"><code class="name flex">
+<span>def <span class="ident">whereAmI</span></span>()
+</code></dt>
+<dd>
+<div class="desc"><p>This function can be called during a simulation to give information to the user.</p>
+</div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def whereAmI():
+    """
+    This function can be called during a simulation to give information to the user.
+    """
+    print()
+    print("Where am I ?")
+    print()
+    if 'Current Step' in O.tags.keys():
+        print('Iteration',O.iter)
+        print(O.tags['Current Step'],'dissolutions done :')
+        print('Sample description :')
+        print('\tNumber of bonds =', int(counter_bond),'(/)',int(counter_bond0))
+        print('\tepsilon_z =', round(100*(upper_plate.state.pos[2]-upper_plate.state.refPos[2])/upper_plate.state.refPos[2],2),'(%)')
+        print('\tPorosity =', round(porosity(),3),'(-)')
+        print('\tCoordination =', round(avgNumInteractions(),1),'(-)')
+    else :
+        print('Initialisation')
 </code></pre>
 </details>
 </dd>
@@ -1865,6 +2032,11 @@ def dissolve():
 <li><code><a title="main.count_bond" href="#main.count_bond">count_bond</a></code></li>
 <li><code><a title="main.checkUnbalanced" href="#main.checkUnbalanced">checkUnbalanced</a></code></li>
 <li><code><a title="main.dissolve" href="#main.dissolve">dissolve</a></code></li>
+<li><code><a title="main.stopLoad" href="#main.stopLoad">stopLoad</a></code></li>
+<li><code><a title="main.addPlotData" href="#main.addPlotData">addPlotData</a></code></li>
+<li><code><a title="main.saveData" href="#main.saveData">saveData</a></code></li>
+<li><code><a title="main.plotPSD" href="#main.plotPSD">plotPSD</a></code></li>
+<li><code><a title="main.whereAmI" href="#main.whereAmI">whereAmI</a></code></li>
 </ul>
 </li>
 </ul>
