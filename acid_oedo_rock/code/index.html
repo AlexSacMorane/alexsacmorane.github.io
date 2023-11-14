@@ -1046,10 +1046,8 @@ def checkUnbalanced_ir_ic():
 <span>def <span class="ident">controlTopWall_ic</span></span>()
 </code></dt>
 <dd>
-<div class="desc"><p>Description of one PDEM iteration.</p>
-<p>Control the upper wall to applied a defined confinement force.</p>
-<pre><code>
-The displacement of the wall depends on the force difference. A maximum value is defined.
+<div class="desc"><p>Control the upper wall to applied a defined confinement force.</p>
+<pre><code>The displacement of the wall depends on the force difference. A maximum value is defined.
 </code></pre></div>
 <details class="source">
 <summary>
@@ -1077,6 +1075,121 @@ def controlTopWall_ic():
 </code></pre>
 </details>
 </dd>
+<dt id="main.checkUnbalanced_load_cementation_ic"><code class="name flex">
+<span>def <span class="ident">checkUnbalanced_load_cementation_ic</span></span>()
+</code></dt>
+<dd>
+<div class="desc"><p>Wait to reach the vertical pressure targetted for cementation.</p>
+</div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def checkUnbalanced_load_cementation_ic():
+    '''
+    Wait to reach the vertical pressure targetted for cementation.
+    '''
+    addPlotData_cementation_ic()
+    saveData_ic()
+    # check the force applied
+    if abs(O.forces.f(upper_plate.id)[2]-P_cementation*Dx*Dy)/(P_cementation*Dx*Dy) > 0.005:
+        return
+    if unbalancedForce() > unbalancedForce_criteria :
+        return
+    # characterize the ic algorithm
+    global tic
+    tac = time.perf_counter()
+    hours = (tac-tic)//(60*60)
+    minutes = (tac-tic -hours*60*60)//(60)
+    seconds = int(tac-tic -hours*60*60 -minutes*60)
+    tic = tac
+    # report
+    simulation_report = open(simulation_report_name, 'a')
+    simulation_report.write("Pressure (Cementation) applied : "+str(hours)+" hours "+str(minutes)+" minutes "+str(seconds)+" seconds\n")
+    simulation_report.write(str(n_grains)+' grains\n\n')
+    simulation_report.close()
+    print("\nPressure (Cementation) applied : "+str(hours)+" hours "+str(minutes)+" minutes "+str(seconds)+" seconds\n")
+    # switch on friction, bending resistance and twisting resistance between particles
+    O.materials[-1].frictionAngle = frictionAngleReal
+    O.materials[-1].alphaKr = alphaKrReal
+    O.materials[-1].alphaKtw = alphaKtwReal
+    # for existing contacts, clear them
+    O.interactions.clear()
+    # calm down particles
+    for b in O.bodies:
+        if isinstance(b.shape,Sphere):
+            b.state.angVel = Vector3(0,0,0)
+            b.state.vel = Vector3(0,0,0)
+    # switch off damping
+    Newton.damping = 0
+    # next time, do not call this function anymore, but the next one instead
+    checker.command = 'checkUnbalanced_param_ic()'
+</code></pre>
+</details>
+</dd>
+<dt id="main.checkUnbalanced_param_ic"><code class="name flex">
+<span>def <span class="ident">checkUnbalanced_param_ic</span></span>()
+</code></dt>
+<dd>
+<div class="desc"><p>Wait to reach the equilibrium after switching on the friction and the rolling resistances.</p>
+</div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def checkUnbalanced_param_ic():
+    '''
+    Wait to reach the equilibrium after switching on the friction and the rolling resistances.
+    '''
+    addPlotData_cementation_ic()
+    saveData_ic()
+    # check the force applied
+    if abs(O.forces.f(upper_plate.id)[2]-P_cementation*Dx*Dy)/(P_cementation*Dx*Dy) > 0.005:
+        return
+    if unbalancedForce() > unbalancedForce_criteria :
+        return
+    # characterize the ic algorithm
+    global tic
+    tac = time.perf_counter()
+    hours = (tac-tic)//(60*60)
+    minutes = (tac-tic -hours*60*60)//(60)
+    seconds = int(tac-tic -hours*60*60 -minutes*60)
+    tic = tac
+    # report
+    simulation_report = open(simulation_report_name, 'a')
+    simulation_report.write("Parameters applied : "+str(hours)+" hours "+str(minutes)+" minutes "+str(seconds)+" seconds\n\n")
+    simulation_report.close()
+    print("\nParameters applied : "+str(hours)+" hours "+str(minutes)+" minutes "+str(seconds)+" seconds\n")
+    # save
+    #O.save('save/'+O.tags['d.id']+'_ic.yade.bz2')
+    # next time, do not call this function anymore, but the next one instead
+    checker.command = 'cementation()'
+    checker.iterPeriod = 10
+</code></pre>
+</details>
+</dd>
+<dt id="main.pdf_lognormal"><code class="name flex">
+<span>def <span class="ident">pdf_lognormal</span></span>(<span>x, m_log, s_log)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return the probability of a value x with a log normal function defined by the mean m_log and the variance s_log.</p>
+</div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def pdf_lognormal(x,m_log,s_log):
+    '''
+    Return the probability of a value x with a log normal function defined by the mean m_log and the variance s_log.
+    '''
+    p = np.exp(-(np.log(x)-m_log)**2/(2*s_log**2))/(x*s_log*np.sqrt(2*np.pi))
+    return p
+</code></pre>
+</details>
+</dd>
 </dl>
 </section>
 <section>
@@ -1092,6 +1205,9 @@ def controlTopWall_ic():
 <ul class="">
 <li><code><a title="main.checkUnbalanced_ir_ic" href="#main.checkUnbalanced_ir_ic">checkUnbalanced_ir_ic</a></code></li>
 <li><code><a title="main.controlTopWall_ic" href="#main.controlTopWall_ic">controlTopWall_ic</a></code></li>
+<li><code><a title="main.checkUnbalanced_load_cementation_ic" href="#main.checkUnbalanced_load_cementation_ic">checkUnbalanced_load_cementation_ic</a></code></li>
+<li><code><a title="main.checkUnbalanced_param_ic" href="#main.checkUnbalanced_param_ic">checkUnbalanced_param_ic</a></code></li>
+<li><code><a title="main.pdf_lognormal" href="#main.pdf_lognormal">pdf_lognormal</a></code></li>
 </ul>
 </li>
 </ul>
