@@ -1347,6 +1347,209 @@ def DoNotControlLateralWall_ic():
 </code></pre>
 </details>
 </dd>
+<dt id="main.checkUnbalanced_load_k0_ic"><code class="name flex">
+<span>def <span class="ident">checkUnbalanced_load_k0_ic</span></span>()
+</code></dt>
+<dd>
+<div class="desc"><p>Wait to reach the earth pressure coefficient targetted.</p>
+<pre><code>k0 = s_II/s_I, where s_I is the vertical pressure and s_II is the lateral pressure.
+</code></pre>
+</div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def checkUnbalanced_load_k0_ic():
+    '''
+    Wait to reach the earth pressure coefficient targetted.
+
+    k0 = s_II/s_I, where s_I is the vertical pressure and s_II is the lateral pressure.
+    '''
+    addPlotData_confinement_ic()
+    saveData_ic()
+    # check the force applied
+    if abs(O.forces.f(upper_plate.id)[2]  - P_load*lateral_plate.state.pos[0]*Dy)/(P_load*lateral_plate.state.pos[0]*Dy) > 0.005 or\
+    abs(O.forces.f(lateral_plate.id)[0] - k0_target*P_load*upper_plate.state.pos[2]*Dy)/(k0_target*P_load*upper_plate.state.pos[2]*Dy) > 0.005:
+        return
+    if unbalancedForce() > unbalancedForce_criteria :
+        return
+
+    # characterize the ic algorithm
+    global tic, iter_0
+    tac = time.perf_counter()
+    hours = (tac-tic)//(60*60)
+    minutes = (tac-tic -hours*60*60)//(60)
+    seconds = int(tac-tic -hours*60*60 -minutes*60)
+    tic = tac
+    # report
+    simulation_report = open(simulation_report_name, 'a')
+    simulation_report.write("Pressure (k0) applied : "+str(hours)+" hours "+str(minutes)+" minutes "+str(seconds)+" seconds\n")
+    simulation_report.write('IC generation ends\n')
+    simulation_report.write(str(O.iter-iter_0)+' Iterations\n')
+    simulation_report.write(str(n_grains)+' grains\n\n')
+    simulation_report.close()
+    print("\nPressure (k0) applied : "+str(hours)+" hours "+str(minutes)+" minutes "+str(seconds)+" seconds\n")
+
+    # reset plot (IC done, simulation starts)
+    plot.reset()
+    # switch off control lateral wall
+    O.engines = O.engines[:-1]+[PyRunner(command='DoNotControlLateralWall_ic()', iterPeriod = 1)]
+    # save new reference position for upper wall
+    upper_plate.state.refPos = upper_plate.state.pos
+    # next time, do not call this function anymore, but the next one instead
+    iter_0 = O.iter
+    checker.command = 'checkUnbalanced()'
+    checker.iterPeriod = 500
+    # label step
+    O.tags['Current Step']='0'
+    # trackers
+    global L_unbalanced_ite, L_k0_ite, L_confinement_ite, L_count_bond, n_try
+    n_try = 0
+    L_unbalanced_ite = []
+    L_k0_ite = []
+    L_confinement_ite = []
+    L_count_bond = []
+</code></pre>
+</details>
+</dd>
+<dt id="main.addPlotData_cementation_ic"><code class="name flex">
+<span>def <span class="ident">addPlotData_cementation_ic</span></span>()
+</code></dt>
+<dd>
+<div class="desc"><p>Save data in plot.</p>
+</div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def addPlotData_cementation_ic():
+    """
+    Save data in plot.
+    """
+    # add forces applied on wall x and z
+    sz = O.forces.f(upper_plate.id)[2]/(lateral_plate.state.pos[0]*Dy)
+    sx = O.forces.f(lateral_plate.id)[0]/(Dy*upper_plate.state.pos[2])
+    # add data
+    plot.addData(i=O.iter-iter_0, porosity=porosity(), coordination=avgNumInteractions(), unbalanced=unbalancedForce(),\
+                 Sx=sx, Sz=sz, conf_verified=sz/P_cementation*100, n_bond=0,\
+                 vert_strain=100*(upper_plate.state.pos[2]-upper_plate.state.refPos[2])/upper_plate.state.refPos[2], lat_strain=100*(lateral_plate.state.pos[0]-lateral_plate.state.refPos[0])/lateral_plate.state.refPos[0])
+</code></pre>
+</details>
+</dd>
+<dt id="main.addPlotData_confinement_ic"><code class="name flex">
+<span>def <span class="ident">addPlotData_confinement_ic</span></span>()
+</code></dt>
+<dd>
+<div class="desc"><p>Save data in plot.</p>
+</div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def addPlotData_confinement_ic():
+    """
+    Save data in plot.
+    """
+    # add forces applied on wall x and z
+    sz = O.forces.f(upper_plate.id)[2]/(lateral_plate.state.pos[0]*Dy)
+    sx = O.forces.f(lateral_plate.id)[0]/(Dy*upper_plate.state.pos[2])
+    # count the number the bond
+    n_bond = 0
+    for i in O.interactions:
+        if isinstance(O.bodies[i.id1].shape, Sphere) and isinstance(O.bodies[i.id2].shape, Sphere):
+            if not i.phys.cohesionBroken :
+                n_bond = n_bond + 1
+    # add data
+    plot.addData(i=O.iter-iter_0, porosity=porosity(), coordination=avgNumInteractions(), unbalanced=unbalancedForce(),\
+                 Sx=sx, Sz=sz, conf_verified=sz/P_load*100, n_bond=n_bond,\
+                 vert_strain=100*(upper_plate.state.pos[2]-upper_plate.state.refPos[2])/upper_plate.state.refPos[2], lat_strain=100*(lateral_plate.state.pos[0]-lateral_plate.state.refPos[0])/lateral_plate.state.refPos[0])
+</code></pre>
+</details>
+</dd>
+<dt id="main.saveData_ic"><code class="name flex">
+<span>def <span class="ident">saveData_ic</span></span>()
+</code></dt>
+<dd>
+<div class="desc"><p>Save data in .txt file during the ic.</p>
+</div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+  def saveData_ic():
+      """
+      Save data in .txt file during the ic.
+      """
+      plot.saveDataTxt('data/IC_'+O.tags['d.id']+'.txt')
+      # post-proccess
+      L_sigma_x = []
+      L_sigma_z = []
+      L_confinement = []
+      L_coordination = []
+      L_unbalanced = []
+      L_ite  = []
+      L_vert_strain = []
+      L_lat_strain = []
+      L_porosity = []
+      L_n_bond = []
+      file = 'data/IC_'+O.tags['d.id']+'.txt'
+      data = np.genfromtxt(file, skip_header=1)
+      file_read = open(file, 'r')
+      lines = file_read.readlines()
+      file_read.close()
+      if len(lines) >= 3:
+          for i in range(len(data)):
+              L_sigma_x.append(abs(data[i][0]))
+              L_sigma_z.append(abs(data[i][1]))
+              L_confinement.append(data[i][2])
+              L_coordination.append(data[i][3])
+              L_ite.append(data[i][4])
+              L_lat_strain.append(data[i][5])
+              L_n_bond.append(data[i][6])
+              L_porosity.append(data[i][7])
+              L_unbalanced.append(data[i][8])
+              L_vert_strain.append(data[i][9])
+
+          # plot
+          fig, ((ax1, ax2, ax3), (ax4, ax5, ax6)) = plt.subplots(2,3, figsize=(20,10),num=1)
+
+          ax1.plot(L_ite, L_sigma_x, label = r'$\sigma_x$')
+          ax1.plot(L_ite, L_sigma_z, label = r'$\sigma_z$')
+          ax1.legend()
+          ax1.set_title('Stresses (Pa)')
+
+          ax2.plot(L_ite, L_unbalanced, 'b')
+          ax2.set_ylabel('Unbalanced (-)', color='b')
+          ax2.set_ylim(ymin=0, ymax=2*unbalancedForce_criteria)
+          ax2b = ax2.twinx()
+          ax2b.plot(L_ite, L_confinement, 'r')
+          ax2b.set_ylabel('Confinement (%)', color='r')
+          ax2b.set_title('Steady-state indices')
+
+          ax3.plot(L_ite, L_n_bond)
+          ax3.set_title('Number of bond (-)')
+
+          ax4.plot(L_ite, L_lat_strain, label=r'$\epsilon_x$ (%)')
+          ax4.plot(L_ite, L_vert_strain, label=r'$\epsilon_z$ (%)')
+          ax4.legend()
+          ax4.set_title('Strains (%)')
+
+          ax5.plot(L_ite, L_porosity)
+          ax5.set_title('Porosity (-)')
+
+          ax6.plot(L_ite, L_coordination)
+          ax6.set_title('Coordination number (-)')
+
+          plt.savefig('plot/IC_'+O.tags['d.id']+'.png')
+
+          plt.close()
+</code></pre>
+</details>
+</dd>
 </dl>
 </section>
 <section>
@@ -1369,6 +1572,10 @@ def DoNotControlLateralWall_ic():
 <li><code><a title="main.checkUnbalanced_load_confinement_ic" href="#main.checkUnbalanced_load_confinement_ic">checkUnbalanced_load_confinement_ic</a></code></li>
 <li><code><a title="main.controlLateralWall_ic" href="#main.controlLateralWall_ic">controlLateralWall_ic</a></code></li>
 <li><code><a title="main.DoNotControlLateralWall_ic" href="#main.DoNotControlLateralWall_ic">DoNotControlLateralWall_ic</a></code></li>
+<li><code><a title="main.checkUnbalanced_load_k0_ic" href="#main.checkUnbalanced_load_k0_ic">checkUnbalanced_load_k0_ic</a></code></li>
+<li><code><a title="main.addPlotData_cementation_ic" href="#main.addPlotData_cementation_ic">addPlotData_cementation_ic</a></code></li>
+<li><code><a title="main.addPlotData_confinement_ic" href="#main.addPlotData_confinement_ic">addPlotData_confinement_ic</a></code></li>
+<li><code><a title="main.saveData_ic" href="#main.saveData_ic">saveData_ic</a></code></li>
 </ul>
 </li>
 </ul>
