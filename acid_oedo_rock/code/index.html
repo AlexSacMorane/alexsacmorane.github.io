@@ -975,252 +975,106 @@ O.run()</code></pre>
 <section>
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
-<dt id="main.close_main"><code class="name flex">
-<span>def <span class="ident">close_main</span></span>(<span>dict_algorithm, dict_material, dict_sample, dict_sollicitation, dict_tracker, simulation_report)</span>
+<dt id="main.checkUnbalanced_ir_ic"><code class="name flex">
+<span>def <span class="ident">checkUnbalanced_ir_ic</span></span>()
 </code></dt>
 <dd>
-<div class="desc"><p>Close the PFDEM.</p>
-<pre><code>Input :
-    an algorithm dictionnary (a dict)
-    a material dictionnary (a dict)
-    a sample dictionnary (a dict)
-    a sollicitation dictionnary (a dict)
-    a tracker dictionnary (a dict)
-    a simulation report (a Report)
-Output :
-    Nothing but the dictionnaries and the report are updated
-</code></pre></div>
+<div class="desc"><p>Increase particle radius until a steady-state is found.</p>
+</div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def close_main(dict_algorithm, dict_material, dict_sample, dict_sollicitation, dict_tracker, simulation_report):
-    &#39;&#39;&#39;
-    Close the PFDEM.
-
-        Input :
-            an algorithm dictionnary (a dict)
-            a material dictionnary (a dict)
-            a sample dictionnary (a dict)
-            a sollicitation dictionnary (a dict)
-            a tracker dictionnary (a dict)
-            a simulation report (a Report)
-        Output :
-            Nothing but the dictionnaries and the report are updated
-    &#39;&#39;&#39;
-    #make movie of the different configuration
-    if &#39;Movie&#39; in dict_algorithm[&#39;L_flag_plot&#39;] and &#39;Config&#39; in dict_algorithm[&#39;L_flag_plot&#39;]:
-        Owntools.Plot.Plot_mp4(&#39;Debug/Configuration/Configuration_&#39;,&#39;Debug/Configuration.mp4&#39;)
-
-    simulation_report.end(datetime.now())
-
-    #final save
-    if dict_algorithm[&#39;SaveData&#39;]:
-        print()
-        print(&#39;Copying data, it can take long times...&#39;)
-
-        Owntools.Save.save_dicts_final(dict_algorithm, dict_material, dict_sample, dict_sollicitation, dict_tracker)
-        name_actual_folder = os.path.dirname(os.path.realpath(__file__))
-        shutil.copytree(name_actual_folder, &#39;../&#39;+dict_algorithm[&#39;foldername&#39;]+&#39;/&#39;+dict_algorithm[&#39;namefile&#39;])
-        os.remove(&#39;../&#39;+dict_algorithm[&#39;foldername&#39;]+&#39;/User_&#39;+dict_algorithm[&#39;namefile&#39;]+&#39;_tempo.txt&#39;)
-        os.remove(&#39;../&#39;+dict_algorithm[&#39;foldername&#39;]+&#39;/Report_&#39;+dict_algorithm[&#39;namefile&#39;]+&#39;_tempo.txt&#39;)</code></pre>
+<pre><code class="python">
+def checkUnbalanced_ir_ic():
+    '''
+    Increase particle radius until a steady-state is found.
+    '''
+    # the rest will be run only if unbalanced is < .1 (stabilized packing)
+    # Compute the ratio of mean summary force on bodies and mean force magnitude on interactions.
+    if unbalancedForce() > .1:
+        return
+    # increase the radius of particles
+    if int(O.tags['Step ic']) < n_steps_ic :
+        print('IC step '+O.tags['Step ic']+'/'+str(n_steps_ic)+' done')
+        O.tags['Step ic'] = str(int(O.tags['Step ic'])+1)
+        i_L_r = 0
+        for b in O.bodies :
+            if isinstance(b.shape, Sphere):
+                growParticle(b.id, int(O.tags['Step ic'])/n_steps_ic*L_r[i_L_r]/b.shape.radius)
+                i_L_r = i_L_r + 1
+        # update the dt as the radii change
+        O.dt = factor_dt_crit * PWaveTimeStep()
+        return
+    # plot the psd
+    global L_L_psd_binsSizes, L_L_psd_binsProc
+    L_L_psd_binsSizes = []
+    L_L_psd_binsProc = []
+    binsSizes, binsProc, binsSumCum = psd(bins=10)
+    L_L_psd_binsSizes.append(binsSizes)
+    L_L_psd_binsProc.append(binsProc)
+    plotPSD()
+    # characterize the ic algorithm
+    global tic
+    global iter_0
+    tac = time.perf_counter()
+    hours = (tac-tic)//(60*60)
+    minutes = (tac-tic -hours*60*60)//(60)
+    seconds = int(tac-tic -hours*60*60 -minutes*60)
+    tic = tac
+    # report
+    simulation_report = open(simulation_report_name, 'a')
+    simulation_report.write("IC Generated : "+str(hours)+" hours "+str(minutes)+" minutes "+str(seconds)+" seconds\n")
+    simulation_report.write(str(O.iter-iter_0)+' Iterations\n')
+    simulation_report.write(str(n_grains)+' grains\n\n')
+    simulation_report.close()
+    print("\nIC Generated : "+str(hours)+" hours "+str(minutes)+" minutes "+str(seconds)+" seconds\n")
+    # save
+    #O.save('save/simu_ic.yade.bz2')
+    # next time, do not call this function anymore, but the next one instead
+    iter_0 = O.iter
+    checker.command = 'checkUnbalanced_load_cementation_ic()'
+    checker.iterPeriod = 500
+    # control top wall
+    O.engines = O.engines + [PyRunner(command='controlTopWall_ic()', iterPeriod = 1)]
+    # switch on the gravity
+    Newton.gravity = [0, 0, -9.81]
+</code></pre>
 </details>
 </dd>
-<dt id="main.iteration_main"><code class="name flex">
-<span>def <span class="ident">iteration_main</span></span>(<span>dict_algorithm, dict_material, dict_sample, dict_sollicitation, dict_tracker, simulation_report)</span>
+<dt id="main.controlTopWall_ic"><code class="name flex">
+<span>def <span class="ident">controlTopWall_ic</span></span>()
 </code></dt>
 <dd>
 <div class="desc"><p>Description of one PDEM iteration.</p>
-<p>The iteration is composed by a DEM step (to obtain a steady state configuration) and a PF step (to obtain dissolution and precipitation).</p>
-<pre><code>Input :
-    an algorithm dictionnary (a dict)
-    a material dictionnary (a dict)
-    a sample dictionnary (a dict)
-    a sollicitation dictionnary (a dict)
-    a tracker dictionnary (a dict)
-    a simulation report (a Report)
-Output :
-    Nothing but the dictionnaies and the report are updated
+<p>Control the upper wall to applied a defined confinement force.</p>
+<pre><code>
+The displacement of the wall depends on the force difference. A maximum value is defined.
 </code></pre></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def iteration_main(dict_algorithm, dict_material, dict_sample, dict_sollicitation, dict_tracker, simulation_report):
-    &#39;&#39;&#39;
-    Description of one PDEM iteration.
+<pre><code class="python">
+def controlTopWall_ic():
+    '''
+    Control the upper wall to applied a defined confinement force.
 
-    The iteration is composed by a DEM step (to obtain a steady state configuration) and a PF step (to obtain dissolution and precipitation).
-
-        Input :
-            an algorithm dictionnary (a dict)
-            a material dictionnary (a dict)
-            a sample dictionnary (a dict)
-            a sollicitation dictionnary (a dict)
-            a tracker dictionnary (a dict)
-            a simulation report (a Report)
-        Output :
-            Nothing but the dictionnaies and the report are updated
-    &#39;&#39;&#39;
-    #---------------------------------------------------------------------------
-    #prepare iteration
-    #---------------------------------------------------------------------------
-    simulation_report.tic_tempo(datetime.now())
-    dict_algorithm[&#39;i_PFDEM&#39;] = dict_algorithm[&#39;i_PFDEM&#39;] + 1
-    simulation_report.write_and_print(f&#34;\nITERATION {dict_algorithm[&#39;i_PFDEM&#39;]} / {dict_algorithm[&#39;n_t_PFDEM&#39;]}\n\n&#34;,f&#34;\nITERATION {dict_algorithm[&#39;i_PFDEM&#39;]} / {dict_algorithm[&#39;n_t_PFDEM&#39;]}\n&#34;)
-    os.mkdir(&#39;Output/Ite_&#39;+str(dict_algorithm[&#39;i_PFDEM&#39;]))
-
-    #---------------------------------------------------------------------------
-    #move grains
-    #---------------------------------------------------------------------------
-
-    Grain.Compute_overlap_2_grains(dict_sample)
-    Grain.Apply_overlap_target(dict_material,dict_sample,dict_sollicitation,dict_tracker)
-
-    #---------------------------------------------------------------------------
-    #prepare phase field simulation
-    #---------------------------------------------------------------------------
-
-    #Compute parameters needed
-    Owntools.Compute.Compute_S_int(dict_sample) #the intersection surface
-    Owntools.Compute.Compute_sum_min_etai(dict_sample, dict_sollicitation) #the sum of the minimum of etai
-    Owntools.Compute.Compute_Emec(dict_sample, dict_sollicitation) #the mechanical energy
-    if dict_material[&#39;method_to_compute_kc&#39;] == &#39;dilation&#39;:
-        Owntools.Compute.Compute_kc_dil(dict_material, dict_sample) #the solute diffusion
-    elif dict_material[&#39;method_to_compute_kc&#39;] == &#39;wfd&#39;:
-        Owntools.Compute.Compute_kc_wfd(dict_material, dict_sample) #the solute diffusion
-    if dict_material[&#39;method_to_compute_kc&#39;] == &#39;interpolation&#39;:
-        Owntools.Compute.Compute_kc_int(dict_material, dict_sample) #the solute diffusion
-    dict_tracker[&#39;S_int_L&#39;].append(dict_sample[&#39;S_int&#39;])
-    dict_tracker[&#39;sum_min_etai_L&#39;].append(dict_sample[&#39;sum_min_etai&#39;])
-
-    #compute for total energy in the sample and track the value
-    Owntools.Compute.Compute_sum_Ed_plus_minus(dict_sample, dict_sollicitation)
-    dict_tracker[&#39;sum_ed_L&#39;].append(dict_sample[&#39;sum_ed&#39;])
-    dict_tracker[&#39;sum_Ed_che_L&#39;].append(dict_sample[&#39;sum_Ed_che&#39;])
-    dict_tracker[&#39;sum_Ed_mec_L&#39;].append(dict_sample[&#39;sum_Ed_mec&#39;])
-    dict_tracker[&#39;sum_ed_plus_L&#39;].append(dict_sample[&#39;sum_ed_plus&#39;])
-    dict_tracker[&#39;sum_ed_minus_L&#39;].append(dict_sample[&#39;sum_ed_minus&#39;])
-
-    #Adaptative time step
-    if abs(dict_sample[&#39;sum_ed&#39;]) &lt; dict_algorithm[&#39;Ed_level1&#39;]:
-        dict_algorithm[&#39;dt_PF&#39;] = dict_algorithm[&#39;dt_PF_init&#39;]
-    elif dict_algorithm[&#39;Ed_level1&#39;] &lt;= abs(dict_sample[&#39;sum_ed&#39;]) and abs(dict_sample[&#39;sum_ed&#39;]) &lt; dict_algorithm[&#39;Ed_level2&#39;]:
-        dict_algorithm[&#39;dt_PF&#39;] = dict_algorithm[&#39;dt_PF_level1&#39;]
-    elif dict_algorithm[&#39;Ed_level2&#39;] &lt;= abs(dict_sample[&#39;sum_ed&#39;]) and abs(dict_sample[&#39;sum_ed&#39;]) &lt; dict_algorithm[&#39;Ed_level3&#39;]:
-        dict_algorithm[&#39;dt_PF&#39;] = dict_algorithm[&#39;dt_PF_level2&#39;]
-    elif dict_algorithm[&#39;Ed_level3&#39;] &lt;= abs(dict_sample[&#39;sum_ed&#39;]) :
-        dict_algorithm[&#39;dt_PF&#39;] = dict_algorithm[&#39;dt_PF_level3&#39;]
-
-    #plot
-    if &#39;Config&#39; in dict_algorithm[&#39;L_flag_plot&#39;]:
-        Owntools.Plot.Plot_config(dict_algorithm, dict_sample)
-    if &#39;Kc&#39; in dict_algorithm[&#39;L_flag_plot&#39;]:
-        Owntools.Plot.Plot_kc(dict_sample)
-
-    #write data
-    Owntools.Write.Write_eta_txt(dict_algorithm, dict_sample)
-    Owntools.Write.Write_solute_txt(dict_algorithm, dict_sample)
-    Owntools.Write.Write_kc_txt(dict_algorithm, dict_sample)
-    Owntools.Write.Write_Emec_txt(dict_algorithm, dict_sample)
-
-    #plot the difference of solute conentration in the case of a pure diffusion problem
-    if &#39;Diff_Solute&#39; in dict_algorithm[&#39;L_flag_plot&#39;]:
-        os.mkdir(&#39;Debug/Diff_Solute/Ite_&#39;+str(dict_algorithm[&#39;i_PFDEM&#39;]))
-        Owntools.Plot.Plot_Diffusion_Solute(dict_algorithm, dict_material, dict_sample)
-
-    #create i
-    Owntools.Write.Write_i(dict_algorithm, dict_material, dict_sample, dict_sollicitation)
-
-    simulation_report.tac_tempo(datetime.now(),f&#34;Iteration {dict_algorithm[&#39;i_PFDEM&#39;]}: preparation of the pf simulation&#34;)
-    simulation_report.tic_tempo(datetime.now())
-
-    #---------------------------------------------------------------------------
-    #PF simulation
-    #---------------------------------------------------------------------------
-
-    #run
-    os.system(&#39;mpiexec -n &#39;+str(dict_algorithm[&#39;np_proc&#39;])+&#39; ~/projects/moose/modules/combined/combined-opt -i &#39;+dict_algorithm[&#39;namefile&#39;]+&#39;_&#39;+str(dict_algorithm[&#39;i_PFDEM&#39;])+&#39;.i&#39;)
-
-    simulation_report.tac_tempo(datetime.now(),f&#34;Iteration {dict_algorithm[&#39;i_PFDEM&#39;]}: pf simulation&#34;)
-    simulation_report.tic_tempo(datetime.now())
-
-    #sorting files
-    j_str = Owntools.Sort_Files(dict_algorithm)
-
-    #---------------------------------------------------------------------------
-    #PF to DEM
-    #---------------------------------------------------------------------------
-
-    #look for the new grains shape
-    for grain in dict_sample[&#39;L_g&#39;]:
-        grain.PFtoDEM_Multi(&#39;Output/Ite_&#39;+str(dict_algorithm[&#39;i_PFDEM&#39;])+&#39;/&#39;+dict_algorithm[&#39;namefile&#39;]+&#39;_&#39;+str(dict_algorithm[&#39;i_PFDEM&#39;])+&#39;_other_&#39;+j_str,dict_algorithm,dict_sample)
-        grain.geometric_study(dict_sample)
-    #look for the new solute shape
-    Owntools.PFtoDEM_Multi.solute_PFtoDEM_Multi(&#39;Output/Ite_&#39;+str(dict_algorithm[&#39;i_PFDEM&#39;])+&#39;/&#39;+dict_algorithm[&#39;namefile&#39;]+&#39;_&#39;+str(dict_algorithm[&#39;i_PFDEM&#39;])+&#39;_other_&#39;+j_str,dict_algorithm,dict_sample)
-    #look for the initial external energy sources
-    Owntools.PFtoDEM_Multi.Ed_PFtoDEM_Multi(&#39;Output/Ite_&#39;+str(dict_algorithm[&#39;i_PFDEM&#39;])+&#39;/&#39;+dict_algorithm[&#39;namefile&#39;]+&#39;_&#39;+str(dict_algorithm[&#39;i_PFDEM&#39;])+&#39;_other_000&#39;,dict_algorithm,dict_sample)
-
-    #plot
-    if &#39;Config&#39; in dict_algorithm[&#39;L_flag_plot&#39;]:
-        Owntools.Plot.Plot_config(dict_algorithm, dict_sample)
-    if &#39;Init_Current_Shape&#39; in dict_algorithm[&#39;L_flag_plot&#39;]:
-        Owntools.Plot.Plot_init_current_shape(dict_sample)
-    if &#39;Ed&#39; in dict_algorithm[&#39;L_flag_plot&#39;]:
-        Owntools.Plot.Plot_Ed(dict_sample)
-
-    #---------------------------------------------------------------------------
-    #postprocess
-    #---------------------------------------------------------------------------
-
-    #Compute the sphericity for the first grain
-    dict_sample[&#39;L_g&#39;][0].Compute_sphericity(dict_algorithm)
-
-    #compute the mass of grain
-    Owntools.Compute.Compute_sum_eta(dict_sample)
-
-    #compute the mass of the solute
-    Owntools.Compute.Compute_sum_c(dict_sample)
-
-    #---------------------------------------------------------------------------
-    #tracker
-    #---------------------------------------------------------------------------
-
-    dict_tracker[&#39;L_t&#39;].append(dict_tracker[&#39;L_t&#39;][-1]+dict_algorithm[&#39;dt_PF&#39;]*dict_algorithm[&#39;n_t_PF&#39;])
-    dict_tracker[&#39;L_dt&#39;].append(dict_algorithm[&#39;dt_PF&#39;])
-    dict_tracker[&#39;L_sum_solute&#39;].append(dict_sample[&#39;sum_c&#39;])
-    dict_tracker[&#39;L_sum_eta&#39;].append(dict_sample[&#39;sum_eta&#39;])
-    dict_tracker[&#39;L_sum_total&#39;].append(dict_sample[&#39;sum_c&#39;]+dict_sample[&#39;sum_eta&#39;])
-    dict_tracker[&#39;L_area_sphericity_g0&#39;].append(dict_sample[&#39;L_g&#39;][0].area_sphericity)
-    dict_tracker[&#39;L_diameter_sphericity_g0&#39;].append(dict_sample[&#39;L_g&#39;][0].diameter_sphericity)
-    dict_tracker[&#39;L_circle_ratio_sphericity_g0&#39;].append(dict_sample[&#39;L_g&#39;][0].circle_ratio_sphericity)
-    dict_tracker[&#39;L_perimeter_sphericity_g0&#39;].append(dict_sample[&#39;L_g&#39;][0].perimeter_sphericity)
-    dict_tracker[&#39;L_width_to_length_ratio_sphericity_g0&#39;].append(dict_sample[&#39;L_g&#39;][0].width_to_length_ratio_sphericity)
-    dict_tracker[&#39;c_at_the_center&#39;].append(Owntools.Extract_solute_at_p(dict_sample,(int(len(dict_sample[&#39;y_L&#39;])/2),int(len(dict_sample[&#39;x_L&#39;])/2))))
-
-    #Plot trackers
-    if &#39;Eta_c&#39; in dict_algorithm[&#39;L_flag_plot&#39;] :
-        Owntools.Plot.Plot_sum_eta_c(dict_tracker)
-    if &#39;Sphericity&#39; in dict_algorithm[&#39;L_flag_plot&#39;] :
-        Owntools.Plot.Plot_sphericity(dict_tracker)
-    if &#39;C_at_P&#39; in dict_algorithm[&#39;L_flag_plot&#39;] :
-        Owntools.Plot.Plot_c_at_p(dict_tracker)
-    if &#39;sum_Ed&#39; in dict_algorithm[&#39;L_flag_plot&#39;] :
-        Owntools.Plot.Plot_sum_Ed(dict_tracker)
-    if &#39;Sint_MinEtai&#39; in dict_algorithm[&#39;L_flag_plot&#39;] :
-        Owntools.Plot.Plot_Sint_SumMinEtai(dict_tracker)
-    if &#39;dt&#39; in dict_algorithm[&#39;L_flag_plot&#39;] :
-        Owntools.Plot.Plot_dt_used(dict_tracker)
-
-    #---------------------------------------------------------------------------
-    #tempo save
-    #---------------------------------------------------------------------------
-
-    if dict_algorithm[&#39;SaveData&#39;]:
-        Owntools.Save.save_dicts_tempo(dict_algorithm, dict_material, dict_sample, dict_sollicitation, dict_tracker)
-        shutil.copy(&#39;Debug/Report.txt&#39;,&#39;../&#39;+dict_algorithm[&#39;foldername&#39;]+&#39;/Report_&#39;+dict_algorithm[&#39;namefile&#39;]+&#39;_tempo.txt&#39;)
-
-    simulation_report.tac_tempo(datetime.now(),f&#34;Iteration {dict_algorithm[&#39;i_PFDEM&#39;]}: from pf to dem&#34;)</code></pre>
+    The displacement of the wall depends on the force difference. A maximum value is defined.
+    '''
+    Fz = O.forces.f(upper_plate.id)[2]
+    if Fz == 0:
+        upper_plate.state.pos =  (lateral_plate.state.pos[0]/2, Dy/2, max([b.state.pos[2]+0.99*b.shape.radius for b in O.bodies if isinstance(b.shape, Sphere)]))
+    else :
+        dF = Fz - P_cementation*lateral_plate.state.pos[0]*Dy
+        v_plate_max = rMean*0.00005/O.dt
+        v_try_abs = abs(kp*dF)/O.dt
+        # maximal speed is applied to top wall
+        if v_try_abs < v_plate_max :
+            upper_plate.state.vel = (0, 0, np.sign(dF)*v_try_abs)
+        else :
+            upper_plate.state.vel = (0, 0, np.sign(dF)*v_plate_max)
+</code></pre>
 </details>
 </dd>
 </dl>
