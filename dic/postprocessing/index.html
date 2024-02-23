@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.10.0" />
-<title>DIC documentation</title>
+<title>User API documentation</title>
 <meta name="description" content="@author: Alexandre Sac--Morane
 alexandre.sac-morane@uclouvain.be …" />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
@@ -20,50 +20,191 @@ alexandre.sac-morane@uclouvain.be …" />
 <main>
 <article id="content">
 <header>
-<h1 class="title">Project <code>Digital Image Correlation</code></h1>
+<h1 class="title">Function <code>Main</code></h1>
 </header>
 <section id="section-intro">
-<p>Digital Image Correlation.<br>
-This script is about Digital Image Correlation. The displacement and the strains fields are computed.<br><br>
-Please cite the following :<br>
-Rattez H, Shi Y, Sac-Morane A, Klaeyle T, Mielniczuk B, Veveakis M (2022) Effect of grain size distribution on the shear band thickness evolution in sand. Géotechnique 72: 350-363. <a href="https://doi.org/10.1680/jgeot.20.P.120">https://doi.org/10.1680/jgeot.20.P.120</a><br>
-<a href="https://github.com/AlexSacMorane/DIC">The github project</a>
-</p>
-</section>
-<section>
-<h2 class="section-modules" id="section-modules">Functions</h2>
-<ul>
-<li id="Main">
-<p>
-<h3><a href="https://alexsacmorane.github.io/dic/main">Main</a><br></h3>
-It is the Main function to run the algorithm. It calls Displacement2D.<br>
-</p>
-</li>
-<li id="Displacement2D">
-<p>
-<h3><a href="https://alexsacmorane.github.io/dic/displacement2d">Displacement2D</a><br></h3>
-It is the function where the algorithm is run.<br>
-</p>
-</li>
-<li id="Ent">
-<p>
-<h3><a href="https://alexsacmorane.github.io/dic/ent">Ent</a><br></h3>
-It is a function to convert a float to an integer.<br>
-</p>
-</li>
-<li id="PostProcessing">
-<p>
-<h3><a href="https://alexsacmorane.github.io/dic/postprocessing">PostProcessing</a><br></h3>
-It is a function to post-process the data.<br>
-</p>
-</li>
-<li id="DataControl">
-<p>
-<h3><a href="https://alexsacmorane.github.io/dic/datacontrol">DataControl</a><br></h3>
-It is a function to control (and correct) data if it is needed (not used called in the main file).<br>
-</p>
-</li>
-</ul>
+<p>@author: Alexandre Sac&ndash;Morane
+alexandre.sac-morane@uclouvain.be</p>
+<p>It is the Main function to run the algorithm. This is the file where the user can change the different parameters for the postproccessing. It calls Displacement2D.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+  clear
+  close all
+  tic
+
+  %% Data information
+
+  % The name of the pictures folder
+  % There is one folder per camera spot
+  FolderName = 'camera1';
+
+  % The name of the simulation (it must end with '.mat')
+  % This name is used to save data
+  FileName = 'Test.mat';
+
+  %% Sort pictures
+
+  % Put 1==1 if you  want to do this step
+  % Put 1==0 if you  want to skip this step
+  if 1==0
+      % Count the number of pictures
+      D = dir(FolderName);
+      size_D = size(D,1);
+      counter_no_file = 0;
+
+      % Count the number of file which are not pictures
+      for i = 1:size_D
+          if D(i).isdir
+              counter_no_file = counter_no_file + 1;
+          end
+      end
+
+      number_picture = size_D - counter_no_file;
+
+      % Rename picture if the number is larger than 100
+      if number_picture >= 100
+          % Give a template for the name file
+          template_name = 'test18camera2_Movie_Ref_Step';
+          % Give the extension name
+          extension_name = '.jpeg';
+          % Change the name of pictures until 99
+          for i = 0:99
+              if i <10
+                  chr = strcat('0',int2str(i));
+              else
+                  chr = int2str(i);
+              end
+              oldName = strcat(FolderName,'/',template_name,chr,extension_name);
+              newName = strcat(FolderName,'/',template_name,'0',chr,extension_name);
+              movefile(oldName,newName);
+          end
+      end
+  end
+
+  %% Show the picture and select the extract zone
+
+  % Put 1==0 if you do not want to run
+  % Put 1==1 if you want to run
+  if 1==0
+      % Load all pictures
+      images = imageDatastore(fullfile(FolderName));
+      % Take a picture in the middle of the test
+      % The number 39 is a random number and can be changed
+      image = readimage(images,39);
+      % You can rotate the picture if you want
+      % The angle is in degree
+      image=imrotate(image,-90);
+      % A new window opens with your picture
+      figure
+      imshow(image)
+      imrect(gca,[1 1 100 100])
+  end
+
+
+  %% Information given by the previous section
+  % Run the previous one to fill those information
+  % Help is given in the README.md
+
+  extraction = [216 ;
+                1090;
+                400 ;
+                790];
+
+  % Orientation of picture
+  PictureOrientation = [-90];
+
+  % Scalling Factor
+  thalesL = [0.1/3825.6170212766];
+
+  %% Parameters of the postprocessing
+
+  % Picture Folder
+  images = imageDatastore(fullfile(FolderName));
+
+  % Extract data
+  e1sl = extraction(1);
+  e1el = extraction(2);
+  e1sc = extraction(3);
+  e1ec = extraction(4);
+
+  % Orientation Defaut
+  Orientation = PictureOrientation(1);
+
+  % Scalling Factor
+  % Real height / height on the focal plan
+  thales=thalesL(1);
+
+  % Time Step
+  TimeStep = 1;
+
+  % Limits
+  limit = 5 ;
+
+  % Space for the discretisation
+  SpatialStep = 5 ;
+
+  % Size Sample for the discretisation
+  SizePixelValue = 30 ;
+  % [line column]
+  % See the beginning of the code to change the value
+  SizePixel = [SizePixelValue SizePixelValue] ;
+
+  %% To see the discretisation
+
+  % Put 1==0 if you do not want to run
+  % Put 1==1 if you want to run
+  if 1==0
+      % Load all pictures
+      images = imageDatastore(fullfile(FolderName));
+      % Take a picture in the middle of the test
+      % The number 30 is a random number and can be changed
+      image = readimage(images,30);
+      % Rotate the picture
+      view1 = imrotate(image,Orientation);
+      % Extract the zone defined sooner
+      extract1 = view1(e1sl:e1el,e1sc:e1ec);
+
+      % Compute the mesh
+      Nl = (e1el-e1sl+1 - 2*limit) / (SizePixel(1)+SpatialStep);
+      Nl = ent(Nl,1);
+      Nc = (e1ec-e1sc+1 - 2*limit) / (SizePixel(2)+SpatialStep);
+      Nc = ent(Nc,1);
+      Ntot = Nl*Nc;
+
+      % Open a new figure window and show the mesh
+      figure()
+      imshow(extract1)
+      for l = 0:Nl-1
+          for c = 0:Nc-1
+              indice = l * Nc + c + 1;
+              disp(indice/Ntot)
+              % Create the mesh in the window
+              imrect(gca,[limit+c*(SpatialStep+SizePixel(2))+1 ...
+                          limit+l*(SpatialStep+SizePixel(1))+1 ...
+                          SizePixel(2) SizePixel(1)]);
+          end
+      end
+      title('Picture and Discretisation')
+  end
+
+  %% What do you want ?
+
+  % Displacement 2D
+  Displacement = Displacement2D(images,e1sl,e1el,e1sc,e1ec,...
+                             limit,SpatialStep,TimeStep,SizePixel,thales,Orientation);
+
+  %% Saving
+
+  save(strcat('save/',FileName),'Displacement',...
+      'e1sl','e1el','e1sc','e1ec','Orientation',...
+      'thales','TimeStep','limit','SpatialStep','SizePixel');
+
+  toc
+</code></pre>
+</details>
 </section>
 </article>
 <nav id="sidebar">
@@ -72,12 +213,10 @@ It is a function to control (and correct) data if it is needed (not used called 
 <ul></ul>
 </div>
 <ul id="index">
-<li><h4><a href="#Main">Main</a></h4></li>
-<li><h4><a href="#Displacement2D">Displacement2D</a></h4></li>
-<li><h4><a href="#Ent">Ent</a></h4></li>
-<li><h4><a href="#PostProcessing">PostProcessing</a></h4></li>
-<li><h4><a href="#DataControl">DataControl</a></h4></li>
 </ul>
+<form>
+ <input type="button" value="Go back!" onclick="history.back()">
+</form>
 <br>
 <a href="https://alexsacmorane.github.io">Home</a>
 </nav>
