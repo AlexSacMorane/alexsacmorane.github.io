@@ -4,5 +4,4 @@
 # TO DO
 - Add PF_Cement_Solidification
 - Add Article DEM debonding
-- Update DIC
 - Add MY_PFDEM
