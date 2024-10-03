@@ -896,8 +896,29 @@ def compute_mass_loss(dict_user, dict_sample, tracker_key):
 </section>
 <section>
 <h2 class="section-title" id="header-functions">Functions</h2>
-
 <dl>
+
+<dt id="tools.create_folder"><code class="name flex">
+<span>def <span class="ident">create_folder</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Create a new folder. If it already exists, it is erased.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def create_folder(name):
+    '''
+    Create a new folder. If it already exists, it is erased.
+    '''
+    if Path(name).exists():
+        shutil.rmtree(name)
+    os.mkdir(name)
+</code></pre>
+</details>
+</dd>
+    
 <dt id="tools.function_name"><code class="name flex">
 <span>def <span class="ident">function_name</span></span>(<span>)</span>
 </code></dt>
@@ -912,6 +933,7 @@ def compute_mass_loss(dict_user, dict_sample, tracker_key):
 </code></pre>
 </details>
 </dd>
+    
 </dl>
 </section>
 <section>
@@ -925,6 +947,7 @@ def compute_mass_loss(dict_user, dict_sample, tracker_key):
 <ul id="index">
 <li><h3><a href="#header-functions">Functions</a></h3>
 <ul class="">
+<li><code><a title="tools.create_folder" href="#tools.create_folder">create_folder</a></code></li>
 <li><code><a title="tools.function_name" href="#tools.fuction_name">function_name</a></code></li>
 </ul>
 </li>
