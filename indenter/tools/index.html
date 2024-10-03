@@ -1363,21 +1363,246 @@ def lsm_linear(L_y, L_x):
 </details>
 </dd>
     
-<dt id="tools.function_name"><code class="name flex">
-<span>def <span class="ident">function_name</span></span>(<span>)</span>
+<dt id="tools.index_to_str"><code class="name flex">
+<span>def <span class="ident">index_to_str</span></span>(<span>)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>function description</p></div>
+<div class="desc"><p>Convert a integer into a string with the format XXX.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">
-  function_code
+def index_to_str(j):
+    '''
+    Convert a integer into a string with the format XXX.
+    '''
+    if j < 10:
+        return '00'+str(j)
+    elif 10<=j and j<100:
+        return '0'+str(j)
+    else :
+        return str(j)
 </code></pre>
 </details>
 </dd>
     
+<dt id="tools.read_vtk"><code class="name flex">
+<span>def <span class="ident">read_vtk</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Read the last vtk files to obtain data from MOOSE.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def read_vtk(dict_user, dict_sample, j_str):
+    '''
+    Read the last vtk files to obtain data from MOOSE.
+    '''
+    eta_map_old = dict_sample['eta_map'].copy()
+    c_map_old = dict_sample['c_map'].copy()
+    L_eta = []
+    L_c = []
+    if not dict_sample['Map_known']:
+        L_limits = []
+        L_XYZ = []
+        L_L_i_XYZ_used = []
+    else :
+        L_XYZ = dict_sample['L_XYZ']
+
+    # iterate on the proccessors used
+    for i_proc in range(dict_user['n_proc']):
+
+        # name of the file to load
+        namefile = 'vtk/pf_other_'+j_str+'_'+str(i_proc)+'.vtu'
+
+        # load a vtk file as input
+        reader = vtk.vtkXMLUnstructuredGridReader()
+        reader.SetFileName(namefile)
+        reader.Update()
+
+        # Grab a scalar from the vtk file
+        nodes_vtk_array = reader.GetOutput().GetPoints().GetData()
+        eta_vtk_array = reader.GetOutput().GetPointData().GetArray("eta")
+        c_vtk_array = reader.GetOutput().GetPointData().GetArray("c")
+
+        #Get the coordinates of the nodes and the scalar values
+        nodes_array = vtk_to_numpy(nodes_vtk_array)
+        eta_array = vtk_to_numpy(eta_vtk_array)
+        c_array = vtk_to_numpy(c_vtk_array)
+
+        # map is not know
+        if not dict_sample['Map_known']:
+            # look for limits
+            x_min = None
+            x_max = None
+            y_min = None
+            y_max = None
+            # save the map
+            L_i_XYZ_used = []
+            # Must detect common zones between processors
+            for i_XYZ in range(len(nodes_array)) :
+                XYZ = nodes_array[i_XYZ]
+                # Do not consider twice a point
+                if list(XYZ) not in L_XYZ :
+                    L_XYZ.append(list(XYZ))
+                    L_eta.append(eta_array[i_XYZ])
+                    L_c.append(c_array[i_XYZ])
+                    L_i_XYZ_used.append(i_XYZ)
+                    # set first point
+                    if x_min == None :
+                        x_min = list(XYZ)[0]
+                        x_max = list(XYZ)[0]
+                        y_min = list(XYZ)[1]
+                        y_max = list(XYZ)[1]
+                    # look for limits of the processor
+                    else :
+                        if list(XYZ)[0] < x_min:
+                            x_min = list(XYZ)[0]
+                        if list(XYZ)[0] > x_max:
+                            x_max = list(XYZ)[0]
+                        if list(XYZ)[1] < y_min:
+                            y_min = list(XYZ)[1]
+                        if list(XYZ)[1] > y_max:
+                            y_max = list(XYZ)[1]
+            # Here the algorithm can be help as the mapping is known
+            L_L_i_XYZ_used.append(L_i_XYZ_used)
+            # save limits
+            L_limits.append([x_min,x_max,y_min,y_max])
+
+        # map is known
+        else :
+            # the last term considered is at the end of the list
+            if dict_sample['L_L_i_XYZ_used'][i_proc][-1] == len(nodes_array)-1:
+                L_eta = list(L_eta) + list(eta_array)
+                L_c = list(L_c) + list(c_array)
+            # the last term considered is not at the end of the list
+            else :
+                L_eta = list(L_eta) + list(eta_array[dict_sample['L_L_i_XYZ_used'][i_proc][0]: dict_sample['L_L_i_XYZ_used'][i_proc][-1]+1])
+                L_c = list(L_c) + list(c_array[dict_sample['L_L_i_XYZ_used'][i_proc][0]: dict_sample['L_L_i_XYZ_used'][i_proc][-1]+1])
+
+    if not dict_sample['Map_known']:
+        # plot processors distribution
+        if 'processor' in dict_user['L_figures']:
+            fig, (ax1) = plt.subplots(1,1,figsize=(16,9))
+            # parameters
+            title_fontsize = 20
+            for i_proc in range(len(L_limits)):
+                limits = L_limits[i_proc]
+                ax1.plot([limits[0],limits[1],limits[1],limits[0],limits[0]],[limits[2],limits[2],limits[3],limits[3],limits[2]], label='proc '+str(i_proc))
+            ax1.legend()
+            ax1.set_xlabel('X (m)')
+            ax1.set_ylabel('Y (m)')
+            ax1.set_title('Processor i has the priority on i+1',fontsize = title_fontsize)
+            fig.suptitle('Processors ditribution',fontsize = 1.2*title_fontsize)    
+            fig.tight_layout()
+            fig.savefig('plot/processors_distribution.png')
+            plt.close(fig)
+        # the map is known
+        dict_sample['Map_known'] = True
+        dict_sample['L_L_i_XYZ_used'] = L_L_i_XYZ_used
+        dict_sample['L_XYZ'] = L_XYZ
+
+    # rebuild map from lists
+    for i_XYZ in range(len(L_XYZ)):
+        # find nearest node
+        L_search = list(abs(np.array(dict_sample['x_L']-L_XYZ[i_XYZ][0])))
+        i_x = L_search.index(min(L_search))
+        L_search = list(abs(np.array(dict_sample['y_L']-L_XYZ[i_XYZ][1])))
+        i_y = L_search.index(min(L_search))
+        # rewrite map
+        dict_sample['eta_map'][-1-i_y, i_x] = L_eta[i_XYZ]
+        dict_sample['c_map'][-1-i_y, i_x] = L_c[i_XYZ]
+</code></pre>
+</details>
+</dd>
+    
+<dt id="tools.compute_mass"><code class="name flex">
+<span>def <span class="ident">compute_mass</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Compute the mass (combination of eta and c) at a certain time.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def compute_mass(dict_user, dict_sample):
+    '''
+    Compute the mass at a certain time.
+     
+    Mass is sum of eta and c.
+    '''
+    # sum of masses
+    dict_user['sum_eta_tempo'] = np.sum(dict_sample['eta_map'].copy())
+    dict_user['sum_c_tempo'] = np.sum(dict_sample['c_map'].copy())
+    dict_user['sum_mass_tempo'] = np.sum(dict_sample['eta_map'].copy())+np.sum(dict_sample['c_map'].copy())
+</code></pre>
+</details>
+</dd>
+    
+<dt id="tools.compute_mass_loss"><code class="name flex">
+<span>def <span class="ident">compute_mass_loss</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Compute the mass (combination of eta and c) loss from the previous compute_mass() call.
+</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def compute_mass_loss(dict_user, dict_sample, tracker_key):
+    '''
+    Compute the mass loss from the previous compute_mass() call.
+     
+    Plot in the given tracker.
+    Mass is sum of etai and c.
+    '''
+    # delta masses
+    deta = np.sum(dict_sample['eta_map'].copy()) - dict_user['sum_eta_tempo']
+    dc = np.sum(dict_sample['c_map'].copy()) - dict_user['sum_c_tempo']
+    dm = np.sum(dict_sample['eta_map'].copy())+np.sum(dict_sample['c_map'].copy()) - dict_user['sum_mass_tempo']
+    
+    # save
+    dict_user[tracker_key+'_eta'].append(deta)
+    dict_user[tracker_key+'_c'].append(dc)
+    dict_user[tracker_key+'_m'].append(dm)
+
+    # percentage
+    dict_user[tracker_key+'_eta_p'].append(deta/dict_user['sum_eta_tempo']*100)
+    dict_user[tracker_key+'_c_p'].append(dc/dict_user['sum_c_tempo']*100)
+    dict_user[tracker_key+'_m_p'].append(dm/dict_user['sum_mass_tempo']*100)
+
+    # plot
+    if 'mass_loss' in dict_user['L_figures']:
+        fig, (ax1,ax2,ax3) = plt.subplots(nrows=3,ncols=1,figsize=(16,9))
+        ax1.plot(dict_user[tracker_key+'_eta'])
+        ax1.set_title(r'$\eta$ loss (-)')
+        ax2.plot(dict_user[tracker_key+'_c'])
+        ax2.set_title(r'$c$ loss (-)')
+        ax3.plot(dict_user[tracker_key+'_m'])
+        ax3.set_title(r'$\eta$ + $c$ loss (-)')
+        fig.tight_layout()
+        #fig.savefig('plot/evol_mass_loss_'+tracker_key+'_ite.png')
+        plt.close(fig)
+
+        fig, (ax1,ax2,ax3) = plt.subplots(nrows=3,ncols=1,figsize=(16,9))
+        ax1.plot(dict_user[tracker_key+'_eta_p'])
+        ax1.set_title(r'$\eta$ loss (%)')
+        ax2.plot(dict_user[tracker_key+'_c_p'])
+        ax2.set_title(r'$c$ loss (%)')
+        ax3.plot(dict_user[tracker_key+'_m_p'])
+        ax3.set_title(r'$\eta$ + $c$ loss (%)')
+        fig.tight_layout()
+        fig.savefig('plot/evol_mass_loss_'+tracker_key+'_p_ite.png')
+        plt.close(fig)
+</code></pre>
+</details>
+</dd>
+        
 </dl>
 </section>
 <section>
@@ -1405,7 +1630,10 @@ def lsm_linear(L_y, L_x):
 <li><code><a title="tools.plot_as" href="#tools.plot_as">plot_as</a></code></li>
 <li><code><a title="tools.plot_fit" href="#tools.plot_fit">plot_fit</a></code></li>
 <li><code><a title="tools.lsm_linear" href="#tools.lsm_linear">lsm_linear</a></code></li>
-<li><code><a title="tools.function_name" href="#tools.fuction_name">function_name</a></code></li>
+<li><code><a title="tools.index_to_str" href="#tools.index_to_str">index_to_str</a></code></li>
+<li><code><a title="tools.read_vtk" href="#tools.read_vtk">read_vtk</a></code></li>
+<li><code><a title="tools.compute_mass" href="#tools.compute_mass">compute_mass</a></code></li>
+<li><code><a title="tools.compute_mass_loss" href="#tools.compute_mass_loss">compute_mass_loss</a></code></li>
 </ul>
 </li>
 </ul>
