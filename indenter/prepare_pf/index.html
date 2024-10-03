@@ -612,6 +612,42 @@ def compute_as_control_cst(dict_user, dict_sample):
 </code></pre>
 </details>
 </dd>
+
+<dt id="prepare_pf.compute_as_no_control"><code class="name flex">
+<span>def <span class="ident">compute_as_no_control()</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Compute solid activity due to vertical pressure applied.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def compute_as_no_control(dict_user, dict_sample):
+  '''
+  Compute solid activity due to vertical pressure applied.
+  '''
+  # cst
+  R_gas = dict_user['R_cst']
+  Temp = dict_user['temperature'] 
+  V_m = dict_user['V_m']
+
+  # solid activity 
+  a_s = math.exp(dict_user['pressure_applied']*V_m/(R_gas*Temp))
+
+  # init
+  dict_sample['as_map'] = np.zeros((dict_user['n_mesh_y'], dict_user['n_mesh_x']))
+  # iterate on mesh
+  for i_x in range(len(dict_sample['x_L'])):
+      for i_y in range(len(dict_sample['y_L'])):
+          y = dict_sample['y_L'][i_y]
+          if y < dict_user['y_max']-dict_user['size_solute_well'] : # in the grain initially
+              dict_sample['as_map'][-1-i_y, i_x] = a_s
+          else : # not in the grain initially
+              dict_sample['as_map'][-1-i_y, i_x] = 1
+</code></pre>
+</details>
+</dd>
   
 </dl>
 </section>
@@ -629,6 +665,7 @@ def compute_as_control_cst(dict_user, dict_sample):
 <li><code><a title="prepare_pf.compute_as" href="#prepare_pf.compute_as">compute_as()</a></code></li>
 <li><code><a title="prepare_pf.compute_as_control" href="#prepare_pf.compute_as_control">compute_as_control()</a></code></li>
 <li><code><a title="prepare_pf.compute_as_control_cst" href="#prepare_pf.compute_as_control_cst">compute_as_control_cst()</a></code></li>
+<li><code><a title="prepare_pf.compute_as_no_control" href="#prepare_pf.compute_as_no_control">compute_as_no_control()</a></code></li>
 </ul>
 </li>
 </ul>
