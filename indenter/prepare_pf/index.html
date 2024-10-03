@@ -648,6 +648,109 @@ def compute_as_no_control(dict_user, dict_sample):
 </code></pre>
 </details>
 </dd>
+
+<dt id="prepare_pf.compute_c"><code class="name flex">
+<span>def <span class="ident">compute_c</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Compute solute concentration map.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def compute_c(dict_user, dict_sample):
+  '''
+  Compute solute concentration map.
+  '''
+  # compute bool map
+  comb_map = compute_bool_map(dict_user, dict_sample)
+
+  # initialization
+  c_map = dict_sample['c_map'].copy()
+  c_map_new = c_map.copy()
+  c_removed_map = np.zeros((dict_user['n_mesh_y'], dict_user['n_mesh_x']))
+
+  # track solute moved
+  s_solute_moved = 0
+  L_p_solute_moved = []
+  # iterate on x coordinate
+  for i_x in range(len(dict_sample['x_L'])):
+    s_solute_moved_i_x = 0 # quantity to move at this x
+    s_solute_moved_fluid_i_x = 0 # quantity to move to fluid at this x
+    L_i_y_fluid = [] # list of i_y corresponding to the fluid
+    # iterate on y coordinate
+    for i_y in range(len(dict_sample['y_L'])):
+      # detect if this is the fluid
+      if dict_sample['current_front'][i_x]-dict_user['size_tube']/2 <= dict_sample['y_L'][i_y] and\
+          dict_sample['y_L'][i_y] <= dict_sample['current_front'][i_x]+dict_user['size_tube']/2:
+        L_i_y_fluid.append(i_y)
+      # detection of solute to move
+      if not comb_map[-1-i_y, i_x] and c_map_new[-1-i_y, i_x] != dict_user['C_eq']: # threshold value
+        # compute solute to move
+        solute_to_move = c_map_new[-1-i_y, i_x] - dict_user['C_eq']
+        # detect if this solute must go to the fluid
+        factor = 1.5 # increase the fluid zone
+        if dict_sample['current_front'][i_x]-factor*dict_user['size_tube']/2 <= dict_sample['y_L'][i_y] and\
+            dict_sample['y_L'][i_y] <= dict_sample['current_front'][i_x]+factor*dict_user['size_tube']/2:
+          s_solute_moved_fluid_i_x = s_solute_moved_fluid_i_x + solute_to_move    
+        # reset value to equilibrium
+        c_map_new[-1-i_y, i_x] = dict_user['C_eq']
+        # track
+        s_solute_moved = s_solute_moved + solute_to_move
+        s_solute_moved_i_x = s_solute_moved_i_x + solute_to_move
+        c_removed_map[-1-i_y, i_x] = solute_to_move
+      
+    # iterate on y coordinate of the fluid
+    for i_y in L_i_y_fluid:
+      # move solute in the fluid
+      c_map_new[-1-i_y, i_x] = c_map_new[-1-i_y, i_x] + s_solute_moved_fluid_i_x/len(L_i_y_fluid)
+      # track
+      c_removed_map[-1-i_y, i_x] = c_removed_map[-1-i_y, i_x] - s_solute_moved_fluid_i_x/len(L_i_y_fluid)
+    # search i_y near the front coordinate
+    L_search = list(abs(np.array(dict_sample['y_L']-dict_sample['current_front'][i_x])))
+    i_y_f = L_search.index(min(L_search))
+    as_ij = dict_sample['as_map'][-1-i_y_f, i_x]
+    # compute tracker
+    p_solute_moved = s_solute_moved_i_x/(dict_user['C_eq']*as_ij)
+    L_p_solute_moved.append(p_solute_moved)
+  # tracker
+  dict_user['s_solute_moved_L'].append(s_solute_moved) 
+  dict_user['L_L_p_solute_moved'].append(L_p_solute_moved) 
+  dict_user['c_removed_map'] = c_removed_map.copy()
+
+  # plot 
+  if 'c_removed_map' in dict_user['L_figures']:
+    fig, (ax1) = plt.subplots(1,1,figsize=(16,9))
+    im = ax1.imshow(dict_user['c_removed_map'], interpolation = 'nearest', extent=(dict_sample['x_L'][0],dict_sample['x_L'][-1],dict_sample['y_L'][0],dict_sample['y_L'][-1]))
+    fig.colorbar(im, ax=ax1)
+    ax1.set_title(r'Map of c removed',fontsize = 30)
+    fig.tight_layout()
+    fig.savefig('plot/map_c_removed.png')
+    plt.close(fig)
+
+  # extract solute from the well
+  # track mean value
+  m_c_well = 0
+  n_c_well = 0 
+  # iterate on the mesh
+  for i_x in range(len(dict_sample['x_L'])):
+    for i_y in range(len(dict_sample['y_L'])):  
+      # upper zone
+      if dict_sample['y_L'][i_y] > dict_user['y_max'] - dict_user['size_solute_well']:
+        # track the mean value in the upper zone
+        m_c_well = m_c_well + c_map_new[-1-i_y, i_x]
+        n_c_well = n_c_well + 1
+        # change value to have a well zone
+        c_map_new[-1-i_y, i_x] = dict_user['C_eq']
+  # track mean
+  dict_user['m_c_well_L'].append(m_c_well/n_c_well) 
+
+  # save data
+  dict_sample['c_map'] = c_map_new.copy()
+</code></pre>
+</details>
+</dd>
   
 </dl>
 </section>
@@ -666,6 +769,7 @@ def compute_as_no_control(dict_user, dict_sample):
 <li><code><a title="prepare_pf.compute_as_control" href="#prepare_pf.compute_as_control">compute_as_control</a></code></li>
 <li><code><a title="prepare_pf.compute_as_control_cst" href="#prepare_pf.compute_as_control_cst">compute_as_control_cst</a></code></li>
 <li><code><a title="prepare_pf.compute_as_no_control" href="#prepare_pf.compute_as_no_control">compute_as_no_control</a></code></li>
+<li><code><a title="prepare_pf.compute_c" href="#prepare_pf.compute_c">compute_c</a></code></li>
 </ul>
 </li>
 </ul>
