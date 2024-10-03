@@ -751,7 +751,103 @@ def compute_c(dict_user, dict_sample):
 </code></pre>
 </details>
 </dd>
-  
+
+<dt id="prepare_pf.compute_kc"><code class="name flex">
+<span>def <span class="ident">compute_kc</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Compute diffusion map.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def compute_kc(dict_user, dict_sample):
+    '''
+    Compute diffusion map.
+    '''
+    # compute bool map
+    comb_map = compute_bool_map(dict_user, dict_sample)
+
+    # plot
+    if 'diff_map' in dict_user['L_figures']:
+      fig, (ax1) = plt.subplots(1,1,figsize=(16,9))
+      im = ax1.imshow(comb_map, interpolation = 'nearest', extent=(dict_sample['x_L'][0],dict_sample['x_L'][-1],dict_sample['y_L'][0],dict_sample['y_L'][-1]))
+      fig.colorbar(im, ax=ax1)
+      ax1.set_title(r'Bool',fontsize = 30)
+      fig.tight_layout()
+      fig.savefig('plot/map_diffusion.png')
+      plt.close(fig)
+
+    # assign real value
+    kc_map = comb_map*dict_user['D_solute']
+    dict_sample['kc_map'] = kc_map
+
+    # iterate on the mesh
+    for i_x in range(len(dict_sample['x_L'])):
+      for i_y in range(len(dict_sample['y_L'])):  
+        # increase diffusion in the well
+        if dict_sample['y_L'][i_y] > dict_user['y_max'] - dict_user['size_solute_well']:
+          dict_sample['kc_map'][-1-i_y, i_x] = dict_sample['kc_map'][-1-i_y,i_x] * 100
+        # increase diffusion in the tube
+        elif dict_sample['x_L'][i_x] > dict_user['x_max'] - dict_user['size_tube'] and\
+           dict_sample['y_L'][i_y] > dict_sample['current_front'][i_x] + dict_user['size_tube']/2:
+          dict_sample['kc_map'][-1-i_y, i_x] = dict_sample['kc_map'][-1-i_y,i_x] * 100
+</code></pre>
+</details>
+</dd>
+
+
+<dt id="prepare_pf.compute_bool_map"><code class="name flex">
+<span>def <span class="ident">compute_bool_map</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Compute bool map for c and diffusion.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def compute_bool_map(dict_user, dict_sample):
+  '''
+  Compute bool map for c and diffusion.
+  '''
+  # init
+  comb_map = np.array(np.zeros((dict_user['n_mesh_y'], dict_user['n_mesh_x'])), dtype = bool)
+    
+  # add thin fluid film
+  # iterate on x
+  for i_x in range(len(dict_sample['x_L'])):
+    y_front = dict_sample['current_front'][i_x]
+    # iterate on y
+    for i_y in range(len(dict_sample['y_L'])):
+      y = dict_sample['y_L'][i_y]
+      # thin fluid film
+      if y_front-dict_user['size_tube']/2 <= y and y <= y_front+dict_user['size_tube']/2:
+        comb_map[-1-i_y, i_x] = True
+      else :
+        comb_map[-1-i_y, i_x] = False
+
+  # add tubes
+  # iterate on the x coordinates
+  for i_x in range(len(dict_sample['x_L'])):
+    # tube at the right
+    if dict_user['x_max'] - dict_user['size_tube'] < dict_sample['x_L'][i_x]: 
+      i_y = 0
+      while not comb_map[i_y, i_x]:
+        comb_map[i_y, i_x] = True
+        i_y = i_y + 1
+
+  # add top reservoir
+  for i_y in range(len(dict_sample['y_L'])):
+      if dict_sample['y_L'][i_y] > dict_user['y_max'] - dict_user['size_solute_well']:
+        comb_map[-1-i_y, :] = True
+
+  return comb_map
+</code></pre>
+</details>
+</dd>
+
 </dl>
 </section>
 <section>
@@ -770,6 +866,7 @@ def compute_c(dict_user, dict_sample):
 <li><code><a title="prepare_pf.compute_as_control_cst" href="#prepare_pf.compute_as_control_cst">compute_as_control_cst</a></code></li>
 <li><code><a title="prepare_pf.compute_as_no_control" href="#prepare_pf.compute_as_no_control">compute_as_no_control</a></code></li>
 <li><code><a title="prepare_pf.compute_c" href="#prepare_pf.compute_c">compute_c</a></code></li>
+<li><code><a title="prepare_pf.compute_kc" href="#prepare_pf.compute_kc">compute_kc</a></code></li>
 </ul>
 </li>
 </ul>
