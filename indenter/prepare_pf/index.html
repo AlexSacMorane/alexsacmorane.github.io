@@ -848,6 +848,232 @@ def compute_bool_map(dict_user, dict_sample):
 </details>
 </dd>
 
+<dt id="prepare_pf.write_as_txt"><code class="name flex">
+<span>def <span class="ident">write_as_txt</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Write a .txt file for the solid activity needed for MOOSE simulation.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def write_as_txt(dict_user, dict_sample):
+    '''
+    Write a .txt file needed for MOOSE simulation.
+
+    This .txt represents the map of the solid activity.
+    '''
+    file_to_write = open('data/as.txt','w')
+    # x
+    file_to_write.write('AXIS X\n')
+    line = ''
+    for x in dict_sample['x_L']:
+        line = line + str(x)+ ' '
+    line = line + '\n'
+    file_to_write.write(line)
+    # y
+    file_to_write.write('AXIS Y\n')
+    line = ''
+    for y in dict_sample['y_L']:
+        line = line + str(y)+ ' '
+    line = line + '\n'
+    file_to_write.write(line)
+    # data
+    file_to_write.write('DATA\n')
+    for j in range(len(dict_sample['y_L'])):
+        for i in range(len(dict_sample['x_L'])):
+            file_to_write.write(str(dict_sample['as_map'][-1-j,i])+'\n')
+    # close
+    file_to_write.close()
+</code></pre>
+</details>
+</dd>
+
+<dt id="prepare_pf.write_kc_txt"><code class="name flex">
+<span>def <span class="ident">write_kc_txt</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Write a .txt file for the diffusion coefficient needed for MOOSE simulation.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def write_kc_txt(dict_user, dict_sample):
+    '''
+    Write a .txt file needed for MOOSE simulation.
+
+    This .txt represents the map of the diffusion.
+    '''
+    file_to_write = open('data/kc.txt','w')
+    # x
+    file_to_write.write('AXIS X\n')
+    line = ''
+    for x in dict_sample['x_L']:
+        line = line + str(x)+ ' '
+    line = line + '\n'
+    file_to_write.write(line)
+    # y
+    file_to_write.write('AXIS Y\n')
+    line = ''
+    for y in dict_sample['y_L']:
+        line = line + str(y)+ ' '
+    line = line + '\n'
+    file_to_write.write(line)
+    # data
+    file_to_write.write('DATA\n')
+    for j in range(len(dict_sample['y_L'])):
+        for i in range(len(dict_sample['x_L'])):
+            file_to_write.write(str(dict_sample['kc_map'][-1-j,i])+'\n')
+    # close
+    file_to_write.close()
+</code></pre>
+</details>
+</dd>
+
+<dt id="prepare_pf.write_c_txt"><code class="name flex">
+<span>def <span class="ident">write_c_txt</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Write a .txt file for the solute concentration needed for MOOSE simulation.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def write_c_txt(dict_user, dict_sample):
+    '''
+    Write a .txt file needed for MOOSE simulation.
+
+    This .txt represents the map of the solute concentration.
+    '''
+    file_to_write = open('data/c.txt','w')
+    # x
+    file_to_write.write('AXIS X\n')
+    line = ''
+    for x in dict_sample['x_L']:
+        line = line + str(x)+ ' '
+    line = line + '\n'
+    file_to_write.write(line)
+    # y
+    file_to_write.write('AXIS Y\n')
+    line = ''
+    for y in dict_sample['y_L']:
+        line = line + str(y)+ ' '
+    line = line + '\n'
+    file_to_write.write(line)
+    # data
+    file_to_write.write('DATA\n')
+    for j in range(len(dict_sample['y_L'])):
+        for i in range(len(dict_sample['x_L'])):
+            file_to_write.write(str(dict_sample['c_map'][-1-j,i])+'\n')
+    # close
+    file_to_write.close()
+</code></pre>
+</details>
+</dd>
+
+<dt id="prepare_pf.write_eta_txt"><code class="name flex">
+<span>def <span class="ident">write_eta_txt</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Write a .txt file for the phase variable needed for MOOSE simulation.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def write_eta_txt(dict_user, dict_sample):
+    '''
+    Write a .txt file needed for MOOSE simulation.
+
+    This .txt represents the map of phase.
+    '''
+    file_to_write = open('data/eta.txt','w')
+    # x
+    file_to_write.write('AXIS X\n')
+    line = ''
+    for x in dict_sample['x_L']:
+        line = line + str(x)+ ' '
+    line = line + '\n'
+    file_to_write.write(line)
+    # y
+    file_to_write.write('AXIS Y\n')
+    line = ''
+    for y in dict_sample['y_L']:
+        line = line + str(y)+ ' '
+    line = line + '\n'
+    file_to_write.write(line)
+    # data
+    file_to_write.write('DATA\n')
+    for j in range(len(dict_sample['y_L'])):
+        for i in range(len(dict_sample['x_L'])):
+            file_to_write.write(str(dict_sample['eta_map'][-1-j,i])+'\n')
+    # close
+    file_to_write.close()
+</code></pre>
+</details>
+</dd>
+
+<dt id="prepare_pf.write_i"><code class="name flex">
+<span>def <span class="ident">write_i</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Write a .i file (input file from the template file pf_base.i) needed for MOOSE simulation.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+
+def write_i(dict_user, dict_sample):
+  '''
+  Create the .i file to run MOOSE simulation.
+
+  The file is generated from a template nammed pf_base.i
+  '''
+  file_to_write = open('pf.i','w')
+  file_to_read = open('pf_base.i','r')
+  lines = file_to_read.readlines()
+  file_to_read.close()
+
+  j = 0
+  for line in lines :
+    j = j + 1
+    if j == 4:
+      line = line[:-1] + ' ' + str(len(dict_sample['x_L'])-1)+'\n'
+    elif j == 5:
+      line = line[:-1] + ' ' + str(len(dict_sample['y_L'])-1)+'\n'
+    elif j == 6:
+      line = line[:-1] + ' ' + str(min(dict_sample['x_L']))+'\n'
+    elif j == 7:
+      line = line[:-1] + ' ' + str(max(dict_sample['x_L']))+'\n'
+    elif j == 8:
+      line = line[:-1] + ' ' + str(min(dict_sample['y_L']))+'\n'
+    elif j == 9:
+      line = line[:-1] + ' ' + str(max(dict_sample['y_L']))+'\n'
+    elif j == 70:
+       line = line[:-1] + ' ' + str(1/dict_user['V_m'])+'\n'
+    elif j == 84:
+      line = line[:-1] + "'1 "+str(dict_user['kappa_eta'])+" 1'\n"
+    elif j == 106:
+      line = line[:-1] + ' ' + str(dict_user['Energy_barrier'])+"'\n"
+    elif j == 119:
+      line = line[:-1] + "'" + str(dict_user['C_eq']) + ' ' + str(dict_user['k_diss']) + ' ' + str(dict_user['k_prec']) + "'\n"
+    elif j == 176 or j == 177 or j == 179 or j == 180:
+      line = line[:-1] + ' ' + str(dict_user['crit_res']) +'\n'
+    elif j == 183:
+      line = line[:-1] + ' ' + str(dict_user['dt_PF']*dict_user['n_t_PF']) +'\n'
+    elif j == 187:
+      line = line[:-1] + ' ' + str(dict_user['dt_PF']) +'\n'
+    file_to_write.write(line)
+
+  file_to_write.close()
+</code></pre>
+</details>
+</dd>
+              
 </dl>
 </section>
 <section>
@@ -868,6 +1094,11 @@ def compute_bool_map(dict_user, dict_sample):
 <li><code><a title="prepare_pf.compute_c" href="#prepare_pf.compute_c">compute_c</a></code></li>
 <li><code><a title="prepare_pf.compute_kc" href="#prepare_pf.compute_kc">compute_kc</a></code></li>
 <li><code><a title="prepare_pf.compute_bool_map" href="#prepare_pf.compute_bool_map">compute_bool_map</a></code></li>
+<li><code><a title="prepare_pf.write_as_txt" href="#prepare_pf.write_as_txt">write_as_txt</a></code></li>
+<li><code><a title="prepare_pf.write_kc_txt" href="#prepare_pf.write_kc_txt">write_kc_txt</a></code></li>
+<li><code><a title="prepare_pf.write_c_txt" href="#prepare_pf.write_c_txt">write_c_txt</a></code></li>
+<li><code><a title="prepare_pf.write_eta_txt" href="#prepare_pf.write_eta_txt">write_eta_txt</a></code></li>
+<li><code><a title="prepare_pf.write_i" href="#prepare_pf.write_i">write_i</a></code></li>
 </ul>
 </li>
 </ul>
