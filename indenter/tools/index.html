@@ -833,6 +833,105 @@ def compute_sat_in_film(dict_user, dict_sample):
 </details>
 </dd>
     
+<dt id="tools.plot_ed"><code class="name flex">
+<span>def <span class="ident">plot_ed</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Plot the tilting term ed (and Ed).</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def plot_ed(dict_user, dict_sample):
+    '''
+    Plot the tilting term ed (and Ed).
+    Ed(eta) = ed*h(eta)
+    '''
+    # init
+    ed_map = np.zeros((dict_user['n_mesh_y'], dict_user['n_mesh_x']))
+    Ed_map = np.zeros((dict_user['n_mesh_y'], dict_user['n_mesh_x']))
+    # Iterate on the mesh
+    for i_x in range(dict_user['n_mesh_x']):
+        for i_y in range(dict_user['n_mesh_y']):
+            c_ij = dict_sample['c_map'][i_y, i_x]
+            as_ij = dict_sample['as_map'][i_y, i_x]
+            eta_ij = dict_sample['eta_map'][i_y, i_x]
+            # dissolution
+            if c_ij < dict_user['C_eq']*as_ij:
+                ed_map[i_y, i_x] = dict_user['k_diss']*as_ij*(1-c_ij/(dict_user['C_eq']*as_ij))
+                Ed_map[i_y, i_x] = ed_map[i_y, i_x]*(3*eta_ij**2 - 2*eta_ij**3)
+            # precipitation
+            else :
+                ed_map[i_y, i_x] = dict_user['k_prec']*as_ij*(1-c_ij/(dict_user['C_eq']*as_ij))
+                Ed_map[i_y, i_x] = ed_map[i_y, i_x]*(3*eta_ij**2 - 2*eta_ij**3)
+
+    # plot
+    fig, (ax1, ax2) = plt.subplots(1,2,figsize=(16,9))
+    # ed
+    im = ax1.imshow(ed_map, interpolation = 'nearest', extent=(dict_sample['x_L'][0],dict_sample['x_L'][-1],dict_sample['y_L'][0],dict_sample['y_L'][-1]))
+    fig.colorbar(im, ax=ax1)
+    ax1.set_title(r'Map of $e_d$',fontsize = 30)
+    # Ed
+    im = ax2.imshow(Ed_map, interpolation = 'nearest', extent=(dict_sample['x_L'][0],dict_sample['x_L'][-1],dict_sample['y_L'][0],dict_sample['y_L'][-1]))
+    fig.colorbar(im, ax=ax2)
+    ax2.set_title(r'Map of $E_d(\eta)=e_d\times h(\eta)$',fontsize = 30)
+    # close
+    fig.tight_layout()
+    fig.savefig('plot/map_tilt.png')
+    plt.close(fig)
+</code></pre>
+</details>
+</dd>
+    
+<dt id="tools.plot_ed_in_film"><code class="name flex">
+<span>def <span class="ident">plot_ed_in_film</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Plot the evolution of the profile of the tilting term ed in the thin fluid film and the mean value.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def plot_ed_in_film(dict_user, dict_sample):
+    '''
+    Plot the evolution of the profile of the tilting term ed in the thin fluid film and the mean value.
+    '''
+    # plot
+    fig, (ax1) = plt.subplots(1,1,figsize=(16,9))
+    ax1.plot(dict_user['time_L'], dict_user['L_m_ed_in_film'])
+    ax1.set_xlabel('Time (-)')
+    ax1.set_ylabel('Mean ed in the fluid film (-)')
+    fig.tight_layout()
+    fig.savefig('plot/evol_m_ed_film_t.png')
+    plt.close(fig)
+
+    # compute the plot frequence
+    if len(dict_user['L_L_ed_in_film']) > dict_user['max_plot']:
+        f_plot = len(dict_user['L_L_ed_in_film'])/dict_user['max_plot']
+    else :
+        f_plot = 1
+    # plot index
+    i_plot = 0
+
+    # plot
+    fig, (ax1) = plt.subplots(1,1,figsize=(16,9))
+    for i_L_ed_in_film in range(len(dict_user['L_L_ed_in_film'])):
+        if i_L_ed_in_film >= f_plot*i_plot:
+            L_ed_in_film = dict_user['L_L_ed_in_film'][i_L_ed_in_film]
+            ax1.plot(dict_sample['x_L'], L_ed_in_film, label='t='+str(dict_user['time_L'][i_L_ed_in_film]))
+            i_plot = i_plot + 1
+    ax1.legend()
+    ax1.set_xlabel('x coordinate / n_distance (-)')
+    ax1.set_ylabel('Ed in the fluid film (-)')
+    fig.tight_layout()
+    fig.savefig('plot/evol_profile_ed_film_t.png')
+    plt.close(fig)
+</code></pre>
+</details>
+</dd>
+
 <dt id="tools.function_name"><code class="name flex">
 <span>def <span class="ident">function_name</span></span>(<span>)</span>
 </code></dt>
@@ -864,6 +963,8 @@ def compute_sat_in_film(dict_user, dict_sample):
 <li><code><a title="tools.create_folder" href="#tools.create_folder">create_folder</a></code></li>
 <li><code><a title="tools.compute_ed_in_film" href="#tools.compute_ed_in_film">compute_ed_in_film</a></code></li>
 <li><code><a title="tools.compute_sat_in_film" href="#tools.compute_sat_in_film">compute_sat_in_film</a></code></li>
+<li><code><a title="tools.plot_ed" href="#tools.plot_ed">plot_ed</a></code></li>
+<li><code><a title="tools.plot_ed_in_film" href="#tools.plot_ed_in_film">plot_ed_in_film</a></code></li>
 <li><code><a title="tools.function_name" href="#tools.fuction_name">function_name</a></code></li>
 </ul>
 </li>
