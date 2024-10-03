@@ -290,6 +290,68 @@ if dict_user['save_simulation']:
 <section>
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
+
+<dt id="main.run_moose"><code class="name flex">
+<span>def <span class="ident">run_moose</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Prepare and run moose simulation.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def run_moose(dict_user, dict_sample):
+    '''
+    Prepare and run moose simulation.
+    '''
+    # compute data
+    compute_as(dict_user, dict_sample) # from prepare_pf.py
+    compute_kc(dict_user, dict_sample) # from prepare_pf.py
+    compute_c(dict_user, dict_sample) # from prepare_pf.py
+    compute_ed_in_film(dict_user, dict_sample) # from tools.py
+    compute_sat_in_film(dict_user, dict_sample) # from tools.py
+
+    # write data
+    write_eta_txt(dict_user, dict_sample) # from prepare_pf.py
+    write_c_txt(dict_user, dict_sample) # from prepare_pf.py
+    write_as_txt(dict_user, dict_sample) # from prepare_pf.py
+    write_kc_txt(dict_user, dict_sample) # from prepare_pf.py
+
+    # plot data
+    if 'tilt' in dict_user['L_figures']:
+        plot_ed(dict_user, dict_sample) # from tools.py
+    if 'tilt_in_film' in dict_user['L_figures']:
+        plot_ed_in_film(dict_user, dict_sample) # from tools.py
+    if 'as' in dict_user['L_figures']:
+        plot_as(dict_user, dict_sample) # from tools.py
+    if 'sat_in_film' in dict_user['L_figures']:
+        plot_sat_in_film(dict_user, dict_sample) # from tools.py
+    if 'c_removed' in dict_user['L_figures']:
+        plot_c_removed(dict_user, dict_sample) # from tools.py
+
+    # compute mass
+    compute_mass(dict_user, dict_sample) # from tools.py
+
+    # generate .i file
+    write_i(dict_user, dict_sample) # in prepare_pf.py
+    
+    # run pf simulation    
+    os.system('mpiexec -n '+str(dict_user['n_proc'])+' ~/projects/moose/modules/phase_field/phase_field-opt -i pf.i')
+    
+    # sort output
+    last_j_str = sort_files(dict_user, dict_sample) # in tools.py
+
+    # read data
+    read_vtk(dict_user, dict_sample, last_j_str) # in tools.py
+
+    # compute mass and mass_loss
+    # plot data
+    compute_mass_loss(dict_user, dict_sample, 'moose') # from tools.pys
+</code></pre>
+</details>
+</dd>
+    
 <dt id="main.name"><code class="name flex">
 <span>def <span class="ident">name</span></span>(<span>)</span>
 </code></dt>
@@ -304,6 +366,7 @@ code
 </code></pre>
 </details>
 </dd>
+    
 </dl>
 </section>
 <section>
@@ -317,6 +380,7 @@ code
 <ul id="index">
 <li><h3><a href="#header-functions">Functions</a></h3>
 <ul class="">
+<li><code><a title="main.run_moose" href="#main.run_moose">run_moose</a></code></li>
 <li><code><a title="main.name" href="#main.name">name</a></code></li>
 </ul>
 </li>
