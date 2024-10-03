@@ -932,6 +932,264 @@ def plot_ed_in_film(dict_user, dict_sample):
 </details>
 </dd>
 
+<dt id="tools.plot_sat_in_film"><code class="name flex">
+<span>def <span class="ident">plot_sat_in_film</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Plot the evolution of the profile of the saturation in the thin fluid film and the mean value.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def plot_sat_in_film(dict_user, dict_sample):
+    '''
+    Plot the evolution of the profile of the saturation in the thin fluid film and the mean value.
+    '''
+    # plot
+    fig, (ax1) = plt.subplots(1,1,figsize=(16,9))
+    ax1.plot(dict_user['time_L'], dict_user['L_m_sat_in_film'])
+    ax1.set_xlabel('Time / n_time (-)')
+    ax1.set_ylabel('mean saturation in the fluid film (-)')
+    fig.tight_layout()
+    fig.savefig('plot/evol_m_sat_film_t.png')
+    plt.close(fig)
+
+    # compute the plot frequence
+    if len(dict_user['L_L_sat_in_film']) > dict_user['max_plot']:
+        f_plot = len(dict_user['L_L_sat_in_film'])/dict_user['max_plot']
+    else :
+        f_plot = 1
+    # plot index
+    i_plot = 0
+
+    # plot
+    fig, (ax1) = plt.subplots(1,1,figsize=(16,9))
+    for i_L_sat_in_film in range(len(dict_user['L_L_sat_in_film'])):
+        if i_L_sat_in_film >= f_plot*i_plot:
+            L_sat_in_film = dict_user['L_L_sat_in_film'][i_L_sat_in_film]
+            ax1.plot(dict_sample['x_L'], L_sat_in_film, label='t='+str(dict_user['time_L'][i_L_sat_in_film]))
+            i_plot = i_plot + 1
+    ax1.legend()
+    ax1.set_xlabel('x coordinate / n_distance (-)')
+    ax1.set_ylabel('saturation in the fluid film (%)')
+    fig.tight_layout()
+    fig.savefig('plot/evol_profile_sat_film_t.png')
+    plt.close(fig)
+</code></pre>
+</details>
+</dd>
+    
+<dt id="tools.plot_config"><code class="name flex">
+<span>def <span class="ident">plot_config</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Plot the map of the configuration (solute and phase).</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def plot_config(dict_user, dict_sample):
+    '''
+    Plot the map of the configuration (solute and phase).
+    '''
+    # plot
+    fig, (ax1, ax2) = plt.subplots(1,2,figsize=(16,9))
+    # solute
+    im = ax1.imshow(dict_sample['eta_map'], interpolation = 'nearest', extent=(dict_sample['x_L'][0],dict_sample['x_L'][-1],dict_sample['y_L'][0],dict_sample['y_L'][-1]))
+    fig.colorbar(im, ax=ax1)
+    ax1.set_title(r'Map of $\eta$',fontsize = 30)
+    # phase
+    im = ax2.imshow(dict_sample['c_map'], interpolation = 'nearest', extent=(dict_sample['x_L'][0],dict_sample['x_L'][-1],dict_sample['y_L'][0],dict_sample['y_L'][-1]))
+    fig.colorbar(im, ax=ax2)
+    ax2.set_title(r'Map of $c$',fontsize = 30)
+    # close
+    fig.tight_layout()
+    fig.savefig('plot/map_config.png')
+    plt.close(fig)
+</code></pre>
+</details>
+</dd>
+    
+<dt id="tools.plot_front"><code class="name flex">
+<span>def <span class="ident">plot_front</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Plot the evolution of the y coordinate of the front.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def plot_front(dict_user, dict_sample):
+    '''
+    Plot the evolution of the y coordinate of the front.
+    '''
+    # pp data
+    time_L_pp = []
+    y_front_L_pp = []
+    for i in range(len(dict_user['time_L'])):
+        time_L_pp.append(dict_user['time_L'][i]*dict_user['n_time'])
+        y_front_L_pp.append((dict_user['y_front_L'][0]-dict_user['y_front_L'][i])*dict_user['n_dist'])
+
+    # plot
+    fig, (ax1) = plt.subplots(1,1,figsize=(16,9))
+    #ax1.plot(dict_user['time_L'], dict_user['y_front_L'])
+    ax1.plot(time_L_pp, y_front_L_pp)
+    ax1.set_xlabel('Time (s)')
+    ax1.set_ylabel('y coordinate of the front (m)')
+    fig.tight_layout()
+    fig.savefig('plot/evol_front_t.png')
+    plt.close(fig)
+    
+    # plot
+    fig, (ax1) = plt.subplots(1,1,figsize=(16,9))
+    ax1.plot(dict_user['time_L'], dict_user['min_y_front_L'])
+    ax1.plot(dict_user['time_L'], dict_user['max_y_front_L'])
+    ax1.set_xlabel('Time / n_time (-)')
+    ax1.set_ylabel('Min-Max y coordinate of the front / n_distance (-)')
+    fig.tight_layout()
+    fig.savefig('plot/evol_min_max_front_t.png')
+    plt.close(fig)
+
+    # pp data
+    L_delta = []
+    for i in range(len(dict_user['time_L'])):
+        L_delta.append((dict_user['max_y_front_L'][i] - dict_user['min_y_front_L'][i])/dict_user['size_tube']*100)
+
+    # plot
+    fig, (ax1) = plt.subplots(1,1,figsize=(16,9))
+    ax1.plot(dict_user['time_L'], L_delta)
+    ax1.set_xlabel('Time / n_time (-)')
+    ax1.set_ylabel('Delta y coordinate of the front / size of the tube (%)')
+    fig.tight_layout()
+    fig.savefig('plot/evol_delta_front_t.png')
+    plt.close(fig)
+</code></pre>
+</details>
+</dd>
+    
+<dt id="tools.plot_eta_profile"><code class="name flex">
+<span>def <span class="ident">plot_eta_profile</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Plot the evolution of the eta profile at the center of x.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def plot_eta_profile(dict_user, dict_sample):
+    '''
+    Plot the evolution of the eta profile at the center of x.    
+    '''    
+    # plan figure
+    fig, (ax1, ax2) = plt.subplots(2,1,figsize=(16,9))
+    # search front 
+    tempo_y_L = [] 
+    tempo_x_L = []
+    # iterate on time
+    for i_L_eta in range(len(dict_user['L_L_eta_center'])):
+        L_x = []
+        for i_eta in range(len(dict_user['L_L_eta_center'][i_L_eta])):
+            eta = dict_user['L_L_eta_center'][i_L_eta][-1-i_eta]
+            L_x.append(i_L_eta+eta) 
+        ax1.plot(L_x, dict_sample['y_L'])
+        # search the y coordinate of the front 
+        i_y = 0
+        while not (0.5<=dict_user['L_L_eta_center'][i_L_eta][-1-i_y] and\
+                   dict_user['L_L_eta_center'][i_L_eta][-1-i_y-1]<=0.5):
+            i_y = i_y + 1
+        # linear interpolation
+        y_front = (0.5-dict_user['L_L_eta_center'][i_L_eta][-1-i_y])/(dict_user['L_L_eta_center'][i_L_eta][-1-(i_y+1)]-dict_user['L_L_eta_center'][i_L_eta][-1-i_y])*(dict_sample['y_L'][i_y+1]-dict_sample['y_L'][i_y])+dict_sample['y_L'][i_y]
+        tempo_y_L.append(y_front)
+        tempo_x_L.append(i_L_eta+0.5)
+
+    ax1.plot(tempo_x_L, tempo_y_L, color='k', marker='x', linestyle='dotted')
+    ax1.set_xlabel('Iteration (-)')
+    ax1.set_ylabel(r'y profile of $\eta$ (-)')
+    ax1.set_title('At the center')
+    # search front 
+    tempo_y_L = [] 
+    tempo_x_L = []
+    # iterate on time
+    for i_L_eta in range(len(dict_user['L_L_eta_ext'])):
+        L_x = []
+        for i_eta in range(len(dict_user['L_L_eta_ext'][i_L_eta])):
+            eta = dict_user['L_L_eta_ext'][i_L_eta][-1-i_eta]
+            L_x.append(i_L_eta+eta) 
+        ax2.plot(L_x, dict_sample['y_L'])
+        # search the y coordinate of the front 
+        i_y = 0
+        while not (0.5<=dict_user['L_L_eta_ext'][i_L_eta][-1-i_y] and\
+                   dict_user['L_L_eta_ext'][i_L_eta][-1-i_y-1]<=0.5):
+            i_y = i_y + 1
+        # linear interpolation
+        y_front = (0.5-dict_user['L_L_eta_ext'][i_L_eta][-1-i_y])/(dict_user['L_L_eta_ext'][i_L_eta][-1-(i_y+1)]-dict_user['L_L_eta_ext'][i_L_eta][-1-i_y])*(dict_sample['y_L'][i_y+1]-dict_sample['y_L'][i_y])+dict_sample['y_L'][i_y]
+        tempo_y_L.append(y_front)
+        tempo_x_L.append(i_L_eta+0.5)
+    ax2.plot(tempo_x_L, tempo_y_L, color='k', marker='x', linestyle='dotted')
+    ax2.set_xlabel('Iteration (-)')
+    ax2.set_ylabel(r'y profile of $\eta$ (-)')
+    ax2.set_title('At the extremum')
+    # close
+    fig.tight_layout()
+    fig.savefig('plot/evol_profile_eta_t.png')
+    plt.close(fig)
+</code></pre>
+</details>
+</dd>
+    
+<dt id="tools.plot_m_c_well"><code class="name flex">
+<span>def <span class="ident">plot_m_c_well</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Plot the evolution of the mean concentration of the solute in the well.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def plot_m_c_well(dict_user, dict_sample):
+    '''
+    Plot the evolution of the mean concentration of the solute in the well.
+    '''
+    # compute the solute concentration at the equilibrium considering the solid activity
+    R_gas = dict_user['R_cst'] 
+    Temp = dict_user['temperature']   
+    V_m = dict_user['V_m']
+    a_s = math.exp(dict_user['pressure_applied']*V_m/(R_gas*Temp))
+    c_eq_as = dict_user['C_eq']*a_s
+
+    # plot
+    fig, (ax1) = plt.subplots(1,1,figsize=(16,9))
+    ax1.plot(dict_user['m_c_well_L'])
+    ax1.plot([0, len(dict_user['m_c_well_L'])-1], [c_eq_as, c_eq_as], linestyle='dotted')
+    ax1.set_xlabel('Iteration (-)')
+    ax1.set_ylabel('mean concentration in the well / (n_mol/n_distance^3) (-)')
+    fig.tight_layout()
+    #fig.savefig('plot/evol_m_c_weel_ite.png')
+    plt.close(fig)
+
+    # pp data
+    L_sat = []
+    for m_c in dict_user['m_c_well_L']:
+        sat = (m_c-dict_user['C_eq'])/(c_eq_as-dict_user['C_eq'])*100
+        L_sat.append(sat)
+
+    # plot
+    fig, (ax1) = plt.subplots(1,1,figsize=(16,9))
+    ax1.plot(L_sat)
+    ax1.set_xlabel('Iteration (-)')
+    ax1.set_ylabel('saturation in the well (%)')
+    fig.tight_layout()
+    fig.savefig('plot/evol_sat_weel_ite.png')
+    plt.close(fig)
+</code></pre>
+</details>
+</dd>
+    
 <dt id="tools.function_name"><code class="name flex">
 <span>def <span class="ident">function_name</span></span>(<span>)</span>
 </code></dt>
@@ -965,6 +1223,11 @@ def plot_ed_in_film(dict_user, dict_sample):
 <li><code><a title="tools.compute_sat_in_film" href="#tools.compute_sat_in_film">compute_sat_in_film</a></code></li>
 <li><code><a title="tools.plot_ed" href="#tools.plot_ed">plot_ed</a></code></li>
 <li><code><a title="tools.plot_ed_in_film" href="#tools.plot_ed_in_film">plot_ed_in_film</a></code></li>
+<li><code><a title="tools.plot_sat_in_film" href="#tools.plot_sat_in_film">plot_sat_in_film</a></code></li>
+<li><code><a title="tools.plot_config" href="#tools.plot_config">plot_config</a></code></li>
+<li><code><a title="tools.plot_front" href="#tools.plot_front">plot_front</a></code></li>
+<li><code><a title="tools.tools.plot_eta_profile" href="#tools.tools.plot_eta_profile">tools.plot_eta_profile</a></code></li>
+<li><code><a title="tools.tools.plot_m_c_well" href="#tools.tools.plot_m_c_well">tools.plot_m_c_well</a></code></li>
 <li><code><a title="tools.function_name" href="#tools.fuction_name">function_name</a></code></li>
 </ul>
 </li>
