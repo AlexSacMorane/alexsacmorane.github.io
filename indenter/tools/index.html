@@ -1190,6 +1190,179 @@ def plot_m_c_well(dict_user, dict_sample):
 </details>
 </dd>
     
+<dt id="tools.plot_c_removed"><code class="name flex">
+<span>def <span class="ident">plot_c_removed</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Plot the evolution of the solute removed.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def plot_c_removed(dict_user, dict_sample):
+    '''
+    Plot the evolution of the solute removed.
+    '''
+    # pp data 
+    L_p_solute_moved = []
+    for i_L_p_solute_moved in dict_user['L_L_p_solute_moved']:
+        L_p_solute_moved.append(np.mean(i_L_p_solute_moved)*100)
+    s_solute_moved_L_pp = []
+    for s_solute_moved in dict_user['s_solute_moved_L']:
+        s_solute_moved_L_pp.append(s_solute_moved*dict_user['m_size_mesh']**2)
+
+    # solute removed - PF times
+    fig, (ax1) = plt.subplots(1,1,figsize=(16,9))
+    ax1.plot(dict_user['time_L'], s_solute_moved_L_pp, linewidth=6)
+    ax1.set_ylabel(r'solute removed / (n_mol/n_distance^3) (-)', fontsize=25)
+    ax1.set_xlabel('time / n_time (-)', fontsize=25)
+    ax1.tick_params(axis='both', labelsize=20, width=3, length=3)          
+    fig.tight_layout()
+    fig.savefig('plot/evol_sol_removed_times.png')
+    plt.close(fig)
+
+    # percentage solute removed of the fluid - PF times
+    fig, (ax1) = plt.subplots(1,1,figsize=(16,9))
+    ax1.plot(dict_user['time_L'], L_p_solute_moved, linewidth=6)
+    ax1.set_ylabel(r'solute removed / saturated value (%)', fontsize=25)
+    ax1.set_xlabel('time / n_time (-)', fontsize=25)
+    ax1.tick_params(axis='both', labelsize=20, width=3, length=3)           
+    fig.tight_layout()
+    fig.savefig('plot/evol_sol_removed_p_fluid_times.png')
+    plt.close(fig)
+</code></pre>
+</details>
+</dd>
+    
+<dt id="tools.plot_as"><code class="name flex">
+<span>def <span class="ident">plot_as</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Plot the evolution of the profile of the solid activity as.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def plot_as(dict_user, dict_sample):
+    '''
+    Plot the evolution of the profile of the solid activity as.
+    '''
+    # compute the plot frequence
+    if len(dict_user['L_L_ed_in_film']) > dict_user['max_plot']:
+        f_plot = len(dict_user['L_L_ed_in_film'])/dict_user['max_plot']
+    else :
+        f_plot = 1
+    # plot index
+    i_plot = 0
+    # plot
+    fig, (ax1) = plt.subplots(1,1,figsize=(16,9))
+    for i_L_as in range(len(dict_user['L_L_as'])):
+        if i_L_as >= f_plot*i_plot:
+            L_as = dict_user['L_L_as'][i_L_as]
+            ax1.plot(dict_sample['x_L'], L_as, label='t='+str(dict_user['time_L'][i_L_as]))
+            i_plot = i_plot + 1
+    ax1.legend()
+    ax1.set_xlabel('x coordinate / n_distance (-)')
+    ax1.set_ylabel('solid activity as (-)')
+    fig.tight_layout()
+    fig.savefig('plot/evol_profile_as_t.png')
+    plt.close(fig)
+</code></pre>
+</details>
+</dd>
+    
+<dt id="tools.plot_fit"><code class="name flex">
+<span>def <span class="ident">plot_fit</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Plot the evolution of the log(disp) - log(Times) and compute a fit (y = ax + b).</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def plot_fit(dict_user, dict_sample):
+    '''
+    Plot the evolution of the log(disp) - log(Times) and compute a fit (y = ax + b).
+    '''
+    # compute the pp data
+    log_disp = []
+    log_times = []
+    for i in range(1, len(dict_user['y_front_L'])):
+        log_times.append(math.log(dict_user['time_L'][i]))
+        disp = (dict_user['y_front_L'][0]-dict_user['y_front_L'][i])
+        log_disp.append(math.log(disp))
+
+    # compute the fit
+    coeff, const, corr = lsm_linear(log_disp, log_times)
+    L_fit = []
+    # compute fitted Andrade creep law
+    for i in range(len(log_times)):
+        L_fit.append(const + coeff*log_times[i])
+
+    # plot
+    fig, (ax1) = plt.subplots(1,1,figsize=(16,9))
+    ax1.plot(log_times, log_disp, label='Data')
+    ax1.plot(log_times, L_fit, linestyle='dotted', color='k',\
+             label='Fit : y = '+str(round(coeff,2))+'x + '+str(round(const,2))+' ('+str(round(corr,2))+')')
+    ax1.set_ylabel(r'log(displacement) (-)')
+    ax1.set_xlabel('log(Times) (-)')   
+    ax1.legend()
+    fig.tight_layout()
+    fig.savefig('plot/evol_log_disp_log_t.png')
+    plt.close(fig)
+</code></pre>
+</details>
+</dd>
+    
+<dt id="tools.lsm_linear"><code class="name flex">
+<span>def <span class="ident">lsm_linear</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Least square method to determine y = ax + b.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def lsm_linear(L_y, L_x):
+    '''
+    Least square method to determine y = ax + b.
+    '''
+    # compute sums
+    s_1 = 0
+    s_2 = 0
+    s_3 = 0
+    s_4 = 0
+    s_5 = 0
+    for i in range(len(L_y)):
+        s_1 = s_1 + 1*L_x[i]*L_x[i]
+        s_2 = s_2 + 1*L_x[i]
+        s_3 = s_3 + 1
+        s_4 = s_4 + 1*L_x[i]*L_y[i]
+        s_5 = s_5 + 1*L_y[i]
+    # solve problem
+    M = np.array([[s_1, s_2],[s_2, s_3]])
+    V = np.array([s_4, s_5])
+    result = np.linalg.solve(M, V)
+    a = result[0]
+    b = result[1]
+    # correlation linear
+    cov = 0
+    vx = 0
+    vy = 0
+    for i in range(len(L_y)):
+        cov = cov + (L_x[i]-np.mean(L_x))*(L_y[i]-np.mean(L_y))
+        vx = vx + (L_x[i]-np.mean(L_x))*(L_x[i]-np.mean(L_x))
+        vy = vy + (L_y[i]-np.mean(L_y))*(L_y[i]-np.mean(L_y))
+    corr = cov/(math.sqrt(vx*vy))
+    return a, b, corr
+</code></pre>
+</details>
+</dd>
+    
 <dt id="tools.function_name"><code class="name flex">
 <span>def <span class="ident">function_name</span></span>(<span>)</span>
 </code></dt>
@@ -1228,6 +1401,10 @@ def plot_m_c_well(dict_user, dict_sample):
 <li><code><a title="tools.plot_front" href="#tools.plot_front">plot_front</a></code></li>
 <li><code><a title="tools.tools.plot_eta_profile" href="#tools.tools.plot_eta_profile">tools.plot_eta_profile</a></code></li>
 <li><code><a title="tools.tools.plot_m_c_well" href="#tools.tools.plot_m_c_well">tools.plot_m_c_well</a></code></li>
+<li><code><a title="tools.plot_c_removed" href="#tools.plot_c_removed">plot_c_removed</a></code></li>
+<li><code><a title="tools.plot_as" href="#tools.plot_as">plot_as</a></code></li>
+<li><code><a title="tools.plot_fit" href="#tools.plot_fit">plot_fit</a></code></li>
+<li><code><a title="tools.lsm_linear" href="#tools.lsm_linear">lsm_linear</a></code></li>
 <li><code><a title="tools.function_name" href="#tools.fuction_name">function_name</a></code></li>
 </ul>
 </li>
