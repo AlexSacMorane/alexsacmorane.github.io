@@ -567,6 +567,52 @@ def compute_as_control(dict_user, dict_sample):
 </details>
 </dd>
 
+<dt id="prepare_pf.compute_as_control_cst"><code class="name flex">
+<span>def <span class="ident">compute_as_control_cst()</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Compute solid activity due to vertical pressure applied.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def compute_as_control_cst(dict_user, dict_sample):
+  '''
+  Compute solid activity due to vertical pressure applied.
+  '''
+  # cst
+  R_gas = dict_user['R_cst']
+  Temp = dict_user['temperature'] 
+  V_m = dict_user['V_m']
+
+  # solid activity 
+  a_s = math.exp(dict_user['pressure_applied']*V_m/(R_gas*Temp))
+  a_s_p = a_s*(1+dict_user['control_front_factor'])
+  a_s_m = a_s*(1-dict_user['control_front_factor'])
+
+  # init
+  dict_sample['as_map'] = np.zeros((dict_user['n_mesh_y'], dict_user['n_mesh_x']))
+  # track
+  as_L = []
+  # iterate on x
+  for i_x in range(len(dict_sample['x_L'])):
+    x = dict_sample['x_L'][i_x]
+    a_s_i_x = a_s_p + (a_s_m-a_s_p)*(x-dict_sample['x_L'][0])/(dict_sample['x_L'][-1]-dict_sample['x_L'][0])
+    as_L.append(a_s_i_x)
+    # iterate on y
+    for i_y in range(len(dict_sample['y_L'])):
+      y = dict_sample['y_L'][i_y]
+      if y < dict_user['y_max']-dict_user['size_solute_well'] : # in the grain initially
+        dict_sample['as_map'][-1-i_y, i_x] = a_s_i_x
+      else : # not in the grain initially
+        dict_sample['as_map'][-1-i_y, i_x] = 1
+  # track
+  dict_user['L_L_as'].append(as_L)
+</code></pre>
+</details>
+</dd>
+  
 </dl>
 </section>
 <section>
@@ -582,6 +628,7 @@ def compute_as_control(dict_user, dict_sample):
 <ul class="">
 <li><code><a title="prepare_pf.compute_as" href="#prepare_pf.compute_as">compute_as()</a></code></li>
 <li><code><a title="prepare_pf.compute_as_control" href="#prepare_pf.compute_as_control">compute_as_control()</a></code></li>
+<li><code><a title="prepare_pf.compute_as_control_cst" href="#prepare_pf.compute_as_control_cst">compute_as_control_cst()</a></code></li>
 </ul>
 </li>
 </ul>
