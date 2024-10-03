@@ -492,17 +492,29 @@ def write_i(dict_user, dict_sample):
 <section>
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
-<dt id="prepare_pf.function_name"><code class="name flex">
-<span>def <span class="ident">function_name</span></span>(<span>)</span>
+<dt id="prepare_pf.compute_as"><code class="name flex">
+<span>def <span class="ident">compute_as()</span></span>(<span>)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Function description.</p></div>
+<div class="desc"><p>Compute solid activity due to vertical pressure applied.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">
-  function code
+  def compute_as(dict_user, dict_sample):
+  '''
+  Compute solid activity due to vertical pressure applied.
+  '''
+  # control of the front
+  if dict_user['control_front']:
+    if dict_user['control_technique'] == 'monitor':
+      compute_as_control(dict_user, dict_sample)
+    if dict_user['control_technique'] == 'constant':
+      compute_as_control_cst(dict_user, dict_sample)
+  # no control of the front
+  else : 
+    compute_as_no_control(dict_user, dict_sample)
 </code></pre>
 </details>
 </dd>
@@ -519,7 +531,7 @@ def write_i(dict_user, dict_sample):
 <ul id="index">
 <li><h3><a href="#header-functions">Functions</a></h3>
 <ul class="">
-<li><code><a title="parameters.function_name" href="#parameters.function_name">function_name</a></code></li>
+<li><code><a title="parameters.compute_as" href="#parameters.compute_as">compute_as()</a></code></li>
 </ul>
 </li>
 </ul>
