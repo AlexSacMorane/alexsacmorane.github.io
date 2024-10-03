@@ -756,6 +756,82 @@ def create_folder(name):
 </code></pre>
 </details>
 </dd>
+
+<dt id="tools.compute_ed_in_film"><code class="name flex">
+<span>def <span class="ident">compute_ed_in_film</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Plot the tilting term ed in the thin fluid film.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def compute_ed_in_film(dict_user, dict_sample):
+    '''
+    Plot the tilting term ed in the thin fluid film.
+    '''
+    # init
+    L_ed = []
+    # Iterate on the mesh
+    for i_x in range(dict_user['n_mesh_x']):
+        # search i_y near the front coordinate
+        L_search = list(abs(np.array(dict_sample['y_L']-dict_sample['current_front'][i_x])))
+        i_y = L_search.index(min(L_search))
+        # search data needed
+        c_ij = dict_sample['c_map'][-1-i_y, i_x]
+        as_ij = dict_sample['as_map'][-1-i_y, i_x]
+        # dissolution
+        if c_ij < dict_user['C_eq']*as_ij:
+            ed_ij = dict_user['k_diss']*as_ij*(1-c_ij/(dict_user['C_eq']*as_ij))
+        # precipitation
+        else :
+            ed_ij = dict_user['k_prec']*as_ij*(1-c_ij/(dict_user['C_eq']*as_ij))
+        L_ed.append(ed_ij)
+    # save data
+    dict_user['L_L_ed_in_film'].append(L_ed)
+    dict_user['L_m_ed_in_film'].append(np.mean(L_ed))
+</code></pre>
+</details>
+</dd>
+    
+<dt id="tools.compute_sat_in_film"><code class="name flex">
+<span>def <span class="ident">compute_sat_in_film</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Compute the solute saturation in the thin fluid film.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def compute_sat_in_film(dict_user, dict_sample):
+    '''
+    Compute the solute saturation in the thin fluid film.
+    '''
+    # init
+    L_sat = []
+    # Iterate on the mesh
+    for i_x in range(dict_user['n_mesh_x']):
+        L_tempo = []
+        for i_y in range(dict_user['n_mesh_y']):
+            if dict_sample['current_front'][i_x]-dict_user['size_tube']/2 <= dict_sample['y_L'][i_y] and\
+               dict_sample['y_L'][i_y] <= dict_sample['current_front'][i_x]+dict_user['size_tube']/2:
+                # search data needed
+                c_ij = dict_sample['c_map'][-1-i_y, i_x]
+                as_ij = dict_sample['as_map'][-1-i_y, i_x]
+                # compute and save saturation
+                sat = (c_ij-dict_user['C_eq'])/(dict_user['C_eq']*as_ij-dict_user['C_eq'])*100
+                L_tempo.append(sat)
+        # save mean
+        L_sat.append(np.mean(L_tempo))
+
+    # save data
+    dict_user['L_L_sat_in_film'].append(L_sat)
+    dict_user['L_m_sat_in_film'].append(np.mean(L_sat))
+</code></pre>
+</details>
+</dd>
     
 <dt id="tools.function_name"><code class="name flex">
 <span>def <span class="ident">function_name</span></span>(<span>)</span>
@@ -786,6 +862,8 @@ def create_folder(name):
 <li><h3><a href="#header-functions">Functions</a></h3>
 <ul class="">
 <li><code><a title="tools.create_folder" href="#tools.create_folder">create_folder</a></code></li>
+<li><code><a title="tools.compute_ed_in_film" href="#tools.compute_ed_in_film">compute_ed_in_film</a></code></li>
+<li><code><a title="tools.compute_sat_in_film" href="#tools.compute_sat_in_film">compute_sat_in_film</a></code></li>
 <li><code><a title="tools.function_name" href="#tools.fuction_name">function_name</a></code></li>
 </ul>
 </li>
