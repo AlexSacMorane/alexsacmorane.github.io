@@ -352,17 +352,62 @@ def run_moose(dict_user, dict_sample):
 </details>
 </dd>
     
-<dt id="main.name"><code class="name flex">
-<span>def <span class="ident">name</span></span>(<span>)</span>
+<dt id="main.track_front"><code class="name flex">
+<span>def <span class="ident">track_front</span></span>(<span>)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Description.</p></div>
+<div class="desc"><p>Track the front.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">
-code
+def track_front(dict_user, dict_sample):
+    '''
+    Track the front.
+    '''
+    # initialization
+    tempo_y_L = []
+    eta_map = dict_sample['eta_map'].copy()
+    # iterate on the x-axis
+    for i_x in range(len(dict_sample['x_L'])):
+        # search the y coordinate of the front 
+        i_y = 0
+        while not (0.5<=eta_map[-1-i_y, i_x] and eta_map[-1-i_y-1, i_x]<=0.5):
+            i_y = i_y + 1
+        # linear interpolation
+        y_front = (0.5-eta_map[-1-i_y, i_x])/(eta_map[-1-(i_y+1), i_x]-eta_map[-1-i_y, i_x])*(dict_sample['y_L'][i_y+1]-dict_sample['y_L'][i_y])+dict_sample['y_L'][i_y]
+        # save in tempo list
+        tempo_y_L.append(y_front)
+    # save data
+    dict_sample['current_front'] = tempo_y_L
+    # tracker
+    dict_user['y_front_L'].append(np.mean(tempo_y_L))
+    dict_user['min_y_front_L'].append(np.min(tempo_y_L))
+    dict_user['max_y_front_L'].append(np.max(tempo_y_L))
+</code></pre>
+</details>
+</dd>
+    
+<dt id="main.track_eta_profile"><code class="name flex">
+<span>def <span class="ident">track_eta_profile</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Track the profile of eta at specific points.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def track_eta_profile(dict_user, dict_sample):
+    '''
+    Track the profile of eta at specific points.
+    '''
+    # initialization
+    eta_map = dict_sample['eta_map'].copy()
+    # tracker
+    dict_user['L_L_eta_center'].append(eta_map[:, 0].copy())
+    dict_user['L_L_eta_ext'].append(eta_map[:, -1].copy())
 </code></pre>
 </details>
 </dd>
@@ -381,7 +426,8 @@ code
 <li><h3><a href="#header-functions">Functions</a></h3>
 <ul class="">
 <li><code><a title="main.run_moose" href="#main.run_moose">run_moose</a></code></li>
-<li><code><a title="main.name" href="#main.name">name</a></code></li>
+<li><code><a title="main.track_front" href="#main.track_front">track_front</a></code></li>
+<li><code><a title="main.track_eta_profile" href="#main.track_eta_profile">track_eta_profile</a></code></li>
 </ul>
 </li>
 </ul>
