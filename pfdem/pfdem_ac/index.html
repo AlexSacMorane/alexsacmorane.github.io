@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.10.0" />
-<title>PFDEM projects</title>
+<title>PFDEM_AC documentation</title>
 <meta name="description" content="@author: Alexandre Sac--Morane
 alexandre.sac-morane@uclouvain.be …" />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
@@ -20,76 +20,93 @@ alexandre.sac-morane@uclouvain.be …" />
 <main>
 <article id="content">
 <header>
-<h1 class="title">Project <code>Phase-Field Discrete Element Model</code></h1>
+<h1 class="title">Project <code>PFDEM_AC</code></h1>
 </header>
 <section id="section-intro">
-<p>Phase-Field Discrete Element Modelization applied to granular material.<br>
-</p>
-</section>
-<section>
-<h2 class="section-modules" id="section-modules">Mini Projects</h2>
-<ul>
-<li id="my_pfdem_mg_3d">
-<p>
-<h3><a href="https://alexsacmorane.github.io/my_pfdem_mg_3d/">MY_PFDEM_MG_3D</a><br></h3>
-The goal is to simulate the pressure solution phenomenon to granular material with multiple grains in 3D.<br>
-<a href="https://github.com/AlexSacMorane/MY_PFDEM_MG_3D">The github project</a><br>
-</p>
-</li>
-<li id="my_pfdem_mg_2d">
-<p>
-<h3><a href="https://alexsacmorane.github.io/my_pfdem_mg_2d/">MY_PFDEM_MG_2D</a><br></h3>
-The goal is to simulate the pressure solution phenomenon to granular material with multiple grains in 2D.<br>
-<a href="https://github.com/AlexSacMorane/MY_PFDEM_MG_2D">The github project</a><br>
-</p>
-</li>
-<li id="my_pfdem_2g_2d">
-<p>
-<h3><a href="https://alexsacmorane.github.io/my_pfdem_2g_2d/">MY_PFDEM_2G_2D</a><br></h3>
-The goal is to simulate the pressure solution phenomenon to granular material between 2 grains in 2D.<br>
-<a href="https://github.com/AlexSacMorane/MY_PFDEM_2G_2D">The github project</a><br>
-</p>
-</li>
-<li id="my_pfdem_1g_2d">
-<p>
-<h3><a href="https://alexsacmorane.github.io/my_pfdem_1g_2d/">MY_PFDEM_1G_2D</a><br></h3>
-The goal is to simulate the pressure solution phenomenon to granular material between 1 grain and a plate in 2D.<br>
-<a href="https://github.com/AlexSacMorane/MY_PFDEM_1G_2D">The github project</a><br>
-</p>
-</li>
-<li id="pfdem_acs_mg">
-<p>
-<h3><a href="https://alexsacmorane.github.io/pfdem/pfdem_acs_mg/">PFDEM_ACS_MG</a><br></h3>
-The goal is to simulate the pressure solution phenomenon to granular material with multiple grains.<br>
-<a href="https://github.com/AlexSacMorane/PFDEM_ACS_MultiGrains">The github project</a><br>
-</p>
-</li>
- <li id="pfdem_acs">
-<p>
-<h3><a href="https://alexsacmorane.github.io/pfdem/pfdem_acs/">PFDEM_ACS</a><br></h3>
-The goal is to simulate the pressure solution phenomenon between 2 grains.<br>
-<a href="https://github.com/AlexSacMorane/PFDEM_ACS">The github project</a><br>
-</p>
-</li>
-<li id="pfdem_ac">
-<p>
-<h3><a href="https://alexsacmorane.github.io/pfdem/pfdem_ac/">PFDEM_AC</a><br></h3>
+<p>Phase-Field Discrete Element Modelisation applied to granular material.<br>
 This simulation is about a 2D test under oedometrical conditions with an acid injection. The chain force and the k0 (= σ2/σ1) evolves with the material dissolution.<br>
-<a href="https://github.com/AlexSacMorane/PFDEM_AC">The github project</a><br>
+<a href="https://youtu.be/9gg3L0vMaMQ">One movie of an example (dissolvable = disk)</a></iframe> or <a href="https://youtu.be/tK1UPa1D_fM">One movie of an example (dissolvable = square)</a></iframe><br><br>
+
+This work is presented in the following paper: <br>
+Alexandre Sac-Morane, Manolis Veveakis, Hadrien Rattez. (2024). A Phase-Field Discrete Element Method to study chemo-mechanical coupling in granular materials. Computer Methods in Applied Mechanics and Engineering. https://doi.org/10.1016/j.cma.2024.116900<br><br>
+
+<a href="https://github.com/AlexSacMorane/PFDEM_AC">The github</a><br>
 </p>
-</li>
-</ul>
 </section>
 <section>
-<h2 class="section-articles" id="section-articles">Articles</h2>
-<ul>
-<li>
-Alexandre Sac-Morane, Hadrien Rattez, Manolis Veveakis. (xxxx). Importance of the precipitation on the slowdown of the creep behavior due to pressure-solution. ?. ?
-</li>
-<li>
-Alexandre Sac-Morane, Manolis Veveakis, Hadrien Rattez. (2024). A Phase-Field Discrete Element Method to study chemo-mechanical coupling in granular materials. Computer Methods in Applied Mechanics and Engineering. 10.1016/j.cma.2024.116900
-</li>
-</ul>
+<h2 class="section-modules" id="section-modules">Modules</h2>
+<dt id="contact">
+<p>
+<a href="https://alexsacmorane.github.io/pfdem/pfdem_ac/contact">Contact.py</a><br>
+Define the contact between two grains.
+</p>
+</dt>
+<dt id="contact_gw">
+<p>
+<a href="https://alexsacmorane.github.io/pfdem/pfdem_ac/contact_gw">Contact_gw.py</a><br>
+Define the contact between a grain and a wall.
+</p>
+</dt>
+<dt id="create_i_ac">
+<p>
+<a href="https://alexsacmorane.github.io/pfdem/pfdem_ac/create_i_ac">Create_I_AC.py</a><br>
+Create an input file .i based on the template PF_base_AC.i.
+</p>
+</dt>
+<dt id="create_lg_ic">
+<p>
+<a href="https://alexsacmorane.github.io/pfdem/pfdem_ac/create_lg_ic">Create_LG_IC.py</a><br>
+Define an initial configuration.
+</p>
+</dt>
+<dt id="grain">
+<p>
+<a href="https://alexsacmorane.github.io/pfdem/pfdem_ac/grain">Grain.py</a><br>
+Define a grain.
+</p>
+</dt>
+<dt id="main">
+<p>
+<a href="https://alexsacmorane.github.io/pfdem/pfdem_ac/main">Main.py</a><br>
+Main file to run the simulation.
+</p>
+</dt>
+<dt id="main_after_crash">
+<p>
+<a href="https://alexsacmorane.github.io/pfdem/pfdem_ac/main_after_crash">main_after_crash.py</a><br>
+Sometime crashs can occur. This file is used after one of them to restart the main file.
+</p>
+</dt>
+<dt id="multiple_main">
+<p>
+<a href="https://alexsacmorane.github.io/pfdem/pfdem_ac/multiple_main">multiple_main.py</a><br>
+Repeat multiple main simulations.
+</p>
+</dt>
+<dt id="owntools">
+<p>
+<a href="https://alexsacmorane.github.io/pfdem/pfdem_ac/owntools">Owntools.py</a><br>
+Tools developped for the project.
+</p>
+</dt>
+<dt id="report">
+<p>
+<a href="https://alexsacmorane.github.io/pfdem/pfdem_ac/report">Report.py</a><br>
+Define the .txt report file.
+</p>
+</dt>
+<dt id="user">
+<p>
+<a href="https://alexsacmorane.github.io/pfdem/pfdem_ac/user">User.py</a><br>
+Where the parameters are defined by the user.
+</p>
+</dt>
+<dt id="write_txt">
+<p>
+<a href="https://alexsacmorane.github.io/pfdem/pfdem_ac/write_txt">Write_txt.py</a><br>
+Define functions to write .txt files.
+</p>
+</dt>
 </section>
 </article>
 <nav id="sidebar">
@@ -98,15 +115,18 @@ Alexandre Sac-Morane, Manolis Veveakis, Hadrien Rattez. (2024). A Phase-Field Di
 <ul></ul>
 </div>
 <ul id="index">
-<li><h3><a href="#section-modules">Mini Projects</a></h3></li>
-<li><h4><a href="#my_pfdem_mg_3d">MY_PFDEM_MG_3D</a></h4></li>
-<li><h4><a href="#my_pfdem_mg_2d">MY_PFDEM_MG_2D</a></h4></li>
-<li><h4><a href="#my_pfdem_2g_2d">MY_PFDEM_2G_2D</a></h4></li>
-<li><h4><a href="#my_pfdem_1g_2d">MY_PFDEM_1G_2D</a></h4></li>
-<li><h4><a href="#pfdem_acs_mg">PFDEM_ACS_MG</a></h4></li>
-<li><h4><a href="#pfdem_acs">PFDEM_ACS</a></h4></li>
-<li><h4><a href="#pfdem_ac">PFDEM_AC</a></h4></li>
-<li><h3><a href="#section-articles">Articles</a></h3></li>
+<li><h4><a href="#contact">Contact</a></h4></li>
+<li><h4><a href="#contact_gw">Contact_gw</a></h4></li>
+<li><h4><a href="#create_i_ac">Create_I_AC</a></h4></li>
+<li><h4><a href="#create_lg_ic">Create_LG_IC</a></h4></li>
+<li><h4><a href="#grain">Grain</a></h4></li>
+<li><h4><a href="#main">main</a></h4></li>
+<li><h4><a href="#main_after_crash">main_after_crash</a></h4></li>
+<li><h4><a href="#multiple_main">multiple_main</a></h4></li>
+<li><h4><a href="#owntools">Owntools</a></h4></li>
+<li><h4><a href="#report">Report</a></h4></li>
+<li><h4><a href="#user">User</a></h4></li>
+<li><h4><a href="#write_txt">Write_txt</a></h4></li>
 </ul>
 <br>
 <a href="https://alexsacmorane.github.io">Home</a>

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.10.0" />
-<title>PFDEM projects</title>
+<title>multiple_main API documentation</title>
 <meta name="description" content="@author: Alexandre Sac--Morane
 alexandre.sac-morane@uclouvain.be …" />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
@@ -20,76 +20,46 @@ alexandre.sac-morane@uclouvain.be …" />
 <main>
 <article id="content">
 <header>
-<h1 class="title">Project <code>Phase-Field Discrete Element Model</code></h1>
+<h1 class="title">Module <code>multiple_main</code></h1>
 </header>
 <section id="section-intro">
-<p>Phase-Field Discrete Element Modelization applied to granular material.<br>
-</p>
+<p>@author: Alexandre Sac&ndash;Morane
+alexandre.sac-morane@uclouvain.be</p>
+<p>This is to run several times the main file.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python"># -*- coding: utf-8 -*-
+&#34;&#34;&#34;
+@author: Alexandre Sac--Morane
+alexandre.sac-morane@uclouvain.be
+
+This is to run several times the main file.
+&#34;&#34;&#34;
+
+#-------------------------------------------------------------------------------
+#User parameters
+#-------------------------------------------------------------------------------
+
+if &#39;__main__&#39; == __name__:
+    N_iterations = 10
+
+    #-------------------------------------------------------------------------------
+    #main multiple times
+    #-------------------------------------------------------------------------------
+
+    for i in range(N_iterations):
+        exec(open(&#34;main.py&#34;).read())</code></pre>
+</details>
 </section>
 <section>
-<h2 class="section-modules" id="section-modules">Mini Projects</h2>
-<ul>
-<li id="my_pfdem_mg_3d">
-<p>
-<h3><a href="https://alexsacmorane.github.io/my_pfdem_mg_3d/">MY_PFDEM_MG_3D</a><br></h3>
-The goal is to simulate the pressure solution phenomenon to granular material with multiple grains in 3D.<br>
-<a href="https://github.com/AlexSacMorane/MY_PFDEM_MG_3D">The github project</a><br>
-</p>
-</li>
-<li id="my_pfdem_mg_2d">
-<p>
-<h3><a href="https://alexsacmorane.github.io/my_pfdem_mg_2d/">MY_PFDEM_MG_2D</a><br></h3>
-The goal is to simulate the pressure solution phenomenon to granular material with multiple grains in 2D.<br>
-<a href="https://github.com/AlexSacMorane/MY_PFDEM_MG_2D">The github project</a><br>
-</p>
-</li>
-<li id="my_pfdem_2g_2d">
-<p>
-<h3><a href="https://alexsacmorane.github.io/my_pfdem_2g_2d/">MY_PFDEM_2G_2D</a><br></h3>
-The goal is to simulate the pressure solution phenomenon to granular material between 2 grains in 2D.<br>
-<a href="https://github.com/AlexSacMorane/MY_PFDEM_2G_2D">The github project</a><br>
-</p>
-</li>
-<li id="my_pfdem_1g_2d">
-<p>
-<h3><a href="https://alexsacmorane.github.io/my_pfdem_1g_2d/">MY_PFDEM_1G_2D</a><br></h3>
-The goal is to simulate the pressure solution phenomenon to granular material between 1 grain and a plate in 2D.<br>
-<a href="https://github.com/AlexSacMorane/MY_PFDEM_1G_2D">The github project</a><br>
-</p>
-</li>
-<li id="pfdem_acs_mg">
-<p>
-<h3><a href="https://alexsacmorane.github.io/pfdem/pfdem_acs_mg/">PFDEM_ACS_MG</a><br></h3>
-The goal is to simulate the pressure solution phenomenon to granular material with multiple grains.<br>
-<a href="https://github.com/AlexSacMorane/PFDEM_ACS_MultiGrains">The github project</a><br>
-</p>
-</li>
- <li id="pfdem_acs">
-<p>
-<h3><a href="https://alexsacmorane.github.io/pfdem/pfdem_acs/">PFDEM_ACS</a><br></h3>
-The goal is to simulate the pressure solution phenomenon between 2 grains.<br>
-<a href="https://github.com/AlexSacMorane/PFDEM_ACS">The github project</a><br>
-</p>
-</li>
-<li id="pfdem_ac">
-<p>
-<h3><a href="https://alexsacmorane.github.io/pfdem/pfdem_ac/">PFDEM_AC</a><br></h3>
-This simulation is about a 2D test under oedometrical conditions with an acid injection. The chain force and the k0 (= σ2/σ1) evolves with the material dissolution.<br>
-<a href="https://github.com/AlexSacMorane/PFDEM_AC">The github project</a><br>
-</p>
-</li>
-</ul>
 </section>
 <section>
-<h2 class="section-articles" id="section-articles">Articles</h2>
-<ul>
-<li>
-Alexandre Sac-Morane, Hadrien Rattez, Manolis Veveakis. (xxxx). Importance of the precipitation on the slowdown of the creep behavior due to pressure-solution. ?. ?
-</li>
-<li>
-Alexandre Sac-Morane, Manolis Veveakis, Hadrien Rattez. (2024). A Phase-Field Discrete Element Method to study chemo-mechanical coupling in granular materials. Computer Methods in Applied Mechanics and Engineering. 10.1016/j.cma.2024.116900
-</li>
-</ul>
+</section>
+<section>
+</section>
+<section>
 </section>
 </article>
 <nav id="sidebar">
@@ -98,16 +68,9 @@ Alexandre Sac-Morane, Manolis Veveakis, Hadrien Rattez. (2024). A Phase-Field Di
 <ul></ul>
 </div>
 <ul id="index">
-<li><h3><a href="#section-modules">Mini Projects</a></h3></li>
-<li><h4><a href="#my_pfdem_mg_3d">MY_PFDEM_MG_3D</a></h4></li>
-<li><h4><a href="#my_pfdem_mg_2d">MY_PFDEM_MG_2D</a></h4></li>
-<li><h4><a href="#my_pfdem_2g_2d">MY_PFDEM_2G_2D</a></h4></li>
-<li><h4><a href="#my_pfdem_1g_2d">MY_PFDEM_1G_2D</a></h4></li>
-<li><h4><a href="#pfdem_acs_mg">PFDEM_ACS_MG</a></h4></li>
-<li><h4><a href="#pfdem_acs">PFDEM_ACS</a></h4></li>
-<li><h4><a href="#pfdem_ac">PFDEM_AC</a></h4></li>
-<li><h3><a href="#section-articles">Articles</a></h3></li>
 </ul>
+<br>
+<a href="https://alexsacmorane.github.io/pfdem/pfdem_acs">PFDEM_ACS</a>
 <br>
 <a href="https://alexsacmorane.github.io">Home</a>
 </nav>

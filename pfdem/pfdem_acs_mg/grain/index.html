@@ -1,0 +1,2946 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>Grain API documentation</title>
+<meta name="description" content="@author: Alexandre Sac--Morane
+alexandre.sac-morane@uclouvain.be …" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>Grain</code></h1>
+</header>
+<section id="section-intro">
+<p>@author: Alexandre Sac&ndash;Morane
+alexandre.sac-morane@uclouvain.be</p>
+<p>The goal of this file is to define a new class.
+The new class is about the grains</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python"># -*- coding: utf-8 -*-
+&#34;&#34;&#34;
+@author: Alexandre Sac--Morane
+alexandre.sac-morane@uclouvain.be
+
+The goal of this file is to define a new class.
+The new class is about the grains
+&#34;&#34;&#34;
+
+#-------------------------------------------------------------------------------
+#Libs
+#-------------------------------------------------------------------------------
+
+import numpy as np
+import math
+import random
+
+#Own  functions and classes
+import Owntools
+
+#-------------------------------------------------------------------------------
+#Class
+#-------------------------------------------------------------------------------
+
+class Grain:
+
+    #---------------------------------------------------------------------------
+
+    def __init__(self, dict_ic_to_real, dict_material, dict_sample):
+        &#39;&#39;&#39;
+        Defining a disk grain
+
+            Input :
+                an id (an integer)
+                a radius (a float)
+                a center (a 2 x 1 numpy array)
+                a material dictionnary (a dictionnary)
+                a sample dictionnary (a dictionnary)
+            Output :
+                a grain (a grain)
+        &#39;&#39;&#39;
+        self.id = dict_ic_to_real[&#39;Id&#39;]
+        self.center = dict_ic_to_real[&#39;Center&#39;]
+        #save description
+        self.r_mean = np.mean(dict_ic_to_real[&#39;L_r&#39;])
+        self.r_min = min(dict_ic_to_real[&#39;L_r&#39;])
+        self.r_max = np.max(dict_ic_to_real[&#39;L_r&#39;])
+        self.l_r = dict_ic_to_real[&#39;L_r&#39;]
+        self.l_theta_r = dict_ic_to_real[&#39;L_theta_r&#39;]
+        self.l_border = dict_ic_to_real[&#39;L_border&#39;]
+        self.l_border_x = dict_ic_to_real[&#39;L_border_x&#39;]
+        self.l_border_y = dict_ic_to_real[&#39;L_border_y&#39;]
+        self.surface = dict_ic_to_real[&#39;Surface&#39;]
+        self.inertia = dict_ic_to_real[&#39;Inertia&#39;]
+        #save initial
+        self.center_init = self.center.copy()
+        self.l_border_x_init = self.l_border_x.copy()
+        self.l_border_y_init = self.l_border_y.copy()
+        #material
+        self.y = dict_material[&#39;Y&#39;]
+        self.nu = dict_material[&#39;nu&#39;]
+        self.g = self.y/2/(1+self.nu) #shear modulus
+        self.rho_surf = dict_ic_to_real[&#39;Rho_surf&#39;]
+        self.mass = dict_ic_to_real[&#39;Mass&#39;]
+
+        self.build_etai_M(dict_material,dict_sample)
+
+    #---------------------------------------------------------------------------
+
+    def build_etai_M(self,dict_material,dict_sample):
+        &#39;&#39;&#39;
+        Build the phase field for one grain.
+
+        A cosine profile is assumed (see https://mooseframework.inl.gov/source/ics/SmoothCircleIC.html).
+
+            Input :
+                itself (a grain)
+                a material dictionnary (a dictionnary)
+                a sample dictionnary (a dictionnary)
+            Output :
+                Nothing but the grain gets a new attribute (a n_y x n_x numpy array)
+        &#39;&#39;&#39;
+        #initialization
+        self.etai_M = np.array(np.zeros((len(dict_sample[&#39;y_L&#39;]),len(dict_sample[&#39;x_L&#39;]))))
+
+        #extract a spatial zone
+        x_min = min(self.l_border_x)-dict_material[&#39;w&#39;]
+        x_max = max(self.l_border_x)+dict_material[&#39;w&#39;]
+        y_min = min(self.l_border_y)-dict_material[&#39;w&#39;]
+        y_max = max(self.l_border_y)+dict_material[&#39;w&#39;]
+
+        #look for this part inside the global mesh
+        #create search list
+        x_L_search_min = abs(np.array(dict_sample[&#39;x_L&#39;])-x_min)
+        x_L_search_max = abs(np.array(dict_sample[&#39;x_L&#39;])-x_max)
+        y_L_search_min = abs(np.array(dict_sample[&#39;y_L&#39;])-y_min)
+        y_L_search_max = abs(np.array(dict_sample[&#39;y_L&#39;])-y_max)
+
+        #get index
+        i_x_min = list(x_L_search_min).index(min(x_L_search_min))
+        i_x_max = list(x_L_search_max).index(min(x_L_search_max))
+        i_y_min = list(y_L_search_min).index(min(y_L_search_min))
+        i_y_max = list(y_L_search_max).index(min(y_L_search_max))
+
+        for l in range(i_y_min,i_y_max+1):
+            for c in range(i_x_min,i_x_max+1):
+                y = dict_sample[&#39;y_L&#39;][l]
+                x = dict_sample[&#39;x_L&#39;][c]
+                p = np.array([x,y])
+                r = np.linalg.norm(self.center - p)
+                #look for the radius on this direction
+                if p[1]&gt;self.center[1]:
+                    theta = math.acos((p[0]-self.center[0])/np.linalg.norm(self.center-p))
+                else :
+                    theta= 2*math.pi - math.acos((p[0]-self.center[0])/np.linalg.norm(self.center-p))
+                L_theta_R_i = list(abs(np.array(self.l_theta_r)-theta))
+                R = self.l_r[L_theta_R_i.index(min(L_theta_R_i))]
+                #build etai_M
+                self.etai_M[-1-l][c] = Owntools.Cosine_Profile(R,r,dict_material[&#39;w&#39;])
+
+    #---------------------------------------------------------------------------
+
+    def geometric_study(self,dict_sample):
+      &#39;&#39;&#39;
+      Searching limits of the grain
+
+      Not best method but first approach
+      We iterate on y constant, we look for a value under and over 0.5
+      If both conditions are verified, there is a limit at this y
+      Same with iteration on x constant
+
+      Once the border of the grain is defined, a Monte Carlo method is used to computed some geometrical properties.
+
+        Input :
+            itself (a grain)
+            a sample dictionnary (a dictionnary)
+        Output :
+            Nothing but the grain gets new attributes
+                r_min : the minimum radius of the grain (a float)
+                r_max : the maximum radius of the grain (a float)
+                r_mean : the mean radius of the grain (a float)
+                l_r : a list of radius of the grain, work with l_theta_r (a list)
+                l_theta_r : a list of angle to see the distribution of the radius of the grain, work with l_r (a list)
+                surface : the surface of the grain (a float)
+                center : the coordinate of the grain center (a 2 x 1 numpy array)
+                l_border_x : the list of the coordinate x of the grain vertices (a list)
+                l_border_y : the list of the coordinate y of the grain vertices (a list)
+                l_border : the list of the coordinate [x,y] of the grain vertices (a list)
+      &#39;&#39;&#39;
+      #-------------------------------------------------------------------------
+      #load data needed
+      n = dict_sample[&#39;grain_discretisation&#39;]
+      x_L = dict_sample[&#39;x_L&#39;]
+      y_L = dict_sample[&#39;y_L&#39;]
+      #-------------------------------------------------------------------------
+
+      L_border_old = []
+      for y_i in range(len(y_L)):
+          L_extract_x = self.etai_M[y_i][:]
+          if max(L_extract_x)&gt;0.5 and min(L_extract_x)&lt;0.5:
+              y_intersect = y_L[len(y_L)-1-y_i]
+              for x_i in range(len(x_L)-1):
+                  if (L_extract_x[x_i]-0.5)*(L_extract_x[x_i+1]-0.5)&lt;0:
+                      x_intersect = (0.5-L_extract_x[x_i])/(L_extract_x[x_i+1]-L_extract_x[x_i])*\
+                                  (x_L[x_i+1]-x_L[x_i]) + x_L[x_i]
+                      L_border_old.append(np.array([x_intersect,y_intersect]))
+
+      for x_i in range(len(x_L)):
+          L_extract_y = []
+          for y_i in range(len(y_L)):
+              L_extract_y.append(self.etai_M[y_i][x_i])
+          if max(L_extract_y)&gt;0.5 and min(L_extract_y)&lt;0.5:
+              x_intersect = x_L[x_i]
+              for y_i in range(len(y_L)-1):
+                  if (L_extract_y[y_i]-0.5)*(L_extract_y[y_i+1]-0.5)&lt;0:
+                      y_intersect = (0.5-L_extract_y[y_i])/(L_extract_y[y_i+1]-L_extract_y[y_i])*\
+                                  (y_L[len(y_L)-1-y_i-1]-y_L[len(y_L)-1-y_i]) + y_L[len(y_L)-1-y_i]
+                      L_border_old.append(np.array([x_intersect,y_intersect]))
+
+      #Adaptating
+      L_id_used = [0]
+      L_border = [L_border_old[0]]
+      HighValue = 100000000 #Large
+
+      current_node = L_border_old[0]
+      for j in range(1,len(L_border_old)):
+          L_d = list(np.zeros(len(L_border_old)))
+          for i in range(0,len(L_border_old)):
+              node = L_border_old[i]
+              if  i not in L_id_used:
+                  d = np.linalg.norm(node - current_node)
+                  L_d[i] = d
+              else :
+                  L_d[i] = HighValue #Value need to be larger than potential distance between node
+
+          index_nearest_node = L_d.index(min(L_d))
+          nearest_node = L_border_old[index_nearest_node]
+          current_node = nearest_node
+          L_border.append(nearest_node)
+          L_id_used.append(index_nearest_node)
+
+      #Correcting
+      L_d_final = []
+      for i in range(len(L_border)-1):
+          L_d_final.append(np.linalg.norm(L_border[i+1] - L_border[i]))
+
+      #look for really far points, we assume the first point is accurate
+      d_final_mean = np.mean(L_d_final)
+      while np.max(L_d_final) &gt; 5 * d_final_mean : #5 here is an user choixe value
+          i_error = L_d_final.index(np.max(L_d_final))+1
+          #simulation_report.write(&#39;Point &#39;+str(L_border[i_error])+&#39; is deleted because it is detected as an error\n&#39;)
+          L_border.pop(i_error)
+          L_id_used.pop(i_error)
+          L_d_final = []
+          for i in range(len(L_border)-1):
+              L_d_final.append(np.linalg.norm(L_border[i+1] - L_border[i]))
+
+      #-------------------------------------------------------------------------------
+      #Reduce the number of nodes for a grain
+      #-------------------------------------------------------------------------------
+
+      Perimeter = 0
+      for i_p in range(len(L_border)-1):
+          Perimeter = Perimeter + np.linalg.norm(L_border[i_p+1]-L_border[i_p])
+      Perimeter = Perimeter + np.linalg.norm(L_border[-1]-L_border[0])
+      distance_min = Perimeter/n
+      L_border_adapted = [L_border[0]]
+      for p in L_border[1:]:
+          distance = np.linalg.norm(p-L_border_adapted[-1])
+          if distance &gt;= distance_min:
+              L_border_adapted.append(p)
+      L_border = L_border_adapted
+      L_border.append(L_border[0])
+      self.l_border = L_border
+
+      #-------------------------------------------------------------------------------
+      #Searching Surface, Center of mass and Inertia.
+      #Monte Carlo Method
+      #A box is defined, we take a random point and we look if it is inside or outside the grain
+      #Properties are the statistic times the box properties
+      #-------------------------------------------------------------------------------
+
+      min_max_defined = False
+      for p in L_border[:-1] :
+          if not min_max_defined:
+              box_min_x = p[0]
+              box_max_x = p[0]
+              box_min_y = p[1]
+              box_max_y = p[1]
+              min_max_defined = True
+          else:
+              if p[0] &lt; box_min_x:
+                  box_min_x = p[0]
+              elif p[0] &gt; box_max_x:
+                  box_max_x = p[0]
+              if p[1] &lt; box_min_y:
+                  box_min_y = p[1]
+              elif p[1] &gt; box_max_y:
+                  box_max_y = p[1]
+
+      N_MonteCarlo = 3000 #The larger it is, the more accurate it is
+      sigma = self.rho_surf
+      M_Mass = 0
+      M_Center_Mass = np.array([0,0])
+      M_Inertia = 0
+
+      for i in range(N_MonteCarlo):
+          P = np.array([random.uniform(box_min_x,box_max_x),random.uniform(box_min_y,box_max_y)])
+          if self.P_is_inside(P):
+              M_Mass = M_Mass + sigma
+              M_Center_Mass = M_Center_Mass + sigma*P
+              M_Inertia = M_Inertia + sigma*np.dot(P,P)
+
+      Mass = (box_max_x-box_min_x)*(box_max_y-box_min_y)/N_MonteCarlo*M_Mass
+      Center_Mass = (box_max_x-box_min_x)*(box_max_y-box_min_y)/N_MonteCarlo*M_Center_Mass/Mass
+      Inertia = (box_max_x-box_min_x)*(box_max_y-box_min_y)/N_MonteCarlo*M_Inertia-Mass*np.dot(Center_Mass,Center_Mass)
+
+      #-------------------------------------------------------------------------------
+      #Updating the grain geometry and properties
+      #-------------------------------------------------------------------------------
+
+      L_R = []
+      L_theta_R = []
+      L_border_x = []
+      L_border_y = []
+      for p in L_border[:-1]:
+          L_R.append(np.linalg.norm(p-Center_Mass))
+          L_border_x.append(p[0])
+          L_border_y.append(p[1])
+          if (p-Center_Mass)[1] &gt; 0:
+              theta = math.acos((p-Center_Mass)[0]/np.linalg.norm(p-Center_Mass))
+          else :
+              theta = 2*math.pi - math.acos((p-Center_Mass)[0]/np.linalg.norm(p-Center_Mass))
+          L_theta_R.append(theta)
+      L_border_x.append(L_border_x[0])
+      L_border_y.append(L_border_y[0])
+      #reorganize lists
+      i_theta = 0
+      while L_theta_R[i_theta] &lt; 2*math.pi/10 or 2*math.pi*9/10 &lt; L_theta_R[i_theta]:
+          i_theta = i_theta + 1
+      if L_theta_R[i_theta + 1] &lt; L_theta_R[i_theta] :
+          L_R.reverse()
+          L_theta_R.reverse()
+          L_border_x.reverse()
+          L_border_y.reverse()
+          L_border.reverse()
+
+      self.r_min = np.min(L_R)
+      self.r_max = np.max(L_R)
+      self.r_mean = np.mean(L_R)
+      self.l_r = L_R
+      self.l_theta_r = L_theta_R
+      self.mass = Mass
+      self.surface = Mass/sigma
+      self.inertia = Inertia
+      self.center = Center_Mass
+      self.l_border_x = L_border_x
+      self.l_border_y = L_border_y
+      self.l_border = L_border
+
+    #-------------------------------------------------------------------------------
+
+    def P_is_inside(self,P):
+      &#39;&#39;&#39;Determine if a point P is inside of a grain
+
+      Make a slide on constant y. Every time a border is crossed, the point switches between in and out.
+      see Franklin 1994, see Alonso-Marroquin 2009
+
+          Input :
+              itself (a grain)
+              a point (a 2 x 1 numpy array)
+          Output :
+              True or False, depending on the fact that the point is inside the grain or not (a bool)
+      &#39;&#39;&#39;
+      counter = 0
+      for i_p_border in range(len(self.l_border)-1):
+          #consider only points if the coordinates frame the y-coordinate of the point
+          if (self.l_border[i_p_border][1]-P[1])*(self.l_border[i_p_border+1][1]-P[1]) &lt; 0 :
+            x_border = self.l_border[i_p_border][0] + (self.l_border[i_p_border+1][0]-self.l_border[i_p_border][0])*(P[1]-self.l_border[i_p_border][1])/(self.l_border[i_p_border+1][1]-self.l_border[i_p_border][1])
+            if x_border &gt; P[0] :
+                counter = counter + 1
+      if counter % 2 == 0:
+        return False
+      else :
+        return True
+
+    #-------------------------------------------------------------------------------
+
+    def Compute_sphericity(self, dict_algorithm):
+      &#39;&#39;&#39;Compute sphericity of the particle with five parameters.
+
+      The parameters used are the area, the diameter, the circle ratio, the perimeter and the width to length ratio sphericity.
+      See Zheng, J., Hryciw, R.D. (2015) Traditional soil particle sphericity, roundness and surface roughness by computational geometry, Geotechnique, Vol 65
+
+          Input :
+              itself (a grain)
+              an algorithm dictionnary (a dict)
+          Output :
+              Nothing, but the grain gets updated attributes (five floats)
+      &#39;&#39;&#39;
+      #Find the minimum circumscribing circle
+      #look for the two farthest and nearest points
+      MaxDistance = 0
+      for i_p in range(0,len(self.l_border)-2):
+          for j_p in range(i_p+1,len(self.l_border)-1):
+              Distance = np.linalg.norm(self.l_border[i_p]-self.l_border[j_p])
+              if Distance &gt; MaxDistance :
+                  ij_farthest = (i_p,j_p)
+                  MaxDistance = Distance
+
+      #Trial circle
+      center_circumscribing = (self.l_border[ij_farthest[0]]+self.l_border[ij_farthest[1]])/2
+      radius_circumscribing = MaxDistance/2
+      Circumscribing_Found = True
+      Max_outside_distance = radius_circumscribing
+      for i_p in range(len(self.l_border)-1):
+          #there is a margin here because of the numerical approximation
+          if np.linalg.norm(self.l_border[i_p]-center_circumscribing) &gt; (1+dict_algorithm[&#39;sphericity_margin&#39;])*radius_circumscribing and i_p not in ij_farthest: #vertex outside the trial circle
+            Circumscribing_Found = False
+            if np.linalg.norm(self.l_border[i_p]-center_circumscribing) &gt; Max_outside_distance:
+                k_outside_farthest = i_p
+                Max_outside_distance = np.linalg.norm(self.l_border[i_p]-center_circumscribing)
+      #The trial guess does not work
+      if not Circumscribing_Found:
+          L_ijk_circumscribing = [ij_farthest[0],ij_farthest[1],k_outside_farthest]
+          center_circumscribing, radius_circumscribing = FindCircleFromThreePoints(self.l_border[L_ijk_circumscribing[0]],self.l_border[L_ijk_circumscribing[1]],self.l_border[L_ijk_circumscribing[2]])
+          Circumscribing_Found = True
+          for i_p in range(len(self.l_border)-1):
+              #there is a margin here because of the numerical approximation
+              if np.linalg.norm(self.l_border[i_p]-center_circumscribing) &gt; (1+dict_algorithm[&#39;sphericity_margin&#39;])*radius_circumscribing and i_p not in L_ijk_circumscribing: #vertex outside the circle computed
+                Circumscribing_Found = False
+          #see article for other case
+          if not Circumscribing_Found:
+              print(&#39;This algorithm is not developped for this case...&#39;)
+
+      #look for length and width
+      length = MaxDistance
+      u_maxDistance = (self.l_border[ij_farthest[0]]-self.l_border[ij_farthest[1]])/np.linalg.norm(self.l_border[ij_farthest[0]]-self.l_border[ij_farthest[1]])
+      v_maxDistance = np.array([u_maxDistance[1], -u_maxDistance[0]])
+      MaxWidth = 0
+      for i_p in range(0,len(self.l_border)-2):
+        for j_p in range(i_p+1,len(self.l_border)-1):
+            Distance = abs(np.dot(self.l_border[i_p]-self.l_border[j_p],v_maxDistance))
+            if Distance &gt; MaxWidth :
+                ij_width = (i_p,j_p)
+                MaxWidth = Distance
+      width = MaxWidth
+
+      #look for maximum inscribed circle
+      #discretisation of the grain
+      l_x_inscribing = np.linspace(min(self.l_border_x),max(self.l_border_x),dict_algorithm[&#39;n_spatial_inscribing&#39;])
+      l_y_inscribing = np.linspace(min(self.l_border_y),max(self.l_border_y),dict_algorithm[&#39;n_spatial_inscribing&#39;])
+      #creation of an Euclidean distance map to the nearest boundary vertex
+      map_inscribing = np.zeros((dict_algorithm[&#39;n_spatial_inscribing&#39;],dict_algorithm[&#39;n_spatial_inscribing&#39;]))
+      #compute the map
+      for i_x in range(dict_algorithm[&#39;n_spatial_inscribing&#39;]):
+          for i_y in range(dict_algorithm[&#39;n_spatial_inscribing&#39;]):
+              p = np.array([l_x_inscribing[i_x], l_y_inscribing[-1-i_y]])
+              #work only if the point is inside the grain
+              if self.P_is_inside(p):
+                  #look for the nearest vertex
+                  MinDistance = None
+                  for q in self.l_border[:-1]:
+                      Distance = np.linalg.norm(p-q)
+                      if MinDistance == None or Distance &lt; MinDistance:
+                          MinDistance = Distance
+                  map_inscribing[-1-i_y][i_x] = MinDistance
+              else :
+                  map_inscribing[-1-i_y][i_x] = 0
+      #look for the peak of the map
+      index_max = np.argmax(map_inscribing)
+      l = index_max//dict_algorithm[&#39;n_spatial_inscribing&#39;]
+      c = index_max%dict_algorithm[&#39;n_spatial_inscribing&#39;]
+      radius_inscribing = map_inscribing[l][c]
+
+      #Area Sphericity
+      SurfaceParticle = self.surface
+      SurfaceCircumscribing = math.pi*radius_circumscribing**2
+      AreaSphericity = SurfaceParticle / SurfaceCircumscribing
+      if Circumscribing_Found: #else, same value
+          self.area_sphericity = AreaSphericity
+
+      #Diameter Sphericity
+      DiameterSameAreaParticle = 2*math.sqrt(self.surface/math.pi)
+      DiameterCircumscribing = radius_circumscribing*2
+      DiameterSphericity = DiameterSameAreaParticle / DiameterCircumscribing
+      if Circumscribing_Found: #else, same value
+          self.diameter_sphericity = DiameterSphericity
+
+      #Circle Ratio Sphericity
+      DiameterInscribing = radius_inscribing*2
+      CircleRatioSphericity = DiameterInscribing / DiameterCircumscribing
+      self.circle_ratio_sphericity = CircleRatioSphericity
+
+      #Perimeter Sphericity
+      PerimeterSameAreaParticle = 2*math.sqrt(self.surface*math.pi)
+      PerimeterParticle = 0
+      for i in range(len(self.l_border)-1):
+          PerimeterParticle = PerimeterParticle + np.linalg.norm(self.l_border[i+1]-self.l_border[i])
+      PerimeterSphericity = PerimeterSameAreaParticle / PerimeterParticle
+      self.perimeter_sphericity = PerimeterSphericity
+
+      #Width to length ratio Spericity
+      WidthToLengthRatioSpericity = width / length
+      self.width_to_length_ratio_sphericity = WidthToLengthRatioSpericity
+
+    #---------------------------------------------------------------------------
+
+    def PFtoDEM_Multi(self,FileToRead,dict_algorithm,dict_sample):
+        &#39;&#39;&#39;
+        Read file from MOOSE simulation to reconstruct the phase field of the grain.
+
+            Input :
+                itself (a grain)
+                the name of the file to read (a string)
+                an algorithm dictionnary (a dictionnary)
+                a sample dictionnary (a dictionnary)
+            Output :
+                Nothing but the grain gets an updated attribute (a n_y x n_x numpy array)
+        &#39;&#39;&#39;
+        #--------------------------------------------------------------------------
+        #Global parameters
+        #---------------------------------------------------------------------------
+
+        self.etai_M = np.array(np.zeros((len(dict_sample[&#39;y_L&#39;]),len(dict_sample[&#39;x_L&#39;]))))
+
+        id_L = None
+        eta_selector_len = len(&#39;        &lt;DataArray type=&#34;Float64&#34; Name=&#34;etai&#39;)
+        end_len = len(&#39;        &lt;/DataArray&gt;&#39;)
+        XYZ_selector_len = len(&#39;        &lt;DataArray type=&#34;Float64&#34; Name=&#34;Points&#34;&#39;)
+        data_jump_len = len(&#39;          &#39;)
+
+        for i_proc in range(dict_algorithm[&#39;np_proc&#39;]):
+
+            L_Work = [[], #X
+                      [], #Y
+                      []] #etai
+
+        #---------------------------------------------------------------------------
+        #Reading file
+        #---------------------------------------------------------------------------
+
+            f = open(f&#39;{FileToRead}_{i_proc}.vtu&#39;,&#39;r&#39;)
+            data = f.read()
+            f.close
+            lines = data.splitlines()
+
+            #iterations on line
+            for line in lines:
+
+                if line[0:eta_selector_len] == &#39;        &lt;DataArray type=&#34;Float64&#34; Name=&#34;eta&#39;+str(self.id):
+                    id_L = 2
+
+                elif line[0:XYZ_selector_len] == &#39;        &lt;DataArray type=&#34;Float64&#34; Name=&#34;Points&#34;&#39;:
+                    id_L = 0
+
+                elif (line[0:end_len] == &#39;        &lt;/DataArray&gt;&#39; or  line[0:len(&#39;          &lt;InformationKey&#39;)] == &#39;          &lt;InformationKey&#39;) and id_L != None:
+                    id_L = None
+
+                elif line[0:data_jump_len] == &#39;          &#39; and id_L == 2: #Read etai
+                    line = line[data_jump_len:]
+                    c_start = 0
+                    for c_i in range(0,len(line)):
+                        if line[c_i]==&#39; &#39;:
+                            c_end = c_i
+                            L_Work[id_L].append(float(line[c_start:c_end]))
+                            c_start = c_i+1
+                    L_Work[id_L].append(float(line[c_start:]))
+
+                elif line[0:data_jump_len] == &#39;          &#39; and id_L == 0: #Read [X, Y, Z]
+                    line = line[data_jump_len:]
+                    XYZ_temp = []
+                    c_start = 0
+                    for c_i in range(0,len(line)):
+                        if line[c_i]==&#39; &#39;:
+                            c_end = c_i
+                            XYZ_temp.append(float(line[c_start:c_end]))
+                            if len(XYZ_temp)==3:
+                                L_Work[0].append(XYZ_temp[0])
+                                L_Work[1].append(XYZ_temp[1])
+                                XYZ_temp = []
+                            c_start = c_i+1
+                    XYZ_temp.append(float(line[c_start:]))
+                    L_Work[0].append(XYZ_temp[0])
+                    L_Work[1].append(XYZ_temp[1])
+
+            #Adaptating data and update of etai_M
+            for i in range(len(L_Work[0])):
+                #Interpolation method
+                L_dy = []
+                for y_i in dict_sample[&#39;y_L&#39;] :
+                    L_dy.append(abs(y_i - L_Work[1][i]))
+                L_dx = []
+                for x_i in dict_sample[&#39;x_L&#39;] :
+                    L_dx.append(abs(x_i - L_Work[0][i]))
+                self.etai_M[-1-list(L_dy).index(min(L_dy))][list(L_dx).index(min(L_dx))] = L_Work[2][i]
+
+    #---------------------------------------------------------------------------
+
+    def ExtractPF_from_Eta(self, L_etai_M, dict_algorithm, dict_material, dict_sample):
+        &#39;&#39;&#39;
+        Extract from the total phase field the variable associated with the grain.
+
+            Input :
+                itself (a grain)
+                a list of phase field (a neta x nx x ny numpy array)
+                an algorithm dictionnary (a dict)
+                a material dictionnary (a dict)
+                a sample dictionnary (a dict)
+            Output :
+                Nothing but the grain gets an updated attribute (a n_y x n_x numpy array)
+        &#39;&#39;&#39;
+        etai_M = L_etai_M[self.etai].copy()
+        #extract a spatial zone
+        x_min = self.center[0] - 1.2*self.r_max
+        x_max = max(self.l_border_x)+dict_material[&#39;w&#39;]
+        x_max = self.center[0] + 1.2*self.r_max
+        y_min = min(self.l_border_y)-dict_material[&#39;w&#39;]
+        y_min = self.center[1] - 1.2*self.r_max
+        y_max = max(self.l_border_y)+dict_material[&#39;w&#39;]
+        y_max = self.center[1] + 1.2*self.r_max
+
+        #look for this part inside the global mesh
+        #create search list
+        x_L_search_min = abs(np.array(dict_sample[&#39;x_L&#39;])-x_min)
+        x_L_search_max = abs(np.array(dict_sample[&#39;x_L&#39;])-x_max)
+        y_L_search_min = abs(np.array(dict_sample[&#39;y_L&#39;])-y_min)
+        y_L_search_max = abs(np.array(dict_sample[&#39;y_L&#39;])-y_max)
+
+        #get index
+        i_x_min = list(x_L_search_min).index(min(x_L_search_min))
+        i_x_max = list(x_L_search_max).index(min(x_L_search_max))
+        i_y_min = list(y_L_search_min).index(min(y_L_search_min))
+        i_y_max = list(y_L_search_max).index(min(y_L_search_max))
+
+        self.etai_M = np.array(np.zeros((len(dict_sample[&#39;y_L&#39;]),len(dict_sample[&#39;x_L&#39;]))))
+        for l in range(i_y_min,i_y_max+1):
+            for c in range(i_x_min,i_x_max+1):
+                self.etai_M[-1-l][c] = etai_M[-1-l][c]
+
+    #---------------------------------------------------------------------------
+
+    def move_grain_interpolation(self,displacement,dict_sample):
+        &#39;&#39;&#39;
+        Move the grain by updating the phase field of the grain.
+
+        An interpolation on the phase field is done. The mass conservation is better than with move_grain_rebuild().
+
+            Input :
+                itself (a grain)
+                the displacement asked (a 2 x 1 numpy array)
+                a sample dictionnary (a dictionnary)
+            Output :
+                Nothing but the grain gets an updated attribute (a n_y x n_x numpy array)
+        &#39;&#39;&#39;
+        #displacement over x
+        dx = dict_sample[&#39;x_L&#39;][1]-dict_sample[&#39;x_L&#39;][0]
+        n_dx_disp_x = int(abs(displacement[0])//dx)
+        disp_x_remainder = abs(displacement[0])%dx
+        etai_M_old = self.etai_M.copy()
+
+        if np.sign(displacement[0]) &gt; 0 : # +x direction
+            #dx*n_dx_disp_x translation
+            if n_dx_disp_x &gt; 0:
+                for l in range(len(dict_sample[&#39;y_L&#39;])):
+                    self.etai_M[l][:n_dx_disp_x] = 0 #no information to translate so put equal to 0
+                    self.etai_M[l][n_dx_disp_x:] = etai_M_old[l][:-n_dx_disp_x]
+            #disp_x_remainder translation
+            etai_M_old = self.etai_M.copy()
+            for l in range(len(dict_sample[&#39;y_L&#39;])):
+                for c in range(1,len(dict_sample[&#39;x_L&#39;])):
+                    self.etai_M[l][c] = (etai_M_old[l][c]*(dx-disp_x_remainder) + etai_M_old[l][c-1]*disp_x_remainder)/dx
+                self.etai_M[l][0] = 0 #no information to translate so put equal to 0
+
+        else : # -x direction
+            #dx*n_dx_disp_x translation
+            if n_dx_disp_x &gt; 0:
+                for l in range(len(dict_sample[&#39;y_L&#39;])):
+                    self.etai_M[l][-n_dx_disp_x:] = 0 #no information to translate so put equal to 0
+                    self.etai_M[l][:-n_dx_disp_x] = etai_M_old[l][n_dx_disp_x:]
+            #disp_x_remainder translation
+            etai_M_old = self.etai_M.copy()
+            for l in range(len(dict_sample[&#39;y_L&#39;])):
+                for c in range(len(dict_sample[&#39;x_L&#39;])-1):
+                    self.etai_M[l][c] = (etai_M_old[l][c]*(dx-disp_x_remainder) + etai_M_old[l][c+1]*disp_x_remainder)/dx
+                self.etai_M[l][0] = 0 #no information to translate so put equal to 0
+
+        #displacement over y
+        dy = dict_sample[&#39;y_L&#39;][1]-dict_sample[&#39;y_L&#39;][0]
+        n_dy_disp_y = int(abs(displacement[1])//dy)
+        disp_y_remainder = abs(displacement[1])%dy
+        etai_M_old = self.etai_M.copy()
+
+        if np.sign(displacement[1]) &gt; 0 : # +y direction
+            #dy*n_dy_disp_y translation
+            if n_dy_disp_y &gt; 0:
+                for c in range(len(dict_sample[&#39;x_L&#39;])):
+                    for l in range(len(dict_sample[&#39;y_L&#39;])-n_dy_disp_y,len(dict_sample[&#39;y_L&#39;])):
+                        self.etai_M[l][c] = 0 #no information to translate so put equal to 0
+                    for l in range(len(dict_sample[&#39;y_L&#39;])-n_dy_disp_y):
+                        self.etai_M[l][c] = etai_M_old[l+1][c]
+            #disp_y_remainder translation
+            etai_M_old = self.etai_M.copy()
+            for c in range(len(dict_sample[&#39;x_L&#39;])):
+                for l in range(len(dict_sample[&#39;y_L&#39;])-1):
+                    self.etai_M[l][c] = (etai_M_old[l][c]*(dy-disp_y_remainder) + etai_M_old[l+1][c]*disp_y_remainder)/dy
+                self.etai_M[-1][c] = 0 #no information to translate so put equal to 0
+
+        else : # -y direction
+            #dy*n_dy_disp_y translation
+            if n_dy_disp_y &gt; 0:
+                for c in range(len(dict_sample[&#39;x_L&#39;])):
+                    for l in range(n_dy_disp_y):
+                        self.etai_M[l][c] = 0 #no information to translate so put equal to 0
+                    for l in range(n_dy_disp_y, len(dict_sample[&#39;y_L&#39;])):
+                        self.etai_M[l][c] = etai_M_old[l-1][c]
+            #disp_y_remainder translation
+            etai_M_old = self.etai_M.copy()
+            for c in range(len(dict_sample[&#39;x_L&#39;])):
+                for l in range(1,len(dict_sample[&#39;y_L&#39;])):
+                    self.etai_M[l][c] = (etai_M_old[l][c]*(dy-disp_y_remainder) + etai_M_old[l-1][c]*disp_y_remainder)/dy
+                self.etai_M[0][c] = 0 #no information to translate so put equal to 0
+
+    #---------------------------------------------------------------------------
+
+    def move_grain_rebuild(self,dict_material,dict_sample):
+        &#39;&#39;&#39;
+        Move the grain by updating the phase field of the grain.
+
+        A rebuild on the phase field is done. The mass conservation is verified by producing solute.
+
+            Input :
+                itself (a grain)
+                a material dictionnary (a dict)
+                a sample dictionnary (a dictionnary)
+            Output :
+                Nothing but the grain gets an updated attribute (a n_y x n_x numpy array)
+        &#39;&#39;&#39;
+        #save previous phase field
+        save_etai_M = self.etai_M.copy()
+        #compute the new phase field
+        self.build_etai_M(dict_material,dict_sample)
+        #compute the delta etai
+        sum_eta_before = 0
+        sum_eta_after = 0
+        for l in range(len(dict_sample[&#39;y_L&#39;])):
+            for c in range(len(dict_sample[&#39;x_L&#39;])):
+                sum_eta_before = sum_eta_before + save_etai_M[l][c]
+                sum_eta_after = sum_eta_after + self.etai_M[l][c]
+        self.delta_sum_eta = (sum_eta_before - sum_eta_after)/sum_eta_before*100
+
+    #-------------------------------------------------------------------------------
+
+    def update_geometry_kinetic(self, V, A, W, DT):
+        &#34;&#34;&#34;
+        Update the acceleration and the velocity of a grain. Update geometrical parameters as border and center nodes.
+
+            Input :
+                itself (a grain)
+                a speed (a 1 x 2 numpy array)
+                an acceleration (a 1 x 2 numpy array)
+                an angular speed (a float)
+                a time step (a float)
+            Ouput :
+                Nothing, but the position of the grain is updated
+        &#34;&#34;&#34;
+        #translation
+        self.v = V
+        self.a = A
+        for i in range(len(self.l_border)):
+            self.l_border[i] = self.l_border[i] + self.v*DT
+            self.l_border_x[i] = self.l_border_x[i] + self.v[0]*DT
+            self.l_border_y[i] = self.l_border_y[i] + self.v[1]*DT
+        self.center = self.center + self.v*DT
+
+        #rotation
+        self.w = W
+        self.theta = self.theta + self.w*DT
+
+        for i_theta_r in range(len(self.l_theta_r)) :
+            theta_r = self.l_theta_r[i_theta_r]
+            theta_r = theta_r + self.w*DT
+            while theta_r &gt;= 2*math.pi:
+                theta_r = theta_r - 2*math.pi
+            while theta_r &lt; 0 :
+                theta_r = theta_r + 2*math.pi
+            self.l_theta_r[i_theta_r] = theta_r
+
+        for i in range(len(self.l_border)):
+            p = self.l_border[i] - self.center
+            Rot_Matrix = np.array([[math.cos(self.w*DT), -math.sin(self.w*DT)],
+                                   [math.sin(self.w*DT),  math.cos(self.w*DT)]])
+            p = np.dot(Rot_Matrix,p)
+            self.l_border[i] = p + self.center
+            self.l_border_x[i] = p[0] + self.center[0]
+            self.l_border_y[i] = p[1] + self.center[1]
+
+    #-------------------------------------------------------------------------------
+
+    def init_f_control(self,dict_sollicitation):
+        &#34;&#34;&#34;
+        Initialize the force applied to the grain.
+
+        A gravity of g is applied.
+
+            Input :
+                itself (a grain)
+                a sollicitations dictionnary (a dict)
+            Ouput :
+                Nothing, but the force applied on the grain is initialized
+        &#34;&#34;&#34;
+        self.fx = 0
+        self.fy = -dict_sollicitation[&#39;gravity&#39;]*self.mass
+        self.f = np.array([self.fx,self.fy])
+        self.mz = 0
+        self.v = np.array([0, 0])
+        self.theta = 0
+        self.w = 0
+
+    #-------------------------------------------------------------------------------
+
+    def update_f(self, Fx, Fy, p_application):
+        &#34;&#34;&#34;
+        Add a force to the grain.
+
+            Input :
+                itself (a grain)
+                the value x and y of the force (two float)
+                an applicaiton point (a 1 x 2 numpy array)
+            Output :
+                Nothing, but a force is applied to the grain
+        &#34;&#34;&#34;
+        self.fx = self.fx + Fx
+        self.fy = self.fy + Fy
+        self.f = np.array([self.fx,self.fy])
+
+        v1 = np.array([p_application[0]-self.center[0], p_application[1]-self.center[1], 0])
+        v2 = np.array([Fx, Fy, 0])
+        self.mz = self.mz + np.cross(v1,v2)[2]
+
+#-------------------------------------------------------------------------------
+#Functions
+#-------------------------------------------------------------------------------
+
+def Compute_overlap_2_grains(dict_sample):
+    &#39;&#39;&#39;
+    Compute the current overlap between two grains.
+
+    It is assumed the sample is composed  by only 2 grains.
+
+        Input :
+            a sample dictionnary (a dictionnary)
+        Output :
+            Nothing but the sample dictionnary gets an updated value (a float)
+    &#39;&#39;&#39;
+    #2 grains
+    g1 = dict_sample[&#39;L_g&#39;][0]
+    g2 = dict_sample[&#39;L_g&#39;][1]
+
+    #compute overlap
+    #assume the normal n12 is +x axis
+    overlap = max(g1.l_border_x) - min(g2.l_border_x)
+
+    #Add element in dict
+    dict_sample[&#39;overlap&#39;] = overlap
+
+#-------------------------------------------------------------------------------
+
+def FindCircleFromThreePoints(P1,P2,P3):
+    &#39;&#39;&#39;
+    Compute the circumscribing circle of a triangle defined by three points.
+
+    https://www.geeksforgeeks.org/program-find-circumcenter-triangle-2/
+
+        Input :
+            three points (a 2 x 1 numpy array)
+        Output :
+            a center (a 2 x 1 numpy array)
+            a radius (a float)
+    &#39;&#39;&#39;
+    # Line P1P2 is represented as ax + by = c and line P2P3 is represented as ex + fy = g
+    a, b, c = lineFromPoints(P1, P2)
+    e, f, g = lineFromPoints(P2, P3)
+
+    # Converting lines P1P2 and P2P3 to perpendicular bisectors.
+    #After this, L : ax + by = c and M : ex + fy = g
+    a, b, c = perpendicularBisectorFromLine(P1, P2, a, b, c)
+    e, f, g = perpendicularBisectorFromLine(P2, P3, e, f, g)
+
+    # The point of intersection of L and M gives the circumcenter
+    circumcenter = lineLineIntersection(a, b, c, e, f, g)
+
+    if np.linalg.norm(circumcenter - np.array([10**9,10**9])) == 0:
+        raise ValueError(&#39;The given points do not form a triangle and are collinear...&#39;)
+    else :
+        #compute the radius
+        radius = max([np.linalg.norm(P1-circumcenter), np.linalg.norm(P2-circumcenter), np.linalg.norm(P3-circumcenter)])
+
+    return circumcenter, radius
+
+#-------------------------------------------------------------------------------
+
+def lineFromPoints(P, Q):
+    &#39;&#39;&#39;
+    Function to find the line given two points
+
+    Used in FindCircleFromThreePoints().
+    The equation is c = ax + by.
+    https://www.geeksforgeeks.org/program-find-circumcenter-triangle-2/
+
+        Input :
+            two points (a 2 x 1 numpy array)
+        Output :
+            three characteristic of the line (three floats)
+    &#39;&#39;&#39;
+    a = Q[1] - P[1]
+    b = P[0] - Q[0]
+    c = a * (P[0]) + b * (P[1])
+    return a, b, c
+
+#-------------------------------------------------------------------------------
+
+def perpendicularBisectorFromLine(P, Q, a, b, c):
+    &#39;&#39;&#39;
+    Function which converts the input line to its perpendicular bisector.
+
+    Used in FindCircleFromThreePoints().
+    The equation is c = ax + by.
+    https://www.geeksforgeeks.org/program-find-circumcenter-triangle-2/
+
+        Input :
+            two points (a 2 x 1 numpy array)
+            three characteristic of the line (three floats)
+        Output :
+            three characteristic of the perpendicular bisector (three floats)
+    &#39;&#39;&#39;
+    mid_point = [(P[0] + Q[0])//2, (P[1] + Q[1])//2]
+    # c = -bx + ay
+    c = -b * (mid_point[0]) + a * (mid_point[1])
+    temp = a
+    a = -b
+    b = temp
+    return a, b, c
+
+#-------------------------------------------------------------------------------
+
+def lineLineIntersection(a1, b1, c1, a2, b2, c2):
+    &#39;&#39;&#39;
+    Returns the intersection point of two lines.
+
+    Used in FindCircleFromThreePoints().
+    https://www.geeksforgeeks.org/program-find-circumcenter-triangle-2/
+
+        Input :
+            six characteristics of the line 1 and 2 (six floats)
+        Output :
+            the intersection point (a 2 x 1 numpy array)
+    &#39;&#39;&#39;
+    determinant = a1 * b2 - a2 * b1
+    if (determinant == 0):
+        # The lines are parallel.
+        return np.array([10**9,10**9])
+    else:
+        x = (b2 * c1 - b1 * c2)//determinant
+        y = (a1 * c2 - a2 * c1)//determinant
+        return np.array([x, y])</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="Grain.Compute_overlap_2_grains"><code class="name flex">
+<span>def <span class="ident">Compute_overlap_2_grains</span></span>(<span>dict_sample)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Compute the current overlap between two grains.</p>
+<p>It is assumed the sample is composed
+by only 2 grains.</p>
+<pre><code>Input :
+    a sample dictionnary (a dictionnary)
+Output :
+    Nothing but the sample dictionnary gets an updated value (a float)
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def Compute_overlap_2_grains(dict_sample):
+    &#39;&#39;&#39;
+    Compute the current overlap between two grains.
+
+    It is assumed the sample is composed  by only 2 grains.
+
+        Input :
+            a sample dictionnary (a dictionnary)
+        Output :
+            Nothing but the sample dictionnary gets an updated value (a float)
+    &#39;&#39;&#39;
+    #2 grains
+    g1 = dict_sample[&#39;L_g&#39;][0]
+    g2 = dict_sample[&#39;L_g&#39;][1]
+
+    #compute overlap
+    #assume the normal n12 is +x axis
+    overlap = max(g1.l_border_x) - min(g2.l_border_x)
+
+    #Add element in dict
+    dict_sample[&#39;overlap&#39;] = overlap</code></pre>
+</details>
+</dd>
+<dt id="Grain.FindCircleFromThreePoints"><code class="name flex">
+<span>def <span class="ident">FindCircleFromThreePoints</span></span>(<span>P1, P2, P3)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Compute the circumscribing circle of a triangle defined by three points.</p>
+<p><a href="https://www.geeksforgeeks.org/program-find-circumcenter-triangle-2/">https://www.geeksforgeeks.org/program-find-circumcenter-triangle-2/</a></p>
+<pre><code>Input :
+    three points (a 2 x 1 numpy array)
+Output :
+    a center (a 2 x 1 numpy array)
+    a radius (a float)
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def FindCircleFromThreePoints(P1,P2,P3):
+    &#39;&#39;&#39;
+    Compute the circumscribing circle of a triangle defined by three points.
+
+    https://www.geeksforgeeks.org/program-find-circumcenter-triangle-2/
+
+        Input :
+            three points (a 2 x 1 numpy array)
+        Output :
+            a center (a 2 x 1 numpy array)
+            a radius (a float)
+    &#39;&#39;&#39;
+    # Line P1P2 is represented as ax + by = c and line P2P3 is represented as ex + fy = g
+    a, b, c = lineFromPoints(P1, P2)
+    e, f, g = lineFromPoints(P2, P3)
+
+    # Converting lines P1P2 and P2P3 to perpendicular bisectors.
+    #After this, L : ax + by = c and M : ex + fy = g
+    a, b, c = perpendicularBisectorFromLine(P1, P2, a, b, c)
+    e, f, g = perpendicularBisectorFromLine(P2, P3, e, f, g)
+
+    # The point of intersection of L and M gives the circumcenter
+    circumcenter = lineLineIntersection(a, b, c, e, f, g)
+
+    if np.linalg.norm(circumcenter - np.array([10**9,10**9])) == 0:
+        raise ValueError(&#39;The given points do not form a triangle and are collinear...&#39;)
+    else :
+        #compute the radius
+        radius = max([np.linalg.norm(P1-circumcenter), np.linalg.norm(P2-circumcenter), np.linalg.norm(P3-circumcenter)])
+
+    return circumcenter, radius</code></pre>
+</details>
+</dd>
+<dt id="Grain.lineFromPoints"><code class="name flex">
+<span>def <span class="ident">lineFromPoints</span></span>(<span>P, Q)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function to find the line given two points</p>
+<p>Used in FindCircleFromThreePoints().
+The equation is c = ax + by.
+<a href="https://www.geeksforgeeks.org/program-find-circumcenter-triangle-2/">https://www.geeksforgeeks.org/program-find-circumcenter-triangle-2/</a></p>
+<pre><code>Input :
+    two points (a 2 x 1 numpy array)
+Output :
+    three characteristic of the line (three floats)
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def lineFromPoints(P, Q):
+    &#39;&#39;&#39;
+    Function to find the line given two points
+
+    Used in FindCircleFromThreePoints().
+    The equation is c = ax + by.
+    https://www.geeksforgeeks.org/program-find-circumcenter-triangle-2/
+
+        Input :
+            two points (a 2 x 1 numpy array)
+        Output :
+            three characteristic of the line (three floats)
+    &#39;&#39;&#39;
+    a = Q[1] - P[1]
+    b = P[0] - Q[0]
+    c = a * (P[0]) + b * (P[1])
+    return a, b, c</code></pre>
+</details>
+</dd>
+<dt id="Grain.lineLineIntersection"><code class="name flex">
+<span>def <span class="ident">lineLineIntersection</span></span>(<span>a1, b1, c1, a2, b2, c2)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Returns the intersection point of two lines.</p>
+<p>Used in FindCircleFromThreePoints().
+<a href="https://www.geeksforgeeks.org/program-find-circumcenter-triangle-2/">https://www.geeksforgeeks.org/program-find-circumcenter-triangle-2/</a></p>
+<pre><code>Input :
+    six characteristics of the line 1 and 2 (six floats)
+Output :
+    the intersection point (a 2 x 1 numpy array)
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def lineLineIntersection(a1, b1, c1, a2, b2, c2):
+    &#39;&#39;&#39;
+    Returns the intersection point of two lines.
+
+    Used in FindCircleFromThreePoints().
+    https://www.geeksforgeeks.org/program-find-circumcenter-triangle-2/
+
+        Input :
+            six characteristics of the line 1 and 2 (six floats)
+        Output :
+            the intersection point (a 2 x 1 numpy array)
+    &#39;&#39;&#39;
+    determinant = a1 * b2 - a2 * b1
+    if (determinant == 0):
+        # The lines are parallel.
+        return np.array([10**9,10**9])
+    else:
+        x = (b2 * c1 - b1 * c2)//determinant
+        y = (a1 * c2 - a2 * c1)//determinant
+        return np.array([x, y])</code></pre>
+</details>
+</dd>
+<dt id="Grain.perpendicularBisectorFromLine"><code class="name flex">
+<span>def <span class="ident">perpendicularBisectorFromLine</span></span>(<span>P, Q, a, b, c)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function which converts the input line to its perpendicular bisector.</p>
+<p>Used in FindCircleFromThreePoints().
+The equation is c = ax + by.
+<a href="https://www.geeksforgeeks.org/program-find-circumcenter-triangle-2/">https://www.geeksforgeeks.org/program-find-circumcenter-triangle-2/</a></p>
+<pre><code>Input :
+    two points (a 2 x 1 numpy array)
+    three characteristic of the line (three floats)
+Output :
+    three characteristic of the perpendicular bisector (three floats)
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def perpendicularBisectorFromLine(P, Q, a, b, c):
+    &#39;&#39;&#39;
+    Function which converts the input line to its perpendicular bisector.
+
+    Used in FindCircleFromThreePoints().
+    The equation is c = ax + by.
+    https://www.geeksforgeeks.org/program-find-circumcenter-triangle-2/
+
+        Input :
+            two points (a 2 x 1 numpy array)
+            three characteristic of the line (three floats)
+        Output :
+            three characteristic of the perpendicular bisector (three floats)
+    &#39;&#39;&#39;
+    mid_point = [(P[0] + Q[0])//2, (P[1] + Q[1])//2]
+    # c = -bx + ay
+    c = -b * (mid_point[0]) + a * (mid_point[1])
+    temp = a
+    a = -b
+    b = temp
+    return a, b, c</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="Grain.Grain"><code class="flex name class">
+<span>class <span class="ident">Grain</span></span>
+<span>(</span><span>dict_ic_to_real, dict_material, dict_sample)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Defining a disk grain</p>
+<pre><code>Input :
+    an id (an integer)
+    a radius (a float)
+    a center (a 2 x 1 numpy array)
+    a material dictionnary (a dictionnary)
+    a sample dictionnary (a dictionnary)
+Output :
+    a grain (a grain)
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Grain:
+
+    #---------------------------------------------------------------------------
+
+    def __init__(self, dict_ic_to_real, dict_material, dict_sample):
+        &#39;&#39;&#39;
+        Defining a disk grain
+
+            Input :
+                an id (an integer)
+                a radius (a float)
+                a center (a 2 x 1 numpy array)
+                a material dictionnary (a dictionnary)
+                a sample dictionnary (a dictionnary)
+            Output :
+                a grain (a grain)
+        &#39;&#39;&#39;
+        self.id = dict_ic_to_real[&#39;Id&#39;]
+        self.center = dict_ic_to_real[&#39;Center&#39;]
+        #save description
+        self.r_mean = np.mean(dict_ic_to_real[&#39;L_r&#39;])
+        self.r_min = min(dict_ic_to_real[&#39;L_r&#39;])
+        self.r_max = np.max(dict_ic_to_real[&#39;L_r&#39;])
+        self.l_r = dict_ic_to_real[&#39;L_r&#39;]
+        self.l_theta_r = dict_ic_to_real[&#39;L_theta_r&#39;]
+        self.l_border = dict_ic_to_real[&#39;L_border&#39;]
+        self.l_border_x = dict_ic_to_real[&#39;L_border_x&#39;]
+        self.l_border_y = dict_ic_to_real[&#39;L_border_y&#39;]
+        self.surface = dict_ic_to_real[&#39;Surface&#39;]
+        self.inertia = dict_ic_to_real[&#39;Inertia&#39;]
+        #save initial
+        self.center_init = self.center.copy()
+        self.l_border_x_init = self.l_border_x.copy()
+        self.l_border_y_init = self.l_border_y.copy()
+        #material
+        self.y = dict_material[&#39;Y&#39;]
+        self.nu = dict_material[&#39;nu&#39;]
+        self.g = self.y/2/(1+self.nu) #shear modulus
+        self.rho_surf = dict_ic_to_real[&#39;Rho_surf&#39;]
+        self.mass = dict_ic_to_real[&#39;Mass&#39;]
+
+        self.build_etai_M(dict_material,dict_sample)
+
+    #---------------------------------------------------------------------------
+
+    def build_etai_M(self,dict_material,dict_sample):
+        &#39;&#39;&#39;
+        Build the phase field for one grain.
+
+        A cosine profile is assumed (see https://mooseframework.inl.gov/source/ics/SmoothCircleIC.html).
+
+            Input :
+                itself (a grain)
+                a material dictionnary (a dictionnary)
+                a sample dictionnary (a dictionnary)
+            Output :
+                Nothing but the grain gets a new attribute (a n_y x n_x numpy array)
+        &#39;&#39;&#39;
+        #initialization
+        self.etai_M = np.array(np.zeros((len(dict_sample[&#39;y_L&#39;]),len(dict_sample[&#39;x_L&#39;]))))
+
+        #extract a spatial zone
+        x_min = min(self.l_border_x)-dict_material[&#39;w&#39;]
+        x_max = max(self.l_border_x)+dict_material[&#39;w&#39;]
+        y_min = min(self.l_border_y)-dict_material[&#39;w&#39;]
+        y_max = max(self.l_border_y)+dict_material[&#39;w&#39;]
+
+        #look for this part inside the global mesh
+        #create search list
+        x_L_search_min = abs(np.array(dict_sample[&#39;x_L&#39;])-x_min)
+        x_L_search_max = abs(np.array(dict_sample[&#39;x_L&#39;])-x_max)
+        y_L_search_min = abs(np.array(dict_sample[&#39;y_L&#39;])-y_min)
+        y_L_search_max = abs(np.array(dict_sample[&#39;y_L&#39;])-y_max)
+
+        #get index
+        i_x_min = list(x_L_search_min).index(min(x_L_search_min))
+        i_x_max = list(x_L_search_max).index(min(x_L_search_max))
+        i_y_min = list(y_L_search_min).index(min(y_L_search_min))
+        i_y_max = list(y_L_search_max).index(min(y_L_search_max))
+
+        for l in range(i_y_min,i_y_max+1):
+            for c in range(i_x_min,i_x_max+1):
+                y = dict_sample[&#39;y_L&#39;][l]
+                x = dict_sample[&#39;x_L&#39;][c]
+                p = np.array([x,y])
+                r = np.linalg.norm(self.center - p)
+                #look for the radius on this direction
+                if p[1]&gt;self.center[1]:
+                    theta = math.acos((p[0]-self.center[0])/np.linalg.norm(self.center-p))
+                else :
+                    theta= 2*math.pi - math.acos((p[0]-self.center[0])/np.linalg.norm(self.center-p))
+                L_theta_R_i = list(abs(np.array(self.l_theta_r)-theta))
+                R = self.l_r[L_theta_R_i.index(min(L_theta_R_i))]
+                #build etai_M
+                self.etai_M[-1-l][c] = Owntools.Cosine_Profile(R,r,dict_material[&#39;w&#39;])
+
+    #---------------------------------------------------------------------------
+
+    def geometric_study(self,dict_sample):
+      &#39;&#39;&#39;
+      Searching limits of the grain
+
+      Not best method but first approach
+      We iterate on y constant, we look for a value under and over 0.5
+      If both conditions are verified, there is a limit at this y
+      Same with iteration on x constant
+
+      Once the border of the grain is defined, a Monte Carlo method is used to computed some geometrical properties.
+
+        Input :
+            itself (a grain)
+            a sample dictionnary (a dictionnary)
+        Output :
+            Nothing but the grain gets new attributes
+                r_min : the minimum radius of the grain (a float)
+                r_max : the maximum radius of the grain (a float)
+                r_mean : the mean radius of the grain (a float)
+                l_r : a list of radius of the grain, work with l_theta_r (a list)
+                l_theta_r : a list of angle to see the distribution of the radius of the grain, work with l_r (a list)
+                surface : the surface of the grain (a float)
+                center : the coordinate of the grain center (a 2 x 1 numpy array)
+                l_border_x : the list of the coordinate x of the grain vertices (a list)
+                l_border_y : the list of the coordinate y of the grain vertices (a list)
+                l_border : the list of the coordinate [x,y] of the grain vertices (a list)
+      &#39;&#39;&#39;
+      #-------------------------------------------------------------------------
+      #load data needed
+      n = dict_sample[&#39;grain_discretisation&#39;]
+      x_L = dict_sample[&#39;x_L&#39;]
+      y_L = dict_sample[&#39;y_L&#39;]
+      #-------------------------------------------------------------------------
+
+      L_border_old = []
+      for y_i in range(len(y_L)):
+          L_extract_x = self.etai_M[y_i][:]
+          if max(L_extract_x)&gt;0.5 and min(L_extract_x)&lt;0.5:
+              y_intersect = y_L[len(y_L)-1-y_i]
+              for x_i in range(len(x_L)-1):
+                  if (L_extract_x[x_i]-0.5)*(L_extract_x[x_i+1]-0.5)&lt;0:
+                      x_intersect = (0.5-L_extract_x[x_i])/(L_extract_x[x_i+1]-L_extract_x[x_i])*\
+                                  (x_L[x_i+1]-x_L[x_i]) + x_L[x_i]
+                      L_border_old.append(np.array([x_intersect,y_intersect]))
+
+      for x_i in range(len(x_L)):
+          L_extract_y = []
+          for y_i in range(len(y_L)):
+              L_extract_y.append(self.etai_M[y_i][x_i])
+          if max(L_extract_y)&gt;0.5 and min(L_extract_y)&lt;0.5:
+              x_intersect = x_L[x_i]
+              for y_i in range(len(y_L)-1):
+                  if (L_extract_y[y_i]-0.5)*(L_extract_y[y_i+1]-0.5)&lt;0:
+                      y_intersect = (0.5-L_extract_y[y_i])/(L_extract_y[y_i+1]-L_extract_y[y_i])*\
+                                  (y_L[len(y_L)-1-y_i-1]-y_L[len(y_L)-1-y_i]) + y_L[len(y_L)-1-y_i]
+                      L_border_old.append(np.array([x_intersect,y_intersect]))
+
+      #Adaptating
+      L_id_used = [0]
+      L_border = [L_border_old[0]]
+      HighValue = 100000000 #Large
+
+      current_node = L_border_old[0]
+      for j in range(1,len(L_border_old)):
+          L_d = list(np.zeros(len(L_border_old)))
+          for i in range(0,len(L_border_old)):
+              node = L_border_old[i]
+              if  i not in L_id_used:
+                  d = np.linalg.norm(node - current_node)
+                  L_d[i] = d
+              else :
+                  L_d[i] = HighValue #Value need to be larger than potential distance between node
+
+          index_nearest_node = L_d.index(min(L_d))
+          nearest_node = L_border_old[index_nearest_node]
+          current_node = nearest_node
+          L_border.append(nearest_node)
+          L_id_used.append(index_nearest_node)
+
+      #Correcting
+      L_d_final = []
+      for i in range(len(L_border)-1):
+          L_d_final.append(np.linalg.norm(L_border[i+1] - L_border[i]))
+
+      #look for really far points, we assume the first point is accurate
+      d_final_mean = np.mean(L_d_final)
+      while np.max(L_d_final) &gt; 5 * d_final_mean : #5 here is an user choixe value
+          i_error = L_d_final.index(np.max(L_d_final))+1
+          #simulation_report.write(&#39;Point &#39;+str(L_border[i_error])+&#39; is deleted because it is detected as an error\n&#39;)
+          L_border.pop(i_error)
+          L_id_used.pop(i_error)
+          L_d_final = []
+          for i in range(len(L_border)-1):
+              L_d_final.append(np.linalg.norm(L_border[i+1] - L_border[i]))
+
+      #-------------------------------------------------------------------------------
+      #Reduce the number of nodes for a grain
+      #-------------------------------------------------------------------------------
+
+      Perimeter = 0
+      for i_p in range(len(L_border)-1):
+          Perimeter = Perimeter + np.linalg.norm(L_border[i_p+1]-L_border[i_p])
+      Perimeter = Perimeter + np.linalg.norm(L_border[-1]-L_border[0])
+      distance_min = Perimeter/n
+      L_border_adapted = [L_border[0]]
+      for p in L_border[1:]:
+          distance = np.linalg.norm(p-L_border_adapted[-1])
+          if distance &gt;= distance_min:
+              L_border_adapted.append(p)
+      L_border = L_border_adapted
+      L_border.append(L_border[0])
+      self.l_border = L_border
+
+      #-------------------------------------------------------------------------------
+      #Searching Surface, Center of mass and Inertia.
+      #Monte Carlo Method
+      #A box is defined, we take a random point and we look if it is inside or outside the grain
+      #Properties are the statistic times the box properties
+      #-------------------------------------------------------------------------------
+
+      min_max_defined = False
+      for p in L_border[:-1] :
+          if not min_max_defined:
+              box_min_x = p[0]
+              box_max_x = p[0]
+              box_min_y = p[1]
+              box_max_y = p[1]
+              min_max_defined = True
+          else:
+              if p[0] &lt; box_min_x:
+                  box_min_x = p[0]
+              elif p[0] &gt; box_max_x:
+                  box_max_x = p[0]
+              if p[1] &lt; box_min_y:
+                  box_min_y = p[1]
+              elif p[1] &gt; box_max_y:
+                  box_max_y = p[1]
+
+      N_MonteCarlo = 3000 #The larger it is, the more accurate it is
+      sigma = self.rho_surf
+      M_Mass = 0
+      M_Center_Mass = np.array([0,0])
+      M_Inertia = 0
+
+      for i in range(N_MonteCarlo):
+          P = np.array([random.uniform(box_min_x,box_max_x),random.uniform(box_min_y,box_max_y)])
+          if self.P_is_inside(P):
+              M_Mass = M_Mass + sigma
+              M_Center_Mass = M_Center_Mass + sigma*P
+              M_Inertia = M_Inertia + sigma*np.dot(P,P)
+
+      Mass = (box_max_x-box_min_x)*(box_max_y-box_min_y)/N_MonteCarlo*M_Mass
+      Center_Mass = (box_max_x-box_min_x)*(box_max_y-box_min_y)/N_MonteCarlo*M_Center_Mass/Mass
+      Inertia = (box_max_x-box_min_x)*(box_max_y-box_min_y)/N_MonteCarlo*M_Inertia-Mass*np.dot(Center_Mass,Center_Mass)
+
+      #-------------------------------------------------------------------------------
+      #Updating the grain geometry and properties
+      #-------------------------------------------------------------------------------
+
+      L_R = []
+      L_theta_R = []
+      L_border_x = []
+      L_border_y = []
+      for p in L_border[:-1]:
+          L_R.append(np.linalg.norm(p-Center_Mass))
+          L_border_x.append(p[0])
+          L_border_y.append(p[1])
+          if (p-Center_Mass)[1] &gt; 0:
+              theta = math.acos((p-Center_Mass)[0]/np.linalg.norm(p-Center_Mass))
+          else :
+              theta = 2*math.pi - math.acos((p-Center_Mass)[0]/np.linalg.norm(p-Center_Mass))
+          L_theta_R.append(theta)
+      L_border_x.append(L_border_x[0])
+      L_border_y.append(L_border_y[0])
+      #reorganize lists
+      i_theta = 0
+      while L_theta_R[i_theta] &lt; 2*math.pi/10 or 2*math.pi*9/10 &lt; L_theta_R[i_theta]:
+          i_theta = i_theta + 1
+      if L_theta_R[i_theta + 1] &lt; L_theta_R[i_theta] :
+          L_R.reverse()
+          L_theta_R.reverse()
+          L_border_x.reverse()
+          L_border_y.reverse()
+          L_border.reverse()
+
+      self.r_min = np.min(L_R)
+      self.r_max = np.max(L_R)
+      self.r_mean = np.mean(L_R)
+      self.l_r = L_R
+      self.l_theta_r = L_theta_R
+      self.mass = Mass
+      self.surface = Mass/sigma
+      self.inertia = Inertia
+      self.center = Center_Mass
+      self.l_border_x = L_border_x
+      self.l_border_y = L_border_y
+      self.l_border = L_border
+
+    #-------------------------------------------------------------------------------
+
+    def P_is_inside(self,P):
+      &#39;&#39;&#39;Determine if a point P is inside of a grain
+
+      Make a slide on constant y. Every time a border is crossed, the point switches between in and out.
+      see Franklin 1994, see Alonso-Marroquin 2009
+
+          Input :
+              itself (a grain)
+              a point (a 2 x 1 numpy array)
+          Output :
+              True or False, depending on the fact that the point is inside the grain or not (a bool)
+      &#39;&#39;&#39;
+      counter = 0
+      for i_p_border in range(len(self.l_border)-1):
+          #consider only points if the coordinates frame the y-coordinate of the point
+          if (self.l_border[i_p_border][1]-P[1])*(self.l_border[i_p_border+1][1]-P[1]) &lt; 0 :
+            x_border = self.l_border[i_p_border][0] + (self.l_border[i_p_border+1][0]-self.l_border[i_p_border][0])*(P[1]-self.l_border[i_p_border][1])/(self.l_border[i_p_border+1][1]-self.l_border[i_p_border][1])
+            if x_border &gt; P[0] :
+                counter = counter + 1
+      if counter % 2 == 0:
+        return False
+      else :
+        return True
+
+    #-------------------------------------------------------------------------------
+
+    def Compute_sphericity(self, dict_algorithm):
+      &#39;&#39;&#39;Compute sphericity of the particle with five parameters.
+
+      The parameters used are the area, the diameter, the circle ratio, the perimeter and the width to length ratio sphericity.
+      See Zheng, J., Hryciw, R.D. (2015) Traditional soil particle sphericity, roundness and surface roughness by computational geometry, Geotechnique, Vol 65
+
+          Input :
+              itself (a grain)
+              an algorithm dictionnary (a dict)
+          Output :
+              Nothing, but the grain gets updated attributes (five floats)
+      &#39;&#39;&#39;
+      #Find the minimum circumscribing circle
+      #look for the two farthest and nearest points
+      MaxDistance = 0
+      for i_p in range(0,len(self.l_border)-2):
+          for j_p in range(i_p+1,len(self.l_border)-1):
+              Distance = np.linalg.norm(self.l_border[i_p]-self.l_border[j_p])
+              if Distance &gt; MaxDistance :
+                  ij_farthest = (i_p,j_p)
+                  MaxDistance = Distance
+
+      #Trial circle
+      center_circumscribing = (self.l_border[ij_farthest[0]]+self.l_border[ij_farthest[1]])/2
+      radius_circumscribing = MaxDistance/2
+      Circumscribing_Found = True
+      Max_outside_distance = radius_circumscribing
+      for i_p in range(len(self.l_border)-1):
+          #there is a margin here because of the numerical approximation
+          if np.linalg.norm(self.l_border[i_p]-center_circumscribing) &gt; (1+dict_algorithm[&#39;sphericity_margin&#39;])*radius_circumscribing and i_p not in ij_farthest: #vertex outside the trial circle
+            Circumscribing_Found = False
+            if np.linalg.norm(self.l_border[i_p]-center_circumscribing) &gt; Max_outside_distance:
+                k_outside_farthest = i_p
+                Max_outside_distance = np.linalg.norm(self.l_border[i_p]-center_circumscribing)
+      #The trial guess does not work
+      if not Circumscribing_Found:
+          L_ijk_circumscribing = [ij_farthest[0],ij_farthest[1],k_outside_farthest]
+          center_circumscribing, radius_circumscribing = FindCircleFromThreePoints(self.l_border[L_ijk_circumscribing[0]],self.l_border[L_ijk_circumscribing[1]],self.l_border[L_ijk_circumscribing[2]])
+          Circumscribing_Found = True
+          for i_p in range(len(self.l_border)-1):
+              #there is a margin here because of the numerical approximation
+              if np.linalg.norm(self.l_border[i_p]-center_circumscribing) &gt; (1+dict_algorithm[&#39;sphericity_margin&#39;])*radius_circumscribing and i_p not in L_ijk_circumscribing: #vertex outside the circle computed
+                Circumscribing_Found = False
+          #see article for other case
+          if not Circumscribing_Found:
+              print(&#39;This algorithm is not developped for this case...&#39;)
+
+      #look for length and width
+      length = MaxDistance
+      u_maxDistance = (self.l_border[ij_farthest[0]]-self.l_border[ij_farthest[1]])/np.linalg.norm(self.l_border[ij_farthest[0]]-self.l_border[ij_farthest[1]])
+      v_maxDistance = np.array([u_maxDistance[1], -u_maxDistance[0]])
+      MaxWidth = 0
+      for i_p in range(0,len(self.l_border)-2):
+        for j_p in range(i_p+1,len(self.l_border)-1):
+            Distance = abs(np.dot(self.l_border[i_p]-self.l_border[j_p],v_maxDistance))
+            if Distance &gt; MaxWidth :
+                ij_width = (i_p,j_p)
+                MaxWidth = Distance
+      width = MaxWidth
+
+      #look for maximum inscribed circle
+      #discretisation of the grain
+      l_x_inscribing = np.linspace(min(self.l_border_x),max(self.l_border_x),dict_algorithm[&#39;n_spatial_inscribing&#39;])
+      l_y_inscribing = np.linspace(min(self.l_border_y),max(self.l_border_y),dict_algorithm[&#39;n_spatial_inscribing&#39;])
+      #creation of an Euclidean distance map to the nearest boundary vertex
+      map_inscribing = np.zeros((dict_algorithm[&#39;n_spatial_inscribing&#39;],dict_algorithm[&#39;n_spatial_inscribing&#39;]))
+      #compute the map
+      for i_x in range(dict_algorithm[&#39;n_spatial_inscribing&#39;]):
+          for i_y in range(dict_algorithm[&#39;n_spatial_inscribing&#39;]):
+              p = np.array([l_x_inscribing[i_x], l_y_inscribing[-1-i_y]])
+              #work only if the point is inside the grain
+              if self.P_is_inside(p):
+                  #look for the nearest vertex
+                  MinDistance = None
+                  for q in self.l_border[:-1]:
+                      Distance = np.linalg.norm(p-q)
+                      if MinDistance == None or Distance &lt; MinDistance:
+                          MinDistance = Distance
+                  map_inscribing[-1-i_y][i_x] = MinDistance
+              else :
+                  map_inscribing[-1-i_y][i_x] = 0
+      #look for the peak of the map
+      index_max = np.argmax(map_inscribing)
+      l = index_max//dict_algorithm[&#39;n_spatial_inscribing&#39;]
+      c = index_max%dict_algorithm[&#39;n_spatial_inscribing&#39;]
+      radius_inscribing = map_inscribing[l][c]
+
+      #Area Sphericity
+      SurfaceParticle = self.surface
+      SurfaceCircumscribing = math.pi*radius_circumscribing**2
+      AreaSphericity = SurfaceParticle / SurfaceCircumscribing
+      if Circumscribing_Found: #else, same value
+          self.area_sphericity = AreaSphericity
+
+      #Diameter Sphericity
+      DiameterSameAreaParticle = 2*math.sqrt(self.surface/math.pi)
+      DiameterCircumscribing = radius_circumscribing*2
+      DiameterSphericity = DiameterSameAreaParticle / DiameterCircumscribing
+      if Circumscribing_Found: #else, same value
+          self.diameter_sphericity = DiameterSphericity
+
+      #Circle Ratio Sphericity
+      DiameterInscribing = radius_inscribing*2
+      CircleRatioSphericity = DiameterInscribing / DiameterCircumscribing
+      self.circle_ratio_sphericity = CircleRatioSphericity
+
+      #Perimeter Sphericity
+      PerimeterSameAreaParticle = 2*math.sqrt(self.surface*math.pi)
+      PerimeterParticle = 0
+      for i in range(len(self.l_border)-1):
+          PerimeterParticle = PerimeterParticle + np.linalg.norm(self.l_border[i+1]-self.l_border[i])
+      PerimeterSphericity = PerimeterSameAreaParticle / PerimeterParticle
+      self.perimeter_sphericity = PerimeterSphericity
+
+      #Width to length ratio Spericity
+      WidthToLengthRatioSpericity = width / length
+      self.width_to_length_ratio_sphericity = WidthToLengthRatioSpericity
+
+    #---------------------------------------------------------------------------
+
+    def PFtoDEM_Multi(self,FileToRead,dict_algorithm,dict_sample):
+        &#39;&#39;&#39;
+        Read file from MOOSE simulation to reconstruct the phase field of the grain.
+
+            Input :
+                itself (a grain)
+                the name of the file to read (a string)
+                an algorithm dictionnary (a dictionnary)
+                a sample dictionnary (a dictionnary)
+            Output :
+                Nothing but the grain gets an updated attribute (a n_y x n_x numpy array)
+        &#39;&#39;&#39;
+        #--------------------------------------------------------------------------
+        #Global parameters
+        #---------------------------------------------------------------------------
+
+        self.etai_M = np.array(np.zeros((len(dict_sample[&#39;y_L&#39;]),len(dict_sample[&#39;x_L&#39;]))))
+
+        id_L = None
+        eta_selector_len = len(&#39;        &lt;DataArray type=&#34;Float64&#34; Name=&#34;etai&#39;)
+        end_len = len(&#39;        &lt;/DataArray&gt;&#39;)
+        XYZ_selector_len = len(&#39;        &lt;DataArray type=&#34;Float64&#34; Name=&#34;Points&#34;&#39;)
+        data_jump_len = len(&#39;          &#39;)
+
+        for i_proc in range(dict_algorithm[&#39;np_proc&#39;]):
+
+            L_Work = [[], #X
+                      [], #Y
+                      []] #etai
+
+        #---------------------------------------------------------------------------
+        #Reading file
+        #---------------------------------------------------------------------------
+
+            f = open(f&#39;{FileToRead}_{i_proc}.vtu&#39;,&#39;r&#39;)
+            data = f.read()
+            f.close
+            lines = data.splitlines()
+
+            #iterations on line
+            for line in lines:
+
+                if line[0:eta_selector_len] == &#39;        &lt;DataArray type=&#34;Float64&#34; Name=&#34;eta&#39;+str(self.id):
+                    id_L = 2
+
+                elif line[0:XYZ_selector_len] == &#39;        &lt;DataArray type=&#34;Float64&#34; Name=&#34;Points&#34;&#39;:
+                    id_L = 0
+
+                elif (line[0:end_len] == &#39;        &lt;/DataArray&gt;&#39; or  line[0:len(&#39;          &lt;InformationKey&#39;)] == &#39;          &lt;InformationKey&#39;) and id_L != None:
+                    id_L = None
+
+                elif line[0:data_jump_len] == &#39;          &#39; and id_L == 2: #Read etai
+                    line = line[data_jump_len:]
+                    c_start = 0
+                    for c_i in range(0,len(line)):
+                        if line[c_i]==&#39; &#39;:
+                            c_end = c_i
+                            L_Work[id_L].append(float(line[c_start:c_end]))
+                            c_start = c_i+1
+                    L_Work[id_L].append(float(line[c_start:]))
+
+                elif line[0:data_jump_len] == &#39;          &#39; and id_L == 0: #Read [X, Y, Z]
+                    line = line[data_jump_len:]
+                    XYZ_temp = []
+                    c_start = 0
+                    for c_i in range(0,len(line)):
+                        if line[c_i]==&#39; &#39;:
+                            c_end = c_i
+                            XYZ_temp.append(float(line[c_start:c_end]))
+                            if len(XYZ_temp)==3:
+                                L_Work[0].append(XYZ_temp[0])
+                                L_Work[1].append(XYZ_temp[1])
+                                XYZ_temp = []
+                            c_start = c_i+1
+                    XYZ_temp.append(float(line[c_start:]))
+                    L_Work[0].append(XYZ_temp[0])
+                    L_Work[1].append(XYZ_temp[1])
+
+            #Adaptating data and update of etai_M
+            for i in range(len(L_Work[0])):
+                #Interpolation method
+                L_dy = []
+                for y_i in dict_sample[&#39;y_L&#39;] :
+                    L_dy.append(abs(y_i - L_Work[1][i]))
+                L_dx = []
+                for x_i in dict_sample[&#39;x_L&#39;] :
+                    L_dx.append(abs(x_i - L_Work[0][i]))
+                self.etai_M[-1-list(L_dy).index(min(L_dy))][list(L_dx).index(min(L_dx))] = L_Work[2][i]
+
+    #---------------------------------------------------------------------------
+
+    def ExtractPF_from_Eta(self, L_etai_M, dict_algorithm, dict_material, dict_sample):
+        &#39;&#39;&#39;
+        Extract from the total phase field the variable associated with the grain.
+
+            Input :
+                itself (a grain)
+                a list of phase field (a neta x nx x ny numpy array)
+                an algorithm dictionnary (a dict)
+                a material dictionnary (a dict)
+                a sample dictionnary (a dict)
+            Output :
+                Nothing but the grain gets an updated attribute (a n_y x n_x numpy array)
+        &#39;&#39;&#39;
+        etai_M = L_etai_M[self.etai].copy()
+        #extract a spatial zone
+        x_min = self.center[0] - 1.2*self.r_max
+        x_max = max(self.l_border_x)+dict_material[&#39;w&#39;]
+        x_max = self.center[0] + 1.2*self.r_max
+        y_min = min(self.l_border_y)-dict_material[&#39;w&#39;]
+        y_min = self.center[1] - 1.2*self.r_max
+        y_max = max(self.l_border_y)+dict_material[&#39;w&#39;]
+        y_max = self.center[1] + 1.2*self.r_max
+
+        #look for this part inside the global mesh
+        #create search list
+        x_L_search_min = abs(np.array(dict_sample[&#39;x_L&#39;])-x_min)
+        x_L_search_max = abs(np.array(dict_sample[&#39;x_L&#39;])-x_max)
+        y_L_search_min = abs(np.array(dict_sample[&#39;y_L&#39;])-y_min)
+        y_L_search_max = abs(np.array(dict_sample[&#39;y_L&#39;])-y_max)
+
+        #get index
+        i_x_min = list(x_L_search_min).index(min(x_L_search_min))
+        i_x_max = list(x_L_search_max).index(min(x_L_search_max))
+        i_y_min = list(y_L_search_min).index(min(y_L_search_min))
+        i_y_max = list(y_L_search_max).index(min(y_L_search_max))
+
+        self.etai_M = np.array(np.zeros((len(dict_sample[&#39;y_L&#39;]),len(dict_sample[&#39;x_L&#39;]))))
+        for l in range(i_y_min,i_y_max+1):
+            for c in range(i_x_min,i_x_max+1):
+                self.etai_M[-1-l][c] = etai_M[-1-l][c]
+
+    #---------------------------------------------------------------------------
+
+    def move_grain_interpolation(self,displacement,dict_sample):
+        &#39;&#39;&#39;
+        Move the grain by updating the phase field of the grain.
+
+        An interpolation on the phase field is done. The mass conservation is better than with move_grain_rebuild().
+
+            Input :
+                itself (a grain)
+                the displacement asked (a 2 x 1 numpy array)
+                a sample dictionnary (a dictionnary)
+            Output :
+                Nothing but the grain gets an updated attribute (a n_y x n_x numpy array)
+        &#39;&#39;&#39;
+        #displacement over x
+        dx = dict_sample[&#39;x_L&#39;][1]-dict_sample[&#39;x_L&#39;][0]
+        n_dx_disp_x = int(abs(displacement[0])//dx)
+        disp_x_remainder = abs(displacement[0])%dx
+        etai_M_old = self.etai_M.copy()
+
+        if np.sign(displacement[0]) &gt; 0 : # +x direction
+            #dx*n_dx_disp_x translation
+            if n_dx_disp_x &gt; 0:
+                for l in range(len(dict_sample[&#39;y_L&#39;])):
+                    self.etai_M[l][:n_dx_disp_x] = 0 #no information to translate so put equal to 0
+                    self.etai_M[l][n_dx_disp_x:] = etai_M_old[l][:-n_dx_disp_x]
+            #disp_x_remainder translation
+            etai_M_old = self.etai_M.copy()
+            for l in range(len(dict_sample[&#39;y_L&#39;])):
+                for c in range(1,len(dict_sample[&#39;x_L&#39;])):
+                    self.etai_M[l][c] = (etai_M_old[l][c]*(dx-disp_x_remainder) + etai_M_old[l][c-1]*disp_x_remainder)/dx
+                self.etai_M[l][0] = 0 #no information to translate so put equal to 0
+
+        else : # -x direction
+            #dx*n_dx_disp_x translation
+            if n_dx_disp_x &gt; 0:
+                for l in range(len(dict_sample[&#39;y_L&#39;])):
+                    self.etai_M[l][-n_dx_disp_x:] = 0 #no information to translate so put equal to 0
+                    self.etai_M[l][:-n_dx_disp_x] = etai_M_old[l][n_dx_disp_x:]
+            #disp_x_remainder translation
+            etai_M_old = self.etai_M.copy()
+            for l in range(len(dict_sample[&#39;y_L&#39;])):
+                for c in range(len(dict_sample[&#39;x_L&#39;])-1):
+                    self.etai_M[l][c] = (etai_M_old[l][c]*(dx-disp_x_remainder) + etai_M_old[l][c+1]*disp_x_remainder)/dx
+                self.etai_M[l][0] = 0 #no information to translate so put equal to 0
+
+        #displacement over y
+        dy = dict_sample[&#39;y_L&#39;][1]-dict_sample[&#39;y_L&#39;][0]
+        n_dy_disp_y = int(abs(displacement[1])//dy)
+        disp_y_remainder = abs(displacement[1])%dy
+        etai_M_old = self.etai_M.copy()
+
+        if np.sign(displacement[1]) &gt; 0 : # +y direction
+            #dy*n_dy_disp_y translation
+            if n_dy_disp_y &gt; 0:
+                for c in range(len(dict_sample[&#39;x_L&#39;])):
+                    for l in range(len(dict_sample[&#39;y_L&#39;])-n_dy_disp_y,len(dict_sample[&#39;y_L&#39;])):
+                        self.etai_M[l][c] = 0 #no information to translate so put equal to 0
+                    for l in range(len(dict_sample[&#39;y_L&#39;])-n_dy_disp_y):
+                        self.etai_M[l][c] = etai_M_old[l+1][c]
+            #disp_y_remainder translation
+            etai_M_old = self.etai_M.copy()
+            for c in range(len(dict_sample[&#39;x_L&#39;])):
+                for l in range(len(dict_sample[&#39;y_L&#39;])-1):
+                    self.etai_M[l][c] = (etai_M_old[l][c]*(dy-disp_y_remainder) + etai_M_old[l+1][c]*disp_y_remainder)/dy
+                self.etai_M[-1][c] = 0 #no information to translate so put equal to 0
+
+        else : # -y direction
+            #dy*n_dy_disp_y translation
+            if n_dy_disp_y &gt; 0:
+                for c in range(len(dict_sample[&#39;x_L&#39;])):
+                    for l in range(n_dy_disp_y):
+                        self.etai_M[l][c] = 0 #no information to translate so put equal to 0
+                    for l in range(n_dy_disp_y, len(dict_sample[&#39;y_L&#39;])):
+                        self.etai_M[l][c] = etai_M_old[l-1][c]
+            #disp_y_remainder translation
+            etai_M_old = self.etai_M.copy()
+            for c in range(len(dict_sample[&#39;x_L&#39;])):
+                for l in range(1,len(dict_sample[&#39;y_L&#39;])):
+                    self.etai_M[l][c] = (etai_M_old[l][c]*(dy-disp_y_remainder) + etai_M_old[l-1][c]*disp_y_remainder)/dy
+                self.etai_M[0][c] = 0 #no information to translate so put equal to 0
+
+    #---------------------------------------------------------------------------
+
+    def move_grain_rebuild(self,dict_material,dict_sample):
+        &#39;&#39;&#39;
+        Move the grain by updating the phase field of the grain.
+
+        A rebuild on the phase field is done. The mass conservation is verified by producing solute.
+
+            Input :
+                itself (a grain)
+                a material dictionnary (a dict)
+                a sample dictionnary (a dictionnary)
+            Output :
+                Nothing but the grain gets an updated attribute (a n_y x n_x numpy array)
+        &#39;&#39;&#39;
+        #save previous phase field
+        save_etai_M = self.etai_M.copy()
+        #compute the new phase field
+        self.build_etai_M(dict_material,dict_sample)
+        #compute the delta etai
+        sum_eta_before = 0
+        sum_eta_after = 0
+        for l in range(len(dict_sample[&#39;y_L&#39;])):
+            for c in range(len(dict_sample[&#39;x_L&#39;])):
+                sum_eta_before = sum_eta_before + save_etai_M[l][c]
+                sum_eta_after = sum_eta_after + self.etai_M[l][c]
+        self.delta_sum_eta = (sum_eta_before - sum_eta_after)/sum_eta_before*100
+
+    #-------------------------------------------------------------------------------
+
+    def update_geometry_kinetic(self, V, A, W, DT):
+        &#34;&#34;&#34;
+        Update the acceleration and the velocity of a grain. Update geometrical parameters as border and center nodes.
+
+            Input :
+                itself (a grain)
+                a speed (a 1 x 2 numpy array)
+                an acceleration (a 1 x 2 numpy array)
+                an angular speed (a float)
+                a time step (a float)
+            Ouput :
+                Nothing, but the position of the grain is updated
+        &#34;&#34;&#34;
+        #translation
+        self.v = V
+        self.a = A
+        for i in range(len(self.l_border)):
+            self.l_border[i] = self.l_border[i] + self.v*DT
+            self.l_border_x[i] = self.l_border_x[i] + self.v[0]*DT
+            self.l_border_y[i] = self.l_border_y[i] + self.v[1]*DT
+        self.center = self.center + self.v*DT
+
+        #rotation
+        self.w = W
+        self.theta = self.theta + self.w*DT
+
+        for i_theta_r in range(len(self.l_theta_r)) :
+            theta_r = self.l_theta_r[i_theta_r]
+            theta_r = theta_r + self.w*DT
+            while theta_r &gt;= 2*math.pi:
+                theta_r = theta_r - 2*math.pi
+            while theta_r &lt; 0 :
+                theta_r = theta_r + 2*math.pi
+            self.l_theta_r[i_theta_r] = theta_r
+
+        for i in range(len(self.l_border)):
+            p = self.l_border[i] - self.center
+            Rot_Matrix = np.array([[math.cos(self.w*DT), -math.sin(self.w*DT)],
+                                   [math.sin(self.w*DT),  math.cos(self.w*DT)]])
+            p = np.dot(Rot_Matrix,p)
+            self.l_border[i] = p + self.center
+            self.l_border_x[i] = p[0] + self.center[0]
+            self.l_border_y[i] = p[1] + self.center[1]
+
+    #-------------------------------------------------------------------------------
+
+    def init_f_control(self,dict_sollicitation):
+        &#34;&#34;&#34;
+        Initialize the force applied to the grain.
+
+        A gravity of g is applied.
+
+            Input :
+                itself (a grain)
+                a sollicitations dictionnary (a dict)
+            Ouput :
+                Nothing, but the force applied on the grain is initialized
+        &#34;&#34;&#34;
+        self.fx = 0
+        self.fy = -dict_sollicitation[&#39;gravity&#39;]*self.mass
+        self.f = np.array([self.fx,self.fy])
+        self.mz = 0
+        self.v = np.array([0, 0])
+        self.theta = 0
+        self.w = 0
+
+    #-------------------------------------------------------------------------------
+
+    def update_f(self, Fx, Fy, p_application):
+        &#34;&#34;&#34;
+        Add a force to the grain.
+
+            Input :
+                itself (a grain)
+                the value x and y of the force (two float)
+                an applicaiton point (a 1 x 2 numpy array)
+            Output :
+                Nothing, but a force is applied to the grain
+        &#34;&#34;&#34;
+        self.fx = self.fx + Fx
+        self.fy = self.fy + Fy
+        self.f = np.array([self.fx,self.fy])
+
+        v1 = np.array([p_application[0]-self.center[0], p_application[1]-self.center[1], 0])
+        v2 = np.array([Fx, Fy, 0])
+        self.mz = self.mz + np.cross(v1,v2)[2]</code></pre>
+</details>
+<h3>Methods</h3>
+<dl>
+<dt id="Grain.Grain.Compute_sphericity"><code class="name flex">
+<span>def <span class="ident">Compute_sphericity</span></span>(<span>self, dict_algorithm)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Compute sphericity of the particle with five parameters.</p>
+<p>The parameters used are the area, the diameter, the circle ratio, the perimeter and the width to length ratio sphericity.
+See Zheng, J., Hryciw, R.D. (2015) Traditional soil particle sphericity, roundness and surface roughness by computational geometry, Geotechnique, Vol 65</p>
+<pre><code>Input :
+    itself (a grain)
+    an algorithm dictionnary (a dict)
+Output :
+    Nothing, but the grain gets updated attributes (five floats)
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def Compute_sphericity(self, dict_algorithm):
+  &#39;&#39;&#39;Compute sphericity of the particle with five parameters.
+
+  The parameters used are the area, the diameter, the circle ratio, the perimeter and the width to length ratio sphericity.
+  See Zheng, J., Hryciw, R.D. (2015) Traditional soil particle sphericity, roundness and surface roughness by computational geometry, Geotechnique, Vol 65
+
+      Input :
+          itself (a grain)
+          an algorithm dictionnary (a dict)
+      Output :
+          Nothing, but the grain gets updated attributes (five floats)
+  &#39;&#39;&#39;
+  #Find the minimum circumscribing circle
+  #look for the two farthest and nearest points
+  MaxDistance = 0
+  for i_p in range(0,len(self.l_border)-2):
+      for j_p in range(i_p+1,len(self.l_border)-1):
+          Distance = np.linalg.norm(self.l_border[i_p]-self.l_border[j_p])
+          if Distance &gt; MaxDistance :
+              ij_farthest = (i_p,j_p)
+              MaxDistance = Distance
+
+  #Trial circle
+  center_circumscribing = (self.l_border[ij_farthest[0]]+self.l_border[ij_farthest[1]])/2
+  radius_circumscribing = MaxDistance/2
+  Circumscribing_Found = True
+  Max_outside_distance = radius_circumscribing
+  for i_p in range(len(self.l_border)-1):
+      #there is a margin here because of the numerical approximation
+      if np.linalg.norm(self.l_border[i_p]-center_circumscribing) &gt; (1+dict_algorithm[&#39;sphericity_margin&#39;])*radius_circumscribing and i_p not in ij_farthest: #vertex outside the trial circle
+        Circumscribing_Found = False
+        if np.linalg.norm(self.l_border[i_p]-center_circumscribing) &gt; Max_outside_distance:
+            k_outside_farthest = i_p
+            Max_outside_distance = np.linalg.norm(self.l_border[i_p]-center_circumscribing)
+  #The trial guess does not work
+  if not Circumscribing_Found:
+      L_ijk_circumscribing = [ij_farthest[0],ij_farthest[1],k_outside_farthest]
+      center_circumscribing, radius_circumscribing = FindCircleFromThreePoints(self.l_border[L_ijk_circumscribing[0]],self.l_border[L_ijk_circumscribing[1]],self.l_border[L_ijk_circumscribing[2]])
+      Circumscribing_Found = True
+      for i_p in range(len(self.l_border)-1):
+          #there is a margin here because of the numerical approximation
+          if np.linalg.norm(self.l_border[i_p]-center_circumscribing) &gt; (1+dict_algorithm[&#39;sphericity_margin&#39;])*radius_circumscribing and i_p not in L_ijk_circumscribing: #vertex outside the circle computed
+            Circumscribing_Found = False
+      #see article for other case
+      if not Circumscribing_Found:
+          print(&#39;This algorithm is not developped for this case...&#39;)
+
+  #look for length and width
+  length = MaxDistance
+  u_maxDistance = (self.l_border[ij_farthest[0]]-self.l_border[ij_farthest[1]])/np.linalg.norm(self.l_border[ij_farthest[0]]-self.l_border[ij_farthest[1]])
+  v_maxDistance = np.array([u_maxDistance[1], -u_maxDistance[0]])
+  MaxWidth = 0
+  for i_p in range(0,len(self.l_border)-2):
+    for j_p in range(i_p+1,len(self.l_border)-1):
+        Distance = abs(np.dot(self.l_border[i_p]-self.l_border[j_p],v_maxDistance))
+        if Distance &gt; MaxWidth :
+            ij_width = (i_p,j_p)
+            MaxWidth = Distance
+  width = MaxWidth
+
+  #look for maximum inscribed circle
+  #discretisation of the grain
+  l_x_inscribing = np.linspace(min(self.l_border_x),max(self.l_border_x),dict_algorithm[&#39;n_spatial_inscribing&#39;])
+  l_y_inscribing = np.linspace(min(self.l_border_y),max(self.l_border_y),dict_algorithm[&#39;n_spatial_inscribing&#39;])
+  #creation of an Euclidean distance map to the nearest boundary vertex
+  map_inscribing = np.zeros((dict_algorithm[&#39;n_spatial_inscribing&#39;],dict_algorithm[&#39;n_spatial_inscribing&#39;]))
+  #compute the map
+  for i_x in range(dict_algorithm[&#39;n_spatial_inscribing&#39;]):
+      for i_y in range(dict_algorithm[&#39;n_spatial_inscribing&#39;]):
+          p = np.array([l_x_inscribing[i_x], l_y_inscribing[-1-i_y]])
+          #work only if the point is inside the grain
+          if self.P_is_inside(p):
+              #look for the nearest vertex
+              MinDistance = None
+              for q in self.l_border[:-1]:
+                  Distance = np.linalg.norm(p-q)
+                  if MinDistance == None or Distance &lt; MinDistance:
+                      MinDistance = Distance
+              map_inscribing[-1-i_y][i_x] = MinDistance
+          else :
+              map_inscribing[-1-i_y][i_x] = 0
+  #look for the peak of the map
+  index_max = np.argmax(map_inscribing)
+  l = index_max//dict_algorithm[&#39;n_spatial_inscribing&#39;]
+  c = index_max%dict_algorithm[&#39;n_spatial_inscribing&#39;]
+  radius_inscribing = map_inscribing[l][c]
+
+  #Area Sphericity
+  SurfaceParticle = self.surface
+  SurfaceCircumscribing = math.pi*radius_circumscribing**2
+  AreaSphericity = SurfaceParticle / SurfaceCircumscribing
+  if Circumscribing_Found: #else, same value
+      self.area_sphericity = AreaSphericity
+
+  #Diameter Sphericity
+  DiameterSameAreaParticle = 2*math.sqrt(self.surface/math.pi)
+  DiameterCircumscribing = radius_circumscribing*2
+  DiameterSphericity = DiameterSameAreaParticle / DiameterCircumscribing
+  if Circumscribing_Found: #else, same value
+      self.diameter_sphericity = DiameterSphericity
+
+  #Circle Ratio Sphericity
+  DiameterInscribing = radius_inscribing*2
+  CircleRatioSphericity = DiameterInscribing / DiameterCircumscribing
+  self.circle_ratio_sphericity = CircleRatioSphericity
+
+  #Perimeter Sphericity
+  PerimeterSameAreaParticle = 2*math.sqrt(self.surface*math.pi)
+  PerimeterParticle = 0
+  for i in range(len(self.l_border)-1):
+      PerimeterParticle = PerimeterParticle + np.linalg.norm(self.l_border[i+1]-self.l_border[i])
+  PerimeterSphericity = PerimeterSameAreaParticle / PerimeterParticle
+  self.perimeter_sphericity = PerimeterSphericity
+
+  #Width to length ratio Spericity
+  WidthToLengthRatioSpericity = width / length
+  self.width_to_length_ratio_sphericity = WidthToLengthRatioSpericity</code></pre>
+</details>
+</dd>
+<dt id="Grain.Grain.ExtractPF_from_Eta"><code class="name flex">
+<span>def <span class="ident">ExtractPF_from_Eta</span></span>(<span>self, L_etai_M, dict_algorithm, dict_material, dict_sample)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Extract from the total phase field the variable associated with the grain.</p>
+<pre><code>Input :
+    itself (a grain)
+    a list of phase field (a neta x nx x ny numpy array)
+    an algorithm dictionnary (a dict)
+    a material dictionnary (a dict)
+    a sample dictionnary (a dict)
+Output :
+    Nothing but the grain gets an updated attribute (a n_y x n_x numpy array)
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def ExtractPF_from_Eta(self, L_etai_M, dict_algorithm, dict_material, dict_sample):
+    &#39;&#39;&#39;
+    Extract from the total phase field the variable associated with the grain.
+
+        Input :
+            itself (a grain)
+            a list of phase field (a neta x nx x ny numpy array)
+            an algorithm dictionnary (a dict)
+            a material dictionnary (a dict)
+            a sample dictionnary (a dict)
+        Output :
+            Nothing but the grain gets an updated attribute (a n_y x n_x numpy array)
+    &#39;&#39;&#39;
+    etai_M = L_etai_M[self.etai].copy()
+    #extract a spatial zone
+    x_min = self.center[0] - 1.2*self.r_max
+    x_max = max(self.l_border_x)+dict_material[&#39;w&#39;]
+    x_max = self.center[0] + 1.2*self.r_max
+    y_min = min(self.l_border_y)-dict_material[&#39;w&#39;]
+    y_min = self.center[1] - 1.2*self.r_max
+    y_max = max(self.l_border_y)+dict_material[&#39;w&#39;]
+    y_max = self.center[1] + 1.2*self.r_max
+
+    #look for this part inside the global mesh
+    #create search list
+    x_L_search_min = abs(np.array(dict_sample[&#39;x_L&#39;])-x_min)
+    x_L_search_max = abs(np.array(dict_sample[&#39;x_L&#39;])-x_max)
+    y_L_search_min = abs(np.array(dict_sample[&#39;y_L&#39;])-y_min)
+    y_L_search_max = abs(np.array(dict_sample[&#39;y_L&#39;])-y_max)
+
+    #get index
+    i_x_min = list(x_L_search_min).index(min(x_L_search_min))
+    i_x_max = list(x_L_search_max).index(min(x_L_search_max))
+    i_y_min = list(y_L_search_min).index(min(y_L_search_min))
+    i_y_max = list(y_L_search_max).index(min(y_L_search_max))
+
+    self.etai_M = np.array(np.zeros((len(dict_sample[&#39;y_L&#39;]),len(dict_sample[&#39;x_L&#39;]))))
+    for l in range(i_y_min,i_y_max+1):
+        for c in range(i_x_min,i_x_max+1):
+            self.etai_M[-1-l][c] = etai_M[-1-l][c]</code></pre>
+</details>
+</dd>
+<dt id="Grain.Grain.PFtoDEM_Multi"><code class="name flex">
+<span>def <span class="ident">PFtoDEM_Multi</span></span>(<span>self, FileToRead, dict_algorithm, dict_sample)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Read file from MOOSE simulation to reconstruct the phase field of the grain.</p>
+<pre><code>Input :
+    itself (a grain)
+    the name of the file to read (a string)
+    an algorithm dictionnary (a dictionnary)
+    a sample dictionnary (a dictionnary)
+Output :
+    Nothing but the grain gets an updated attribute (a n_y x n_x numpy array)
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def PFtoDEM_Multi(self,FileToRead,dict_algorithm,dict_sample):
+    &#39;&#39;&#39;
+    Read file from MOOSE simulation to reconstruct the phase field of the grain.
+
+        Input :
+            itself (a grain)
+            the name of the file to read (a string)
+            an algorithm dictionnary (a dictionnary)
+            a sample dictionnary (a dictionnary)
+        Output :
+            Nothing but the grain gets an updated attribute (a n_y x n_x numpy array)
+    &#39;&#39;&#39;
+    #--------------------------------------------------------------------------
+    #Global parameters
+    #---------------------------------------------------------------------------
+
+    self.etai_M = np.array(np.zeros((len(dict_sample[&#39;y_L&#39;]),len(dict_sample[&#39;x_L&#39;]))))
+
+    id_L = None
+    eta_selector_len = len(&#39;        &lt;DataArray type=&#34;Float64&#34; Name=&#34;etai&#39;)
+    end_len = len(&#39;        &lt;/DataArray&gt;&#39;)
+    XYZ_selector_len = len(&#39;        &lt;DataArray type=&#34;Float64&#34; Name=&#34;Points&#34;&#39;)
+    data_jump_len = len(&#39;          &#39;)
+
+    for i_proc in range(dict_algorithm[&#39;np_proc&#39;]):
+
+        L_Work = [[], #X
+                  [], #Y
+                  []] #etai
+
+    #---------------------------------------------------------------------------
+    #Reading file
+    #---------------------------------------------------------------------------
+
+        f = open(f&#39;{FileToRead}_{i_proc}.vtu&#39;,&#39;r&#39;)
+        data = f.read()
+        f.close
+        lines = data.splitlines()
+
+        #iterations on line
+        for line in lines:
+
+            if line[0:eta_selector_len] == &#39;        &lt;DataArray type=&#34;Float64&#34; Name=&#34;eta&#39;+str(self.id):
+                id_L = 2
+
+            elif line[0:XYZ_selector_len] == &#39;        &lt;DataArray type=&#34;Float64&#34; Name=&#34;Points&#34;&#39;:
+                id_L = 0
+
+            elif (line[0:end_len] == &#39;        &lt;/DataArray&gt;&#39; or  line[0:len(&#39;          &lt;InformationKey&#39;)] == &#39;          &lt;InformationKey&#39;) and id_L != None:
+                id_L = None
+
+            elif line[0:data_jump_len] == &#39;          &#39; and id_L == 2: #Read etai
+                line = line[data_jump_len:]
+                c_start = 0
+                for c_i in range(0,len(line)):
+                    if line[c_i]==&#39; &#39;:
+                        c_end = c_i
+                        L_Work[id_L].append(float(line[c_start:c_end]))
+                        c_start = c_i+1
+                L_Work[id_L].append(float(line[c_start:]))
+
+            elif line[0:data_jump_len] == &#39;          &#39; and id_L == 0: #Read [X, Y, Z]
+                line = line[data_jump_len:]
+                XYZ_temp = []
+                c_start = 0
+                for c_i in range(0,len(line)):
+                    if line[c_i]==&#39; &#39;:
+                        c_end = c_i
+                        XYZ_temp.append(float(line[c_start:c_end]))
+                        if len(XYZ_temp)==3:
+                            L_Work[0].append(XYZ_temp[0])
+                            L_Work[1].append(XYZ_temp[1])
+                            XYZ_temp = []
+                        c_start = c_i+1
+                XYZ_temp.append(float(line[c_start:]))
+                L_Work[0].append(XYZ_temp[0])
+                L_Work[1].append(XYZ_temp[1])
+
+        #Adaptating data and update of etai_M
+        for i in range(len(L_Work[0])):
+            #Interpolation method
+            L_dy = []
+            for y_i in dict_sample[&#39;y_L&#39;] :
+                L_dy.append(abs(y_i - L_Work[1][i]))
+            L_dx = []
+            for x_i in dict_sample[&#39;x_L&#39;] :
+                L_dx.append(abs(x_i - L_Work[0][i]))
+            self.etai_M[-1-list(L_dy).index(min(L_dy))][list(L_dx).index(min(L_dx))] = L_Work[2][i]</code></pre>
+</details>
+</dd>
+<dt id="Grain.Grain.P_is_inside"><code class="name flex">
+<span>def <span class="ident">P_is_inside</span></span>(<span>self, P)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Determine if a point P is inside of a grain</p>
+<p>Make a slide on constant y. Every time a border is crossed, the point switches between in and out.
+see Franklin 1994, see Alonso-Marroquin 2009</p>
+<pre><code>Input :
+    itself (a grain)
+    a point (a 2 x 1 numpy array)
+Output :
+    True or False, depending on the fact that the point is inside the grain or not (a bool)
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def P_is_inside(self,P):
+  &#39;&#39;&#39;Determine if a point P is inside of a grain
+
+  Make a slide on constant y. Every time a border is crossed, the point switches between in and out.
+  see Franklin 1994, see Alonso-Marroquin 2009
+
+      Input :
+          itself (a grain)
+          a point (a 2 x 1 numpy array)
+      Output :
+          True or False, depending on the fact that the point is inside the grain or not (a bool)
+  &#39;&#39;&#39;
+  counter = 0
+  for i_p_border in range(len(self.l_border)-1):
+      #consider only points if the coordinates frame the y-coordinate of the point
+      if (self.l_border[i_p_border][1]-P[1])*(self.l_border[i_p_border+1][1]-P[1]) &lt; 0 :
+        x_border = self.l_border[i_p_border][0] + (self.l_border[i_p_border+1][0]-self.l_border[i_p_border][0])*(P[1]-self.l_border[i_p_border][1])/(self.l_border[i_p_border+1][1]-self.l_border[i_p_border][1])
+        if x_border &gt; P[0] :
+            counter = counter + 1
+  if counter % 2 == 0:
+    return False
+  else :
+    return True</code></pre>
+</details>
+</dd>
+<dt id="Grain.Grain.build_etai_M"><code class="name flex">
+<span>def <span class="ident">build_etai_M</span></span>(<span>self, dict_material, dict_sample)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Build the phase field for one grain.</p>
+<p>A cosine profile is assumed (see <a href="https://mooseframework.inl.gov/source/ics/SmoothCircleIC.html">https://mooseframework.inl.gov/source/ics/SmoothCircleIC.html</a>).</p>
+<pre><code>Input :
+    itself (a grain)
+    a material dictionnary (a dictionnary)
+    a sample dictionnary (a dictionnary)
+Output :
+    Nothing but the grain gets a new attribute (a n_y x n_x numpy array)
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def build_etai_M(self,dict_material,dict_sample):
+    &#39;&#39;&#39;
+    Build the phase field for one grain.
+
+    A cosine profile is assumed (see https://mooseframework.inl.gov/source/ics/SmoothCircleIC.html).
+
+        Input :
+            itself (a grain)
+            a material dictionnary (a dictionnary)
+            a sample dictionnary (a dictionnary)
+        Output :
+            Nothing but the grain gets a new attribute (a n_y x n_x numpy array)
+    &#39;&#39;&#39;
+    #initialization
+    self.etai_M = np.array(np.zeros((len(dict_sample[&#39;y_L&#39;]),len(dict_sample[&#39;x_L&#39;]))))
+
+    #extract a spatial zone
+    x_min = min(self.l_border_x)-dict_material[&#39;w&#39;]
+    x_max = max(self.l_border_x)+dict_material[&#39;w&#39;]
+    y_min = min(self.l_border_y)-dict_material[&#39;w&#39;]
+    y_max = max(self.l_border_y)+dict_material[&#39;w&#39;]
+
+    #look for this part inside the global mesh
+    #create search list
+    x_L_search_min = abs(np.array(dict_sample[&#39;x_L&#39;])-x_min)
+    x_L_search_max = abs(np.array(dict_sample[&#39;x_L&#39;])-x_max)
+    y_L_search_min = abs(np.array(dict_sample[&#39;y_L&#39;])-y_min)
+    y_L_search_max = abs(np.array(dict_sample[&#39;y_L&#39;])-y_max)
+
+    #get index
+    i_x_min = list(x_L_search_min).index(min(x_L_search_min))
+    i_x_max = list(x_L_search_max).index(min(x_L_search_max))
+    i_y_min = list(y_L_search_min).index(min(y_L_search_min))
+    i_y_max = list(y_L_search_max).index(min(y_L_search_max))
+
+    for l in range(i_y_min,i_y_max+1):
+        for c in range(i_x_min,i_x_max+1):
+            y = dict_sample[&#39;y_L&#39;][l]
+            x = dict_sample[&#39;x_L&#39;][c]
+            p = np.array([x,y])
+            r = np.linalg.norm(self.center - p)
+            #look for the radius on this direction
+            if p[1]&gt;self.center[1]:
+                theta = math.acos((p[0]-self.center[0])/np.linalg.norm(self.center-p))
+            else :
+                theta= 2*math.pi - math.acos((p[0]-self.center[0])/np.linalg.norm(self.center-p))
+            L_theta_R_i = list(abs(np.array(self.l_theta_r)-theta))
+            R = self.l_r[L_theta_R_i.index(min(L_theta_R_i))]
+            #build etai_M
+            self.etai_M[-1-l][c] = Owntools.Cosine_Profile(R,r,dict_material[&#39;w&#39;])</code></pre>
+</details>
+</dd>
+<dt id="Grain.Grain.geometric_study"><code class="name flex">
+<span>def <span class="ident">geometric_study</span></span>(<span>self, dict_sample)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Searching limits of the grain</p>
+<p>Not best method but first approach
+We iterate on y constant, we look for a value under and over 0.5
+If both conditions are verified, there is a limit at this y
+Same with iteration on x constant</p>
+<p>Once the border of the grain is defined, a Monte Carlo method is used to computed some geometrical properties.</p>
+<p>Input :
+itself (a grain)
+a sample dictionnary (a dictionnary)
+Output :
+Nothing but the grain gets new attributes
+r_min : the minimum radius of the grain (a float)
+r_max : the maximum radius of the grain (a float)
+r_mean : the mean radius of the grain (a float)
+l_r : a list of radius of the grain, work with l_theta_r (a list)
+l_theta_r : a list of angle to see the distribution of the radius of the grain, work with l_r (a list)
+surface : the surface of the grain (a float)
+center : the coordinate of the grain center (a 2 x 1 numpy array)
+l_border_x : the list of the coordinate x of the grain vertices (a list)
+l_border_y : the list of the coordinate y of the grain vertices (a list)
+l_border : the list of the coordinate [x,y] of the grain vertices (a list)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def geometric_study(self,dict_sample):
+  &#39;&#39;&#39;
+  Searching limits of the grain
+
+  Not best method but first approach
+  We iterate on y constant, we look for a value under and over 0.5
+  If both conditions are verified, there is a limit at this y
+  Same with iteration on x constant
+
+  Once the border of the grain is defined, a Monte Carlo method is used to computed some geometrical properties.
+
+    Input :
+        itself (a grain)
+        a sample dictionnary (a dictionnary)
+    Output :
+        Nothing but the grain gets new attributes
+            r_min : the minimum radius of the grain (a float)
+            r_max : the maximum radius of the grain (a float)
+            r_mean : the mean radius of the grain (a float)
+            l_r : a list of radius of the grain, work with l_theta_r (a list)
+            l_theta_r : a list of angle to see the distribution of the radius of the grain, work with l_r (a list)
+            surface : the surface of the grain (a float)
+            center : the coordinate of the grain center (a 2 x 1 numpy array)
+            l_border_x : the list of the coordinate x of the grain vertices (a list)
+            l_border_y : the list of the coordinate y of the grain vertices (a list)
+            l_border : the list of the coordinate [x,y] of the grain vertices (a list)
+  &#39;&#39;&#39;
+  #-------------------------------------------------------------------------
+  #load data needed
+  n = dict_sample[&#39;grain_discretisation&#39;]
+  x_L = dict_sample[&#39;x_L&#39;]
+  y_L = dict_sample[&#39;y_L&#39;]
+  #-------------------------------------------------------------------------
+
+  L_border_old = []
+  for y_i in range(len(y_L)):
+      L_extract_x = self.etai_M[y_i][:]
+      if max(L_extract_x)&gt;0.5 and min(L_extract_x)&lt;0.5:
+          y_intersect = y_L[len(y_L)-1-y_i]
+          for x_i in range(len(x_L)-1):
+              if (L_extract_x[x_i]-0.5)*(L_extract_x[x_i+1]-0.5)&lt;0:
+                  x_intersect = (0.5-L_extract_x[x_i])/(L_extract_x[x_i+1]-L_extract_x[x_i])*\
+                              (x_L[x_i+1]-x_L[x_i]) + x_L[x_i]
+                  L_border_old.append(np.array([x_intersect,y_intersect]))
+
+  for x_i in range(len(x_L)):
+      L_extract_y = []
+      for y_i in range(len(y_L)):
+          L_extract_y.append(self.etai_M[y_i][x_i])
+      if max(L_extract_y)&gt;0.5 and min(L_extract_y)&lt;0.5:
+          x_intersect = x_L[x_i]
+          for y_i in range(len(y_L)-1):
+              if (L_extract_y[y_i]-0.5)*(L_extract_y[y_i+1]-0.5)&lt;0:
+                  y_intersect = (0.5-L_extract_y[y_i])/(L_extract_y[y_i+1]-L_extract_y[y_i])*\
+                              (y_L[len(y_L)-1-y_i-1]-y_L[len(y_L)-1-y_i]) + y_L[len(y_L)-1-y_i]
+                  L_border_old.append(np.array([x_intersect,y_intersect]))
+
+  #Adaptating
+  L_id_used = [0]
+  L_border = [L_border_old[0]]
+  HighValue = 100000000 #Large
+
+  current_node = L_border_old[0]
+  for j in range(1,len(L_border_old)):
+      L_d = list(np.zeros(len(L_border_old)))
+      for i in range(0,len(L_border_old)):
+          node = L_border_old[i]
+          if  i not in L_id_used:
+              d = np.linalg.norm(node - current_node)
+              L_d[i] = d
+          else :
+              L_d[i] = HighValue #Value need to be larger than potential distance between node
+
+      index_nearest_node = L_d.index(min(L_d))
+      nearest_node = L_border_old[index_nearest_node]
+      current_node = nearest_node
+      L_border.append(nearest_node)
+      L_id_used.append(index_nearest_node)
+
+  #Correcting
+  L_d_final = []
+  for i in range(len(L_border)-1):
+      L_d_final.append(np.linalg.norm(L_border[i+1] - L_border[i]))
+
+  #look for really far points, we assume the first point is accurate
+  d_final_mean = np.mean(L_d_final)
+  while np.max(L_d_final) &gt; 5 * d_final_mean : #5 here is an user choixe value
+      i_error = L_d_final.index(np.max(L_d_final))+1
+      #simulation_report.write(&#39;Point &#39;+str(L_border[i_error])+&#39; is deleted because it is detected as an error\n&#39;)
+      L_border.pop(i_error)
+      L_id_used.pop(i_error)
+      L_d_final = []
+      for i in range(len(L_border)-1):
+          L_d_final.append(np.linalg.norm(L_border[i+1] - L_border[i]))
+
+  #-------------------------------------------------------------------------------
+  #Reduce the number of nodes for a grain
+  #-------------------------------------------------------------------------------
+
+  Perimeter = 0
+  for i_p in range(len(L_border)-1):
+      Perimeter = Perimeter + np.linalg.norm(L_border[i_p+1]-L_border[i_p])
+  Perimeter = Perimeter + np.linalg.norm(L_border[-1]-L_border[0])
+  distance_min = Perimeter/n
+  L_border_adapted = [L_border[0]]
+  for p in L_border[1:]:
+      distance = np.linalg.norm(p-L_border_adapted[-1])
+      if distance &gt;= distance_min:
+          L_border_adapted.append(p)
+  L_border = L_border_adapted
+  L_border.append(L_border[0])
+  self.l_border = L_border
+
+  #-------------------------------------------------------------------------------
+  #Searching Surface, Center of mass and Inertia.
+  #Monte Carlo Method
+  #A box is defined, we take a random point and we look if it is inside or outside the grain
+  #Properties are the statistic times the box properties
+  #-------------------------------------------------------------------------------
+
+  min_max_defined = False
+  for p in L_border[:-1] :
+      if not min_max_defined:
+          box_min_x = p[0]
+          box_max_x = p[0]
+          box_min_y = p[1]
+          box_max_y = p[1]
+          min_max_defined = True
+      else:
+          if p[0] &lt; box_min_x:
+              box_min_x = p[0]
+          elif p[0] &gt; box_max_x:
+              box_max_x = p[0]
+          if p[1] &lt; box_min_y:
+              box_min_y = p[1]
+          elif p[1] &gt; box_max_y:
+              box_max_y = p[1]
+
+  N_MonteCarlo = 3000 #The larger it is, the more accurate it is
+  sigma = self.rho_surf
+  M_Mass = 0
+  M_Center_Mass = np.array([0,0])
+  M_Inertia = 0
+
+  for i in range(N_MonteCarlo):
+      P = np.array([random.uniform(box_min_x,box_max_x),random.uniform(box_min_y,box_max_y)])
+      if self.P_is_inside(P):
+          M_Mass = M_Mass + sigma
+          M_Center_Mass = M_Center_Mass + sigma*P
+          M_Inertia = M_Inertia + sigma*np.dot(P,P)
+
+  Mass = (box_max_x-box_min_x)*(box_max_y-box_min_y)/N_MonteCarlo*M_Mass
+  Center_Mass = (box_max_x-box_min_x)*(box_max_y-box_min_y)/N_MonteCarlo*M_Center_Mass/Mass
+  Inertia = (box_max_x-box_min_x)*(box_max_y-box_min_y)/N_MonteCarlo*M_Inertia-Mass*np.dot(Center_Mass,Center_Mass)
+
+  #-------------------------------------------------------------------------------
+  #Updating the grain geometry and properties
+  #-------------------------------------------------------------------------------
+
+  L_R = []
+  L_theta_R = []
+  L_border_x = []
+  L_border_y = []
+  for p in L_border[:-1]:
+      L_R.append(np.linalg.norm(p-Center_Mass))
+      L_border_x.append(p[0])
+      L_border_y.append(p[1])
+      if (p-Center_Mass)[1] &gt; 0:
+          theta = math.acos((p-Center_Mass)[0]/np.linalg.norm(p-Center_Mass))
+      else :
+          theta = 2*math.pi - math.acos((p-Center_Mass)[0]/np.linalg.norm(p-Center_Mass))
+      L_theta_R.append(theta)
+  L_border_x.append(L_border_x[0])
+  L_border_y.append(L_border_y[0])
+  #reorganize lists
+  i_theta = 0
+  while L_theta_R[i_theta] &lt; 2*math.pi/10 or 2*math.pi*9/10 &lt; L_theta_R[i_theta]:
+      i_theta = i_theta + 1
+  if L_theta_R[i_theta + 1] &lt; L_theta_R[i_theta] :
+      L_R.reverse()
+      L_theta_R.reverse()
+      L_border_x.reverse()
+      L_border_y.reverse()
+      L_border.reverse()
+
+  self.r_min = np.min(L_R)
+  self.r_max = np.max(L_R)
+  self.r_mean = np.mean(L_R)
+  self.l_r = L_R
+  self.l_theta_r = L_theta_R
+  self.mass = Mass
+  self.surface = Mass/sigma
+  self.inertia = Inertia
+  self.center = Center_Mass
+  self.l_border_x = L_border_x
+  self.l_border_y = L_border_y
+  self.l_border = L_border</code></pre>
+</details>
+</dd>
+<dt id="Grain.Grain.init_f_control"><code class="name flex">
+<span>def <span class="ident">init_f_control</span></span>(<span>self, dict_sollicitation)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Initialize the force applied to the grain.</p>
+<p>A gravity of g is applied.</p>
+<pre><code>Input :
+    itself (a grain)
+    a sollicitations dictionnary (a dict)
+Ouput :
+    Nothing, but the force applied on the grain is initialized
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def init_f_control(self,dict_sollicitation):
+    &#34;&#34;&#34;
+    Initialize the force applied to the grain.
+
+    A gravity of g is applied.
+
+        Input :
+            itself (a grain)
+            a sollicitations dictionnary (a dict)
+        Ouput :
+            Nothing, but the force applied on the grain is initialized
+    &#34;&#34;&#34;
+    self.fx = 0
+    self.fy = -dict_sollicitation[&#39;gravity&#39;]*self.mass
+    self.f = np.array([self.fx,self.fy])
+    self.mz = 0
+    self.v = np.array([0, 0])
+    self.theta = 0
+    self.w = 0</code></pre>
+</details>
+</dd>
+<dt id="Grain.Grain.move_grain_interpolation"><code class="name flex">
+<span>def <span class="ident">move_grain_interpolation</span></span>(<span>self, displacement, dict_sample)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Move the grain by updating the phase field of the grain.</p>
+<p>An interpolation on the phase field is done. The mass conservation is better than with move_grain_rebuild().</p>
+<pre><code>Input :
+    itself (a grain)
+    the displacement asked (a 2 x 1 numpy array)
+    a sample dictionnary (a dictionnary)
+Output :
+    Nothing but the grain gets an updated attribute (a n_y x n_x numpy array)
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def move_grain_interpolation(self,displacement,dict_sample):
+    &#39;&#39;&#39;
+    Move the grain by updating the phase field of the grain.
+
+    An interpolation on the phase field is done. The mass conservation is better than with move_grain_rebuild().
+
+        Input :
+            itself (a grain)
+            the displacement asked (a 2 x 1 numpy array)
+            a sample dictionnary (a dictionnary)
+        Output :
+            Nothing but the grain gets an updated attribute (a n_y x n_x numpy array)
+    &#39;&#39;&#39;
+    #displacement over x
+    dx = dict_sample[&#39;x_L&#39;][1]-dict_sample[&#39;x_L&#39;][0]
+    n_dx_disp_x = int(abs(displacement[0])//dx)
+    disp_x_remainder = abs(displacement[0])%dx
+    etai_M_old = self.etai_M.copy()
+
+    if np.sign(displacement[0]) &gt; 0 : # +x direction
+        #dx*n_dx_disp_x translation
+        if n_dx_disp_x &gt; 0:
+            for l in range(len(dict_sample[&#39;y_L&#39;])):
+                self.etai_M[l][:n_dx_disp_x] = 0 #no information to translate so put equal to 0
+                self.etai_M[l][n_dx_disp_x:] = etai_M_old[l][:-n_dx_disp_x]
+        #disp_x_remainder translation
+        etai_M_old = self.etai_M.copy()
+        for l in range(len(dict_sample[&#39;y_L&#39;])):
+            for c in range(1,len(dict_sample[&#39;x_L&#39;])):
+                self.etai_M[l][c] = (etai_M_old[l][c]*(dx-disp_x_remainder) + etai_M_old[l][c-1]*disp_x_remainder)/dx
+            self.etai_M[l][0] = 0 #no information to translate so put equal to 0
+
+    else : # -x direction
+        #dx*n_dx_disp_x translation
+        if n_dx_disp_x &gt; 0:
+            for l in range(len(dict_sample[&#39;y_L&#39;])):
+                self.etai_M[l][-n_dx_disp_x:] = 0 #no information to translate so put equal to 0
+                self.etai_M[l][:-n_dx_disp_x] = etai_M_old[l][n_dx_disp_x:]
+        #disp_x_remainder translation
+        etai_M_old = self.etai_M.copy()
+        for l in range(len(dict_sample[&#39;y_L&#39;])):
+            for c in range(len(dict_sample[&#39;x_L&#39;])-1):
+                self.etai_M[l][c] = (etai_M_old[l][c]*(dx-disp_x_remainder) + etai_M_old[l][c+1]*disp_x_remainder)/dx
+            self.etai_M[l][0] = 0 #no information to translate so put equal to 0
+
+    #displacement over y
+    dy = dict_sample[&#39;y_L&#39;][1]-dict_sample[&#39;y_L&#39;][0]
+    n_dy_disp_y = int(abs(displacement[1])//dy)
+    disp_y_remainder = abs(displacement[1])%dy
+    etai_M_old = self.etai_M.copy()
+
+    if np.sign(displacement[1]) &gt; 0 : # +y direction
+        #dy*n_dy_disp_y translation
+        if n_dy_disp_y &gt; 0:
+            for c in range(len(dict_sample[&#39;x_L&#39;])):
+                for l in range(len(dict_sample[&#39;y_L&#39;])-n_dy_disp_y,len(dict_sample[&#39;y_L&#39;])):
+                    self.etai_M[l][c] = 0 #no information to translate so put equal to 0
+                for l in range(len(dict_sample[&#39;y_L&#39;])-n_dy_disp_y):
+                    self.etai_M[l][c] = etai_M_old[l+1][c]
+        #disp_y_remainder translation
+        etai_M_old = self.etai_M.copy()
+        for c in range(len(dict_sample[&#39;x_L&#39;])):
+            for l in range(len(dict_sample[&#39;y_L&#39;])-1):
+                self.etai_M[l][c] = (etai_M_old[l][c]*(dy-disp_y_remainder) + etai_M_old[l+1][c]*disp_y_remainder)/dy
+            self.etai_M[-1][c] = 0 #no information to translate so put equal to 0
+
+    else : # -y direction
+        #dy*n_dy_disp_y translation
+        if n_dy_disp_y &gt; 0:
+            for c in range(len(dict_sample[&#39;x_L&#39;])):
+                for l in range(n_dy_disp_y):
+                    self.etai_M[l][c] = 0 #no information to translate so put equal to 0
+                for l in range(n_dy_disp_y, len(dict_sample[&#39;y_L&#39;])):
+                    self.etai_M[l][c] = etai_M_old[l-1][c]
+        #disp_y_remainder translation
+        etai_M_old = self.etai_M.copy()
+        for c in range(len(dict_sample[&#39;x_L&#39;])):
+            for l in range(1,len(dict_sample[&#39;y_L&#39;])):
+                self.etai_M[l][c] = (etai_M_old[l][c]*(dy-disp_y_remainder) + etai_M_old[l-1][c]*disp_y_remainder)/dy
+            self.etai_M[0][c] = 0 #no information to translate so put equal to 0</code></pre>
+</details>
+</dd>
+<dt id="Grain.Grain.move_grain_rebuild"><code class="name flex">
+<span>def <span class="ident">move_grain_rebuild</span></span>(<span>self, dict_material, dict_sample)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Move the grain by updating the phase field of the grain.</p>
+<p>A rebuild on the phase field is done. The mass conservation is verified by producing solute.</p>
+<pre><code>Input :
+    itself (a grain)
+    a material dictionnary (a dict)
+    a sample dictionnary (a dictionnary)
+Output :
+    Nothing but the grain gets an updated attribute (a n_y x n_x numpy array)
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def move_grain_rebuild(self,dict_material,dict_sample):
+    &#39;&#39;&#39;
+    Move the grain by updating the phase field of the grain.
+
+    A rebuild on the phase field is done. The mass conservation is verified by producing solute.
+
+        Input :
+            itself (a grain)
+            a material dictionnary (a dict)
+            a sample dictionnary (a dictionnary)
+        Output :
+            Nothing but the grain gets an updated attribute (a n_y x n_x numpy array)
+    &#39;&#39;&#39;
+    #save previous phase field
+    save_etai_M = self.etai_M.copy()
+    #compute the new phase field
+    self.build_etai_M(dict_material,dict_sample)
+    #compute the delta etai
+    sum_eta_before = 0
+    sum_eta_after = 0
+    for l in range(len(dict_sample[&#39;y_L&#39;])):
+        for c in range(len(dict_sample[&#39;x_L&#39;])):
+            sum_eta_before = sum_eta_before + save_etai_M[l][c]
+            sum_eta_after = sum_eta_after + self.etai_M[l][c]
+    self.delta_sum_eta = (sum_eta_before - sum_eta_after)/sum_eta_before*100</code></pre>
+</details>
+</dd>
+<dt id="Grain.Grain.update_f"><code class="name flex">
+<span>def <span class="ident">update_f</span></span>(<span>self, Fx, Fy, p_application)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Add a force to the grain.</p>
+<pre><code>Input :
+    itself (a grain)
+    the value x and y of the force (two float)
+    an applicaiton point (a 1 x 2 numpy array)
+Output :
+    Nothing, but a force is applied to the grain
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def update_f(self, Fx, Fy, p_application):
+    &#34;&#34;&#34;
+    Add a force to the grain.
+
+        Input :
+            itself (a grain)
+            the value x and y of the force (two float)
+            an applicaiton point (a 1 x 2 numpy array)
+        Output :
+            Nothing, but a force is applied to the grain
+    &#34;&#34;&#34;
+    self.fx = self.fx + Fx
+    self.fy = self.fy + Fy
+    self.f = np.array([self.fx,self.fy])
+
+    v1 = np.array([p_application[0]-self.center[0], p_application[1]-self.center[1], 0])
+    v2 = np.array([Fx, Fy, 0])
+    self.mz = self.mz + np.cross(v1,v2)[2]</code></pre>
+</details>
+</dd>
+<dt id="Grain.Grain.update_geometry_kinetic"><code class="name flex">
+<span>def <span class="ident">update_geometry_kinetic</span></span>(<span>self, V, A, W, DT)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Update the acceleration and the velocity of a grain. Update geometrical parameters as border and center nodes.</p>
+<pre><code>Input :
+    itself (a grain)
+    a speed (a 1 x 2 numpy array)
+    an acceleration (a 1 x 2 numpy array)
+    an angular speed (a float)
+    a time step (a float)
+Ouput :
+    Nothing, but the position of the grain is updated
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def update_geometry_kinetic(self, V, A, W, DT):
+    &#34;&#34;&#34;
+    Update the acceleration and the velocity of a grain. Update geometrical parameters as border and center nodes.
+
+        Input :
+            itself (a grain)
+            a speed (a 1 x 2 numpy array)
+            an acceleration (a 1 x 2 numpy array)
+            an angular speed (a float)
+            a time step (a float)
+        Ouput :
+            Nothing, but the position of the grain is updated
+    &#34;&#34;&#34;
+    #translation
+    self.v = V
+    self.a = A
+    for i in range(len(self.l_border)):
+        self.l_border[i] = self.l_border[i] + self.v*DT
+        self.l_border_x[i] = self.l_border_x[i] + self.v[0]*DT
+        self.l_border_y[i] = self.l_border_y[i] + self.v[1]*DT
+    self.center = self.center + self.v*DT
+
+    #rotation
+    self.w = W
+    self.theta = self.theta + self.w*DT
+
+    for i_theta_r in range(len(self.l_theta_r)) :
+        theta_r = self.l_theta_r[i_theta_r]
+        theta_r = theta_r + self.w*DT
+        while theta_r &gt;= 2*math.pi:
+            theta_r = theta_r - 2*math.pi
+        while theta_r &lt; 0 :
+            theta_r = theta_r + 2*math.pi
+        self.l_theta_r[i_theta_r] = theta_r
+
+    for i in range(len(self.l_border)):
+        p = self.l_border[i] - self.center
+        Rot_Matrix = np.array([[math.cos(self.w*DT), -math.sin(self.w*DT)],
+                               [math.sin(self.w*DT),  math.cos(self.w*DT)]])
+        p = np.dot(Rot_Matrix,p)
+        self.l_border[i] = p + self.center
+        self.l_border_x[i] = p[0] + self.center[0]
+        self.l_border_y[i] = p[1] + self.center[1]</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="Grain.Compute_overlap_2_grains" href="#Grain.Compute_overlap_2_grains">Compute_overlap_2_grains</a></code></li>
+<li><code><a title="Grain.FindCircleFromThreePoints" href="#Grain.FindCircleFromThreePoints">FindCircleFromThreePoints</a></code></li>
+<li><code><a title="Grain.lineFromPoints" href="#Grain.lineFromPoints">lineFromPoints</a></code></li>
+<li><code><a title="Grain.lineLineIntersection" href="#Grain.lineLineIntersection">lineLineIntersection</a></code></li>
+<li><code><a title="Grain.perpendicularBisectorFromLine" href="#Grain.perpendicularBisectorFromLine">perpendicularBisectorFromLine</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="Grain.Grain" href="#Grain.Grain">Grain</a></code></h4>
+<ul class="">
+<li><code><a title="Grain.Grain.Compute_sphericity" href="#Grain.Grain.Compute_sphericity">Compute_sphericity</a></code></li>
+<li><code><a title="Grain.Grain.ExtractPF_from_Eta" href="#Grain.Grain.ExtractPF_from_Eta">ExtractPF_from_Eta</a></code></li>
+<li><code><a title="Grain.Grain.PFtoDEM_Multi" href="#Grain.Grain.PFtoDEM_Multi">PFtoDEM_Multi</a></code></li>
+<li><code><a title="Grain.Grain.P_is_inside" href="#Grain.Grain.P_is_inside">P_is_inside</a></code></li>
+<li><code><a title="Grain.Grain.build_etai_M" href="#Grain.Grain.build_etai_M">build_etai_M</a></code></li>
+<li><code><a title="Grain.Grain.geometric_study" href="#Grain.Grain.geometric_study">geometric_study</a></code></li>
+<li><code><a title="Grain.Grain.init_f_control" href="#Grain.Grain.init_f_control">init_f_control</a></code></li>
+<li><code><a title="Grain.Grain.move_grain_interpolation" href="#Grain.Grain.move_grain_interpolation">move_grain_interpolation</a></code></li>
+<li><code><a title="Grain.Grain.move_grain_rebuild" href="#Grain.Grain.move_grain_rebuild">move_grain_rebuild</a></code></li>
+<li><code><a title="Grain.Grain.update_f" href="#Grain.Grain.update_f">update_f</a></code></li>
+<li><code><a title="Grain.Grain.update_geometry_kinetic" href="#Grain.Grain.update_geometry_kinetic">update_geometry_kinetic</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<br>
+<a href="https://alexsacmorane.github.io/pfdem/pfdem_acs_mg">PFDEM_ACS_MG</a>
+<br>
+<a href="https://alexsacmorane.github.io">Home</a>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>

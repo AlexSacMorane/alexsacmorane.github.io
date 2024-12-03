@@ -1,0 +1,1076 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>Owntools.Write API documentation</title>
+<meta name="description" content="@author: Alexandre Sac--Morane
+alexandre.sac-morane@uclouvain.be …" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>Owntools.Write</code></h1>
+</header>
+<section id="section-intro">
+<p>@author: Alexandre Sac&ndash;Morane
+alexandre.sac-morane@uclouvain.be</p>
+<p>This file contains the different functions to write files used in the simulation.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python"># -*- coding: utf-8 -*-
+&#34;&#34;&#34;
+@author: Alexandre Sac--Morane
+alexandre.sac-morane@uclouvain.be
+
+This file contains the different functions to write files used in the simulation.
+&#34;&#34;&#34;
+
+#-------------------------------------------------------------------------------
+#Librairy
+#-------------------------------------------------------------------------------
+
+#-------------------------------------------------------------------------------
+
+def Write_i(dict_algorithm, dict_material, dict_sample, dict_sollicitation):
+  &#39;&#39;&#39;
+  Create the .i file to run MOOSE simulation.
+
+  The file is generated from a template nammed PF_ACS_base.i
+
+    Input :
+        a algorithm dictionnary (a dictionnary)
+        a sample dictionnary (a dictionnary)
+        a material dictionnary (a dictionnary)
+    Output :
+        Nothing but a txt .i file is generated (a file)
+  &#39;&#39;&#39;
+  file_to_write = open(dict_algorithm[&#39;namefile&#39;]+&#39;_&#39;+str(dict_algorithm[&#39;i_PFDEM&#39;])+&#39;.i&#39;,&#39;w&#39;)
+  file_to_read = open(&#39;PF_ACS_base.i&#39;,&#39;r&#39;)
+  lines = file_to_read.readlines()
+  file_to_read.close()
+
+  j = 0
+  for line in lines :
+    j = j + 1
+    if j == 4:
+      line = line[:-1] + &#39; &#39; + str(len(dict_sample[&#39;x_L&#39;])-1)+&#39;\n&#39;
+    elif j == 5:
+      line = line[:-1] + &#39; &#39; + str(len(dict_sample[&#39;y_L&#39;])-1)+&#39;\n&#39;
+    elif j == 7:
+      line = line[:-1] + &#39; &#39; + str(min(dict_sample[&#39;x_L&#39;]))+&#39;\n&#39;
+    elif j == 8:
+      line = line[:-1] + &#39; &#39; + str(max(dict_sample[&#39;x_L&#39;]))+&#39;\n&#39;
+    elif j == 9:
+      line = line[:-1] + &#39; &#39; + str(min(dict_sample[&#39;y_L&#39;]))+&#39;\n&#39;
+    elif j == 10:
+      line = line[:-1] + &#39; &#39; + str(max(dict_sample[&#39;y_L&#39;]))+&#39;\n&#39;
+    elif j == 20:
+      line = &#39;&#39;
+      for etai in dict_sample[&#39;L_etai&#39;]:
+          line = line + &#39;\t[./eta&#39;+str(int(etai.id+1))+&#39;]\n&#39;+\
+                        &#39;\t\torder = FIRST\n&#39;+\
+                        &#39;\t\tfamily = LAGRANGE\n&#39;+\
+                        &#39;\t\t[./InitialCondition]\n&#39;+\
+                        &#39;\t\t\ttype = FunctionIC\n&#39;+\
+                        &#39;\t\t\tfunction = eta&#39;+str(int(etai.id+1))+&#39;_txt\n&#39;+\
+                        &#39;\t\t[../]\n&#39;+\
+                        &#39;\t[../]\n&#39;
+    elif j == 30:
+      line = &#39;&#39;
+      for etai in dict_sample[&#39;L_etai&#39;]:
+          line = line + &#39;\t#\n&#39;+\
+                        &#39;\t# Order parameter eta&#39;+str(int(etai.id+1))+&#39;\n&#39;+\
+                        &#39;\t#\n&#39;+\
+                        &#39;\t[./deta&#39;+str(int(etai.id+1))+&#39;dt]\n&#39;+\
+                        &#39;\t\ttype = TimeDerivative\n&#39;+\
+                        &#39;\t\tvariable = eta&#39;+str(int(etai.id+1))+&#39;\n&#39;+\
+                        &#39;\t[../]\n&#39;+\
+                        &#39;\t[./ACBulk&#39;+str(int(etai.id+1))+&#39;]\n&#39;+\
+                        &#39;\t\ttype = AllenCahn\n&#39;+\
+                        &#39;\t\tvariable = eta&#39;+str(int(etai.id+1))+&#39;\n&#39;
+          args_str = &#39;&#39;
+          for etaj in dict_sample[&#39;L_etai&#39;] :
+              if etai.id != etaj.id :
+                  args_str = args_str + &#39;eta&#39;+str(int(etaj.id+1))+&#39; &#39;
+          line = line + &#34;\t\targs = &#39;&#34;+args_str[:-1]+&#34;&#39;\n&#34;+\
+                        &#39;\t\tmob_name = L\n&#39;+\
+                        &#39;\t\tf_name = F_total\n&#39;+\
+                        &#39;\t[../]\n&#39;+\
+                        &#39;\t[./ACInterface&#39;+str(int(etai.id+1))+&#39;]\n&#39;+\
+                        &#39;\t\ttype = ACInterface\n&#39;+\
+                        &#39;\t\tvariable = eta&#39;+str(int(etai.id+1))+&#39;\n&#39;+\
+                        &#39;\t\tmob_name = L\n&#39;+\
+                        &#34;\t\tkappa_name = &#39;kappa_eta&#39;\n&#34;+\
+                        &#39;\t[../]\n&#39;
+    elif j == 38:
+      line = &#39;&#39;
+      for etai in dict_sample[&#39;L_etai&#39;]:
+          line = line + &#39;\t[./eta&#39;+str(int(etai.id+1))+&#39;_c]\n&#39;+\
+                        &#39;\t\ttype = CoupledTimeDerivative\n&#39;+\
+                        &#34;\t\tv = &#39;eta&#34;+str(int(etai.id+1))+&#34;&#39;\n&#34;+\
+                        &#39;\t\tvariable = c\n&#39;+\
+                        &#39;\t[../]\n&#39;
+    elif j == 50:
+      line = &#34;\t\tprop_values =&#39;&#34;+str(dict_material[&#39;M&#39;])+&#39; &#39;+str(dict_material[&#39;kappa_eta&#39;])+&#34;&#39;\n&#34;
+    elif j == 68:
+        args_str = &#39;&#39;
+        for etai in dict_sample[&#39;L_etai&#39;] :
+            args_str = args_str + &#39;eta&#39;+str(int(etai.id+1))+&#39; &#39;
+        line = &#34;\t\targs = &#39;&#34;+args_str[:-1]+&#34;&#39;\n&#34;
+    elif j == 70:
+        line = &#34;\t\tconstant_expressions = &#39;&#34;+str(dict_material[&#39;Energy_barrier&#39;])+&#34;&#39;\n&#34;
+    elif j == 71:
+        line = &#34;\t\tfunction = &#39;h*(&#34;
+        etai_str = &#39;&#39;
+        for etai in dict_sample[&#39;L_etai&#39;]:
+            etai_str = etai_str + &#39;eta&#39;+str(int(etai.id+1))+&#39;^2*(1-eta&#39;+str(int(etai.id+1))+&#39;)^2+&#39;
+        line = line + etai_str[:-1] + &#34;)&#39;\n&#34;
+    elif j == 79:
+        line = &#34;\t\targs = &#39;&#34;
+        etai_str = &#39;&#39;
+        for etai in dict_sample[&#39;L_etai&#39;]:
+            etai_str = etai_str + &#39;eta&#39;+str(int(etai.id+1))+&#39; &#39;
+        line = line + etai_str[:-1] + &#34;&#39;\n&#34;
+    elif j == 81:
+        line =  &#34;\t\tfunction = &#39;&#34;
+        etai_str = &#39;&#39;
+        for etai in dict_sample[&#39;L_etai&#39;]:
+            etai_str = etai_str + &#39;ep*3*eta&#39;+str(int(etai.id+1))+&#39;^2-ep*2*eta&#39;+str(int(etai.id+1))+&#39;^3+&#39;
+        line = line + etai_str[:-1] + &#34;&#39;\n&#34;
+    elif j == 89:
+        line =  &#34;\t\targs = &#39;c &#34;
+        etai_str = &#39;&#39;
+        for etai in dict_sample[&#39;L_etai&#39;]:
+            etai_str = etai_str + &#39;eta&#39;+str(int(etai.id+1))+&#39; &#39;
+        line = line + etai_str[:-1] + &#34;&#39;\n&#34;
+    elif j == 91 :
+      line = &#34;\t\tconstant_expressions = &#39;&#34;+str(dict_sollicitation[&#39;chi&#39;])+&#34;&#39;\n&#34;
+    elif j == 92:
+        line =  &#34;\t\tfunction = &#39;&#34;
+        etai_str = &#39;&#39;
+        for etai in dict_sample[&#39;L_etai&#39;]:
+            etai_str = etai_str + &#39;chi*c*(3*eta&#39;+str(int(etai.id+1))+&#39;^2-2*eta&#39;+str(int(etai.id+1))+&#39;^3)+&#39;
+        line = line + etai_str[:-1] + &#34;&#39;\n&#34;
+    elif j == 100:
+        line =  &#34;\t\targs = &#39;&#34;
+        etai_str = &#39;&#39;
+        for etai in dict_sample[&#39;L_etai&#39;]:
+            etai_str = etai_str + &#39;eta&#39;+str(int(etai.id+1))+&#39; &#39;
+        line = line + etai_str[:-1] + &#34;&#39;\n&#34;
+    elif j == 101:
+        etai_str = &#39;&#39;
+        for etai in dict_sample[&#39;L_etai&#39;]:
+            etai_str = etai_str + &#39;eta&#39;+str(int(etai.id+1))+&#39;,&#39;
+        line =  &#34;\t\tmaterial_property_names = &#39;F(&#34;+etai_str[:-1]+&#39;) Ed_mec(&#39;+etai_str[:-1]+&#39;) Ed_pre(&#39;+etai_str[:-1]+&#34;)&#39;\n&#34;
+    elif j == 109:
+        line = &#39;&#39;
+        for etai in dict_sample[&#39;L_etai&#39;]:
+            line = line + &#39;\t[eta&#39;+str(int(etai.id+1))+&#39;_txt]\n&#39;+\
+                          &#39;\t\ttype = PiecewiseMultilinear\n&#39;+\
+                          &#39;\t\tdata_file = Data/eta&#39;+str(int(etai.id+1))+&#39;_&#39;+str(dict_algorithm[&#39;i_PFDEM&#39;])+&#39;.txt\n&#39;+\
+                          &#39;\t[]\n&#39;
+    elif j == 112:
+        line = &#39;\t\tdata_file = Data/c_&#39;+str(dict_algorithm[&#39;i_PFDEM&#39;])+&#39;.txt\n&#39;
+    elif j == 116:
+        line = &#39;\t\tdata_file = Data/ep_&#39;+str(dict_algorithm[&#39;i_PFDEM&#39;])+&#39;.txt\n&#39;
+    elif j == 120:
+        line = &#39;\t\tdata_file = Data/kc_&#39;+str(dict_algorithm[&#39;i_PFDEM&#39;])+&#39;.txt\n&#39;
+    elif j == 150:
+        line =  &#39;\t\tend_time = &#39;+str(dict_algorithm[&#39;dt_PF&#39;]*dict_algorithm[&#39;n_t_PF&#39;])+&#39;\n&#39;
+    elif j == 154:
+        line =  &#39;\t\tdt = &#39;+str(dict_algorithm[&#39;dt_PF&#39;]) +&#39;\n&#39;
+
+    file_to_write.write(line)
+  file_to_write.close()
+
+#-------------------------------------------------------------------------------
+
+def Write_eta_txt(dict_algorithm, dict_sample):
+    &#39;&#39;&#39;
+    Write a .txt file needed for MOOSE simulation.
+
+    The variables etai are transmitted to the MOOSE simulation.
+
+        Input :
+            an algorithm dictionnary (a dict)
+            an sample dictionnary (a dict)
+        Output :
+            Nothing but a .txt file is generated (a file)
+    &#39;&#39;&#39;
+    for etai in dict_sample[&#39;L_etai&#39;] :
+        file_to_write = open(&#39;Data/eta&#39;+str(int(etai.id+1))+&#39;_&#39;+str(dict_algorithm[&#39;i_PFDEM&#39;])+&#39;.txt&#39;,&#39;w&#39;)
+        file_to_write.write(&#39;AXIS X\n&#39;)
+        line = &#39;&#39;
+        for x in dict_sample[&#39;x_L&#39;]:
+            line = line + str(x)+ &#39; &#39;
+        line = line + &#39;\n&#39;
+        file_to_write.write(line)
+
+        file_to_write.write(&#39;AXIS Y\n&#39;)
+        line = &#39;&#39;
+        for y in dict_sample[&#39;y_L&#39;]:
+            line = line + str(y)+ &#39; &#39;
+        line = line + &#39;\n&#39;
+        file_to_write.write(line)
+
+        file_to_write.write(&#39;DATA\n&#39;)
+        for l in range(len(dict_sample[&#39;y_L&#39;])):
+            for c in range(len(dict_sample[&#39;x_L&#39;])):
+                file_to_write.write(str(etai.etai_M[-1-l][c])+&#39;\n&#39;)
+
+        file_to_write.close()
+
+#-------------------------------------------------------------------------------
+
+def Write_solute_txt(dict_algorithm, dict_sample):
+    &#39;&#39;&#39;
+    Write a .txt file needed for MOOSE simulation.
+
+    The variable c is transmitted to the MOOSE simulation.
+
+        Input :
+            an algorithm dictionnary (a dict)
+            an sample dictionnary (a dict)
+        Output :
+            Nothing but a .txt file is generated (a file)
+    &#39;&#39;&#39;
+    file_to_write = open(&#39;Data/c_&#39;+str(dict_algorithm[&#39;i_PFDEM&#39;])+&#39;.txt&#39;,&#39;w&#39;)
+    file_to_write.write(&#39;AXIS X\n&#39;)
+    line = &#39;&#39;
+    for x in dict_sample[&#39;x_L&#39;]:
+        line = line + str(x)+ &#39; &#39;
+    line = line + &#39;\n&#39;
+    file_to_write.write(line)
+
+    file_to_write.write(&#39;AXIS Y\n&#39;)
+    line = &#39;&#39;
+    for y in dict_sample[&#39;y_L&#39;]:
+        line = line + str(y)+ &#39; &#39;
+    line = line + &#39;\n&#39;
+    file_to_write.write(line)
+
+    file_to_write.write(&#39;DATA\n&#39;)
+    for l in range(len(dict_sample[&#39;y_L&#39;])):
+        for c in range(len(dict_sample[&#39;x_L&#39;])):
+            file_to_write.write(str(dict_sample[&#39;solute_M&#39;][-1-l][c])+&#39;\n&#39;)
+
+    file_to_write.close()
+
+#-------------------------------------------------------------------------------
+
+def Write_Emec_txt(dict_algorithm, dict_sample):
+    &#39;&#39;&#39;
+    Write a .txt file needed for MOOSE simulation.
+
+    The variable ep is transmitted to the MOOSE simulation.
+    This variable is the dissolution field due to mechanical energy at the contact level.
+
+        Input :
+            an algorithm dictionnary (a dict)
+            a sample dictionnary (a dict)
+            a sollicitation dictionnary (a dict)
+        Output :
+            Nothing but a .txt file is generated (a file)
+    &#39;&#39;&#39;
+    #write data
+    file_to_write = open(&#39;Data/ep_&#39;+str(dict_algorithm[&#39;i_PFDEM&#39;])+&#39;.txt&#39;,&#39;w&#39;)
+    file_to_write.write(&#39;AXIS X\n&#39;)
+    line = &#39;&#39;
+    for x in dict_sample[&#39;x_L&#39;]:
+        line = line + str(x)+ &#39; &#39;
+    line = line + &#39;\n&#39;
+    file_to_write.write(line)
+
+    file_to_write.write(&#39;AXIS Y\n&#39;)
+    line = &#39;&#39;
+    for y in dict_sample[&#39;y_L&#39;]:
+        line = line + str(y)+ &#39; &#39;
+    line = line + &#39;\n&#39;
+    file_to_write.write(line)
+
+    file_to_write.write(&#39;DATA\n&#39;)
+    for l in range(len(dict_sample[&#39;y_L&#39;])):
+        for c in range(len(dict_sample[&#39;x_L&#39;])):
+            file_to_write.write(str(dict_sample[&#39;Emec_M&#39;][-1-l][c])+&#39;\n&#39;)
+
+    file_to_write.close()
+
+#-------------------------------------------------------------------------------
+
+def Write_kc_txt(dict_algorithm, dict_sample):
+    &#39;&#39;&#39;
+    Write a .txt file needed for MOOSE simulation.
+
+    The variable kc is transmitted to the MOOSE simulation.
+    This variable is the diffusion coefficient of the solute.
+    It takes the value 0 if the point is inside one grain and not in the other.
+    Else it takes an user defined value.
+
+        Input :
+            an algorithm dictionnary (a dict)
+            an material dictionnary (a dict)
+            an sample dictionnary (a dict)
+        Output :
+            Nothing but a .txt file is generated (a file)
+    &#39;&#39;&#39;
+
+    file_to_write = open(&#39;Data/kc_&#39;+str(dict_algorithm[&#39;i_PFDEM&#39;])+&#39;.txt&#39;,&#39;w&#39;)
+    file_to_write.write(&#39;AXIS X\n&#39;)
+    line = &#39;&#39;
+    for x in dict_sample[&#39;x_L&#39;]:
+        line = line + str(x)+ &#39; &#39;
+    line = line + &#39;\n&#39;
+    file_to_write.write(line)
+
+    file_to_write.write(&#39;AXIS Y\n&#39;)
+    line = &#39;&#39;
+    for y in dict_sample[&#39;y_L&#39;]:
+        line = line + str(y)+ &#39; &#39;
+    line = line + &#39;\n&#39;
+    file_to_write.write(line)
+
+    file_to_write.write(&#39;DATA\n&#39;)
+    for l in range(len(dict_sample[&#39;y_L&#39;])):
+        for c in range(len(dict_sample[&#39;x_L&#39;])):
+            file_to_write.write(str(dict_sample[&#39;kc_M&#39;][-l-1][c])+&#39;\n&#39;)
+
+    file_to_write.close()
+
+#-------------------------------------------------------------------------------
+
+def Write_DEM_txt_DEM(dict_algorithm,dict_sample):
+    &#34;&#34;&#34;
+    Write a .txt file to give information about grains and contacts in DEM step.
+
+        Input :
+            an algorithm dictionnary (a dict)
+            a sample dictionnary (a dict)
+        Output :
+            Nothing, but a .txt file is generated (a .txt)
+    &#34;&#34;&#34;
+    file_to_write = open(&#39;Debug/txt/PFDEM_&#39;+str(dict_algorithm[&#39;i_PFDEM&#39;])+&#39;/ite_&#39;+str(dict_algorithm[&#39;i_DEM&#39;])+&#39;.txt&#39;,&#39;w&#39;)
+    file_to_write.write(&#39;Iteration PF : &#39;+str(dict_algorithm[&#39;i_PFDEM&#39;])+&#39;\n&#39;+\
+                        &#39;Iteration DEM : &#39;+str(dict_algorithm[&#39;i_DEM&#39;])+&#39;\n&#39;)
+    file_to_write.write(&#39;\n&#39;)
+    file_to_write.write(&#39;GRAINS LIST\n&#39;)
+    file_to_write.write(&#39;\n&#39;)
+    for grain in dict_sample[&#39;L_g&#39;]:
+        file_to_write.write(&#39;&lt;grain_o&gt;\n&#39;)
+        file_to_write.write(&#39;\tid : &#39;+str(grain.id)+&#39;\n&#39;)
+        file_to_write.write(&#39;\tCenter : [&#39;+str(int(grain.center[0]))+&#39;, &#39;+str(int(grain.center[1]))+&#39;]\n&#39;)
+        file_to_write.write(&#39;\tSpeed : [&#39;+str(round(grain.v[0],2))+&#39;, &#39;+str(round(grain.v[1],2))+&#39;]\n&#39;)
+        file_to_write.write(&#39;\tForce applied : [&#39;+str(round(grain.f[0],1))+&#39;, &#39;+str(round(grain.f[1],1))+&#39;]\n&#39;)
+        file_to_write.write(&#39;\tOmega : &#39;+str(grain.w)+&#39;\n&#39;)
+        file_to_write.write(&#39;\tSurface : &#39;+str(int(grain.surface))+&#39;\n&#39;)
+        file_to_write.write(&#39;\tCoordinate X of the border : &#39;+str(grain.l_border_x)+&#39;\n&#39;)
+        file_to_write.write(&#39;\tCoordinate Y of the border : &#39;+str(grain.l_border_y)+&#39;\n&#39;)
+        file_to_write.write(&#39;\tL_r : &#39;+str(grain.l_r)+&#39;\n&#39;)
+        file_to_write.write(&#39;\tL_theta_r : &#39;+str(grain.l_theta_r)+&#39;\n&#39;)
+        file_to_write.write(&#39;&lt;grain_c&gt;\n&#39;)
+    file_to_write.write(&#39;\n&#39;)
+    file_to_write.write(&#39;CONTACTS LIST\n&#39;)
+    file_to_write.write(&#39;\n&#39;)
+    for contact in dict_sample[&#39;L_contact&#39;]:
+        file_to_write.write(&#39;&lt;contact_o&gt;\n&#39;)
+        file_to_write.write(&#39;\tid : &#39;+str(contact.id)+&#39;\n&#39;)
+        file_to_write.write(&#39;\tGrains : &#39;+str(contact.g1.id)+&#39;-&#39;+str(contact.g2.id)+&#39;\n&#39;)
+        file_to_write.write(&#39;\tNormal : [&#39;+str(round(contact.pc_normal[0],2))+&#39;, &#39;+str(round(contact.pc_normal[1],2))+&#39;]\n&#39;)
+        file_to_write.write(&#39;\tNormal overlap : &#39;+str(round(contact.overlap_normal,2))+&#39;\n&#39;)
+        file_to_write.write(&#39;\tNormal reaction : &#39;+str(int(contact.F_2_1_n))+&#39;\n&#39;)
+        file_to_write.write(&#39;\tNormal damping : &#39;+str(int(contact.F_2_1_damp))+&#39;\n&#39;)
+        file_to_write.write(&#39;\tTangential : [&#39;+str(round(contact.pc_tangential[0],2))+&#39;, &#39;+str(round(contact.pc_tangential[1],2))+&#39;]\n&#39;)
+        file_to_write.write(&#39;\tTangential overlap : &#39;+str(round(contact.overlap_tangential,2))+&#39;\n&#39;)
+        file_to_write.write(&#39;\tTangential reaction : &#39;+str(int(contact.ft))+&#39;\n&#39;)
+        file_to_write.write(&#39;\tTangential damping : &#39;+str(int(contact.ft_damp))+&#39;\n&#39;)
+        file_to_write.write(&#39;&lt;contact_c&gt;\n&#39;)
+    file_to_write.write(&#39;\n&#39;)
+    file_to_write.write(&#39;CONTACTS WITH WALL LIST\n&#39;)
+    file_to_write.write(&#39;\n&#39;)
+    for contact in dict_sample[&#39;L_contact_gw&#39;]:
+        file_to_write.write(&#39;&lt;contact_w_o&gt;\n&#39;)
+        file_to_write.write(&#39;\tid : &#39;+str(contact.id)+&#39;\n&#39;)
+        file_to_write.write(&#39;\tType : &#39;+str(contact.nature)+&#39;\n&#39;)
+        file_to_write.write(&#39;\tGrain : &#39;+str(contact.g.id)+&#39;\n&#39;)
+        file_to_write.write(&#39;\tLimit : &#39;+str(contact.limit)+&#39;\n&#39;)
+        file_to_write.write(&#39;\tNormal : [&#39;+str(round(contact.nwg[0],2))+&#39;, &#39;+str(round(contact.nwg[1],2))+&#39;]\n&#39;)
+        file_to_write.write(&#39;\tNormal overlap : &#39;+str(round(contact.overlap,2))+&#39;\n&#39;)
+        file_to_write.write(&#39;\tNormal reaction : &#39;+str(int(contact.Fwg_n))+&#39;\n&#39;)
+        file_to_write.write(&#39;\tNormal damping : &#39;+str(int(contact.Fwg_damp_n))+&#39;\n&#39;)
+        file_to_write.write(&#39;\tTangential : [&#39;+str(round(contact.twg[0],2))+&#39;, &#39;+str(round(contact.twg[1],2))+&#39;]\n&#39;)
+        file_to_write.write(&#39;\tTangential overlap : &#39;+str(round(contact.overlap_tangential,2))+&#39;\n&#39;)
+        file_to_write.write(&#39;\tTangential reaction : &#39;+str(int(contact.ft))+&#39;\n&#39;)
+        file_to_write.write(&#39;&lt;contact_w_c&gt;\n&#39;)
+    file_to_write.close()
+
+#-------------------------------------------------------------------------------
+
+def Write_DEM_txt(dict_algorithm,dict_sample):
+    &#34;&#34;&#34;
+    Write a .txt file to give information about grains and contacts.
+
+        Input :
+            an algorithm dictionnary (a dict)
+            a sample dictionnary (a dict)
+        Output :
+            Nothing, but a .txt file is generated (a .txt)
+    &#34;&#34;&#34;
+    file_to_write = open(&#39;Debug/txt/PF_&#39;+str(dict_algorithm[&#39;i_PFDEM&#39;])+&#39;_ite_&#39;+str(dict_algorithm[&#39;i_DEM&#39;])+&#39;.txt&#39;,&#39;w&#39;)
+    file_to_write.write(&#39;Iteration PF : &#39;+str(dict_algorithm[&#39;i_PFDEM&#39;])+&#39;\n&#39;+\
+                        &#39;Iteration DEM : &#39;+str(dict_algorithm[&#39;i_DEM&#39;])+&#39;\n&#39;)
+    file_to_write.write(&#39;\n&#39;)
+    file_to_write.write(&#39;GRAINS LIST\n&#39;)
+    file_to_write.write(&#39;\n&#39;)
+    for grain in dict_sample[&#39;L_g&#39;]:
+        file_to_write.write(&#39;&lt;grain_o&gt;\n&#39;)
+        file_to_write.write(&#39;\tid : &#39;+str(grain.id)+&#39;\n&#39;)
+        file_to_write.write(&#39;\tCenter : [&#39;+str(int(grain.center[0]))+&#39;, &#39;+str(int(grain.center[1]))+&#39;]\n&#39;)
+        file_to_write.write(&#39;\tSpeed : [&#39;+str(round(grain.v[0],2))+&#39;, &#39;+str(round(grain.v[1],2))+&#39;]\n&#39;)
+        file_to_write.write(&#39;\tForce applied : [&#39;+str(round(grain.f[0],1))+&#39;, &#39;+str(round(grain.f[1],1))+&#39;]\n&#39;)
+        file_to_write.write(&#39;\tOmega : &#39;+str(grain.w)+&#39;\n&#39;)
+        file_to_write.write(&#39;\tSurface : &#39;+str(int(grain.surface))+&#39;\n&#39;)
+        file_to_write.write(&#39;\tCoordinate X of the border : &#39;+str(grain.l_border_x)+&#39;\n&#39;)
+        file_to_write.write(&#39;\tCoordinate Y of the border : &#39;+str(grain.l_border_y)+&#39;\n&#39;)
+        file_to_write.write(&#39;&lt;grain_c&gt;\n&#39;)
+    file_to_write.write(&#39;\n&#39;)
+    file_to_write.write(&#39;CONTACTS LIST\n&#39;)
+    file_to_write.write(&#39;\n&#39;)
+    for contact in dict_sample[&#39;L_contact&#39;]:
+        file_to_write.write(&#39;&lt;contact_o&gt;\n&#39;)
+        file_to_write.write(&#39;\tid : &#39;+str(contact.id)+&#39;\n&#39;)
+        file_to_write.write(&#39;\tGrains : &#39;+str(contact.g1.id)+&#39;-&#39;+str(contact.g2.id)+&#39;\n&#39;)
+        file_to_write.write(&#39;\tNormal : [&#39;+str(round(contact.pc_normal[0],2))+&#39;, &#39;+str(round(contact.pc_normal[1],2))+&#39;]\n&#39;)
+        file_to_write.write(&#39;\tNormal overlap : &#39;+str(round(contact.overlap_normal,2))+&#39;\n&#39;)
+        file_to_write.write(&#39;\tNormal reaction : &#39;+str(int(contact.F_2_1_n))+&#39;\n&#39;)
+        file_to_write.write(&#39;\tNormal damping : &#39;+str(int(contact.F_2_1_damp))+&#39;\n&#39;)
+        file_to_write.write(&#39;\tTangential : [&#39;+str(round(contact.pc_tangential[0],2))+&#39;, &#39;+str(round(contact.pc_tangential[1],2))+&#39;]\n&#39;)
+        file_to_write.write(&#39;\tTangential overlap : &#39;+str(round(contact.overlap_tangential,2))+&#39;\n&#39;)
+        file_to_write.write(&#39;\tTangential reaction : &#39;+str(int(contact.ft))+&#39;\n&#39;)
+        file_to_write.write(&#39;\tTangential damping : &#39;+str(int(contact.ft_damp))+&#39;\n&#39;)
+        file_to_write.write(&#39;&lt;contact_c&gt;\n&#39;)
+    file_to_write.write(&#39;\n&#39;)
+    file_to_write.write(&#39;CONTACTS WITH WALL LIST\n&#39;)
+    file_to_write.write(&#39;\n&#39;)
+    for contact in dict_sample[&#39;L_contact_gw&#39;]:
+        file_to_write.write(&#39;&lt;contact_w_o&gt;\n&#39;)
+        file_to_write.write(&#39;\tid : &#39;+str(contact.id)+&#39;\n&#39;)
+        file_to_write.write(&#39;\tType : &#39;+str(contact.nature)+&#39;\n&#39;)
+        file_to_write.write(&#39;\tGrain : &#39;+str(contact.g.id)+&#39;\n&#39;)
+        file_to_write.write(&#39;\tLimit : &#39;+str(contact.limit)+&#39;\n&#39;)
+        file_to_write.write(&#39;\tNormal : [&#39;+str(round(contact.nwg[0],2))+&#39;, &#39;+str(round(contact.nwg[1],2))+&#39;]\n&#39;)
+        file_to_write.write(&#39;\tNormal overlap : &#39;+str(round(contact.overlap,2))+&#39;\n&#39;)
+        file_to_write.write(&#39;\tNormal reaction : &#39;+str(int(contact.Fwg_n))+&#39;\n&#39;)
+        file_to_write.write(&#39;\tNormal damping : &#39;+str(int(contact.Fwg_damp_n))+&#39;\n&#39;)
+        file_to_write.write(&#39;\tTangential : [&#39;+str(round(contact.twg[0],2))+&#39;, &#39;+str(round(contact.twg[1],2))+&#39;]\n&#39;)
+        file_to_write.write(&#39;\tTangential overlap : &#39;+str(round(contact.overlap_tangential,2))+&#39;\n&#39;)
+        file_to_write.write(&#39;\tTangential reaction : &#39;+str(int(contact.ft))+&#39;\n&#39;)
+        file_to_write.write(&#39;&lt;contact_w_c&gt;\n&#39;)
+    file_to_write.close()</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="Owntools.Write.Write_DEM_txt"><code class="name flex">
+<span>def <span class="ident">Write_DEM_txt</span></span>(<span>dict_algorithm, dict_sample)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Write a .txt file to give information about grains and contacts.</p>
+<pre><code>Input :
+    an algorithm dictionnary (a dict)
+    a sample dictionnary (a dict)
+Output :
+    Nothing, but a .txt file is generated (a .txt)
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def Write_DEM_txt(dict_algorithm,dict_sample):
+    &#34;&#34;&#34;
+    Write a .txt file to give information about grains and contacts.
+
+        Input :
+            an algorithm dictionnary (a dict)
+            a sample dictionnary (a dict)
+        Output :
+            Nothing, but a .txt file is generated (a .txt)
+    &#34;&#34;&#34;
+    file_to_write = open(&#39;Debug/txt/PF_&#39;+str(dict_algorithm[&#39;i_PFDEM&#39;])+&#39;_ite_&#39;+str(dict_algorithm[&#39;i_DEM&#39;])+&#39;.txt&#39;,&#39;w&#39;)
+    file_to_write.write(&#39;Iteration PF : &#39;+str(dict_algorithm[&#39;i_PFDEM&#39;])+&#39;\n&#39;+\
+                        &#39;Iteration DEM : &#39;+str(dict_algorithm[&#39;i_DEM&#39;])+&#39;\n&#39;)
+    file_to_write.write(&#39;\n&#39;)
+    file_to_write.write(&#39;GRAINS LIST\n&#39;)
+    file_to_write.write(&#39;\n&#39;)
+    for grain in dict_sample[&#39;L_g&#39;]:
+        file_to_write.write(&#39;&lt;grain_o&gt;\n&#39;)
+        file_to_write.write(&#39;\tid : &#39;+str(grain.id)+&#39;\n&#39;)
+        file_to_write.write(&#39;\tCenter : [&#39;+str(int(grain.center[0]))+&#39;, &#39;+str(int(grain.center[1]))+&#39;]\n&#39;)
+        file_to_write.write(&#39;\tSpeed : [&#39;+str(round(grain.v[0],2))+&#39;, &#39;+str(round(grain.v[1],2))+&#39;]\n&#39;)
+        file_to_write.write(&#39;\tForce applied : [&#39;+str(round(grain.f[0],1))+&#39;, &#39;+str(round(grain.f[1],1))+&#39;]\n&#39;)
+        file_to_write.write(&#39;\tOmega : &#39;+str(grain.w)+&#39;\n&#39;)
+        file_to_write.write(&#39;\tSurface : &#39;+str(int(grain.surface))+&#39;\n&#39;)
+        file_to_write.write(&#39;\tCoordinate X of the border : &#39;+str(grain.l_border_x)+&#39;\n&#39;)
+        file_to_write.write(&#39;\tCoordinate Y of the border : &#39;+str(grain.l_border_y)+&#39;\n&#39;)
+        file_to_write.write(&#39;&lt;grain_c&gt;\n&#39;)
+    file_to_write.write(&#39;\n&#39;)
+    file_to_write.write(&#39;CONTACTS LIST\n&#39;)
+    file_to_write.write(&#39;\n&#39;)
+    for contact in dict_sample[&#39;L_contact&#39;]:
+        file_to_write.write(&#39;&lt;contact_o&gt;\n&#39;)
+        file_to_write.write(&#39;\tid : &#39;+str(contact.id)+&#39;\n&#39;)
+        file_to_write.write(&#39;\tGrains : &#39;+str(contact.g1.id)+&#39;-&#39;+str(contact.g2.id)+&#39;\n&#39;)
+        file_to_write.write(&#39;\tNormal : [&#39;+str(round(contact.pc_normal[0],2))+&#39;, &#39;+str(round(contact.pc_normal[1],2))+&#39;]\n&#39;)
+        file_to_write.write(&#39;\tNormal overlap : &#39;+str(round(contact.overlap_normal,2))+&#39;\n&#39;)
+        file_to_write.write(&#39;\tNormal reaction : &#39;+str(int(contact.F_2_1_n))+&#39;\n&#39;)
+        file_to_write.write(&#39;\tNormal damping : &#39;+str(int(contact.F_2_1_damp))+&#39;\n&#39;)
+        file_to_write.write(&#39;\tTangential : [&#39;+str(round(contact.pc_tangential[0],2))+&#39;, &#39;+str(round(contact.pc_tangential[1],2))+&#39;]\n&#39;)
+        file_to_write.write(&#39;\tTangential overlap : &#39;+str(round(contact.overlap_tangential,2))+&#39;\n&#39;)
+        file_to_write.write(&#39;\tTangential reaction : &#39;+str(int(contact.ft))+&#39;\n&#39;)
+        file_to_write.write(&#39;\tTangential damping : &#39;+str(int(contact.ft_damp))+&#39;\n&#39;)
+        file_to_write.write(&#39;&lt;contact_c&gt;\n&#39;)
+    file_to_write.write(&#39;\n&#39;)
+    file_to_write.write(&#39;CONTACTS WITH WALL LIST\n&#39;)
+    file_to_write.write(&#39;\n&#39;)
+    for contact in dict_sample[&#39;L_contact_gw&#39;]:
+        file_to_write.write(&#39;&lt;contact_w_o&gt;\n&#39;)
+        file_to_write.write(&#39;\tid : &#39;+str(contact.id)+&#39;\n&#39;)
+        file_to_write.write(&#39;\tType : &#39;+str(contact.nature)+&#39;\n&#39;)
+        file_to_write.write(&#39;\tGrain : &#39;+str(contact.g.id)+&#39;\n&#39;)
+        file_to_write.write(&#39;\tLimit : &#39;+str(contact.limit)+&#39;\n&#39;)
+        file_to_write.write(&#39;\tNormal : [&#39;+str(round(contact.nwg[0],2))+&#39;, &#39;+str(round(contact.nwg[1],2))+&#39;]\n&#39;)
+        file_to_write.write(&#39;\tNormal overlap : &#39;+str(round(contact.overlap,2))+&#39;\n&#39;)
+        file_to_write.write(&#39;\tNormal reaction : &#39;+str(int(contact.Fwg_n))+&#39;\n&#39;)
+        file_to_write.write(&#39;\tNormal damping : &#39;+str(int(contact.Fwg_damp_n))+&#39;\n&#39;)
+        file_to_write.write(&#39;\tTangential : [&#39;+str(round(contact.twg[0],2))+&#39;, &#39;+str(round(contact.twg[1],2))+&#39;]\n&#39;)
+        file_to_write.write(&#39;\tTangential overlap : &#39;+str(round(contact.overlap_tangential,2))+&#39;\n&#39;)
+        file_to_write.write(&#39;\tTangential reaction : &#39;+str(int(contact.ft))+&#39;\n&#39;)
+        file_to_write.write(&#39;&lt;contact_w_c&gt;\n&#39;)
+    file_to_write.close()</code></pre>
+</details>
+</dd>
+<dt id="Owntools.Write.Write_DEM_txt_DEM"><code class="name flex">
+<span>def <span class="ident">Write_DEM_txt_DEM</span></span>(<span>dict_algorithm, dict_sample)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Write a .txt file to give information about grains and contacts in DEM step.</p>
+<pre><code>Input :
+    an algorithm dictionnary (a dict)
+    a sample dictionnary (a dict)
+Output :
+    Nothing, but a .txt file is generated (a .txt)
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def Write_DEM_txt_DEM(dict_algorithm,dict_sample):
+    &#34;&#34;&#34;
+    Write a .txt file to give information about grains and contacts in DEM step.
+
+        Input :
+            an algorithm dictionnary (a dict)
+            a sample dictionnary (a dict)
+        Output :
+            Nothing, but a .txt file is generated (a .txt)
+    &#34;&#34;&#34;
+    file_to_write = open(&#39;Debug/txt/PFDEM_&#39;+str(dict_algorithm[&#39;i_PFDEM&#39;])+&#39;/ite_&#39;+str(dict_algorithm[&#39;i_DEM&#39;])+&#39;.txt&#39;,&#39;w&#39;)
+    file_to_write.write(&#39;Iteration PF : &#39;+str(dict_algorithm[&#39;i_PFDEM&#39;])+&#39;\n&#39;+\
+                        &#39;Iteration DEM : &#39;+str(dict_algorithm[&#39;i_DEM&#39;])+&#39;\n&#39;)
+    file_to_write.write(&#39;\n&#39;)
+    file_to_write.write(&#39;GRAINS LIST\n&#39;)
+    file_to_write.write(&#39;\n&#39;)
+    for grain in dict_sample[&#39;L_g&#39;]:
+        file_to_write.write(&#39;&lt;grain_o&gt;\n&#39;)
+        file_to_write.write(&#39;\tid : &#39;+str(grain.id)+&#39;\n&#39;)
+        file_to_write.write(&#39;\tCenter : [&#39;+str(int(grain.center[0]))+&#39;, &#39;+str(int(grain.center[1]))+&#39;]\n&#39;)
+        file_to_write.write(&#39;\tSpeed : [&#39;+str(round(grain.v[0],2))+&#39;, &#39;+str(round(grain.v[1],2))+&#39;]\n&#39;)
+        file_to_write.write(&#39;\tForce applied : [&#39;+str(round(grain.f[0],1))+&#39;, &#39;+str(round(grain.f[1],1))+&#39;]\n&#39;)
+        file_to_write.write(&#39;\tOmega : &#39;+str(grain.w)+&#39;\n&#39;)
+        file_to_write.write(&#39;\tSurface : &#39;+str(int(grain.surface))+&#39;\n&#39;)
+        file_to_write.write(&#39;\tCoordinate X of the border : &#39;+str(grain.l_border_x)+&#39;\n&#39;)
+        file_to_write.write(&#39;\tCoordinate Y of the border : &#39;+str(grain.l_border_y)+&#39;\n&#39;)
+        file_to_write.write(&#39;\tL_r : &#39;+str(grain.l_r)+&#39;\n&#39;)
+        file_to_write.write(&#39;\tL_theta_r : &#39;+str(grain.l_theta_r)+&#39;\n&#39;)
+        file_to_write.write(&#39;&lt;grain_c&gt;\n&#39;)
+    file_to_write.write(&#39;\n&#39;)
+    file_to_write.write(&#39;CONTACTS LIST\n&#39;)
+    file_to_write.write(&#39;\n&#39;)
+    for contact in dict_sample[&#39;L_contact&#39;]:
+        file_to_write.write(&#39;&lt;contact_o&gt;\n&#39;)
+        file_to_write.write(&#39;\tid : &#39;+str(contact.id)+&#39;\n&#39;)
+        file_to_write.write(&#39;\tGrains : &#39;+str(contact.g1.id)+&#39;-&#39;+str(contact.g2.id)+&#39;\n&#39;)
+        file_to_write.write(&#39;\tNormal : [&#39;+str(round(contact.pc_normal[0],2))+&#39;, &#39;+str(round(contact.pc_normal[1],2))+&#39;]\n&#39;)
+        file_to_write.write(&#39;\tNormal overlap : &#39;+str(round(contact.overlap_normal,2))+&#39;\n&#39;)
+        file_to_write.write(&#39;\tNormal reaction : &#39;+str(int(contact.F_2_1_n))+&#39;\n&#39;)
+        file_to_write.write(&#39;\tNormal damping : &#39;+str(int(contact.F_2_1_damp))+&#39;\n&#39;)
+        file_to_write.write(&#39;\tTangential : [&#39;+str(round(contact.pc_tangential[0],2))+&#39;, &#39;+str(round(contact.pc_tangential[1],2))+&#39;]\n&#39;)
+        file_to_write.write(&#39;\tTangential overlap : &#39;+str(round(contact.overlap_tangential,2))+&#39;\n&#39;)
+        file_to_write.write(&#39;\tTangential reaction : &#39;+str(int(contact.ft))+&#39;\n&#39;)
+        file_to_write.write(&#39;\tTangential damping : &#39;+str(int(contact.ft_damp))+&#39;\n&#39;)
+        file_to_write.write(&#39;&lt;contact_c&gt;\n&#39;)
+    file_to_write.write(&#39;\n&#39;)
+    file_to_write.write(&#39;CONTACTS WITH WALL LIST\n&#39;)
+    file_to_write.write(&#39;\n&#39;)
+    for contact in dict_sample[&#39;L_contact_gw&#39;]:
+        file_to_write.write(&#39;&lt;contact_w_o&gt;\n&#39;)
+        file_to_write.write(&#39;\tid : &#39;+str(contact.id)+&#39;\n&#39;)
+        file_to_write.write(&#39;\tType : &#39;+str(contact.nature)+&#39;\n&#39;)
+        file_to_write.write(&#39;\tGrain : &#39;+str(contact.g.id)+&#39;\n&#39;)
+        file_to_write.write(&#39;\tLimit : &#39;+str(contact.limit)+&#39;\n&#39;)
+        file_to_write.write(&#39;\tNormal : [&#39;+str(round(contact.nwg[0],2))+&#39;, &#39;+str(round(contact.nwg[1],2))+&#39;]\n&#39;)
+        file_to_write.write(&#39;\tNormal overlap : &#39;+str(round(contact.overlap,2))+&#39;\n&#39;)
+        file_to_write.write(&#39;\tNormal reaction : &#39;+str(int(contact.Fwg_n))+&#39;\n&#39;)
+        file_to_write.write(&#39;\tNormal damping : &#39;+str(int(contact.Fwg_damp_n))+&#39;\n&#39;)
+        file_to_write.write(&#39;\tTangential : [&#39;+str(round(contact.twg[0],2))+&#39;, &#39;+str(round(contact.twg[1],2))+&#39;]\n&#39;)
+        file_to_write.write(&#39;\tTangential overlap : &#39;+str(round(contact.overlap_tangential,2))+&#39;\n&#39;)
+        file_to_write.write(&#39;\tTangential reaction : &#39;+str(int(contact.ft))+&#39;\n&#39;)
+        file_to_write.write(&#39;&lt;contact_w_c&gt;\n&#39;)
+    file_to_write.close()</code></pre>
+</details>
+</dd>
+<dt id="Owntools.Write.Write_Emec_txt"><code class="name flex">
+<span>def <span class="ident">Write_Emec_txt</span></span>(<span>dict_algorithm, dict_sample)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Write a .txt file needed for MOOSE simulation.</p>
+<p>The variable ep is transmitted to the MOOSE simulation.
+This variable is the dissolution field due to mechanical energy at the contact level.</p>
+<pre><code>Input :
+    an algorithm dictionnary (a dict)
+    a sample dictionnary (a dict)
+    a sollicitation dictionnary (a dict)
+Output :
+    Nothing but a .txt file is generated (a file)
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def Write_Emec_txt(dict_algorithm, dict_sample):
+    &#39;&#39;&#39;
+    Write a .txt file needed for MOOSE simulation.
+
+    The variable ep is transmitted to the MOOSE simulation.
+    This variable is the dissolution field due to mechanical energy at the contact level.
+
+        Input :
+            an algorithm dictionnary (a dict)
+            a sample dictionnary (a dict)
+            a sollicitation dictionnary (a dict)
+        Output :
+            Nothing but a .txt file is generated (a file)
+    &#39;&#39;&#39;
+    #write data
+    file_to_write = open(&#39;Data/ep_&#39;+str(dict_algorithm[&#39;i_PFDEM&#39;])+&#39;.txt&#39;,&#39;w&#39;)
+    file_to_write.write(&#39;AXIS X\n&#39;)
+    line = &#39;&#39;
+    for x in dict_sample[&#39;x_L&#39;]:
+        line = line + str(x)+ &#39; &#39;
+    line = line + &#39;\n&#39;
+    file_to_write.write(line)
+
+    file_to_write.write(&#39;AXIS Y\n&#39;)
+    line = &#39;&#39;
+    for y in dict_sample[&#39;y_L&#39;]:
+        line = line + str(y)+ &#39; &#39;
+    line = line + &#39;\n&#39;
+    file_to_write.write(line)
+
+    file_to_write.write(&#39;DATA\n&#39;)
+    for l in range(len(dict_sample[&#39;y_L&#39;])):
+        for c in range(len(dict_sample[&#39;x_L&#39;])):
+            file_to_write.write(str(dict_sample[&#39;Emec_M&#39;][-1-l][c])+&#39;\n&#39;)
+
+    file_to_write.close()</code></pre>
+</details>
+</dd>
+<dt id="Owntools.Write.Write_eta_txt"><code class="name flex">
+<span>def <span class="ident">Write_eta_txt</span></span>(<span>dict_algorithm, dict_sample)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Write a .txt file needed for MOOSE simulation.</p>
+<p>The variables etai are transmitted to the MOOSE simulation.</p>
+<pre><code>Input :
+    an algorithm dictionnary (a dict)
+    an sample dictionnary (a dict)
+Output :
+    Nothing but a .txt file is generated (a file)
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def Write_eta_txt(dict_algorithm, dict_sample):
+    &#39;&#39;&#39;
+    Write a .txt file needed for MOOSE simulation.
+
+    The variables etai are transmitted to the MOOSE simulation.
+
+        Input :
+            an algorithm dictionnary (a dict)
+            an sample dictionnary (a dict)
+        Output :
+            Nothing but a .txt file is generated (a file)
+    &#39;&#39;&#39;
+    for etai in dict_sample[&#39;L_etai&#39;] :
+        file_to_write = open(&#39;Data/eta&#39;+str(int(etai.id+1))+&#39;_&#39;+str(dict_algorithm[&#39;i_PFDEM&#39;])+&#39;.txt&#39;,&#39;w&#39;)
+        file_to_write.write(&#39;AXIS X\n&#39;)
+        line = &#39;&#39;
+        for x in dict_sample[&#39;x_L&#39;]:
+            line = line + str(x)+ &#39; &#39;
+        line = line + &#39;\n&#39;
+        file_to_write.write(line)
+
+        file_to_write.write(&#39;AXIS Y\n&#39;)
+        line = &#39;&#39;
+        for y in dict_sample[&#39;y_L&#39;]:
+            line = line + str(y)+ &#39; &#39;
+        line = line + &#39;\n&#39;
+        file_to_write.write(line)
+
+        file_to_write.write(&#39;DATA\n&#39;)
+        for l in range(len(dict_sample[&#39;y_L&#39;])):
+            for c in range(len(dict_sample[&#39;x_L&#39;])):
+                file_to_write.write(str(etai.etai_M[-1-l][c])+&#39;\n&#39;)
+
+        file_to_write.close()</code></pre>
+</details>
+</dd>
+<dt id="Owntools.Write.Write_i"><code class="name flex">
+<span>def <span class="ident">Write_i</span></span>(<span>dict_algorithm, dict_material, dict_sample, dict_sollicitation)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Create the .i file to run MOOSE simulation.</p>
+<p>The file is generated from a template nammed PF_ACS_base.i</p>
+<p>Input :
+a algorithm dictionnary (a dictionnary)
+a sample dictionnary (a dictionnary)
+a material dictionnary (a dictionnary)
+Output :
+Nothing but a txt .i file is generated (a file)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def Write_i(dict_algorithm, dict_material, dict_sample, dict_sollicitation):
+  &#39;&#39;&#39;
+  Create the .i file to run MOOSE simulation.
+
+  The file is generated from a template nammed PF_ACS_base.i
+
+    Input :
+        a algorithm dictionnary (a dictionnary)
+        a sample dictionnary (a dictionnary)
+        a material dictionnary (a dictionnary)
+    Output :
+        Nothing but a txt .i file is generated (a file)
+  &#39;&#39;&#39;
+  file_to_write = open(dict_algorithm[&#39;namefile&#39;]+&#39;_&#39;+str(dict_algorithm[&#39;i_PFDEM&#39;])+&#39;.i&#39;,&#39;w&#39;)
+  file_to_read = open(&#39;PF_ACS_base.i&#39;,&#39;r&#39;)
+  lines = file_to_read.readlines()
+  file_to_read.close()
+
+  j = 0
+  for line in lines :
+    j = j + 1
+    if j == 4:
+      line = line[:-1] + &#39; &#39; + str(len(dict_sample[&#39;x_L&#39;])-1)+&#39;\n&#39;
+    elif j == 5:
+      line = line[:-1] + &#39; &#39; + str(len(dict_sample[&#39;y_L&#39;])-1)+&#39;\n&#39;
+    elif j == 7:
+      line = line[:-1] + &#39; &#39; + str(min(dict_sample[&#39;x_L&#39;]))+&#39;\n&#39;
+    elif j == 8:
+      line = line[:-1] + &#39; &#39; + str(max(dict_sample[&#39;x_L&#39;]))+&#39;\n&#39;
+    elif j == 9:
+      line = line[:-1] + &#39; &#39; + str(min(dict_sample[&#39;y_L&#39;]))+&#39;\n&#39;
+    elif j == 10:
+      line = line[:-1] + &#39; &#39; + str(max(dict_sample[&#39;y_L&#39;]))+&#39;\n&#39;
+    elif j == 20:
+      line = &#39;&#39;
+      for etai in dict_sample[&#39;L_etai&#39;]:
+          line = line + &#39;\t[./eta&#39;+str(int(etai.id+1))+&#39;]\n&#39;+\
+                        &#39;\t\torder = FIRST\n&#39;+\
+                        &#39;\t\tfamily = LAGRANGE\n&#39;+\
+                        &#39;\t\t[./InitialCondition]\n&#39;+\
+                        &#39;\t\t\ttype = FunctionIC\n&#39;+\
+                        &#39;\t\t\tfunction = eta&#39;+str(int(etai.id+1))+&#39;_txt\n&#39;+\
+                        &#39;\t\t[../]\n&#39;+\
+                        &#39;\t[../]\n&#39;
+    elif j == 30:
+      line = &#39;&#39;
+      for etai in dict_sample[&#39;L_etai&#39;]:
+          line = line + &#39;\t#\n&#39;+\
+                        &#39;\t# Order parameter eta&#39;+str(int(etai.id+1))+&#39;\n&#39;+\
+                        &#39;\t#\n&#39;+\
+                        &#39;\t[./deta&#39;+str(int(etai.id+1))+&#39;dt]\n&#39;+\
+                        &#39;\t\ttype = TimeDerivative\n&#39;+\
+                        &#39;\t\tvariable = eta&#39;+str(int(etai.id+1))+&#39;\n&#39;+\
+                        &#39;\t[../]\n&#39;+\
+                        &#39;\t[./ACBulk&#39;+str(int(etai.id+1))+&#39;]\n&#39;+\
+                        &#39;\t\ttype = AllenCahn\n&#39;+\
+                        &#39;\t\tvariable = eta&#39;+str(int(etai.id+1))+&#39;\n&#39;
+          args_str = &#39;&#39;
+          for etaj in dict_sample[&#39;L_etai&#39;] :
+              if etai.id != etaj.id :
+                  args_str = args_str + &#39;eta&#39;+str(int(etaj.id+1))+&#39; &#39;
+          line = line + &#34;\t\targs = &#39;&#34;+args_str[:-1]+&#34;&#39;\n&#34;+\
+                        &#39;\t\tmob_name = L\n&#39;+\
+                        &#39;\t\tf_name = F_total\n&#39;+\
+                        &#39;\t[../]\n&#39;+\
+                        &#39;\t[./ACInterface&#39;+str(int(etai.id+1))+&#39;]\n&#39;+\
+                        &#39;\t\ttype = ACInterface\n&#39;+\
+                        &#39;\t\tvariable = eta&#39;+str(int(etai.id+1))+&#39;\n&#39;+\
+                        &#39;\t\tmob_name = L\n&#39;+\
+                        &#34;\t\tkappa_name = &#39;kappa_eta&#39;\n&#34;+\
+                        &#39;\t[../]\n&#39;
+    elif j == 38:
+      line = &#39;&#39;
+      for etai in dict_sample[&#39;L_etai&#39;]:
+          line = line + &#39;\t[./eta&#39;+str(int(etai.id+1))+&#39;_c]\n&#39;+\
+                        &#39;\t\ttype = CoupledTimeDerivative\n&#39;+\
+                        &#34;\t\tv = &#39;eta&#34;+str(int(etai.id+1))+&#34;&#39;\n&#34;+\
+                        &#39;\t\tvariable = c\n&#39;+\
+                        &#39;\t[../]\n&#39;
+    elif j == 50:
+      line = &#34;\t\tprop_values =&#39;&#34;+str(dict_material[&#39;M&#39;])+&#39; &#39;+str(dict_material[&#39;kappa_eta&#39;])+&#34;&#39;\n&#34;
+    elif j == 68:
+        args_str = &#39;&#39;
+        for etai in dict_sample[&#39;L_etai&#39;] :
+            args_str = args_str + &#39;eta&#39;+str(int(etai.id+1))+&#39; &#39;
+        line = &#34;\t\targs = &#39;&#34;+args_str[:-1]+&#34;&#39;\n&#34;
+    elif j == 70:
+        line = &#34;\t\tconstant_expressions = &#39;&#34;+str(dict_material[&#39;Energy_barrier&#39;])+&#34;&#39;\n&#34;
+    elif j == 71:
+        line = &#34;\t\tfunction = &#39;h*(&#34;
+        etai_str = &#39;&#39;
+        for etai in dict_sample[&#39;L_etai&#39;]:
+            etai_str = etai_str + &#39;eta&#39;+str(int(etai.id+1))+&#39;^2*(1-eta&#39;+str(int(etai.id+1))+&#39;)^2+&#39;
+        line = line + etai_str[:-1] + &#34;)&#39;\n&#34;
+    elif j == 79:
+        line = &#34;\t\targs = &#39;&#34;
+        etai_str = &#39;&#39;
+        for etai in dict_sample[&#39;L_etai&#39;]:
+            etai_str = etai_str + &#39;eta&#39;+str(int(etai.id+1))+&#39; &#39;
+        line = line + etai_str[:-1] + &#34;&#39;\n&#34;
+    elif j == 81:
+        line =  &#34;\t\tfunction = &#39;&#34;
+        etai_str = &#39;&#39;
+        for etai in dict_sample[&#39;L_etai&#39;]:
+            etai_str = etai_str + &#39;ep*3*eta&#39;+str(int(etai.id+1))+&#39;^2-ep*2*eta&#39;+str(int(etai.id+1))+&#39;^3+&#39;
+        line = line + etai_str[:-1] + &#34;&#39;\n&#34;
+    elif j == 89:
+        line =  &#34;\t\targs = &#39;c &#34;
+        etai_str = &#39;&#39;
+        for etai in dict_sample[&#39;L_etai&#39;]:
+            etai_str = etai_str + &#39;eta&#39;+str(int(etai.id+1))+&#39; &#39;
+        line = line + etai_str[:-1] + &#34;&#39;\n&#34;
+    elif j == 91 :
+      line = &#34;\t\tconstant_expressions = &#39;&#34;+str(dict_sollicitation[&#39;chi&#39;])+&#34;&#39;\n&#34;
+    elif j == 92:
+        line =  &#34;\t\tfunction = &#39;&#34;
+        etai_str = &#39;&#39;
+        for etai in dict_sample[&#39;L_etai&#39;]:
+            etai_str = etai_str + &#39;chi*c*(3*eta&#39;+str(int(etai.id+1))+&#39;^2-2*eta&#39;+str(int(etai.id+1))+&#39;^3)+&#39;
+        line = line + etai_str[:-1] + &#34;&#39;\n&#34;
+    elif j == 100:
+        line =  &#34;\t\targs = &#39;&#34;
+        etai_str = &#39;&#39;
+        for etai in dict_sample[&#39;L_etai&#39;]:
+            etai_str = etai_str + &#39;eta&#39;+str(int(etai.id+1))+&#39; &#39;
+        line = line + etai_str[:-1] + &#34;&#39;\n&#34;
+    elif j == 101:
+        etai_str = &#39;&#39;
+        for etai in dict_sample[&#39;L_etai&#39;]:
+            etai_str = etai_str + &#39;eta&#39;+str(int(etai.id+1))+&#39;,&#39;
+        line =  &#34;\t\tmaterial_property_names = &#39;F(&#34;+etai_str[:-1]+&#39;) Ed_mec(&#39;+etai_str[:-1]+&#39;) Ed_pre(&#39;+etai_str[:-1]+&#34;)&#39;\n&#34;
+    elif j == 109:
+        line = &#39;&#39;
+        for etai in dict_sample[&#39;L_etai&#39;]:
+            line = line + &#39;\t[eta&#39;+str(int(etai.id+1))+&#39;_txt]\n&#39;+\
+                          &#39;\t\ttype = PiecewiseMultilinear\n&#39;+\
+                          &#39;\t\tdata_file = Data/eta&#39;+str(int(etai.id+1))+&#39;_&#39;+str(dict_algorithm[&#39;i_PFDEM&#39;])+&#39;.txt\n&#39;+\
+                          &#39;\t[]\n&#39;
+    elif j == 112:
+        line = &#39;\t\tdata_file = Data/c_&#39;+str(dict_algorithm[&#39;i_PFDEM&#39;])+&#39;.txt\n&#39;
+    elif j == 116:
+        line = &#39;\t\tdata_file = Data/ep_&#39;+str(dict_algorithm[&#39;i_PFDEM&#39;])+&#39;.txt\n&#39;
+    elif j == 120:
+        line = &#39;\t\tdata_file = Data/kc_&#39;+str(dict_algorithm[&#39;i_PFDEM&#39;])+&#39;.txt\n&#39;
+    elif j == 150:
+        line =  &#39;\t\tend_time = &#39;+str(dict_algorithm[&#39;dt_PF&#39;]*dict_algorithm[&#39;n_t_PF&#39;])+&#39;\n&#39;
+    elif j == 154:
+        line =  &#39;\t\tdt = &#39;+str(dict_algorithm[&#39;dt_PF&#39;]) +&#39;\n&#39;
+
+    file_to_write.write(line)
+  file_to_write.close()</code></pre>
+</details>
+</dd>
+<dt id="Owntools.Write.Write_kc_txt"><code class="name flex">
+<span>def <span class="ident">Write_kc_txt</span></span>(<span>dict_algorithm, dict_sample)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Write a .txt file needed for MOOSE simulation.</p>
+<p>The variable kc is transmitted to the MOOSE simulation.
+This variable is the diffusion coefficient of the solute.
+It takes the value 0 if the point is inside one grain and not in the other.
+Else it takes an user defined value.</p>
+<pre><code>Input :
+    an algorithm dictionnary (a dict)
+    an material dictionnary (a dict)
+    an sample dictionnary (a dict)
+Output :
+    Nothing but a .txt file is generated (a file)
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def Write_kc_txt(dict_algorithm, dict_sample):
+    &#39;&#39;&#39;
+    Write a .txt file needed for MOOSE simulation.
+
+    The variable kc is transmitted to the MOOSE simulation.
+    This variable is the diffusion coefficient of the solute.
+    It takes the value 0 if the point is inside one grain and not in the other.
+    Else it takes an user defined value.
+
+        Input :
+            an algorithm dictionnary (a dict)
+            an material dictionnary (a dict)
+            an sample dictionnary (a dict)
+        Output :
+            Nothing but a .txt file is generated (a file)
+    &#39;&#39;&#39;
+
+    file_to_write = open(&#39;Data/kc_&#39;+str(dict_algorithm[&#39;i_PFDEM&#39;])+&#39;.txt&#39;,&#39;w&#39;)
+    file_to_write.write(&#39;AXIS X\n&#39;)
+    line = &#39;&#39;
+    for x in dict_sample[&#39;x_L&#39;]:
+        line = line + str(x)+ &#39; &#39;
+    line = line + &#39;\n&#39;
+    file_to_write.write(line)
+
+    file_to_write.write(&#39;AXIS Y\n&#39;)
+    line = &#39;&#39;
+    for y in dict_sample[&#39;y_L&#39;]:
+        line = line + str(y)+ &#39; &#39;
+    line = line + &#39;\n&#39;
+    file_to_write.write(line)
+
+    file_to_write.write(&#39;DATA\n&#39;)
+    for l in range(len(dict_sample[&#39;y_L&#39;])):
+        for c in range(len(dict_sample[&#39;x_L&#39;])):
+            file_to_write.write(str(dict_sample[&#39;kc_M&#39;][-l-1][c])+&#39;\n&#39;)
+
+    file_to_write.close()</code></pre>
+</details>
+</dd>
+<dt id="Owntools.Write.Write_solute_txt"><code class="name flex">
+<span>def <span class="ident">Write_solute_txt</span></span>(<span>dict_algorithm, dict_sample)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Write a .txt file needed for MOOSE simulation.</p>
+<p>The variable c is transmitted to the MOOSE simulation.</p>
+<pre><code>Input :
+    an algorithm dictionnary (a dict)
+    an sample dictionnary (a dict)
+Output :
+    Nothing but a .txt file is generated (a file)
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def Write_solute_txt(dict_algorithm, dict_sample):
+    &#39;&#39;&#39;
+    Write a .txt file needed for MOOSE simulation.
+
+    The variable c is transmitted to the MOOSE simulation.
+
+        Input :
+            an algorithm dictionnary (a dict)
+            an sample dictionnary (a dict)
+        Output :
+            Nothing but a .txt file is generated (a file)
+    &#39;&#39;&#39;
+    file_to_write = open(&#39;Data/c_&#39;+str(dict_algorithm[&#39;i_PFDEM&#39;])+&#39;.txt&#39;,&#39;w&#39;)
+    file_to_write.write(&#39;AXIS X\n&#39;)
+    line = &#39;&#39;
+    for x in dict_sample[&#39;x_L&#39;]:
+        line = line + str(x)+ &#39; &#39;
+    line = line + &#39;\n&#39;
+    file_to_write.write(line)
+
+    file_to_write.write(&#39;AXIS Y\n&#39;)
+    line = &#39;&#39;
+    for y in dict_sample[&#39;y_L&#39;]:
+        line = line + str(y)+ &#39; &#39;
+    line = line + &#39;\n&#39;
+    file_to_write.write(line)
+
+    file_to_write.write(&#39;DATA\n&#39;)
+    for l in range(len(dict_sample[&#39;y_L&#39;])):
+        for c in range(len(dict_sample[&#39;x_L&#39;])):
+            file_to_write.write(str(dict_sample[&#39;solute_M&#39;][-1-l][c])+&#39;\n&#39;)
+
+    file_to_write.close()</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="Owntools" href="https://alexsacmorane.github.io/pfdem/pfdem_acs_mg/owntools">Owntools</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="two-column">
+<li><code><a title="Owntools.Write.Write_DEM_txt" href="#Owntools.Write.Write_DEM_txt">Write_DEM_txt</a></code></li>
+<li><code><a title="Owntools.Write.Write_DEM_txt_DEM" href="#Owntools.Write.Write_DEM_txt_DEM">Write_DEM_txt_DEM</a></code></li>
+<li><code><a title="Owntools.Write.Write_Emec_txt" href="#Owntools.Write.Write_Emec_txt">Write_Emec_txt</a></code></li>
+<li><code><a title="Owntools.Write.Write_eta_txt" href="#Owntools.Write.Write_eta_txt">Write_eta_txt</a></code></li>
+<li><code><a title="Owntools.Write.Write_i" href="#Owntools.Write.Write_i">Write_i</a></code></li>
+<li><code><a title="Owntools.Write.Write_kc_txt" href="#Owntools.Write.Write_kc_txt">Write_kc_txt</a></code></li>
+<li><code><a title="Owntools.Write.Write_solute_txt" href="#Owntools.Write.Write_solute_txt">Write_solute_txt</a></code></li>
+</ul>
+</li>
+</ul>
+<br>
+<a href="https://alexsacmorane.github.io/pfdem/pfdem_acs_mg/owntools">Owntools</a>
+<br>
+<a href="https://alexsacmorane.github.io/pfdem/pfdem_acs_mg">PFDEM_ACS_MG</a>
+<br>
+<a href="https://alexsacmorane.github.io">Home</a>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>
