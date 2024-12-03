@@ -79,10 +79,10 @@ def run_moose(dict_user, dict_sample):
 
     # generate .i file
     write_i(dict_user, dict_sample) # in prepare_pf.py
-    
-    # run pf simulation    
+
+    # run pf simulation
     os.system('mpiexec -n '+str(dict_user['n_proc'])+' ~/projects/moose/modules/phase_field/phase_field-opt -i pf.i')
-    
+
     # sort output
     last_j_str = sort_files(dict_user, dict_sample) # in tools.py
 
@@ -104,7 +104,7 @@ def track_front(dict_user, dict_sample):
     eta_map = dict_sample['eta_map'].copy()
     # iterate on the x-axis
     for i_x in range(len(dict_sample['x_L'])):
-        # search the y coordinate of the front 
+        # search the y coordinate of the front
         i_y = 0
         while not (0.5<=eta_map[-1-i_y, i_x] and eta_map[-1-i_y-1, i_x]<=0.5):
             i_y = i_y + 1
@@ -129,11 +129,11 @@ def track_eta_profile(dict_user, dict_sample):
     eta_map = dict_sample['eta_map'].copy()
     # tracker
     dict_user['L_L_eta_center'].append(eta_map[:, 0].copy())
-    dict_user['L_L_eta_ext'].append(eta_map[:, -1].copy()) 
+    dict_user['L_L_eta_ext'].append(eta_map[:, -1].copy())
 
 # ------------------------------------------------------------------------------------------------------------------------------------------ #
 # Plan
-    
+
 # get parameters
 dict_user = get_parameters() # from Parameters.py
 dict_sample = {}
@@ -185,7 +185,7 @@ if 'ic' in dict_user['L_figures']:
 track_front(dict_user, dict_sample)
 track_eta_profile(dict_user, dict_sample)
 dict_user['time_L'].append(0)
-   
+
 # ------------------------------------------------------------------------------------------------------------------------------------------ #
 # Performances
 
@@ -335,10 +335,10 @@ def run_moose(dict_user, dict_sample):
 
     # generate .i file
     write_i(dict_user, dict_sample) # in prepare_pf.py
-    
-    # run pf simulation    
+
+    # run pf simulation
     os.system('mpiexec -n '+str(dict_user['n_proc'])+' ~/projects/moose/modules/phase_field/phase_field-opt -i pf.i')
-    
+
     # sort output
     last_j_str = sort_files(dict_user, dict_sample) # in tools.py
 
@@ -351,7 +351,7 @@ def run_moose(dict_user, dict_sample):
 </code></pre>
 </details>
 </dd>
-    
+
 <dt id="main.track_front"><code class="name flex">
 <span>def <span class="ident">track_front</span></span>(<span>)</span>
 </code></dt>
@@ -371,7 +371,7 @@ def track_front(dict_user, dict_sample):
     eta_map = dict_sample['eta_map'].copy()
     # iterate on the x-axis
     for i_x in range(len(dict_sample['x_L'])):
-        # search the y coordinate of the front 
+        # search the y coordinate of the front
         i_y = 0
         while not (0.5<=eta_map[-1-i_y, i_x] and eta_map[-1-i_y-1, i_x]<=0.5):
             i_y = i_y + 1
@@ -388,7 +388,7 @@ def track_front(dict_user, dict_sample):
 </code></pre>
 </details>
 </dd>
-    
+
 <dt id="main.track_eta_profile"><code class="name flex">
 <span>def <span class="ident">track_eta_profile</span></span>(<span>)</span>
 </code></dt>
@@ -411,7 +411,7 @@ def track_eta_profile(dict_user, dict_sample):
 </code></pre>
 </details>
 </dd>
-    
+
 </dl>
 </section>
 <section>
@@ -432,7 +432,7 @@ def track_eta_profile(dict_user, dict_sample):
 </li>
 </ul>
 <br>
-<a href="https://alexsacmorane.github.io/indenter">Indentation of a solid during pressure solution</a>
+<a href="https://alexsacmorane.github.io/pf/indenter">Indentation of a solid during pressure solution</a>
 <br>
 <a href="https://alexsacmorane.github.io">Home</a>
 </nav>
