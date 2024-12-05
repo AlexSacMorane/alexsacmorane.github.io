@@ -1,0 +1,806 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>User API documentation</title>
+<meta name="description" content="@author: Alexandre Sac--Morane
+alexandre.sac-morane@uclouvain.be …" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>Parameters</code></h1>
+</header>
+<section id="section-intro">
+<p>@author: Alexandre Sac&ndash;Morane
+alexandre.sac-morane@uclouvain.be</p>
+<p>Definition of the parameters used in the simulatio.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+  #------------------------------------------------------------------------------------------------------------------------------------------ #
+  # Librairies
+  #------------------------------------------------------------------------------------------------------------------------------------------#
+
+  import numpy as np
+
+  #------------------------------------------------------------------------------------------------------------------------------------------ #
+  # Parameters
+  #------------------------------------------------------------------------------------------------------------------------------------------#
+
+  def get_parameters():
+      '''
+      Define the parameters used in the simulation.
+      '''
+      #---------------------------------------------------------------------#
+      # Norrmalization
+      n_dist = 100*1e-6 # m
+      n_time = 24*60*60 # s
+      n_mol = 0.73*1e3 * n_dist**3 # mol
+
+      #---------------------------------------------------------------------#
+      # PFDEM
+
+      n_DEMPF_ite = 150 # number of PFDEM iterations
+      n_proc = 4 # number of processors used
+      j_total = 0 # index global of results
+      save_simulation = False # indicate if the simulation is saved
+      n_max_vtk_files = 10 # maximum number of vtk files (can be None to save all files)
+
+      # Select Figures to plot
+      # Available:
+      # contact_pressure, contact_distrib_m_ed, contact_point_ed, contact_volume, contact_nb_node
+      # contact_detection, contact_h_s_v, contact_dem, saturation, m_c_pore
+      # m_ed, dt_PF, IC, processor, sphericities, force_applied, maps, n_grain_kc_map, dim_dom
+      # shape_evolution, n_vertices, sum_etai_c, mean_etai_c, mass_loss, performances
+      # disp_strain, disp_strain_andrade, sample_height, y_contactPoint
+      L_figures = ['maps', 'shape_evolution', 'contact_pressure', 'saturation', 'm_c_pore', 'disp_strain']
+
+      # Figure (plot all or current)
+      # The maps configuration
+      print_all_map_config = False # else only the current one is printed
+
+      #---------------------------------------------------------------------#
+      # DEM (Yade)
+
+      # steady state detection
+      n_ite_max = 5000 # maximum number of iteration during a DEM step
+      n_steady_state_detection = 100 # number of iterations considered in the window
+      # the difference between max and min < tolerance * force_applied
+      steady_state_detection = 0.02
+      # + the force applied must be contained in this window
+
+      # sollicitation
+      force_applied = 100e6  # (kg m s-2)
+      control_force = True # Boolean to determine if the force is controled with the contact volume
+
+      # DEM material parameters
+      # Young modulus
+      E = 2e9 # (kg m-1 s-2)
+
+      # Poisson ratio
+      Poisson = 0.3
+
+      # Figure (plot all or current)
+      # The evolution of the overlap durig DEM steps
+      print_all_contact_dem = False # else only the current one is printed
+      # The evolution of shape (compared to the initial state)
+      print_all_shape_evolution = False # else only the current one is printed
+
+      #---------------------------------------------------------------------#
+      # Grain description
+
+      # shape of the grain
+      # Sphere, Hex or Proxy_Hex
+      Shape = 'Sphere'
+
+      # the radius of grains
+      radius = 100*1e-6/n_dist # m/m
+      # discretization of the grain
+      n_phi = 30
+
+      # size of the indenter
+      plate = 0.1*radius # m/m
+
+      #---------------------------------------------------------------------#
+      # Phase-Field (Moose)
+
+      # determine if remeshing is available
+      remesh = True
+      # mesh
+      check_database = True
+      # remesh
+      if remesh:
+          size_x_mesh = radius/40
+          size_y_mesh = size_x_mesh
+          m_size_mesh = (size_x_mesh+size_y_mesh)/2
+          margin_mesh_domain = 15*size_x_mesh
+      # constant mesh
+      else :
+          x_min = -1.3*radius
+          x_max =  1.3*radius
+          y_min = -2.3*radius
+          y_max =  2.3*radius
+          n_mesh_x = 100
+          n_mesh_y = 200
+          m_size_mesh = ((x_max-x_min)/(n_mesh_x-1)+(y_max-y_min)/(n_mesh_y-1))/2
+
+      # PF material parameters
+      # the energy barrier
+      Energy_barrier = 1
+      # number of mesh in the interface
+      n_int = 6
+      # the interface thickness
+      w = m_size_mesh*n_int
+      # the gradient coefficient
+      kappa_eta = Energy_barrier*w*w/9.86
+      # the mobility
+      Mobility_eff = 3*(100*1e-6/(24*60*60))/(n_dist/n_time) # m.s-1/(m.s-1)
+
+      # temperature
+      temperature = 623 # K
+      # molar volume
+      V_m = (2.2*1e-5)/(n_dist**3/n_mol) # (m3 mol-1)/(m3 mol-1)
+      # constant
+      R_cst = (8.32)/(n_dist**2/(n_time**2*n_mol)) # (kg m2 s-2 mol-1 K-1)/(m2 s-2 mol-1)
+
+      # kinetics of dissolution and precipitation
+      # it affects the tilting coefficient in Ed
+      k_diss = 1*(0.005)/(m_size_mesh) # ed_j = ed_i*m_i/m_j
+      k_prec = k_diss*10 # -
+
+      # molar concentration at the equilibrium
+      C_eq = (0.73*1e3)/(n_mol/n_dist**3) # (mol m-3)/(mol m-3)
+
+      # diffusion of the solute
+      size_film = m_size_mesh*5
+      D_solute = (4e-14/2/size_film)/(n_dist*n_dist/n_time) # (m2 s-1)/(m2 s-1)
+      n_struct_element = int(round(size_film/m_size_mesh,0))
+      struct_element = np.array(np.ones((n_struct_element,n_struct_element)), dtype=bool) # for dilation
+
+      # Aitken method
+      # the time stepping and duration of one PF simualtion
+      # level 0
+      dt_PF_0 = (0.01*24*60*60)/n_time # time step
+      # level 1
+      dt_PF_1 = dt_PF_0
+      m_ed_contact_1 = 0
+      # level 2
+      dt_PF_2 = dt_PF_1
+      m_ed_contact_2 = 0
+      # n_t_PF*dt_PF gives the total time duration
+      n_t_PF = 200 # number of iterations
+
+      # the criteria on residual
+      crit_res = 1e-3
+
+      # Contact box detection
+      eta_contact_box_detection = 0.1 # value of the phase field searched to determine the contact box
+
+      # Figure (plot all or current)
+      # The detection of the contact by a box
+      print_all_contact_detection = False # else only the current one is printed
+
+      #---------------------------------------------------------------------#
+      # trackers
+
+      L_displacement = []
+      L_sum_eta_1 = []
+      L_sum_eta_2 = []
+      L_sum_c = []
+      L_sum_mass = []
+      L_m_eta_1 = []
+      L_m_eta_2 = []
+      L_m_c = []
+      L_m_mass = []
+      L_distance_extrema = []
+      L_equivalent_area = []
+      L_contact_overlap = []
+      L_contact_area = []
+      L_contact_volume_yade = []
+      L_contact_volume_moose = []
+      L_contact_volume_box = []
+      L_t_pf_to_dem_1 = []
+      L_t_pf_to_dem_2 = []
+      L_t_dem = []
+      L_t_dem_to_pf = []
+      L_t_pf = []
+      L_P_applied = []
+      L_n_v_1 = []
+      L_n_v_2 = []
+      L_n_v_1_target = []
+      L_n_v_2_target = []
+      L_m_ed = []
+      L_m_ed_contact = []
+      L_m_ed_large_contact = []
+      L_m_ed_plus_contact = []
+      L_m_ed_minus_contact = []
+      L_m_ed_plus_large_contact = []
+      L_m_ed_minus_large_contact = []
+      L_ed_contact_point = []
+      L_vertices_1_init = None
+      L_force_applied = []
+      L_dt_PF = []
+      L_AreaSphericity = []
+      L_DiameterSphericity = []
+      L_CircleRatioSphericity = []
+      L_PerimeterSphericity = []
+      L_WidthToLengthRatioSpericity = []
+      L_grain_kc_map = []
+      L_sample_height = []
+      L_y_contactPoint = []
+      L_loss_move_pf_eta1 = []
+      L_loss_move_pf_c = []
+      L_loss_move_pf_m = []
+      L_loss_kc_eta1 = []
+      L_loss_kc_c = []
+      L_loss_kc_m = []
+      L_loss_pf_eta1 = []
+      L_loss_pf_c = []
+      L_loss_pf_m = []
+      L_L_profile_sat = []
+      L_L_x = []
+      L_m_c_pore = []
+      L_m_sat_contact = []
+      if remesh:
+          L_x_min_dom = []
+          L_x_max_dom = []
+          L_y_min_dom = []
+          L_y_max_dom = []
+          L_delta_x_max = []
+          L_delta_y_max = []
+
+      #---------------------------------------------------------------------#
+      # dictionnary
+
+      dict_user = {
+      'n_dist': n_dist,
+      'n_time': n_time,
+      'n_mol': n_mol,
+      'n_DEMPF_ite': n_DEMPF_ite,
+      'n_proc': n_proc,
+      'j_total': j_total,
+      'save_simulation': save_simulation,
+      'n_max_vtk_files': n_max_vtk_files,
+      'L_figures': L_figures,
+      'print_all_map_config': print_all_map_config,
+      'n_ite_max': n_ite_max,
+      'n_steady_state_detection': n_steady_state_detection,
+      'steady_state_detection': steady_state_detection,
+      'force_applied': force_applied,
+      'force_applied_target': force_applied,
+      'control_force': control_force,
+      'E': E,
+      'Poisson': Poisson,
+      'print_all_contact_dem': print_all_contact_dem,
+      'print_all_shape_evolution': print_all_shape_evolution,
+      'Shape': Shape,
+      'radius': radius,
+      'n_phi': n_phi,
+      'plate': plate,
+      'remesh': remesh,
+      'check_database': check_database,
+      'Energy_barrier': Energy_barrier,
+      'n_int': n_int,
+      'w_int': w,
+      'kappa_eta': kappa_eta,
+      'Mobility_eff': Mobility_eff,
+      'temperature': temperature,
+      'V_m': V_m,
+      'R_cst': R_cst,
+      'k_diss': k_diss,
+      'k_prec': k_prec,
+      'C_eq': C_eq,
+      'size_film': size_film,
+      'D_solute': D_solute,
+      'struct_element': struct_element,
+      'dt_PF_0': dt_PF_0,
+      'dt_PF_1': dt_PF_1,
+      'Aitken_1': m_ed_contact_1,
+      'dt_PF_2': dt_PF_2,
+      'Aitken_2': m_ed_contact_2,
+      'n_t_PF': n_t_PF,
+      'crit_res': crit_res,
+      'eta_contact_box_detection': eta_contact_box_detection,
+      'print_all_contact_detection': print_all_contact_detection,
+      'L_displacement': L_displacement,
+      'L_sum_eta_1': L_sum_eta_1,
+      'L_sum_eta_2': L_sum_eta_2,
+      'L_sum_c': L_sum_c,
+      'L_sum_mass': L_sum_mass,
+      'L_m_eta_1': L_m_eta_1,
+      'L_m_eta_2': L_m_eta_2,
+      'L_m_c': L_m_c,
+      'L_m_mass': L_m_mass,
+      'L_distance_extrema': L_distance_extrema,
+      'L_equivalent_area': L_equivalent_area,
+      'L_contact_overlap': L_contact_overlap,
+      'L_contact_area': L_contact_area,
+      'L_contact_volume_yade': L_contact_volume_yade,
+      'L_contact_volume_moose': L_contact_volume_moose,
+      'L_contact_volume_box': L_contact_volume_box,
+      'L_t_pf_to_dem_1': L_t_pf_to_dem_1,
+      'L_t_pf_to_dem_2': L_t_pf_to_dem_2,
+      'L_t_dem': L_t_dem,
+      'L_t_dem_to_pf': L_t_dem_to_pf,
+      'L_t_pf': L_t_pf,
+      'L_P_applied': L_P_applied,
+      'L_n_v_1': L_n_v_1,
+      'L_n_v_2': L_n_v_2,
+      'L_n_v_1_target': L_n_v_1_target,
+      'L_n_v_2_target': L_n_v_2_target,
+      'L_m_ed': L_m_ed,
+      'L_m_ed_contact': L_m_ed_contact,
+      'L_m_ed_large_contact': L_m_ed_large_contact,
+      'L_m_ed_plus_contact': L_m_ed_plus_contact,
+      'L_m_ed_minus_contact': L_m_ed_minus_contact,
+      'L_m_ed_plus_large_contact': L_m_ed_plus_large_contact,
+      'L_m_ed_minus_large_contact': L_m_ed_minus_large_contact,
+      'L_ed_contact_point': L_ed_contact_point,
+      'L_vertices_1_init': L_vertices_1_init,
+      'L_force_applied': L_force_applied,
+      'L_dt_PF': L_dt_PF,
+      'L_AreaSphericity': L_AreaSphericity,
+      'L_DiameterSphericity': L_DiameterSphericity,
+      'L_CircleRatioSphericity': L_CircleRatioSphericity,
+      'L_PerimeterSphericity': L_PerimeterSphericity,
+      'L_WidthToLengthRatioSpericity': L_WidthToLengthRatioSpericity,
+      'L_grain_kc_map': L_grain_kc_map,
+      'L_sample_height': L_sample_height,
+      'L_y_contactPoint': L_y_contactPoint,
+      'L_loss_move_pf_eta1': L_loss_move_pf_eta1,
+      'L_loss_move_pf_c': L_loss_move_pf_c,
+      'L_loss_move_pf_m': L_loss_move_pf_m,
+      'L_loss_kc_eta1': L_loss_kc_eta1,
+      'L_loss_kc_c': L_loss_kc_c,
+      'L_loss_kc_m': L_loss_kc_m,
+      'L_loss_pf_eta1': L_loss_pf_eta1,
+      'L_loss_pf_c': L_loss_pf_c,
+      'L_loss_pf_m': L_loss_pf_m,
+      'L_L_profile_sat': L_L_profile_sat,
+      'L_L_x': L_L_x,
+      'L_m_c_pore': L_m_c_pore,
+      'L_m_sat_contact': L_m_sat_contact
+      }
+
+      # specific inputs
+      if remesh:
+          dict_user['size_x_mesh'] = size_x_mesh
+          dict_user['size_y_mesh'] = size_y_mesh
+          dict_user['margin_mesh_domain'] = margin_mesh_domain
+          dict_user['L_x_min_dom'] = L_x_min_dom
+          dict_user['L_x_max_dom'] = L_x_max_dom
+          dict_user['L_y_min_dom'] = L_y_min_dom
+          dict_user['L_y_max_dom'] = L_y_max_dom
+          dict_user['L_delta_x_max'] = L_delta_x_max
+          dict_user['L_delta_y_max'] = L_delta_y_max
+      else :
+          dict_user['x_min'] = x_min
+          dict_user['x_max'] = x_max
+          dict_user['y_min'] = y_min
+          dict_user['y_max'] = y_max
+          dict_user['n_mesh_x'] = n_mesh_x
+          dict_user['n_mesh_y'] = n_mesh_y
+
+      return dict_user
+</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="parameters.get_parameters"><code class="name flex">
+<span>def <span class="ident">get_parameters</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p> Defie the parameters used in the simulation.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+  def get_parameters():
+      '''
+      Define the parameters used in the simulation.
+      '''
+      #---------------------------------------------------------------------#
+      # Norrmalization
+      n_dist = 100*1e-6 # m
+      n_time = 24*60*60 # s
+      n_mol = 0.73*1e3 * n_dist**3 # mol
+
+      #---------------------------------------------------------------------#
+      # PFDEM
+
+      n_DEMPF_ite = 150 # number of PFDEM iterations
+      n_proc = 4 # number of processors used
+      j_total = 0 # index global of results
+      save_simulation = False # indicate if the simulation is saved
+      n_max_vtk_files = 10 # maximum number of vtk files (can be None to save all files)
+
+      # Select Figures to plot
+      # Available:
+      # contact_pressure, contact_distrib_m_ed, contact_point_ed, contact_volume, contact_nb_node
+      # contact_detection, contact_h_s_v, contact_dem, saturation, m_c_pore
+      # m_ed, dt_PF, IC, processor, sphericities, force_applied, maps, n_grain_kc_map, dim_dom
+      # shape_evolution, n_vertices, sum_etai_c, mean_etai_c, mass_loss, performances
+      # disp_strain, disp_strain_andrade, sample_height, y_contactPoint
+      L_figures = ['maps', 'shape_evolution', 'contact_pressure', 'saturation', 'm_c_pore', 'disp_strain']
+
+      # Figure (plot all or current)
+      # The maps configuration
+      print_all_map_config = False # else only the current one is printed
+
+      #---------------------------------------------------------------------#
+      # DEM (Yade)
+
+      # steady state detection
+      n_ite_max = 5000 # maximum number of iteration during a DEM step
+      n_steady_state_detection = 100 # number of iterations considered in the window
+      # the difference between max and min < tolerance * force_applied
+      steady_state_detection = 0.02
+      # + the force applied must be contained in this window
+
+      # sollicitation
+      force_applied = 100e6  # (kg m s-2)
+      control_force = True # Boolean to determine if the force is controled with the contact volume
+
+      # DEM material parameters
+      # Young modulus
+      E = 2e9 # (kg m-1 s-2)
+
+      # Poisson ratio
+      Poisson = 0.3
+
+      # Figure (plot all or current)
+      # The evolution of the overlap durig DEM steps
+      print_all_contact_dem = False # else only the current one is printed
+      # The evolution of shape (compared to the initial state)
+      print_all_shape_evolution = False # else only the current one is printed
+
+      #---------------------------------------------------------------------#
+      # Grain description
+
+      # shape of the grain
+      # Sphere, Hex or Proxy_Hex
+      Shape = 'Sphere'
+
+      # the radius of grains
+      radius = 100*1e-6/n_dist # m/m
+      # discretization of the grain
+      n_phi = 30
+
+      # size of the indenter
+      plate = 0.1*radius # m/m
+
+      #---------------------------------------------------------------------#
+      # Phase-Field (Moose)
+
+      # determine if remeshing is available
+      remesh = True
+      # mesh
+      check_database = True
+      # remesh
+      if remesh:
+          size_x_mesh = radius/40
+          size_y_mesh = size_x_mesh
+          m_size_mesh = (size_x_mesh+size_y_mesh)/2
+          margin_mesh_domain = 15*size_x_mesh
+      # constant mesh
+      else :
+          x_min = -1.3*radius
+          x_max =  1.3*radius
+          y_min = -2.3*radius
+          y_max =  2.3*radius
+          n_mesh_x = 100
+          n_mesh_y = 200
+          m_size_mesh = ((x_max-x_min)/(n_mesh_x-1)+(y_max-y_min)/(n_mesh_y-1))/2
+
+      # PF material parameters
+      # the energy barrier
+      Energy_barrier = 1
+      # number of mesh in the interface
+      n_int = 6
+      # the interface thickness
+      w = m_size_mesh*n_int
+      # the gradient coefficient
+      kappa_eta = Energy_barrier*w*w/9.86
+      # the mobility
+      Mobility_eff = 3*(100*1e-6/(24*60*60))/(n_dist/n_time) # m.s-1/(m.s-1)
+
+      # temperature
+      temperature = 623 # K
+      # molar volume
+      V_m = (2.2*1e-5)/(n_dist**3/n_mol) # (m3 mol-1)/(m3 mol-1)
+      # constant
+      R_cst = (8.32)/(n_dist**2/(n_time**2*n_mol)) # (kg m2 s-2 mol-1 K-1)/(m2 s-2 mol-1)
+
+      # kinetics of dissolution and precipitation
+      # it affects the tilting coefficient in Ed
+      k_diss = 1*(0.005)/(m_size_mesh) # ed_j = ed_i*m_i/m_j
+      k_prec = k_diss*10 # -
+
+      # molar concentration at the equilibrium
+      C_eq = (0.73*1e3)/(n_mol/n_dist**3) # (mol m-3)/(mol m-3)
+
+      # diffusion of the solute
+      size_film = m_size_mesh*5
+      D_solute = (4e-14/2/size_film)/(n_dist*n_dist/n_time) # (m2 s-1)/(m2 s-1)
+      n_struct_element = int(round(size_film/m_size_mesh,0))
+      struct_element = np.array(np.ones((n_struct_element,n_struct_element)), dtype=bool) # for dilation
+
+      # Aitken method
+      # the time stepping and duration of one PF simualtion
+      # level 0
+      dt_PF_0 = (0.01*24*60*60)/n_time # time step
+      # level 1
+      dt_PF_1 = dt_PF_0
+      m_ed_contact_1 = 0
+      # level 2
+      dt_PF_2 = dt_PF_1
+      m_ed_contact_2 = 0
+      # n_t_PF*dt_PF gives the total time duration
+      n_t_PF = 200 # number of iterations
+
+      # the criteria on residual
+      crit_res = 1e-3
+
+      # Contact box detection
+      eta_contact_box_detection = 0.1 # value of the phase field searched to determine the contact box
+
+      # Figure (plot all or current)
+      # The detection of the contact by a box
+      print_all_contact_detection = False # else only the current one is printed
+
+      #---------------------------------------------------------------------#
+      # trackers
+
+      L_displacement = []
+      L_sum_eta_1 = []
+      L_sum_eta_2 = []
+      L_sum_c = []
+      L_sum_mass = []
+      L_m_eta_1 = []
+      L_m_eta_2 = []
+      L_m_c = []
+      L_m_mass = []
+      L_distance_extrema = []
+      L_equivalent_area = []
+      L_contact_overlap = []
+      L_contact_area = []
+      L_contact_volume_yade = []
+      L_contact_volume_moose = []
+      L_contact_volume_box = []
+      L_t_pf_to_dem_1 = []
+      L_t_pf_to_dem_2 = []
+      L_t_dem = []
+      L_t_dem_to_pf = []
+      L_t_pf = []
+      L_P_applied = []
+      L_n_v_1 = []
+      L_n_v_2 = []
+      L_n_v_1_target = []
+      L_n_v_2_target = []
+      L_m_ed = []
+      L_m_ed_contact = []
+      L_m_ed_large_contact = []
+      L_m_ed_plus_contact = []
+      L_m_ed_minus_contact = []
+      L_m_ed_plus_large_contact = []
+      L_m_ed_minus_large_contact = []
+      L_ed_contact_point = []
+      L_vertices_1_init = None
+      L_force_applied = []
+      L_dt_PF = []
+      L_AreaSphericity = []
+      L_DiameterSphericity = []
+      L_CircleRatioSphericity = []
+      L_PerimeterSphericity = []
+      L_WidthToLengthRatioSpericity = []
+      L_grain_kc_map = []
+      L_sample_height = []
+      L_y_contactPoint = []
+      L_loss_move_pf_eta1 = []
+      L_loss_move_pf_c = []
+      L_loss_move_pf_m = []
+      L_loss_kc_eta1 = []
+      L_loss_kc_c = []
+      L_loss_kc_m = []
+      L_loss_pf_eta1 = []
+      L_loss_pf_c = []
+      L_loss_pf_m = []
+      L_L_profile_sat = []
+      L_L_x = []
+      L_m_c_pore = []
+      L_m_sat_contact = []
+      if remesh:
+          L_x_min_dom = []
+          L_x_max_dom = []
+          L_y_min_dom = []
+          L_y_max_dom = []
+          L_delta_x_max = []
+          L_delta_y_max = []
+
+      #---------------------------------------------------------------------#
+      # dictionnary
+
+      dict_user = {
+      'n_dist': n_dist,
+      'n_time': n_time,
+      'n_mol': n_mol,
+      'n_DEMPF_ite': n_DEMPF_ite,
+      'n_proc': n_proc,
+      'j_total': j_total,
+      'save_simulation': save_simulation,
+      'n_max_vtk_files': n_max_vtk_files,
+      'L_figures': L_figures,
+      'print_all_map_config': print_all_map_config,
+      'n_ite_max': n_ite_max,
+      'n_steady_state_detection': n_steady_state_detection,
+      'steady_state_detection': steady_state_detection,
+      'force_applied': force_applied,
+      'force_applied_target': force_applied,
+      'control_force': control_force,
+      'E': E,
+      'Poisson': Poisson,
+      'print_all_contact_dem': print_all_contact_dem,
+      'print_all_shape_evolution': print_all_shape_evolution,
+      'Shape': Shape,
+      'radius': radius,
+      'n_phi': n_phi,
+      'plate': plate,
+      'remesh': remesh,
+      'check_database': check_database,
+      'Energy_barrier': Energy_barrier,
+      'n_int': n_int,
+      'w_int': w,
+      'kappa_eta': kappa_eta,
+      'Mobility_eff': Mobility_eff,
+      'temperature': temperature,
+      'V_m': V_m,
+      'R_cst': R_cst,
+      'k_diss': k_diss,
+      'k_prec': k_prec,
+      'C_eq': C_eq,
+      'size_film': size_film,
+      'D_solute': D_solute,
+      'struct_element': struct_element,
+      'dt_PF_0': dt_PF_0,
+      'dt_PF_1': dt_PF_1,
+      'Aitken_1': m_ed_contact_1,
+      'dt_PF_2': dt_PF_2,
+      'Aitken_2': m_ed_contact_2,
+      'n_t_PF': n_t_PF,
+      'crit_res': crit_res,
+      'eta_contact_box_detection': eta_contact_box_detection,
+      'print_all_contact_detection': print_all_contact_detection,
+      'L_displacement': L_displacement,
+      'L_sum_eta_1': L_sum_eta_1,
+      'L_sum_eta_2': L_sum_eta_2,
+      'L_sum_c': L_sum_c,
+      'L_sum_mass': L_sum_mass,
+      'L_m_eta_1': L_m_eta_1,
+      'L_m_eta_2': L_m_eta_2,
+      'L_m_c': L_m_c,
+      'L_m_mass': L_m_mass,
+      'L_distance_extrema': L_distance_extrema,
+      'L_equivalent_area': L_equivalent_area,
+      'L_contact_overlap': L_contact_overlap,
+      'L_contact_area': L_contact_area,
+      'L_contact_volume_yade': L_contact_volume_yade,
+      'L_contact_volume_moose': L_contact_volume_moose,
+      'L_contact_volume_box': L_contact_volume_box,
+      'L_t_pf_to_dem_1': L_t_pf_to_dem_1,
+      'L_t_pf_to_dem_2': L_t_pf_to_dem_2,
+      'L_t_dem': L_t_dem,
+      'L_t_dem_to_pf': L_t_dem_to_pf,
+      'L_t_pf': L_t_pf,
+      'L_P_applied': L_P_applied,
+      'L_n_v_1': L_n_v_1,
+      'L_n_v_2': L_n_v_2,
+      'L_n_v_1_target': L_n_v_1_target,
+      'L_n_v_2_target': L_n_v_2_target,
+      'L_m_ed': L_m_ed,
+      'L_m_ed_contact': L_m_ed_contact,
+      'L_m_ed_large_contact': L_m_ed_large_contact,
+      'L_m_ed_plus_contact': L_m_ed_plus_contact,
+      'L_m_ed_minus_contact': L_m_ed_minus_contact,
+      'L_m_ed_plus_large_contact': L_m_ed_plus_large_contact,
+      'L_m_ed_minus_large_contact': L_m_ed_minus_large_contact,
+      'L_ed_contact_point': L_ed_contact_point,
+      'L_vertices_1_init': L_vertices_1_init,
+      'L_force_applied': L_force_applied,
+      'L_dt_PF': L_dt_PF,
+      'L_AreaSphericity': L_AreaSphericity,
+      'L_DiameterSphericity': L_DiameterSphericity,
+      'L_CircleRatioSphericity': L_CircleRatioSphericity,
+      'L_PerimeterSphericity': L_PerimeterSphericity,
+      'L_WidthToLengthRatioSpericity': L_WidthToLengthRatioSpericity,
+      'L_grain_kc_map': L_grain_kc_map,
+      'L_sample_height': L_sample_height,
+      'L_y_contactPoint': L_y_contactPoint,
+      'L_loss_move_pf_eta1': L_loss_move_pf_eta1,
+      'L_loss_move_pf_c': L_loss_move_pf_c,
+      'L_loss_move_pf_m': L_loss_move_pf_m,
+      'L_loss_kc_eta1': L_loss_kc_eta1,
+      'L_loss_kc_c': L_loss_kc_c,
+      'L_loss_kc_m': L_loss_kc_m,
+      'L_loss_pf_eta1': L_loss_pf_eta1,
+      'L_loss_pf_c': L_loss_pf_c,
+      'L_loss_pf_m': L_loss_pf_m,
+      'L_L_profile_sat': L_L_profile_sat,
+      'L_L_x': L_L_x,
+      'L_m_c_pore': L_m_c_pore,
+      'L_m_sat_contact': L_m_sat_contact
+      }
+
+      # specific inputs
+      if remesh:
+          dict_user['size_x_mesh'] = size_x_mesh
+          dict_user['size_y_mesh'] = size_y_mesh
+          dict_user['margin_mesh_domain'] = margin_mesh_domain
+          dict_user['L_x_min_dom'] = L_x_min_dom
+          dict_user['L_x_max_dom'] = L_x_max_dom
+          dict_user['L_y_min_dom'] = L_y_min_dom
+          dict_user['L_y_max_dom'] = L_y_max_dom
+          dict_user['L_delta_x_max'] = L_delta_x_max
+          dict_user['L_delta_y_max'] = L_delta_y_max
+      else :
+          dict_user['x_min'] = x_min
+          dict_user['x_max'] = x_max
+          dict_user['y_min'] = y_min
+          dict_user['y_max'] = y_max
+          dict_user['n_mesh_x'] = n_mesh_x
+          dict_user['n_mesh_y'] = n_mesh_y
+
+      return dict_user
+</code></pre>
+</details>
+</dd>
+
+</dl>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="parameters.get_parameters" href="#parameters.get_parameters">get_parameters</a></code></li>
+</ul>
+</li>
+</ul>
+<br>
+<a href="https://alexsacmorane.github.io/pfdem/my_pfdem_1g_2d">MY_PFDEM_1G_2D</a>
+<br>
+<a href="https://alexsacmorane.github.io">Home</a>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>
