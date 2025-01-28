@@ -123,8 +123,8 @@ alexandre.sac-morane@uclouvain.be</p>
           return
       window = plot.data['normal_force'][-n_steady_state_detection:]
       if O.iter > n_ite_max or \
-         ((max(window)-min(window))<steady_state_detection*force_applied and
-          max(window)>force_applied and min(window)<force_applied):
+         ((max(window)-min(window)) < steady_state_detection*force_applied and
+          max(window)>force_applied and min(window) < force_applied):
           vtkExporter.exportPolyhedra(what=dict(color='b.shape.color')) # final export
           vtkExporter_1.exportPolyhedra(ids=[0])
           vtkExporter_2.exportPolyhedra(ids=[1])
@@ -414,8 +414,8 @@ A maximum number of iterations is used.</p></div>
           return
       window = plot.data['normal_force'][-n_steady_state_detection:]
       if O.iter > n_ite_max or \
-         ((max(window)-min(window))<steady_state_detection*force_applied and
-          max(window)>force_applied and min(window)<force_applied):
+         ((max(window)-min(window)) < steady_state_detection*force_applied and
+          max(window)>force_applied and min(window) < force_applied):
           vtkExporter.exportPolyhedra(what=dict(color='b.shape.color')) # final export
           vtkExporter_1.exportPolyhedra(ids=[0])
           vtkExporter_2.exportPolyhedra(ids=[1])
