@@ -1,0 +1,2143 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>User API documentation</title>
+<meta name="description" content="@author: Alexandre Sac--Morane
+alexandre.sac-morane@uclouvain.be …" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>CreateIC</code></h1>
+</header>
+<section id="section-intro">
+<p>@author: Alexandre Sac&ndash;Morane
+alexandre.sac-morane@uclouvain.be</p>
+<p>This is the file where the initial conditions are defined.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+#-------------------------------------------------------------------------------
+# Librairies
+#-------------------------------------------------------------------------------
+
+import numpy as np
+import matplotlib.pyplot as plt
+import random
+import math
+import skfmm
+from scipy import ndimage
+
+#-------------------------------------------------------------------------------
+# Functions
+#-------------------------------------------------------------------------------
+
+def check_overlap(L_radius_grains, L_pos_grains, L_radius_grains_virtual, L_pos_grains_virtual, L_i_grain_virtual, factor_int):
+    '''
+    Determine if grains are overlapping.
+
+    Used in Insert_Grains() function.
+    '''
+    overlap = False
+    # real - real
+    L_overlap = []
+    for i_g in range(len(L_radius_grains)-1):
+        # radius of grains
+        radius_i = L_radius_grains[i_g]
+        # position of grains
+        pos_i = L_pos_grains[i_g]
+        for j_g in range(i_g+1, len(L_radius_grains)):
+            # radius of grains
+            radius_j = L_radius_grains[j_g]
+            # position of grains
+            pos_j = L_pos_grains[j_g]
+            # check distance
+            if np.linalg.norm(pos_i-pos_j) < radius_i+radius_j+factor_int:
+                overlap = True
+                L_overlap.append((i_g, j_g))
+    # real - virtual
+    L_overlap_virtual = []
+    for i_g in range(len(L_radius_grains)):
+        # radius of grains
+        radius_i = L_radius_grains[i_g]
+        # position of grains
+        pos_i = L_pos_grains[i_g]
+        for j_g in range(len(L_radius_grains_virtual)):
+            # radius of grains
+            radius_j = L_radius_grains_virtual[j_g]
+            # position of grains
+            pos_j = L_pos_grains_virtual[j_g]
+            # check distance
+            if np.linalg.norm(pos_i-pos_j) < radius_i+radius_j+factor_int:
+                overlap = True
+                L_overlap_virtual.append((i_g, j_g, L_i_grain_virtual[j_g]))
+
+    return overlap, L_overlap, L_overlap_virtual
+
+#-------------------------------------------------------------------------------
+
+def compute_virtual(dict_user, L_pos_grains, L_radius_grains_step):
+    '''
+    Compute virtual grains with the periodic conditions.
+    '''
+    L_pos_grains_virtual = []
+    L_radius_grains_virtual = []
+    L_i_grain_virtual = []
+
+    for i_grain in range(len(L_pos_grains)):
+        per_x_p = False
+        per_x_m = False
+        per_y_p = False
+        per_y_m = False
+        # - x limit
+        if L_pos_grains[i_grain][0] < -dict_user['dim_domain']/2 + L_radius_grains_step[i_grain]:
+            L_pos_grains_virtual.append(L_pos_grains[i_grain] + np.array([ dict_user['dim_domain'], 0]))
+            L_radius_grains_virtual.append(L_radius_grains_step[i_grain])
+            L_i_grain_virtual.append(i_grain)
+            per_x_m = True
+        # + x limit
+        if dict_user['dim_domain']/2 - L_radius_grains_step[i_grain] < L_pos_grains[i_grain][0]:
+            L_pos_grains_virtual.append(L_pos_grains[i_grain] + np.array([-dict_user['dim_domain'], 0]))
+            L_radius_grains_virtual.append(L_radius_grains_step[i_grain])
+            L_i_grain_virtual.append(i_grain)
+            per_x_p = True
+        # - y limit
+        if L_pos_grains[i_grain][1] < -dict_user['dim_domain']/2 + L_radius_grains_step[i_grain]:
+            L_pos_grains_virtual.append(L_pos_grains[i_grain] + np.array([0,  dict_user['dim_domain']]))
+            L_radius_grains_virtual.append(L_radius_grains_step[i_grain])
+            L_i_grain_virtual.append(i_grain)
+            per_y_m = True
+        # + y limit
+        if dict_user['dim_domain']/2 - L_radius_grains_step[i_grain] < L_pos_grains[i_grain][1]:
+            L_pos_grains_virtual.append(L_pos_grains[i_grain] + np.array([0, -dict_user['dim_domain']]))
+            L_radius_grains_virtual.append(L_radius_grains_step[i_grain])
+            L_i_grain_virtual.append(i_grain)
+            per_y_p = True
+        # - x and - y limits
+        if per_x_m and per_y_m:
+            L_pos_grains_virtual.append(L_pos_grains[i_grain] + np.array([ dict_user['dim_domain'], dict_user['dim_domain']]))
+            L_radius_grains_virtual.append(L_radius_grains_step[i_grain])
+            L_i_grain_virtual.append(i_grain)
+        # - x and + y limits
+        if per_x_m and per_y_p:
+            L_pos_grains_virtual.append(L_pos_grains[i_grain] + np.array([ dict_user['dim_domain'], -dict_user['dim_domain']]))
+            L_radius_grains_virtual.append(L_radius_grains_step[i_grain])
+            L_i_grain_virtual.append(i_grain)
+        # + x and - y limit
+        if per_x_p and per_y_m:
+            L_pos_grains_virtual.append(L_pos_grains[i_grain] + np.array([ -dict_user['dim_domain'], dict_user['dim_domain']]))
+            L_radius_grains_virtual.append(L_radius_grains_step[i_grain])
+            L_i_grain_virtual.append(i_grain)
+        # + x and + y limit
+        if per_x_p and per_y_p:
+            L_pos_grains_virtual.append(L_pos_grains[i_grain] + np.array([ -dict_user['dim_domain'], -dict_user['dim_domain']]))
+            L_radius_grains_virtual.append(L_radius_grains_step[i_grain])
+            L_i_grain_virtual.append(i_grain)
+
+    return L_pos_grains_virtual, L_radius_grains_virtual, L_i_grain_virtual
+
+#-------------------------------------------------------------------------------
+
+def Insert_One_Grain_Seed(dict_sample, dict_user):
+    '''
+    Insert one grain in the domain. The grain is circle defined by a radius.
+
+    Map of phi, psi and c are generated.
+    '''
+    # Initialize the arrays
+    M_psi = np.zeros((dict_user['n_mesh'],dict_user['n_mesh']))
+    M_phi = np.zeros((dict_user['n_mesh'],dict_user['n_mesh']))
+    M_c = dict_user['C_eq_phi']*np.ones((dict_user['n_mesh'],dict_user['n_mesh']))
+
+    # Initialize the mesh lists
+    L_x = np.linspace(-dict_user['dim_domain']/2, dict_user['dim_domain']/2, dict_user['n_mesh'])
+    L_y = np.linspace(-dict_user['dim_domain']/2, dict_user['dim_domain']/2, dict_user['n_mesh'])
+
+    # compute m_H20_m_cement
+    M_psi = np.zeros((dict_user['n_mesh'],dict_user['n_mesh']))
+    # iterate on grains
+    x_grain = 0
+    y_grain = 0
+    Center_grain = np.array([x_grain, y_grain])
+    r_grain = dict_user['R']
+    # find the nearest node of the center
+    L_search = list(abs(np.array(L_x-x_grain)))
+    i_x_center = L_search.index(min(L_search))
+    L_search = list(abs(np.array(L_y-y_grain)))
+    i_y_center = L_search.index(min(L_search))
+    # compute the number of node (depending on the radius)
+    n_nodes = int(r_grain/(L_x[1]-L_x[0]))+4
+    for i_x in range(max(0,i_x_center-n_nodes),min(i_x_center+n_nodes+1,len(L_x))):
+        for i_y in range(max(0,i_y_center-n_nodes),min(i_y_center+n_nodes+1,len(L_y))):
+            x = L_x[i_x]
+            y = L_y[i_y]
+            Point = np.array([x, y])
+            distance = np.linalg.norm(Point-Center_grain)
+            # Update map psi
+            if M_psi[-1-i_y, i_x] == 0 : # do not erase data already written
+                if distance <= r_grain:
+                    M_psi[-1-i_y, i_x] = 1
+                elif distance >= r_grain:
+                    M_psi[-1-i_y, i_x] = 0
+    # compute surface grains and water
+    Surface_grain = np.sum(M_psi)/M_psi.size*dict_user['dim_domain']*dict_user['dim_domain']
+    Surface_water = dict_user['dim_domain']*dict_user['dim_domain'] - Surface_grain
+    # compute ratio
+    m_H20_m_cement = (Surface_water*dict_user['rho_water'])/(Surface_grain*dict_user['rho_g'])
+    # print result
+    print()
+    print('m_H20/m_cement:', round(m_H20_m_cement,2),'targetted')
+
+    # Compute phi
+    n_seed = dict_user['n_seed']
+    for i_seed in range(n_seed):
+        i_try = 0
+        seed_created = False
+        while not seed_created and i_try < 100:
+            i_try = i_try + 1
+            # generate a seed
+            i_x_seed = random.randint(0, len(L_x)-1)
+            i_y_seed = random.randint(0, len(L_y)-1)
+            center_seed = np.array([L_x[i_x_seed], L_y[i_y_seed]])
+
+            # verify the node is not in a cement source
+            if M_psi[-1-i_y_seed, i_x_seed] != 1:
+                seed_created = True
+                # generate the seed
+                r_seed = 1.5*dict_user['w_int']
+                # compute the number of node (depending on the radius)
+                n_nodes = int(r_seed/(L_x[1]-L_x[0]))+4
+                for i_x in range(max(0,i_x_seed-n_nodes),min(i_x_seed+n_nodes+1,len(L_x))):
+                    for i_y in range(max(0,i_y_seed-n_nodes),min(i_y_seed+n_nodes+1,len(L_y))):
+                        x = L_x[i_x]
+                        y = L_y[i_y]
+                        Point = np.array([x, y])
+                        distance = np.linalg.norm(Point-center_seed)
+                        # Update map psi
+                        if M_phi[-1-i_y, i_x] == 0 : # do not erase data already written
+                            if distance <= r_seed:
+                                M_phi[-1-i_y, i_x] = 1
+                            elif distance >= r_seed:
+                                M_phi[-1-i_y, i_x] = 0
+
+    # print psi/phi map
+    M_phi_psi = M_psi + 2*M_phi
+    fig, (ax1) = plt.subplots(1,1,figsize=(16,9))
+    title_fontsize = 30
+    im = ax1.imshow(M_phi_psi, interpolation = 'nearest', extent=(L_x[0],L_x[-1],L_y[0],L_y[-1]), vmax=2)
+    cbar = fig.colorbar(im, ax=ax1)
+    cbar.set_ticks(ticks=[0, 1, 2], labels=['Pore', 'Source', 'C-S-H'])
+    fig.tight_layout()
+    fig.savefig('png/IC_one_map.png')
+    plt.close(fig)
+
+    # adapt maps
+    M_psi = M_psi - 0.5
+    M_phi = M_phi - 0.5
+
+    # compute the signed distance functions
+    sd_phi = skfmm.distance(M_phi, dx = np.array([L_x[1]-L_x[0],L_y[1]-L_y[0]]))
+    sd_psi = skfmm.distance(M_psi, dx = np.array([L_x[1]-L_x[0],L_y[1]-L_y[0]]))
+
+    # compute the phase field variables
+    for i_x in range(len(L_x)):
+        for i_y in range(len(L_y)):
+            # phi
+            if sd_phi[i_y, i_x] > dict_user['w_int']/2: # inside the grain
+                M_phi[i_y, i_x] = 1
+            elif sd_phi[i_y, i_x] < -dict_user['w_int']/2: # outside the grain
+                M_phi[i_y, i_x] = 0
+            else : # in the interface
+                M_phi[i_y, i_x] = 0.5*(1+math.cos(math.pi*(-sd_phi[i_y, i_x]+dict_user['w_int']/2)/(dict_user['w_int'])))
+            # psi
+            if sd_psi[i_y, i_x] > dict_user['w_int']/2: # inside the grain
+                M_psi[i_y, i_x] = 1
+            elif sd_psi[i_y, i_x] < -dict_user['w_int']/2: # outside the grain
+                M_psi[i_y, i_x] = 0
+            else : # in the interface
+                M_psi[i_y, i_x] = 0.5*(1+math.cos(math.pi*(-sd_psi[i_y, i_x]+dict_user['w_int']/2)/(dict_user['w_int'])))
+
+    # result
+    print()
+    print('Mean value of psi:', round(np.sum(M_psi)/M_psi.size,2))
+    print('Mean value of phi:', round(np.sum(M_phi)/M_phi.size,2))
+
+    # Plot maps
+    fig, ((ax1),(ax2),(ax3)) = plt.subplots(3,1,figsize=(9,25))
+    # parameters
+    title_fontsize = 30
+    # psi
+    im = ax1.imshow(M_psi, interpolation = 'nearest', extent=(L_x[0],L_x[-1],L_y[0],L_y[-1]))
+    fig.colorbar(im, ax=ax1)
+    ax1.set_title(r'Map of $\psi$',fontsize = title_fontsize)
+    # phi
+    im = ax2.imshow(M_phi, interpolation = 'nearest', extent=(L_x[0],L_x[-1],L_y[0],L_y[-1]))
+    fig.colorbar(im, ax=ax2)
+    ax2.set_title(r'Map of $\phi$',fontsize = title_fontsize)
+    # c
+    im = ax3.imshow(M_c, interpolation = 'nearest', extent=(L_x[0],L_x[-1],L_y[0],L_y[-1]))
+    fig.colorbar(im, ax=ax3)
+    ax3.set_title(r'Map of c',fontsize = title_fontsize)
+
+    fig.savefig('png/IC.png')
+    plt.close(fig)
+
+    # save in dicts
+    dict_sample['L_x'] = L_x
+    dict_sample['L_y'] = L_y
+    dict_sample['M_psi'] = M_psi
+    dict_sample['M_phi'] = M_phi
+    dict_sample['M_c'] = M_c
+
+    # Write data
+    file_to_write_psi = open('txt/psi.txt','w')
+    file_to_write_phi = open('txt/phi.txt','w')
+    file_to_write_c = open('txt/c.txt','w')
+    # x
+    file_to_write_psi.write('AXIS X\n')
+    file_to_write_phi.write('AXIS X\n')
+    file_to_write_c.write('AXIS X\n')
+    line = ''
+    for x in dict_sample['L_x']:
+        line = line + str(x)+ ' '
+    line = line + '\n'
+    file_to_write_psi.write(line)
+    file_to_write_phi.write(line)
+    file_to_write_c.write(line)
+    # y
+    file_to_write_psi.write('AXIS Y\n')
+    file_to_write_phi.write('AXIS Y\n')
+    file_to_write_c.write('AXIS Y\n')
+    line = ''
+    for y in dict_sample['L_y']:
+        line = line + str(y)+ ' '
+    line = line + '\n'
+    file_to_write_psi.write(line)
+    file_to_write_phi.write(line)
+    file_to_write_c.write(line)
+    # data
+    file_to_write_psi.write('DATA\n')
+    file_to_write_phi.write('DATA\n')
+    file_to_write_c.write('DATA\n')
+    for l in range(len(dict_sample['L_y'])):
+        for c in range(len(dict_sample['L_x'])):
+            file_to_write_psi.write(str(M_psi[-1-l][c])+'\n')
+            file_to_write_phi.write(str(M_phi[-1-l][c])+'\n')
+            file_to_write_c.write(str(M_c[-1-l][c])+'\n')
+    # close
+    file_to_write_psi.close()
+    file_to_write_phi.close()
+    file_to_write_c.close()
+
+#-------------------------------------------------------------------------------
+
+def Insert_One_Grain_Seed_Fixed(dict_sample, dict_user):
+    '''
+    Insert one grain in the domain. The grain is circle defined by a radius.
+
+    Map of phi, psi and c are generated.
+    '''
+    # Initialize the arrays
+    M_psi = np.zeros((dict_user['n_mesh'],dict_user['n_mesh']))
+    M_phi = np.zeros((dict_user['n_mesh'],dict_user['n_mesh']))
+    M_c = dict_user['C_eq_phi']*np.ones((dict_user['n_mesh'],dict_user['n_mesh']))
+
+    # Initialize the mesh lists
+    L_x = np.linspace(-dict_user['dim_domain']/2, dict_user['dim_domain']/2, dict_user['n_mesh'])
+    L_y = np.linspace(-dict_user['dim_domain']/2, dict_user['dim_domain']/2, dict_user['n_mesh'])
+
+    # compute m_H20_m_cement
+    M_psi = np.zeros((dict_user['n_mesh'],dict_user['n_mesh']))
+    # iterate on grains
+    x_grain = 0
+    y_grain = 0
+    Center_grain = np.array([x_grain, y_grain])
+    r_grain = dict_user['R']
+    # find the nearest node of the center
+    L_search = list(abs(np.array(L_x-x_grain)))
+    i_x_center = L_search.index(min(L_search))
+    L_search = list(abs(np.array(L_y-y_grain)))
+    i_y_center = L_search.index(min(L_search))
+    # compute the number of node (depending on the radius)
+    n_nodes = int(r_grain/(L_x[1]-L_x[0]))+4
+    for i_x in range(max(0,i_x_center-n_nodes),min(i_x_center+n_nodes+1,len(L_x))):
+        for i_y in range(max(0,i_y_center-n_nodes),min(i_y_center+n_nodes+1,len(L_y))):
+            x = L_x[i_x]
+            y = L_y[i_y]
+            Point = np.array([x, y])
+            distance = np.linalg.norm(Point-Center_grain)
+            # Update map psi
+            if M_psi[-1-i_y, i_x] == 0 : # do not erase data already written
+                if distance <= r_grain:
+                    M_psi[-1-i_y, i_x] = 1
+                elif distance >= r_grain:
+                    M_psi[-1-i_y, i_x] = 0
+    # compute surface grains and water
+    Surface_grain = np.sum(M_psi)/M_psi.size*dict_user['dim_domain']*dict_user['dim_domain']
+    Surface_water = dict_user['dim_domain']*dict_user['dim_domain'] - Surface_grain
+    # compute ratio
+    m_H20_m_cement = (Surface_water*dict_user['rho_water'])/(Surface_grain*dict_user['rho_g'])
+    # print result
+    print()
+    print('m_H20/m_cement:', round(m_H20_m_cement,2),'targetted')
+
+    # Compute phi
+    # center and radius definition
+    i_x_seed = len(L_x)-1
+    i_y_seed = int(len(L_y)/2)
+    center_seed = np.array([L_x[i_x_seed], L_y[i_y_seed]])
+    r_seed = 2*dict_user['w_int']
+    # compute map
+    n_nodes = int(r_seed/(L_x[1]-L_x[0]))+8
+    for i_x in range(max(0,i_x_seed-n_nodes),min(i_x_seed+n_nodes+1,len(L_x))):
+        for i_y in range(max(0,i_y_seed-n_nodes),min(i_y_seed+n_nodes+1,len(L_y))):
+            x = L_x[i_x]
+            y = L_y[i_y]
+            Point = np.array([x, y])
+            distance = np.linalg.norm(Point-center_seed)
+            # Update map psi
+            if M_phi[-1-i_y, i_x] == 0 : # do not erase data already written
+                if distance <= r_seed:
+                    M_phi[-1-i_y, i_x] = 1
+                elif distance >= r_seed:
+                    M_phi[-1-i_y, i_x] = 0
+
+    # print psi/phi map
+    M_phi_psi = M_psi + 2*M_phi
+    fig, (ax1) = plt.subplots(1,1,figsize=(16,9))
+    title_fontsize = 30
+    im = ax1.imshow(M_phi_psi, interpolation = 'nearest', extent=(L_x[0],L_x[-1],L_y[0],L_y[-1]), vmax=2)
+    cbar = fig.colorbar(im, ax=ax1)
+    cbar.set_ticks(ticks=[0, 1, 2], labels=['Pore', 'Source', 'C-S-H'])
+    fig.tight_layout()
+    fig.savefig('png/IC_one_map.png')
+    plt.close(fig)
+
+    # adapt maps
+    M_psi = M_psi - 0.5
+    M_phi = M_phi - 0.5
+
+    # compute the signed distance functions
+    sd_phi = skfmm.distance(M_phi, dx = np.array([L_x[1]-L_x[0],L_y[1]-L_y[0]]))
+    sd_psi = skfmm.distance(M_psi, dx = np.array([L_x[1]-L_x[0],L_y[1]-L_y[0]]))
+
+    # compute the phase field variables
+    for i_x in range(len(L_x)):
+        for i_y in range(len(L_y)):
+            # phi
+            if sd_phi[i_y, i_x] > dict_user['w_int']/2: # inside the grain
+                M_phi[i_y, i_x] = 1
+            elif sd_phi[i_y, i_x] < -dict_user['w_int']/2: # outside the grain
+                M_phi[i_y, i_x] = 0
+            else : # in the interface
+                M_phi[i_y, i_x] = 0.5*(1+math.cos(math.pi*(-sd_phi[i_y, i_x]+dict_user['w_int']/2)/(dict_user['w_int'])))
+            # psi
+            if sd_psi[i_y, i_x] > dict_user['w_int']/2: # inside the grain
+                M_psi[i_y, i_x] = 1
+            elif sd_psi[i_y, i_x] < -dict_user['w_int']/2: # outside the grain
+                M_psi[i_y, i_x] = 0
+            else : # in the interface
+                M_psi[i_y, i_x] = 0.5*(1+math.cos(math.pi*(-sd_psi[i_y, i_x]+dict_user['w_int']/2)/(dict_user['w_int'])))
+
+    # result
+    print()
+    print('Mean value of psi:', round(np.sum(M_psi)/M_psi.size,2))
+    print('Mean value of phi:', round(np.sum(M_phi)/M_phi.size,2))
+
+    # Plot maps
+    fig, ((ax1),(ax2),(ax3)) = plt.subplots(3,1,figsize=(9,25))
+    # parameters
+    title_fontsize = 30
+    # psi
+    im = ax1.imshow(M_psi, interpolation = 'nearest', extent=(L_x[0],L_x[-1],L_y[0],L_y[-1]))
+    fig.colorbar(im, ax=ax1)
+    ax1.set_title(r'Map of $\psi$',fontsize = title_fontsize)
+    # phi
+    im = ax2.imshow(M_phi, interpolation = 'nearest', extent=(L_x[0],L_x[-1],L_y[0],L_y[-1]))
+    fig.colorbar(im, ax=ax2)
+    ax2.set_title(r'Map of $\phi$',fontsize = title_fontsize)
+    # c
+    im = ax3.imshow(M_c, interpolation = 'nearest', extent=(L_x[0],L_x[-1],L_y[0],L_y[-1]))
+    fig.colorbar(im, ax=ax3)
+    ax3.set_title(r'Map of c',fontsize = title_fontsize)
+
+    fig.savefig('png/IC.png')
+    plt.close(fig)
+
+    # save in dicts
+    dict_sample['L_x'] = L_x
+    dict_sample['L_y'] = L_y
+    dict_sample['M_psi'] = M_psi
+    dict_sample['M_phi'] = M_phi
+    dict_sample['M_c'] = M_c
+
+    # Write data
+    file_to_write_psi = open('txt/psi.txt','w')
+    file_to_write_phi = open('txt/phi.txt','w')
+    file_to_write_c = open('txt/c.txt','w')
+    # x
+    file_to_write_psi.write('AXIS X\n')
+    file_to_write_phi.write('AXIS X\n')
+    file_to_write_c.write('AXIS X\n')
+    line = ''
+    for x in dict_sample['L_x']:
+        line = line + str(x)+ ' '
+    line = line + '\n'
+    file_to_write_psi.write(line)
+    file_to_write_phi.write(line)
+    file_to_write_c.write(line)
+    # y
+    file_to_write_psi.write('AXIS Y\n')
+    file_to_write_phi.write('AXIS Y\n')
+    file_to_write_c.write('AXIS Y\n')
+    line = ''
+    for y in dict_sample['L_y']:
+        line = line + str(y)+ ' '
+    line = line + '\n'
+    file_to_write_psi.write(line)
+    file_to_write_phi.write(line)
+    file_to_write_c.write(line)
+    # data
+    file_to_write_psi.write('DATA\n')
+    file_to_write_phi.write('DATA\n')
+    file_to_write_c.write('DATA\n')
+    for l in range(len(dict_sample['L_y'])):
+        for c in range(len(dict_sample['L_x'])):
+            file_to_write_psi.write(str(M_psi[-1-l][c])+'\n')
+            file_to_write_phi.write(str(M_phi[-1-l][c])+'\n')
+            file_to_write_c.write(str(M_c[-1-l][c])+'\n')
+    # close
+    file_to_write_psi.close()
+    file_to_write_phi.close()
+    file_to_write_c.close()
+
+#-------------------------------------------------------------------------------
+
+def Insert_Grains_Seed(dict_sample, dict_user):
+    '''
+    Insert n_grains grains in the domain. The grains are circle defined by a radius (uniform distribution).
+    The position of the grains is randomly set, avoiding overlap between particules.
+    A maximum number of tries is done per grain insertion.
+
+    Map of phi, psi and c are generated.
+    '''
+    # Initialize the arrays
+    M_psi = np.zeros((dict_user['n_mesh'],dict_user['n_mesh']))
+    M_phi = np.zeros((dict_user['n_mesh'],dict_user['n_mesh']))
+    M_c = dict_user['C_eq_phi']*np.ones((dict_user['n_mesh'],dict_user['n_mesh']))
+
+    # Initialize the mesh lists
+    L_x = np.linspace(-dict_user['dim_domain']/2, dict_user['dim_domain']/2, dict_user['n_mesh'])
+    L_y = np.linspace(-dict_user['dim_domain']/2, dict_user['dim_domain']/2, dict_user['n_mesh'])
+
+    # Insert grains
+    L_pos_grains = []
+    L_radius_grains = []
+    m_H20_m_cement = 2*dict_user['w_g_target']
+    # check conditions
+    while m_H20_m_cement > dict_user['w_g_target'] :
+        # Random radius of the grain
+        if dict_user['PSD_mode'] == 'Uniform':
+            R_try = max(dict_user['R']*(1+dict_user['R_var']*(random.random()-0.5)*2), dict_user['d_mesh']*5)
+        if dict_user['PSD_mode'] == 'Given':
+            i_bin = np.random.choice(len(dict_user['L_perc_R']), p=dict_user['L_perc_R'])
+            R_try = random.uniform(dict_user['L_R'][i_bin], dict_user['L_R'][i_bin+1])
+        # Random position of the grain center
+        x_try = (dict_user['dim_domain']/2+R_try)*(random.random()-0.5)*2
+        y_try = (dict_user['dim_domain']/2+R_try)*(random.random()-0.5)*2
+        # Save grain
+        L_pos_grains.append(np.array([x_try, y_try]))
+        L_radius_grains.append(R_try)
+
+        # compute surface grains and water
+        Surface_grain = 0
+        for i_grain in range(len(L_pos_grains)):
+            Surface_grain = Surface_grain + math.pi*L_radius_grains[i_grain]**2
+        Surface_water = dict_user['dim_domain']*dict_user['dim_domain'] - Surface_grain
+        # compute ratio
+        m_H20_m_cement = (Surface_water*dict_user['rho_water'])/(Surface_grain*dict_user['rho_g'])
+        # output
+        print('Compute IC:',round(m_H20_m_cement,2),'/',dict_user['w_g_target'],'targetted')
+
+    # compute the configuration
+    for i_steps in range(1, dict_user['n_steps']+1):
+        print('Increase radius step',i_steps,'/',dict_user['n_steps'])
+
+        # compute tempo radius at this step
+        L_radius_grains_step = []
+        for radius in L_radius_grains:
+            L_radius_grains_step.append(radius*i_steps/dict_user['n_steps'])
+
+        # compute virtual grain due to periodic condition
+        L_pos_grains_virtual, L_radius_grains_virtual, L_i_grain_virtual = compute_virtual(dict_user, L_pos_grains, L_radius_grains_step)
+
+        # check if there is no overlap
+        overlap, L_overlap, L_overlap_virtual = check_overlap(L_radius_grains_step, L_pos_grains,\
+                                                              L_radius_grains_virtual, L_pos_grains_virtual, L_i_grain_virtual,\
+                                                              dict_user['factor_int'])
+        while overlap:
+            # save old positions
+            L_pos_grains_old = L_pos_grains.copy()
+            L_pos_grains_virtual_old = L_pos_grains_virtual.copy()
+            # iterate on overlap list to move problematic grains
+            if L_overlap != []:
+                overlap = L_overlap[0]
+                # get indices
+                i_g = overlap[0]
+                j_g = overlap[1]
+                # get radius
+                r_i = L_radius_grains_step[i_g]
+                r_j = L_radius_grains_step[j_g]
+                # get displacement vector (i->j)
+                u_ij = np.array(L_pos_grains[j_g] - L_pos_grains[i_g])
+                u_ij = u_ij/np.linalg.norm(u_ij)
+                # move grain
+                L_pos_grains[i_g] = L_pos_grains_old[j_g] - u_ij*(r_i+r_j+dict_user['factor_int'])
+                L_pos_grains[j_g] = L_pos_grains_old[i_g] + u_ij*(r_i+r_j+dict_user['factor_int'])
+            else :
+                overlap = L_overlap_virtual[0]
+                # get indices
+                i_g = overlap[0]
+                j_g_virtual = overlap[1]
+                j_g = overlap[2]
+                # get radius
+                r_i = L_radius_grains_step[i_g]
+                r_j = L_radius_grains_step[j_g]
+                # get displacement vector (i->j)
+                u_ij = np.array(L_pos_grains_virtual[j_g_virtual] - L_pos_grains[i_g])
+                u_ij = u_ij/np.linalg.norm(u_ij)
+                # move grain
+                L_pos_grains[i_g] = L_pos_grains_virtual_old[j_g_virtual] - u_ij*(r_i+r_j+2*dict_user['factor_int'])
+
+            # check position of grain after displacement
+            for i_grain in range(len(L_pos_grains)):
+                # - x limit
+                if L_pos_grains[i_grain][0] < -dict_user['dim_domain']/2 - L_radius_grains_step[i_grain]:
+                    L_pos_grains[i_grain] = L_pos_grains[i_grain] + np.array([ dict_user['dim_domain'], 0])
+                # + x limit
+                if dict_user['dim_domain']/2 + L_radius_grains_step[i_grain] < L_pos_grains[i_grain][0]:
+                    L_pos_grains[i_grain] = L_pos_grains[i_grain] + np.array([-dict_user['dim_domain'], 0])
+                # - y limit
+                if L_pos_grains[i_grain][1] < -dict_user['dim_domain']/2 - L_radius_grains_step[i_grain]:
+                    L_pos_grains[i_grain] = L_pos_grains[i_grain] + np.array([0,  dict_user['dim_domain']])
+                # + y limit
+                if dict_user['dim_domain']/2 + L_radius_grains_step[i_grain] < L_pos_grains[i_grain][1]:
+                    L_pos_grains[i_grain] = L_pos_grains[i_grain] + np.array([0, -dict_user['dim_domain']])
+
+            # compute virtual grain due to periodic condition
+            L_pos_grains_virtual, L_radius_grains_virtual, L_i_grain_virtual = compute_virtual(dict_user, L_pos_grains, L_radius_grains_step)
+
+
+            # look if overlap exists
+            overlap, L_overlap, L_overlap_virtual = check_overlap(L_radius_grains_step, L_pos_grains,\
+                                                                    L_radius_grains_virtual, L_pos_grains_virtual, L_i_grain_virtual,\
+                                                                    dict_user['factor_int'])
+
+    # combine the final list
+    L_pos_grains_real_virtual = L_pos_grains + L_pos_grains_virtual
+    L_radius_grains_real_virtual = L_radius_grains + L_radius_grains_virtual
+    # compute m_H20_m_cement
+    M_psi = np.zeros((dict_user['n_mesh'],dict_user['n_mesh']))
+    # iterate on grains
+    for i_grain in range(len(L_pos_grains_real_virtual)):
+        x_grain = L_pos_grains_real_virtual[i_grain][0]
+        y_grain = L_pos_grains_real_virtual[i_grain][1]
+        Center_grain = np.array([x_grain, y_grain])
+        r_grain = L_radius_grains_real_virtual[i_grain]
+        # find the nearest node of the center
+        L_search = list(abs(np.array(L_x-x_grain)))
+        i_x_center = L_search.index(min(L_search))
+        L_search = list(abs(np.array(L_y-y_grain)))
+        i_y_center = L_search.index(min(L_search))
+        # compute the number of node (depending on the radius)
+        n_nodes = int(r_grain/(L_x[1]-L_x[0]))+4
+        for i_x in range(max(0,i_x_center-n_nodes),min(i_x_center+n_nodes+1,len(L_x))):
+            for i_y in range(max(0,i_y_center-n_nodes),min(i_y_center+n_nodes+1,len(L_y))):
+                x = L_x[i_x]
+                y = L_y[i_y]
+                Point = np.array([x, y])
+                distance = np.linalg.norm(Point-Center_grain)
+                # Update map psi
+                if M_psi[-1-i_y, i_x] == 0 : # do not erase data already written
+                    if distance <= r_grain:
+                        M_psi[-1-i_y, i_x] = 1
+                    elif distance >= r_grain:
+                        M_psi[-1-i_y, i_x] = 0
+
+    # compute surface grains and water
+    Surface_grain = np.sum(M_psi)/M_psi.size*dict_user['dim_domain']*dict_user['dim_domain']
+    Surface_water = dict_user['dim_domain']*dict_user['dim_domain'] - Surface_grain
+    # compute ratio
+    m_H20_m_cement = (Surface_water*dict_user['rho_water'])/(Surface_grain*dict_user['rho_g'])
+    # print result
+    print()
+    print(len(L_radius_grains),'grains inserted')
+    print('psd:', round(np.mean(L_radius_grains),1),'(mean)', round(np.min(L_radius_grains),1),'(min)', round(np.max(L_radius_grains),1),'(max)')
+    print('m_H20/m_cement:', round(m_H20_m_cement,2),'/',dict_user['w_g_target'],'targetted')
+
+    # Compute phi
+    n_seed = dict_user['n_seed']
+    for i_seed in range(n_seed):
+        i_try = 0
+        seed_created = False
+        while not seed_created and i_try < 500:
+            i_try = i_try + 1
+            # generate a seed
+            i_x_seed = random.randint(0, len(L_x)-1)
+            i_y_seed = random.randint(0, len(L_y)-1)
+            center_seed = np.array([L_x[i_x_seed], L_y[i_y_seed]])
+            r_seed = dict_user['w_int']+dict_user['d_mesh']
+
+            # verify the node is not in a cement source
+            # and not far from a source
+            if M_psi[-1-i_y_seed, i_x_seed] != 1:
+                close_seed = False
+                for i_grain in range(len(L_pos_grains_real_virtual)):
+                    d_seed_grain = np.linalg.norm(center_seed-L_pos_grains_real_virtual[i_grain])
+                    if d_seed_grain < L_radius_grains_real_virtual[i_grain]+2*r_seed:
+                        close_seed = True
+                if close_seed:
+                    seed_created = True
+                    # compute the number of node (depending on the radius)
+                    n_nodes = 2*int(r_seed/(L_x[1]-L_x[0]))
+                    for i_x in range(max(0,i_x_seed-n_nodes),min(i_x_seed+n_nodes+1,len(L_x))):
+                        for i_y in range(max(0,i_y_seed-n_nodes),min(i_y_seed+n_nodes+1,len(L_y))):
+                            x = L_x[i_x]
+                            y = L_y[i_y]
+                            Point = np.array([x, y])
+                            distance = np.linalg.norm(Point-center_seed)
+                            # Update map psi
+                            if M_phi[-1-i_y, i_x] == 0 : # do not erase data already written
+                                if distance <= r_seed:
+                                    M_phi[-1-i_y, i_x] = 1
+                                elif distance >= r_seed:
+                                    M_phi[-1-i_y, i_x] = 0
+
+    # print psi/phi map
+    M_phi_psi = M_psi + 2*M_phi
+    fig, (ax1) = plt.subplots(1,1,figsize=(16,9))
+    title_fontsize = 30
+    im = ax1.imshow(M_phi_psi, interpolation = 'nearest', extent=(L_x[0],L_x[-1],L_y[0],L_y[-1]), vmax=2)
+    cbar = fig.colorbar(im, ax=ax1)
+    cbar.set_ticks(ticks=[0, 1, 2], labels=['Pore', 'Source', 'C-S-H'])
+    fig.tight_layout()
+    fig.savefig('png/IC_one_map.png')
+    plt.close(fig)
+
+    # adapt maps
+    M_psi = M_psi - 0.5
+    if n_seed > 0:
+        M_phi = M_phi - 0.5
+
+    # compute the signed distance functions
+    sd_psi = skfmm.distance(M_psi, dx = np.array([L_x[1]-L_x[0],L_y[1]-L_y[0]]))
+    if n_seed > 0:
+        sd_phi = skfmm.distance(M_phi, dx = np.array([L_x[1]-L_x[0],L_y[1]-L_y[0]]))
+
+    # compute the phase field variables
+    for i_x in range(len(L_x)):
+        for i_y in range(len(L_y)):
+            # phi
+            if n_seed > 0:
+                if sd_phi[i_y, i_x] > dict_user['w_int']/2: # inside the grain
+                    M_phi[i_y, i_x] = 1
+                elif sd_phi[i_y, i_x] < -dict_user['w_int']/2: # outside the grain
+                    M_phi[i_y, i_x] = 0
+                else : # in the interface
+                    M_phi[i_y, i_x] = 0.5*(1+math.cos(math.pi*(-sd_phi[i_y, i_x]+dict_user['w_int']/2)/(dict_user['w_int'])))
+            # psi
+            if sd_psi[i_y, i_x] > dict_user['w_int']/2: # inside the grain
+                M_psi[i_y, i_x] = 1
+            elif sd_psi[i_y, i_x] < -dict_user['w_int']/2: # outside the grain
+                M_psi[i_y, i_x] = 0
+            else : # in the interface
+                M_psi[i_y, i_x] = 0.5*(1+math.cos(math.pi*(-sd_psi[i_y, i_x]+dict_user['w_int']/2)/(dict_user['w_int'])))
+
+    # result
+    print()
+    print('Mean value of psi:', round(np.sum(M_psi)/M_psi.size,2))
+    print('Mean value of phi:', round(np.sum(M_phi)/M_phi.size,2))
+
+    # Plot maps
+    fig, ((ax1),(ax2),(ax3)) = plt.subplots(3,1,figsize=(9,25))
+    # parameters
+    title_fontsize = 30
+    # psi
+    im = ax1.imshow(M_psi, interpolation = 'nearest', extent=(L_x[0],L_x[-1],L_y[0],L_y[-1]))
+    fig.colorbar(im, ax=ax1)
+    ax1.set_title(r'Map of $\psi$',fontsize = title_fontsize)
+    # phi
+    im = ax2.imshow(M_phi, interpolation = 'nearest', extent=(L_x[0],L_x[-1],L_y[0],L_y[-1]))
+    fig.colorbar(im, ax=ax2)
+    ax2.set_title(r'Map of $\phi$',fontsize = title_fontsize)
+    # c
+    im = ax3.imshow(M_c, interpolation = 'nearest', extent=(L_x[0],L_x[-1],L_y[0],L_y[-1]))
+    fig.colorbar(im, ax=ax3)
+    ax3.set_title(r'Map of c',fontsize = title_fontsize)
+
+    fig.savefig('png/IC.png')
+    plt.close(fig)
+
+    # save in dicts
+    dict_sample['L_x'] = L_x
+    dict_sample['L_y'] = L_y
+    dict_sample['M_psi'] = M_psi
+    dict_sample['M_phi'] = M_phi
+    dict_sample['M_c'] = M_c
+
+    # Write data
+    file_to_write_psi = open('txt/psi.txt','w')
+    file_to_write_phi = open('txt/phi.txt','w')
+    file_to_write_c = open('txt/c.txt','w')
+    # x
+    file_to_write_psi.write('AXIS X\n')
+    file_to_write_phi.write('AXIS X\n')
+    file_to_write_c.write('AXIS X\n')
+    line = ''
+    for x in dict_sample['L_x']:
+        line = line + str(x)+ ' '
+    line = line + '\n'
+    file_to_write_psi.write(line)
+    file_to_write_phi.write(line)
+    file_to_write_c.write(line)
+    # y
+    file_to_write_psi.write('AXIS Y\n')
+    file_to_write_phi.write('AXIS Y\n')
+    file_to_write_c.write('AXIS Y\n')
+    line = ''
+    for y in dict_sample['L_y']:
+        line = line + str(y)+ ' '
+    line = line + '\n'
+    file_to_write_psi.write(line)
+    file_to_write_phi.write(line)
+    file_to_write_c.write(line)
+    # data
+    file_to_write_psi.write('DATA\n')
+    file_to_write_phi.write('DATA\n')
+    file_to_write_c.write('DATA\n')
+    for l in range(len(dict_sample['L_y'])):
+        for c in range(len(dict_sample['L_x'])):
+            file_to_write_psi.write(str(M_psi[-1-l][c])+'\n')
+            file_to_write_phi.write(str(M_phi[-1-l][c])+'\n')
+            file_to_write_c.write(str(M_c[-1-l][c])+'\n')
+    # close
+    file_to_write_psi.close()
+    file_to_write_phi.close()
+    file_to_write_c.close()
+
+#-------------------------------------------------------------------------------
+
+def Insert_Powder_Seed(dict_sample, dict_user):
+    '''
+    Insert n_grains grains in the domain. The grains are circle defined by a radius (uniform distribution).
+    The position of the grains is randomly set, overlap between particules is allowed.
+    A ratio of water mass / cement mass is targetted.
+
+    Map of phi, psi and c are generated.
+    '''
+    # Initialize the arrays
+    M_psi = np.zeros((dict_user['n_mesh'],dict_user['n_mesh']))
+    M_phi = np.zeros((dict_user['n_mesh'],dict_user['n_mesh']))
+    M_c = dict_user['C_eq_phi']*np.ones((dict_user['n_mesh'],dict_user['n_mesh']))
+
+    # Initialize the mesh lists
+    L_x = np.linspace(-dict_user['dim_domain']/2, dict_user['dim_domain']/2, dict_user['n_mesh'])
+    L_y = np.linspace(-dict_user['dim_domain']/2, dict_user['dim_domain']/2, dict_user['n_mesh'])
+
+    # Insert grains
+    m_H20_m_cement = 2*dict_user['w_g_target']
+    while m_H20_m_cement > dict_user['w_g_target']:
+        # Random radius of the grain
+        r_grain = max(dict_user['R']*(1+dict_user['R_var']*(random.random()-0.5)*2), dict_user['d_mesh']*5)
+        # Random position of the grain center
+        x_grain = (dict_user['dim_domain']/2+r_grain)*(random.random()-0.5)*2
+        y_grain = (dict_user['dim_domain']/2+r_grain)*(random.random()-0.5)*2
+        Center_grain = np.array([x_grain, y_grain])
+        # find the nearest node of the center
+        L_search = list(abs(np.array(L_x-x_grain)))
+        i_x_center = L_search.index(min(L_search))
+        L_search = list(abs(np.array(L_y-y_grain)))
+        i_y_center = L_search.index(min(L_search))
+        # compute the number of node (depending on the radius)
+        n_nodes = int(r_grain/(L_x[1]-L_x[0]))+15
+        for i_x in range(max(0,i_x_center-n_nodes),min(i_x_center+n_nodes+1,len(L_x))):
+            for i_y in range(max(0,i_y_center-n_nodes),min(i_y_center+n_nodes+1,len(L_y))):
+                x = L_x[i_x]
+                y = L_y[i_y]
+                Point = np.array([x, y])
+                distance = np.linalg.norm(Point-Center_grain)
+                # Update map psi
+                if distance <= r_grain :
+                    M_psi[-1-i_y, i_x] = 1
+
+        # compute the ratio water mass/cement mass
+        Surface_grain = np.sum(M_psi)*(L_x[1]-L_x[0])*(L_y[1]-L_y[0])
+        Surface_water = dict_user['dim_domain']*dict_user['dim_domain'] - Surface_grain
+        m_H20_m_cement = Surface_water*dict_user['rho_water']/(Surface_grain*dict_user['rho_g'])
+        # output
+        print('Compute IC:',round(m_H20_m_cement,2),'/',dict_user['w_g_target'],'targetted')
+
+    # Compute phi
+    n_seed = dict_user['n_seed']
+    for i_seed in range(n_seed):
+        i_try = 0
+        seed_created = False
+        while not seed_created and i_try < 100:
+            i_try = i_try + 1
+            # generate a seed
+            i_x_seed = random.randint(0, len(L_x)-1)
+            i_y_seed = random.randint(0, len(L_y)-1)
+            center_seed = np.array([L_x[i_x_seed], L_y[i_y_seed]])
+
+            # verify the node is not in a cement source
+            if M_psi[-1-i_y_seed, i_x_seed] != 1:
+                seed_created = True
+                # generate the seed
+                r_seed = 1.3*dict_user['w_int']
+                # compute the number of node (depending on the radius)
+                n_nodes = int(r_seed/(L_x[1]-L_x[0]))+4
+                for i_x in range(max(0,i_x_seed-n_nodes),min(i_x_seed+n_nodes+1,len(L_x))):
+                    for i_y in range(max(0,i_y_seed-n_nodes),min(i_y_seed+n_nodes+1,len(L_y))):
+                        x = L_x[i_x]
+                        y = L_y[i_y]
+                        Point = np.array([x, y])
+                        distance = np.linalg.norm(Point-center_seed)
+                        # Update map psi
+                        if M_phi[-1-i_y, i_x] == 0 : # do not erase data already written
+                            if distance <= r_seed:
+                                M_phi[-1-i_y, i_x] = 1
+                            elif distance >= r_seed:
+                                M_phi[-1-i_y, i_x] = 0
+
+    # print psi/phi map
+    M_phi_psi = M_psi + 2*M_phi
+    fig, (ax1) = plt.subplots(1,1,figsize=(16,9))
+    title_fontsize = 30
+    im = ax1.imshow(M_phi_psi, interpolation = 'nearest', extent=(L_x[0],L_x[-1],L_y[0],L_y[-1]), vmax=2)
+    cbar = fig.colorbar(im, ax=ax1)
+    cbar.set_ticks(ticks=[0, 1, 2], labels=['Pore', 'Source', 'C-S-H'])
+    fig.tight_layout()
+    fig.savefig('png/IC_one_map.png')
+    plt.close(fig)
+
+    # adapt maps
+    M_psi = M_psi - 0.5
+    M_phi = M_phi - 0.5
+
+    # compute the signed distance functions
+    sd_phi = skfmm.distance(M_phi, dx = np.array([L_x[1]-L_x[0],L_y[1]-L_y[0]]))
+    sd_psi = skfmm.distance(M_psi, dx = np.array([L_x[1]-L_x[0],L_y[1]-L_y[0]]))
+
+    # compute the phase field variables
+    for i_x in range(len(L_x)):
+        for i_y in range(len(L_y)):
+            # phi
+            if sd_phi[i_y, i_x] > dict_user['w_int']/2: # inside the grain
+                M_phi[i_y, i_x] = 1
+            elif sd_phi[i_y, i_x] < -dict_user['w_int']/2: # outside the grain
+                M_phi[i_y, i_x] = 0
+            else : # in the interface
+                M_phi[i_y, i_x] = 0.5*(1+math.cos(math.pi*(-sd_phi[i_y, i_x]+dict_user['w_int']/2)/(dict_user['w_int'])))
+            # psi
+            if sd_psi[i_y, i_x] > dict_user['w_int']/2: # inside the grain
+                M_psi[i_y, i_x] = 1
+            elif sd_psi[i_y, i_x] < -dict_user['w_int']/2: # outside the grain
+                M_psi[i_y, i_x] = 0
+            else : # in the interface
+                M_psi[i_y, i_x] = 0.5*(1+math.cos(math.pi*(-sd_psi[i_y, i_x]+dict_user['w_int']/2)/(dict_user['w_int'])))
+
+    # result
+    print()
+    print('Mean value of psi:', round(np.sum(M_psi)/M_psi.size,2))
+    print('Mean value of phi:', round(np.sum(M_phi)/M_phi.size,2))
+
+    # Plot maps
+    fig, ((ax1),(ax2),(ax3)) = plt.subplots(3,1,figsize=(9,25))
+
+    # parameters
+    title_fontsize = 30
+
+    # psi
+    im = ax1.imshow(M_psi, interpolation = 'nearest', extent=(L_x[0],L_x[-1],L_y[0],L_y[-1]))
+    fig.colorbar(im, ax=ax1)
+    ax1.set_title(r'Map of $\psi$',fontsize = title_fontsize)
+    # phi
+    im = ax2.imshow(M_phi, interpolation = 'nearest', extent=(L_x[0],L_x[-1],L_y[0],L_y[-1]))
+    fig.colorbar(im, ax=ax2)
+    ax2.set_title(r'Map of $\phi$',fontsize = title_fontsize)
+    # c
+    im = ax3.imshow(M_c, interpolation = 'nearest', extent=(L_x[0],L_x[-1],L_y[0],L_y[-1]))
+    fig.colorbar(im, ax=ax3)
+    ax3.set_title(r'Map of c',fontsize = title_fontsize)
+
+    fig.savefig('png/IC.png')
+    plt.close(fig)
+
+    # save in dicts
+    dict_sample['L_x'] = L_x
+    dict_sample['L_y'] = L_y
+    dict_sample['M_psi'] = M_psi
+    dict_sample['M_phi'] = M_phi
+    dict_sample['M_c'] = M_c
+
+    # Write data
+    file_to_write_psi = open('txt/psi.txt','w')
+    file_to_write_phi = open('txt/phi.txt','w')
+    file_to_write_c = open('txt/c.txt','w')
+    # x
+    file_to_write_psi.write('AXIS X\n')
+    file_to_write_phi.write('AXIS X\n')
+    file_to_write_c.write('AXIS X\n')
+    line = ''
+    for x in dict_sample['L_x']:
+        line = line + str(x)+ ' '
+    line = line + '\n'
+    file_to_write_psi.write(line)
+    file_to_write_phi.write(line)
+    file_to_write_c.write(line)
+    # y
+    file_to_write_psi.write('AXIS Y\n')
+    file_to_write_phi.write('AXIS Y\n')
+    file_to_write_c.write('AXIS Y\n')
+    line = ''
+    for y in dict_sample['L_y']:
+        line = line + str(y)+ ' '
+    line = line + '\n'
+    file_to_write_psi.write(line)
+    file_to_write_phi.write(line)
+    file_to_write_c.write(line)
+    # data
+    file_to_write_psi.write('DATA\n')
+    file_to_write_phi.write('DATA\n')
+    file_to_write_c.write('DATA\n')
+    for l in range(len(dict_sample['L_y'])):
+        for c in range(len(dict_sample['L_x'])):
+            file_to_write_psi.write(str(M_psi[-1-l][c])+'\n')
+            file_to_write_phi.write(str(M_phi[-1-l][c])+'\n')
+            file_to_write_c.write(str(M_c[-1-l][c])+'\n')
+    # close
+    file_to_write_psi.close()
+    file_to_write_phi.close()
+    file_to_write_c.close()
+</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="ic.check_overlap"><code class="name flex">
+<span>def <span class="ident">check_overlap</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Determine if grains are overlapping.</p>
+<pre><code>Used in Insert_Grains() function.
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def check_overlap(L_radius_grains, L_pos_grains, L_radius_grains_virtual, L_pos_grains_virtual, L_i_grain_virtual, factor_int):
+    '''
+    Determine if grains are overlapping.
+
+    Used in Insert_Grains() function.
+    '''
+    overlap = False
+    # real - real
+    L_overlap = []
+    for i_g in range(len(L_radius_grains)-1):
+        # radius of grains
+        radius_i = L_radius_grains[i_g]
+        # position of grains
+        pos_i = L_pos_grains[i_g]
+        for j_g in range(i_g+1, len(L_radius_grains)):
+            # radius of grains
+            radius_j = L_radius_grains[j_g]
+            # position of grains
+            pos_j = L_pos_grains[j_g]
+            # check distance
+            if np.linalg.norm(pos_i-pos_j) < radius_i+radius_j+factor_int:
+                overlap = True
+                L_overlap.append((i_g, j_g))
+    # real - virtual
+    L_overlap_virtual = []
+    for i_g in range(len(L_radius_grains)):
+        # radius of grains
+        radius_i = L_radius_grains[i_g]
+        # position of grains
+        pos_i = L_pos_grains[i_g]
+        for j_g in range(len(L_radius_grains_virtual)):
+            # radius of grains
+            radius_j = L_radius_grains_virtual[j_g]
+            # position of grains
+            pos_j = L_pos_grains_virtual[j_g]
+            # check distance
+            if np.linalg.norm(pos_i-pos_j) < radius_i+radius_j+factor_int:
+                overlap = True
+                L_overlap_virtual.append((i_g, j_g, L_i_grain_virtual[j_g]))
+
+    return overlap, L_overlap, L_overlap_virtual
+</code></pre>
+</details>
+</dd>
+<dt id="ic.compute_virtual"><code class="name flex">
+<span>def <span class="ident">compute_virtual</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Compute virtual grains with the periodic conditions.</p>
+</div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def compute_virtual(dict_user, L_pos_grains, L_radius_grains_step):
+    '''
+    Compute virtual grains with the periodic conditions.
+    '''
+    L_pos_grains_virtual = []
+    L_radius_grains_virtual = []
+    L_i_grain_virtual = []
+
+    for i_grain in range(len(L_pos_grains)):
+        per_x_p = False
+        per_x_m = False
+        per_y_p = False
+        per_y_m = False
+        # - x limit
+        if L_pos_grains[i_grain][0] < -dict_user['dim_domain']/2 + L_radius_grains_step[i_grain]:
+            L_pos_grains_virtual.append(L_pos_grains[i_grain] + np.array([ dict_user['dim_domain'], 0]))
+            L_radius_grains_virtual.append(L_radius_grains_step[i_grain])
+            L_i_grain_virtual.append(i_grain)
+            per_x_m = True
+        # + x limit
+        if dict_user['dim_domain']/2 - L_radius_grains_step[i_grain] < L_pos_grains[i_grain][0]:
+            L_pos_grains_virtual.append(L_pos_grains[i_grain] + np.array([-dict_user['dim_domain'], 0]))
+            L_radius_grains_virtual.append(L_radius_grains_step[i_grain])
+            L_i_grain_virtual.append(i_grain)
+            per_x_p = True
+        # - y limit
+        if L_pos_grains[i_grain][1] < -dict_user['dim_domain']/2 + L_radius_grains_step[i_grain]:
+            L_pos_grains_virtual.append(L_pos_grains[i_grain] + np.array([0,  dict_user['dim_domain']]))
+            L_radius_grains_virtual.append(L_radius_grains_step[i_grain])
+            L_i_grain_virtual.append(i_grain)
+            per_y_m = True
+        # + y limit
+        if dict_user['dim_domain']/2 - L_radius_grains_step[i_grain] < L_pos_grains[i_grain][1]:
+            L_pos_grains_virtual.append(L_pos_grains[i_grain] + np.array([0, -dict_user['dim_domain']]))
+            L_radius_grains_virtual.append(L_radius_grains_step[i_grain])
+            L_i_grain_virtual.append(i_grain)
+            per_y_p = True
+        # - x and - y limits
+        if per_x_m and per_y_m:
+            L_pos_grains_virtual.append(L_pos_grains[i_grain] + np.array([ dict_user['dim_domain'], dict_user['dim_domain']]))
+            L_radius_grains_virtual.append(L_radius_grains_step[i_grain])
+            L_i_grain_virtual.append(i_grain)
+        # - x and + y limits
+        if per_x_m and per_y_p:
+            L_pos_grains_virtual.append(L_pos_grains[i_grain] + np.array([ dict_user['dim_domain'], -dict_user['dim_domain']]))
+            L_radius_grains_virtual.append(L_radius_grains_step[i_grain])
+            L_i_grain_virtual.append(i_grain)
+        # + x and - y limit
+        if per_x_p and per_y_m:
+            L_pos_grains_virtual.append(L_pos_grains[i_grain] + np.array([ -dict_user['dim_domain'], dict_user['dim_domain']]))
+            L_radius_grains_virtual.append(L_radius_grains_step[i_grain])
+            L_i_grain_virtual.append(i_grain)
+        # + x and + y limit
+        if per_x_p and per_y_p:
+            L_pos_grains_virtual.append(L_pos_grains[i_grain] + np.array([ -dict_user['dim_domain'], -dict_user['dim_domain']]))
+            L_radius_grains_virtual.append(L_radius_grains_step[i_grain])
+            L_i_grain_virtual.append(i_grain)
+
+    return L_pos_grains_virtual, L_radius_grains_virtual, L_i_grain_virtual
+</code></pre>
+</details>
+</dd>
+<dt id="ic.Insert_One_Grain_Seed"><code class="name flex">
+<span>def <span class="ident">Insert_One_Grain_Seed</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Insert one grain in the domain. The grain is circle defined by a radius.</p>
+<pre><code>Map of phi, psi and c are generated.
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def Insert_One_Grain_Seed(dict_sample, dict_user):
+    '''
+    Insert one grain in the domain. The grain is circle defined by a radius.
+
+    Map of phi, psi and c are generated.
+    '''
+    # Initialize the arrays
+    M_psi = np.zeros((dict_user['n_mesh'],dict_user['n_mesh']))
+    M_phi = np.zeros((dict_user['n_mesh'],dict_user['n_mesh']))
+    M_c = dict_user['C_eq_phi']*np.ones((dict_user['n_mesh'],dict_user['n_mesh']))
+
+    # Initialize the mesh lists
+    L_x = np.linspace(-dict_user['dim_domain']/2, dict_user['dim_domain']/2, dict_user['n_mesh'])
+    L_y = np.linspace(-dict_user['dim_domain']/2, dict_user['dim_domain']/2, dict_user['n_mesh'])
+
+    # compute m_H20_m_cement
+    M_psi = np.zeros((dict_user['n_mesh'],dict_user['n_mesh']))
+    # iterate on grains
+    x_grain = 0
+    y_grain = 0
+    Center_grain = np.array([x_grain, y_grain])
+    r_grain = dict_user['R']
+    # find the nearest node of the center
+    L_search = list(abs(np.array(L_x-x_grain)))
+    i_x_center = L_search.index(min(L_search))
+    L_search = list(abs(np.array(L_y-y_grain)))
+    i_y_center = L_search.index(min(L_search))
+    # compute the number of node (depending on the radius)
+    n_nodes = int(r_grain/(L_x[1]-L_x[0]))+4
+    for i_x in range(max(0,i_x_center-n_nodes),min(i_x_center+n_nodes+1,len(L_x))):
+        for i_y in range(max(0,i_y_center-n_nodes),min(i_y_center+n_nodes+1,len(L_y))):
+            x = L_x[i_x]
+            y = L_y[i_y]
+            Point = np.array([x, y])
+            distance = np.linalg.norm(Point-Center_grain)
+            # Update map psi
+            if M_psi[-1-i_y, i_x] == 0 : # do not erase data already written
+                if distance <= r_grain:
+                    M_psi[-1-i_y, i_x] = 1
+                elif distance >= r_grain:
+                    M_psi[-1-i_y, i_x] = 0
+    # compute surface grains and water
+    Surface_grain = np.sum(M_psi)/M_psi.size*dict_user['dim_domain']*dict_user['dim_domain']
+    Surface_water = dict_user['dim_domain']*dict_user['dim_domain'] - Surface_grain
+    # compute ratio
+    m_H20_m_cement = (Surface_water*dict_user['rho_water'])/(Surface_grain*dict_user['rho_g'])
+    # print result
+    print()
+    print('m_H20/m_cement:', round(m_H20_m_cement,2),'targetted')
+
+    # Compute phi
+    n_seed = dict_user['n_seed']
+    for i_seed in range(n_seed):
+        i_try = 0
+        seed_created = False
+        while not seed_created and i_try < 100:
+            i_try = i_try + 1
+            # generate a seed
+            i_x_seed = random.randint(0, len(L_x)-1)
+            i_y_seed = random.randint(0, len(L_y)-1)
+            center_seed = np.array([L_x[i_x_seed], L_y[i_y_seed]])
+
+            # verify the node is not in a cement source
+            if M_psi[-1-i_y_seed, i_x_seed] != 1:
+                seed_created = True
+                # generate the seed
+                r_seed = 1.5*dict_user['w_int']
+                # compute the number of node (depending on the radius)
+                n_nodes = int(r_seed/(L_x[1]-L_x[0]))+4
+                for i_x in range(max(0,i_x_seed-n_nodes),min(i_x_seed+n_nodes+1,len(L_x))):
+                    for i_y in range(max(0,i_y_seed-n_nodes),min(i_y_seed+n_nodes+1,len(L_y))):
+                        x = L_x[i_x]
+                        y = L_y[i_y]
+                        Point = np.array([x, y])
+                        distance = np.linalg.norm(Point-center_seed)
+                        # Update map psi
+                        if M_phi[-1-i_y, i_x] == 0 : # do not erase data already written
+                            if distance <= r_seed:
+                                M_phi[-1-i_y, i_x] = 1
+                            elif distance >= r_seed:
+                                M_phi[-1-i_y, i_x] = 0
+
+    # print psi/phi map
+    M_phi_psi = M_psi + 2*M_phi
+    fig, (ax1) = plt.subplots(1,1,figsize=(16,9))
+    title_fontsize = 30
+    im = ax1.imshow(M_phi_psi, interpolation = 'nearest', extent=(L_x[0],L_x[-1],L_y[0],L_y[-1]), vmax=2)
+    cbar = fig.colorbar(im, ax=ax1)
+    cbar.set_ticks(ticks=[0, 1, 2], labels=['Pore', 'Source', 'C-S-H'])
+    fig.tight_layout()
+    fig.savefig('png/IC_one_map.png')
+    plt.close(fig)
+
+    # adapt maps
+    M_psi = M_psi - 0.5
+    M_phi = M_phi - 0.5
+
+    # compute the signed distance functions
+    sd_phi = skfmm.distance(M_phi, dx = np.array([L_x[1]-L_x[0],L_y[1]-L_y[0]]))
+    sd_psi = skfmm.distance(M_psi, dx = np.array([L_x[1]-L_x[0],L_y[1]-L_y[0]]))
+
+    # compute the phase field variables
+    for i_x in range(len(L_x)):
+        for i_y in range(len(L_y)):
+            # phi
+            if sd_phi[i_y, i_x] > dict_user['w_int']/2: # inside the grain
+                M_phi[i_y, i_x] = 1
+            elif sd_phi[i_y, i_x] < -dict_user['w_int']/2: # outside the grain
+                M_phi[i_y, i_x] = 0
+            else : # in the interface
+                M_phi[i_y, i_x] = 0.5*(1+math.cos(math.pi*(-sd_phi[i_y, i_x]+dict_user['w_int']/2)/(dict_user['w_int'])))
+            # psi
+            if sd_psi[i_y, i_x] > dict_user['w_int']/2: # inside the grain
+                M_psi[i_y, i_x] = 1
+            elif sd_psi[i_y, i_x] < -dict_user['w_int']/2: # outside the grain
+                M_psi[i_y, i_x] = 0
+            else : # in the interface
+                M_psi[i_y, i_x] = 0.5*(1+math.cos(math.pi*(-sd_psi[i_y, i_x]+dict_user['w_int']/2)/(dict_user['w_int'])))
+
+    # result
+    print()
+    print('Mean value of psi:', round(np.sum(M_psi)/M_psi.size,2))
+    print('Mean value of phi:', round(np.sum(M_phi)/M_phi.size,2))
+
+    # Plot maps
+    fig, ((ax1),(ax2),(ax3)) = plt.subplots(3,1,figsize=(9,25))
+    # parameters
+    title_fontsize = 30
+    # psi
+    im = ax1.imshow(M_psi, interpolation = 'nearest', extent=(L_x[0],L_x[-1],L_y[0],L_y[-1]))
+    fig.colorbar(im, ax=ax1)
+    ax1.set_title(r'Map of $\psi$',fontsize = title_fontsize)
+    # phi
+    im = ax2.imshow(M_phi, interpolation = 'nearest', extent=(L_x[0],L_x[-1],L_y[0],L_y[-1]))
+    fig.colorbar(im, ax=ax2)
+    ax2.set_title(r'Map of $\phi$',fontsize = title_fontsize)
+    # c
+    im = ax3.imshow(M_c, interpolation = 'nearest', extent=(L_x[0],L_x[-1],L_y[0],L_y[-1]))
+    fig.colorbar(im, ax=ax3)
+    ax3.set_title(r'Map of c',fontsize = title_fontsize)
+
+    fig.savefig('png/IC.png')
+    plt.close(fig)
+
+    # save in dicts
+    dict_sample['L_x'] = L_x
+    dict_sample['L_y'] = L_y
+    dict_sample['M_psi'] = M_psi
+    dict_sample['M_phi'] = M_phi
+    dict_sample['M_c'] = M_c
+
+    # Write data
+    file_to_write_psi = open('txt/psi.txt','w')
+    file_to_write_phi = open('txt/phi.txt','w')
+    file_to_write_c = open('txt/c.txt','w')
+    # x
+    file_to_write_psi.write('AXIS X\n')
+    file_to_write_phi.write('AXIS X\n')
+    file_to_write_c.write('AXIS X\n')
+    line = ''
+    for x in dict_sample['L_x']:
+        line = line + str(x)+ ' '
+    line = line + '\n'
+    file_to_write_psi.write(line)
+    file_to_write_phi.write(line)
+    file_to_write_c.write(line)
+    # y
+    file_to_write_psi.write('AXIS Y\n')
+    file_to_write_phi.write('AXIS Y\n')
+    file_to_write_c.write('AXIS Y\n')
+    line = ''
+    for y in dict_sample['L_y']:
+        line = line + str(y)+ ' '
+    line = line + '\n'
+    file_to_write_psi.write(line)
+    file_to_write_phi.write(line)
+    file_to_write_c.write(line)
+    # data
+    file_to_write_psi.write('DATA\n')
+    file_to_write_phi.write('DATA\n')
+    file_to_write_c.write('DATA\n')
+    for l in range(len(dict_sample['L_y'])):
+        for c in range(len(dict_sample['L_x'])):
+            file_to_write_psi.write(str(M_psi[-1-l][c])+'\n')
+            file_to_write_phi.write(str(M_phi[-1-l][c])+'\n')
+            file_to_write_c.write(str(M_c[-1-l][c])+'\n')
+    # close
+    file_to_write_psi.close()
+    file_to_write_phi.close()
+    file_to_write_c.close()
+</code></pre>
+</details>
+</dd>
+<dt id="ic.Insert_One_Grain_Seed_Fixed"><code class="name flex">
+<span>def <span class="ident">Insert_One_Grain_Seed_Fixed</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Insert one grain in the domain. The grain is circle defined by a radius.</p>
+<pre><code>Map of phi, psi and c are generated.
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def Insert_One_Grain_Seed_Fixed(dict_sample, dict_user):
+    '''
+    Insert one grain in the domain. The grain is circle defined by a radius.
+
+    Map of phi, psi and c are generated.
+    '''
+    # Initialize the arrays
+    M_psi = np.zeros((dict_user['n_mesh'],dict_user['n_mesh']))
+    M_phi = np.zeros((dict_user['n_mesh'],dict_user['n_mesh']))
+    M_c = dict_user['C_eq_phi']*np.ones((dict_user['n_mesh'],dict_user['n_mesh']))
+
+    # Initialize the mesh lists
+    L_x = np.linspace(-dict_user['dim_domain']/2, dict_user['dim_domain']/2, dict_user['n_mesh'])
+    L_y = np.linspace(-dict_user['dim_domain']/2, dict_user['dim_domain']/2, dict_user['n_mesh'])
+
+    # compute m_H20_m_cement
+    M_psi = np.zeros((dict_user['n_mesh'],dict_user['n_mesh']))
+    # iterate on grains
+    x_grain = 0
+    y_grain = 0
+    Center_grain = np.array([x_grain, y_grain])
+    r_grain = dict_user['R']
+    # find the nearest node of the center
+    L_search = list(abs(np.array(L_x-x_grain)))
+    i_x_center = L_search.index(min(L_search))
+    L_search = list(abs(np.array(L_y-y_grain)))
+    i_y_center = L_search.index(min(L_search))
+    # compute the number of node (depending on the radius)
+    n_nodes = int(r_grain/(L_x[1]-L_x[0]))+4
+    for i_x in range(max(0,i_x_center-n_nodes),min(i_x_center+n_nodes+1,len(L_x))):
+        for i_y in range(max(0,i_y_center-n_nodes),min(i_y_center+n_nodes+1,len(L_y))):
+            x = L_x[i_x]
+            y = L_y[i_y]
+            Point = np.array([x, y])
+            distance = np.linalg.norm(Point-Center_grain)
+            # Update map psi
+            if M_psi[-1-i_y, i_x] == 0 : # do not erase data already written
+                if distance <= r_grain:
+                    M_psi[-1-i_y, i_x] = 1
+                elif distance >= r_grain:
+                    M_psi[-1-i_y, i_x] = 0
+    # compute surface grains and water
+    Surface_grain = np.sum(M_psi)/M_psi.size*dict_user['dim_domain']*dict_user['dim_domain']
+    Surface_water = dict_user['dim_domain']*dict_user['dim_domain'] - Surface_grain
+    # compute ratio
+    m_H20_m_cement = (Surface_water*dict_user['rho_water'])/(Surface_grain*dict_user['rho_g'])
+    # print result
+    print()
+    print('m_H20/m_cement:', round(m_H20_m_cement,2),'targetted')
+
+    # Compute phi
+    # center and radius definition
+    i_x_seed = len(L_x)-1
+    i_y_seed = int(len(L_y)/2)
+    center_seed = np.array([L_x[i_x_seed], L_y[i_y_seed]])
+    r_seed = 2*dict_user['w_int']
+    # compute map
+    n_nodes = int(r_seed/(L_x[1]-L_x[0]))+8
+    for i_x in range(max(0,i_x_seed-n_nodes),min(i_x_seed+n_nodes+1,len(L_x))):
+        for i_y in range(max(0,i_y_seed-n_nodes),min(i_y_seed+n_nodes+1,len(L_y))):
+            x = L_x[i_x]
+            y = L_y[i_y]
+            Point = np.array([x, y])
+            distance = np.linalg.norm(Point-center_seed)
+            # Update map psi
+            if M_phi[-1-i_y, i_x] == 0 : # do not erase data already written
+                if distance <= r_seed:
+                    M_phi[-1-i_y, i_x] = 1
+                elif distance >= r_seed:
+                    M_phi[-1-i_y, i_x] = 0
+
+    # print psi/phi map
+    M_phi_psi = M_psi + 2*M_phi
+    fig, (ax1) = plt.subplots(1,1,figsize=(16,9))
+    title_fontsize = 30
+    im = ax1.imshow(M_phi_psi, interpolation = 'nearest', extent=(L_x[0],L_x[-1],L_y[0],L_y[-1]), vmax=2)
+    cbar = fig.colorbar(im, ax=ax1)
+    cbar.set_ticks(ticks=[0, 1, 2], labels=['Pore', 'Source', 'C-S-H'])
+    fig.tight_layout()
+    fig.savefig('png/IC_one_map.png')
+    plt.close(fig)
+
+    # adapt maps
+    M_psi = M_psi - 0.5
+    M_phi = M_phi - 0.5
+
+    # compute the signed distance functions
+    sd_phi = skfmm.distance(M_phi, dx = np.array([L_x[1]-L_x[0],L_y[1]-L_y[0]]))
+    sd_psi = skfmm.distance(M_psi, dx = np.array([L_x[1]-L_x[0],L_y[1]-L_y[0]]))
+
+    # compute the phase field variables
+    for i_x in range(len(L_x)):
+        for i_y in range(len(L_y)):
+            # phi
+            if sd_phi[i_y, i_x] > dict_user['w_int']/2: # inside the grain
+                M_phi[i_y, i_x] = 1
+            elif sd_phi[i_y, i_x] < -dict_user['w_int']/2: # outside the grain
+                M_phi[i_y, i_x] = 0
+            else : # in the interface
+                M_phi[i_y, i_x] = 0.5*(1+math.cos(math.pi*(-sd_phi[i_y, i_x]+dict_user['w_int']/2)/(dict_user['w_int'])))
+            # psi
+            if sd_psi[i_y, i_x] > dict_user['w_int']/2: # inside the grain
+                M_psi[i_y, i_x] = 1
+            elif sd_psi[i_y, i_x] < -dict_user['w_int']/2: # outside the grain
+                M_psi[i_y, i_x] = 0
+            else : # in the interface
+                M_psi[i_y, i_x] = 0.5*(1+math.cos(math.pi*(-sd_psi[i_y, i_x]+dict_user['w_int']/2)/(dict_user['w_int'])))
+
+    # result
+    print()
+    print('Mean value of psi:', round(np.sum(M_psi)/M_psi.size,2))
+    print('Mean value of phi:', round(np.sum(M_phi)/M_phi.size,2))
+
+    # Plot maps
+    fig, ((ax1),(ax2),(ax3)) = plt.subplots(3,1,figsize=(9,25))
+    # parameters
+    title_fontsize = 30
+    # psi
+    im = ax1.imshow(M_psi, interpolation = 'nearest', extent=(L_x[0],L_x[-1],L_y[0],L_y[-1]))
+    fig.colorbar(im, ax=ax1)
+    ax1.set_title(r'Map of $\psi$',fontsize = title_fontsize)
+    # phi
+    im = ax2.imshow(M_phi, interpolation = 'nearest', extent=(L_x[0],L_x[-1],L_y[0],L_y[-1]))
+    fig.colorbar(im, ax=ax2)
+    ax2.set_title(r'Map of $\phi$',fontsize = title_fontsize)
+    # c
+    im = ax3.imshow(M_c, interpolation = 'nearest', extent=(L_x[0],L_x[-1],L_y[0],L_y[-1]))
+    fig.colorbar(im, ax=ax3)
+    ax3.set_title(r'Map of c',fontsize = title_fontsize)
+
+    fig.savefig('png/IC.png')
+    plt.close(fig)
+
+    # save in dicts
+    dict_sample['L_x'] = L_x
+    dict_sample['L_y'] = L_y
+    dict_sample['M_psi'] = M_psi
+    dict_sample['M_phi'] = M_phi
+    dict_sample['M_c'] = M_c
+
+    # Write data
+    file_to_write_psi = open('txt/psi.txt','w')
+    file_to_write_phi = open('txt/phi.txt','w')
+    file_to_write_c = open('txt/c.txt','w')
+    # x
+    file_to_write_psi.write('AXIS X\n')
+    file_to_write_phi.write('AXIS X\n')
+    file_to_write_c.write('AXIS X\n')
+    line = ''
+    for x in dict_sample['L_x']:
+        line = line + str(x)+ ' '
+    line = line + '\n'
+    file_to_write_psi.write(line)
+    file_to_write_phi.write(line)
+    file_to_write_c.write(line)
+    # y
+    file_to_write_psi.write('AXIS Y\n')
+    file_to_write_phi.write('AXIS Y\n')
+    file_to_write_c.write('AXIS Y\n')
+    line = ''
+    for y in dict_sample['L_y']:
+        line = line + str(y)+ ' '
+    line = line + '\n'
+    file_to_write_psi.write(line)
+    file_to_write_phi.write(line)
+    file_to_write_c.write(line)
+    # data
+    file_to_write_psi.write('DATA\n')
+    file_to_write_phi.write('DATA\n')
+    file_to_write_c.write('DATA\n')
+    for l in range(len(dict_sample['L_y'])):
+        for c in range(len(dict_sample['L_x'])):
+            file_to_write_psi.write(str(M_psi[-1-l][c])+'\n')
+            file_to_write_phi.write(str(M_phi[-1-l][c])+'\n')
+            file_to_write_c.write(str(M_c[-1-l][c])+'\n')
+    # close
+    file_to_write_psi.close()
+    file_to_write_phi.close()
+    file_to_write_c.close()
+</code></pre>
+</details>
+</dd>
+<dt id="ic.Insert_Grains_Seed"><code class="name flex">
+<span>def <span class="ident">Insert_Grains_Seed</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Insert n_grains grains in the domain. The grains are circle defined by a radius (uniform distribution).
+    The position of the grains is randomly set, avoiding overlap between particules.
+    A maximum number of tries is done per grain insertion.</p>
+<pre><code>Map of phi, psi and c are generated.
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def Insert_Grains_Seed(dict_sample, dict_user):
+    '''
+    Insert n_grains grains in the domain. The grains are circle defined by a radius (uniform distribution).
+    The position of the grains is randomly set, avoiding overlap between particules.
+    A maximum number of tries is done per grain insertion.
+
+    Map of phi, psi and c are generated.
+    '''
+    # Initialize the arrays
+    M_psi = np.zeros((dict_user['n_mesh'],dict_user['n_mesh']))
+    M_phi = np.zeros((dict_user['n_mesh'],dict_user['n_mesh']))
+    M_c = dict_user['C_eq_phi']*np.ones((dict_user['n_mesh'],dict_user['n_mesh']))
+
+    # Initialize the mesh lists
+    L_x = np.linspace(-dict_user['dim_domain']/2, dict_user['dim_domain']/2, dict_user['n_mesh'])
+    L_y = np.linspace(-dict_user['dim_domain']/2, dict_user['dim_domain']/2, dict_user['n_mesh'])
+
+    # Insert grains
+    L_pos_grains = []
+    L_radius_grains = []
+    m_H20_m_cement = 2*dict_user['w_g_target']
+    # check conditions
+    while m_H20_m_cement > dict_user['w_g_target'] :
+        # Random radius of the grain
+        if dict_user['PSD_mode'] == 'Uniform':
+            R_try = max(dict_user['R']*(1+dict_user['R_var']*(random.random()-0.5)*2), dict_user['d_mesh']*5)
+        if dict_user['PSD_mode'] == 'Given':
+            i_bin = np.random.choice(len(dict_user['L_perc_R']), p=dict_user['L_perc_R'])
+            R_try = random.uniform(dict_user['L_R'][i_bin], dict_user['L_R'][i_bin+1])
+        # Random position of the grain center
+        x_try = (dict_user['dim_domain']/2+R_try)*(random.random()-0.5)*2
+        y_try = (dict_user['dim_domain']/2+R_try)*(random.random()-0.5)*2
+        # Save grain
+        L_pos_grains.append(np.array([x_try, y_try]))
+        L_radius_grains.append(R_try)
+
+        # compute surface grains and water
+        Surface_grain = 0
+        for i_grain in range(len(L_pos_grains)):
+            Surface_grain = Surface_grain + math.pi*L_radius_grains[i_grain]**2
+        Surface_water = dict_user['dim_domain']*dict_user['dim_domain'] - Surface_grain
+        # compute ratio
+        m_H20_m_cement = (Surface_water*dict_user['rho_water'])/(Surface_grain*dict_user['rho_g'])
+        # output
+        print('Compute IC:',round(m_H20_m_cement,2),'/',dict_user['w_g_target'],'targetted')
+
+    # compute the configuration
+    for i_steps in range(1, dict_user['n_steps']+1):
+        print('Increase radius step',i_steps,'/',dict_user['n_steps'])
+
+        # compute tempo radius at this step
+        L_radius_grains_step = []
+        for radius in L_radius_grains:
+            L_radius_grains_step.append(radius*i_steps/dict_user['n_steps'])
+
+        # compute virtual grain due to periodic condition
+        L_pos_grains_virtual, L_radius_grains_virtual, L_i_grain_virtual = compute_virtual(dict_user, L_pos_grains, L_radius_grains_step)
+
+        # check if there is no overlap
+        overlap, L_overlap, L_overlap_virtual = check_overlap(L_radius_grains_step, L_pos_grains,\
+                                                              L_radius_grains_virtual, L_pos_grains_virtual, L_i_grain_virtual,\
+                                                              dict_user['factor_int'])
+        while overlap:
+            # save old positions
+            L_pos_grains_old = L_pos_grains.copy()
+            L_pos_grains_virtual_old = L_pos_grains_virtual.copy()
+            # iterate on overlap list to move problematic grains
+            if L_overlap != []:
+                overlap = L_overlap[0]
+                # get indices
+                i_g = overlap[0]
+                j_g = overlap[1]
+                # get radius
+                r_i = L_radius_grains_step[i_g]
+                r_j = L_radius_grains_step[j_g]
+                # get displacement vector (i->j)
+                u_ij = np.array(L_pos_grains[j_g] - L_pos_grains[i_g])
+                u_ij = u_ij/np.linalg.norm(u_ij)
+                # move grain
+                L_pos_grains[i_g] = L_pos_grains_old[j_g] - u_ij*(r_i+r_j+dict_user['factor_int'])
+                L_pos_grains[j_g] = L_pos_grains_old[i_g] + u_ij*(r_i+r_j+dict_user['factor_int'])
+            else :
+                overlap = L_overlap_virtual[0]
+                # get indices
+                i_g = overlap[0]
+                j_g_virtual = overlap[1]
+                j_g = overlap[2]
+                # get radius
+                r_i = L_radius_grains_step[i_g]
+                r_j = L_radius_grains_step[j_g]
+                # get displacement vector (i->j)
+                u_ij = np.array(L_pos_grains_virtual[j_g_virtual] - L_pos_grains[i_g])
+                u_ij = u_ij/np.linalg.norm(u_ij)
+                # move grain
+                L_pos_grains[i_g] = L_pos_grains_virtual_old[j_g_virtual] - u_ij*(r_i+r_j+2*dict_user['factor_int'])
+
+            # check position of grain after displacement
+            for i_grain in range(len(L_pos_grains)):
+                # - x limit
+                if L_pos_grains[i_grain][0] < -dict_user['dim_domain']/2 - L_radius_grains_step[i_grain]:
+                    L_pos_grains[i_grain] = L_pos_grains[i_grain] + np.array([ dict_user['dim_domain'], 0])
+                # + x limit
+                if dict_user['dim_domain']/2 + L_radius_grains_step[i_grain] < L_pos_grains[i_grain][0]:
+                    L_pos_grains[i_grain] = L_pos_grains[i_grain] + np.array([-dict_user['dim_domain'], 0])
+                # - y limit
+                if L_pos_grains[i_grain][1] < -dict_user['dim_domain']/2 - L_radius_grains_step[i_grain]:
+                    L_pos_grains[i_grain] = L_pos_grains[i_grain] + np.array([0,  dict_user['dim_domain']])
+                # + y limit
+                if dict_user['dim_domain']/2 + L_radius_grains_step[i_grain] < L_pos_grains[i_grain][1]:
+                    L_pos_grains[i_grain] = L_pos_grains[i_grain] + np.array([0, -dict_user['dim_domain']])
+
+            # compute virtual grain due to periodic condition
+            L_pos_grains_virtual, L_radius_grains_virtual, L_i_grain_virtual = compute_virtual(dict_user, L_pos_grains, L_radius_grains_step)
+
+
+            # look if overlap exists
+            overlap, L_overlap, L_overlap_virtual = check_overlap(L_radius_grains_step, L_pos_grains,\
+                                                                    L_radius_grains_virtual, L_pos_grains_virtual, L_i_grain_virtual,\
+                                                                    dict_user['factor_int'])
+
+    # combine the final list
+    L_pos_grains_real_virtual = L_pos_grains + L_pos_grains_virtual
+    L_radius_grains_real_virtual = L_radius_grains + L_radius_grains_virtual
+    # compute m_H20_m_cement
+    M_psi = np.zeros((dict_user['n_mesh'],dict_user['n_mesh']))
+    # iterate on grains
+    for i_grain in range(len(L_pos_grains_real_virtual)):
+        x_grain = L_pos_grains_real_virtual[i_grain][0]
+        y_grain = L_pos_grains_real_virtual[i_grain][1]
+        Center_grain = np.array([x_grain, y_grain])
+        r_grain = L_radius_grains_real_virtual[i_grain]
+        # find the nearest node of the center
+        L_search = list(abs(np.array(L_x-x_grain)))
+        i_x_center = L_search.index(min(L_search))
+        L_search = list(abs(np.array(L_y-y_grain)))
+        i_y_center = L_search.index(min(L_search))
+        # compute the number of node (depending on the radius)
+        n_nodes = int(r_grain/(L_x[1]-L_x[0]))+4
+        for i_x in range(max(0,i_x_center-n_nodes),min(i_x_center+n_nodes+1,len(L_x))):
+            for i_y in range(max(0,i_y_center-n_nodes),min(i_y_center+n_nodes+1,len(L_y))):
+                x = L_x[i_x]
+                y = L_y[i_y]
+                Point = np.array([x, y])
+                distance = np.linalg.norm(Point-Center_grain)
+                # Update map psi
+                if M_psi[-1-i_y, i_x] == 0 : # do not erase data already written
+                    if distance <= r_grain:
+                        M_psi[-1-i_y, i_x] = 1
+                    elif distance >= r_grain:
+                        M_psi[-1-i_y, i_x] = 0
+
+    # compute surface grains and water
+    Surface_grain = np.sum(M_psi)/M_psi.size*dict_user['dim_domain']*dict_user['dim_domain']
+    Surface_water = dict_user['dim_domain']*dict_user['dim_domain'] - Surface_grain
+    # compute ratio
+    m_H20_m_cement = (Surface_water*dict_user['rho_water'])/(Surface_grain*dict_user['rho_g'])
+    # print result
+    print()
+    print(len(L_radius_grains),'grains inserted')
+    print('psd:', round(np.mean(L_radius_grains),1),'(mean)', round(np.min(L_radius_grains),1),'(min)', round(np.max(L_radius_grains),1),'(max)')
+    print('m_H20/m_cement:', round(m_H20_m_cement,2),'/',dict_user['w_g_target'],'targetted')
+
+    # Compute phi
+    n_seed = dict_user['n_seed']
+    for i_seed in range(n_seed):
+        i_try = 0
+        seed_created = False
+        while not seed_created and i_try < 500:
+            i_try = i_try + 1
+            # generate a seed
+            i_x_seed = random.randint(0, len(L_x)-1)
+            i_y_seed = random.randint(0, len(L_y)-1)
+            center_seed = np.array([L_x[i_x_seed], L_y[i_y_seed]])
+            r_seed = dict_user['w_int']+dict_user['d_mesh']
+
+            # verify the node is not in a cement source
+            # and not far from a source
+            if M_psi[-1-i_y_seed, i_x_seed] != 1:
+                close_seed = False
+                for i_grain in range(len(L_pos_grains_real_virtual)):
+                    d_seed_grain = np.linalg.norm(center_seed-L_pos_grains_real_virtual[i_grain])
+                    if d_seed_grain < L_radius_grains_real_virtual[i_grain]+2*r_seed:
+                        close_seed = True
+                if close_seed:
+                    seed_created = True
+                    # compute the number of node (depending on the radius)
+                    n_nodes = 2*int(r_seed/(L_x[1]-L_x[0]))
+                    for i_x in range(max(0,i_x_seed-n_nodes),min(i_x_seed+n_nodes+1,len(L_x))):
+                        for i_y in range(max(0,i_y_seed-n_nodes),min(i_y_seed+n_nodes+1,len(L_y))):
+                            x = L_x[i_x]
+                            y = L_y[i_y]
+                            Point = np.array([x, y])
+                            distance = np.linalg.norm(Point-center_seed)
+                            # Update map psi
+                            if M_phi[-1-i_y, i_x] == 0 : # do not erase data already written
+                                if distance <= r_seed:
+                                    M_phi[-1-i_y, i_x] = 1
+                                elif distance >= r_seed:
+                                    M_phi[-1-i_y, i_x] = 0
+
+    # print psi/phi map
+    M_phi_psi = M_psi + 2*M_phi
+    fig, (ax1) = plt.subplots(1,1,figsize=(16,9))
+    title_fontsize = 30
+    im = ax1.imshow(M_phi_psi, interpolation = 'nearest', extent=(L_x[0],L_x[-1],L_y[0],L_y[-1]), vmax=2)
+    cbar = fig.colorbar(im, ax=ax1)
+    cbar.set_ticks(ticks=[0, 1, 2], labels=['Pore', 'Source', 'C-S-H'])
+    fig.tight_layout()
+    fig.savefig('png/IC_one_map.png')
+    plt.close(fig)
+
+    # adapt maps
+    M_psi = M_psi - 0.5
+    if n_seed > 0:
+        M_phi = M_phi - 0.5
+
+    # compute the signed distance functions
+    sd_psi = skfmm.distance(M_psi, dx = np.array([L_x[1]-L_x[0],L_y[1]-L_y[0]]))
+    if n_seed > 0:
+        sd_phi = skfmm.distance(M_phi, dx = np.array([L_x[1]-L_x[0],L_y[1]-L_y[0]]))
+
+    # compute the phase field variables
+    for i_x in range(len(L_x)):
+        for i_y in range(len(L_y)):
+            # phi
+            if n_seed > 0:
+                if sd_phi[i_y, i_x] > dict_user['w_int']/2: # inside the grain
+                    M_phi[i_y, i_x] = 1
+                elif sd_phi[i_y, i_x] < -dict_user['w_int']/2: # outside the grain
+                    M_phi[i_y, i_x] = 0
+                else : # in the interface
+                    M_phi[i_y, i_x] = 0.5*(1+math.cos(math.pi*(-sd_phi[i_y, i_x]+dict_user['w_int']/2)/(dict_user['w_int'])))
+            # psi
+            if sd_psi[i_y, i_x] > dict_user['w_int']/2: # inside the grain
+                M_psi[i_y, i_x] = 1
+            elif sd_psi[i_y, i_x] < -dict_user['w_int']/2: # outside the grain
+                M_psi[i_y, i_x] = 0
+            else : # in the interface
+                M_psi[i_y, i_x] = 0.5*(1+math.cos(math.pi*(-sd_psi[i_y, i_x]+dict_user['w_int']/2)/(dict_user['w_int'])))
+
+    # result
+    print()
+    print('Mean value of psi:', round(np.sum(M_psi)/M_psi.size,2))
+    print('Mean value of phi:', round(np.sum(M_phi)/M_phi.size,2))
+
+    # Plot maps
+    fig, ((ax1),(ax2),(ax3)) = plt.subplots(3,1,figsize=(9,25))
+    # parameters
+    title_fontsize = 30
+    # psi
+    im = ax1.imshow(M_psi, interpolation = 'nearest', extent=(L_x[0],L_x[-1],L_y[0],L_y[-1]))
+    fig.colorbar(im, ax=ax1)
+    ax1.set_title(r'Map of $\psi$',fontsize = title_fontsize)
+    # phi
+    im = ax2.imshow(M_phi, interpolation = 'nearest', extent=(L_x[0],L_x[-1],L_y[0],L_y[-1]))
+    fig.colorbar(im, ax=ax2)
+    ax2.set_title(r'Map of $\phi$',fontsize = title_fontsize)
+    # c
+    im = ax3.imshow(M_c, interpolation = 'nearest', extent=(L_x[0],L_x[-1],L_y[0],L_y[-1]))
+    fig.colorbar(im, ax=ax3)
+    ax3.set_title(r'Map of c',fontsize = title_fontsize)
+
+    fig.savefig('png/IC.png')
+    plt.close(fig)
+
+    # save in dicts
+    dict_sample['L_x'] = L_x
+    dict_sample['L_y'] = L_y
+    dict_sample['M_psi'] = M_psi
+    dict_sample['M_phi'] = M_phi
+    dict_sample['M_c'] = M_c
+
+    # Write data
+    file_to_write_psi = open('txt/psi.txt','w')
+    file_to_write_phi = open('txt/phi.txt','w')
+    file_to_write_c = open('txt/c.txt','w')
+    # x
+    file_to_write_psi.write('AXIS X\n')
+    file_to_write_phi.write('AXIS X\n')
+    file_to_write_c.write('AXIS X\n')
+    line = ''
+    for x in dict_sample['L_x']:
+        line = line + str(x)+ ' '
+    line = line + '\n'
+    file_to_write_psi.write(line)
+    file_to_write_phi.write(line)
+    file_to_write_c.write(line)
+    # y
+    file_to_write_psi.write('AXIS Y\n')
+    file_to_write_phi.write('AXIS Y\n')
+    file_to_write_c.write('AXIS Y\n')
+    line = ''
+    for y in dict_sample['L_y']:
+        line = line + str(y)+ ' '
+    line = line + '\n'
+    file_to_write_psi.write(line)
+    file_to_write_phi.write(line)
+    file_to_write_c.write(line)
+    # data
+    file_to_write_psi.write('DATA\n')
+    file_to_write_phi.write('DATA\n')
+    file_to_write_c.write('DATA\n')
+    for l in range(len(dict_sample['L_y'])):
+        for c in range(len(dict_sample['L_x'])):
+            file_to_write_psi.write(str(M_psi[-1-l][c])+'\n')
+            file_to_write_phi.write(str(M_phi[-1-l][c])+'\n')
+            file_to_write_c.write(str(M_c[-1-l][c])+'\n')
+    # close
+    file_to_write_psi.close()
+    file_to_write_phi.close()
+    file_to_write_c.close()
+</code></pre>
+</details>
+</dd>
+<dt id="ic.Insert_Powder_Seed"><code class="name flex">
+<span>def <span class="ident">Insert_Powder_Seed</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Insert n_grains grains in the domain. The grains are circle defined by a radius (uniform distribution).
+    The position of the grains is randomly set, overlap between particules is allowed.
+    A ratio of water mass / cement mass is targetted.</p>
+<pre><code>Map of phi, psi and c are generated.
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def Insert_Powder_Seed(dict_sample, dict_user):
+    '''
+    Insert n_grains grains in the domain. The grains are circle defined by a radius (uniform distribution).
+    The position of the grains is randomly set, overlap between particules is allowed.
+    A ratio of water mass / cement mass is targetted.
+
+    Map of phi, psi and c are generated.
+    '''
+    # Initialize the arrays
+    M_psi = np.zeros((dict_user['n_mesh'],dict_user['n_mesh']))
+    M_phi = np.zeros((dict_user['n_mesh'],dict_user['n_mesh']))
+    M_c = dict_user['C_eq_phi']*np.ones((dict_user['n_mesh'],dict_user['n_mesh']))
+
+    # Initialize the mesh lists
+    L_x = np.linspace(-dict_user['dim_domain']/2, dict_user['dim_domain']/2, dict_user['n_mesh'])
+    L_y = np.linspace(-dict_user['dim_domain']/2, dict_user['dim_domain']/2, dict_user['n_mesh'])
+
+    # Insert grains
+    m_H20_m_cement = 2*dict_user['w_g_target']
+    while m_H20_m_cement > dict_user['w_g_target']:
+        # Random radius of the grain
+        r_grain = max(dict_user['R']*(1+dict_user['R_var']*(random.random()-0.5)*2), dict_user['d_mesh']*5)
+        # Random position of the grain center
+        x_grain = (dict_user['dim_domain']/2+r_grain)*(random.random()-0.5)*2
+        y_grain = (dict_user['dim_domain']/2+r_grain)*(random.random()-0.5)*2
+        Center_grain = np.array([x_grain, y_grain])
+        # find the nearest node of the center
+        L_search = list(abs(np.array(L_x-x_grain)))
+        i_x_center = L_search.index(min(L_search))
+        L_search = list(abs(np.array(L_y-y_grain)))
+        i_y_center = L_search.index(min(L_search))
+        # compute the number of node (depending on the radius)
+        n_nodes = int(r_grain/(L_x[1]-L_x[0]))+15
+        for i_x in range(max(0,i_x_center-n_nodes),min(i_x_center+n_nodes+1,len(L_x))):
+            for i_y in range(max(0,i_y_center-n_nodes),min(i_y_center+n_nodes+1,len(L_y))):
+                x = L_x[i_x]
+                y = L_y[i_y]
+                Point = np.array([x, y])
+                distance = np.linalg.norm(Point-Center_grain)
+                # Update map psi
+                if distance <= r_grain :
+                    M_psi[-1-i_y, i_x] = 1
+
+        # compute the ratio water mass/cement mass
+        Surface_grain = np.sum(M_psi)*(L_x[1]-L_x[0])*(L_y[1]-L_y[0])
+        Surface_water = dict_user['dim_domain']*dict_user['dim_domain'] - Surface_grain
+        m_H20_m_cement = Surface_water*dict_user['rho_water']/(Surface_grain*dict_user['rho_g'])
+        # output
+        print('Compute IC:',round(m_H20_m_cement,2),'/',dict_user['w_g_target'],'targetted')
+
+    # Compute phi
+    n_seed = dict_user['n_seed']
+    for i_seed in range(n_seed):
+        i_try = 0
+        seed_created = False
+        while not seed_created and i_try < 100:
+            i_try = i_try + 1
+            # generate a seed
+            i_x_seed = random.randint(0, len(L_x)-1)
+            i_y_seed = random.randint(0, len(L_y)-1)
+            center_seed = np.array([L_x[i_x_seed], L_y[i_y_seed]])
+
+            # verify the node is not in a cement source
+            if M_psi[-1-i_y_seed, i_x_seed] != 1:
+                seed_created = True
+                # generate the seed
+                r_seed = 1.3*dict_user['w_int']
+                # compute the number of node (depending on the radius)
+                n_nodes = int(r_seed/(L_x[1]-L_x[0]))+4
+                for i_x in range(max(0,i_x_seed-n_nodes),min(i_x_seed+n_nodes+1,len(L_x))):
+                    for i_y in range(max(0,i_y_seed-n_nodes),min(i_y_seed+n_nodes+1,len(L_y))):
+                        x = L_x[i_x]
+                        y = L_y[i_y]
+                        Point = np.array([x, y])
+                        distance = np.linalg.norm(Point-center_seed)
+                        # Update map psi
+                        if M_phi[-1-i_y, i_x] == 0 : # do not erase data already written
+                            if distance <= r_seed:
+                                M_phi[-1-i_y, i_x] = 1
+                            elif distance >= r_seed:
+                                M_phi[-1-i_y, i_x] = 0
+
+    # print psi/phi map
+    M_phi_psi = M_psi + 2*M_phi
+    fig, (ax1) = plt.subplots(1,1,figsize=(16,9))
+    title_fontsize = 30
+    im = ax1.imshow(M_phi_psi, interpolation = 'nearest', extent=(L_x[0],L_x[-1],L_y[0],L_y[-1]), vmax=2)
+    cbar = fig.colorbar(im, ax=ax1)
+    cbar.set_ticks(ticks=[0, 1, 2], labels=['Pore', 'Source', 'C-S-H'])
+    fig.tight_layout()
+    fig.savefig('png/IC_one_map.png')
+    plt.close(fig)
+
+    # adapt maps
+    M_psi = M_psi - 0.5
+    M_phi = M_phi - 0.5
+
+    # compute the signed distance functions
+    sd_phi = skfmm.distance(M_phi, dx = np.array([L_x[1]-L_x[0],L_y[1]-L_y[0]]))
+    sd_psi = skfmm.distance(M_psi, dx = np.array([L_x[1]-L_x[0],L_y[1]-L_y[0]]))
+
+    # compute the phase field variables
+    for i_x in range(len(L_x)):
+        for i_y in range(len(L_y)):
+            # phi
+            if sd_phi[i_y, i_x] > dict_user['w_int']/2: # inside the grain
+                M_phi[i_y, i_x] = 1
+            elif sd_phi[i_y, i_x] < -dict_user['w_int']/2: # outside the grain
+                M_phi[i_y, i_x] = 0
+            else : # in the interface
+                M_phi[i_y, i_x] = 0.5*(1+math.cos(math.pi*(-sd_phi[i_y, i_x]+dict_user['w_int']/2)/(dict_user['w_int'])))
+            # psi
+            if sd_psi[i_y, i_x] > dict_user['w_int']/2: # inside the grain
+                M_psi[i_y, i_x] = 1
+            elif sd_psi[i_y, i_x] < -dict_user['w_int']/2: # outside the grain
+                M_psi[i_y, i_x] = 0
+            else : # in the interface
+                M_psi[i_y, i_x] = 0.5*(1+math.cos(math.pi*(-sd_psi[i_y, i_x]+dict_user['w_int']/2)/(dict_user['w_int'])))
+
+    # result
+    print()
+    print('Mean value of psi:', round(np.sum(M_psi)/M_psi.size,2))
+    print('Mean value of phi:', round(np.sum(M_phi)/M_phi.size,2))
+
+    # Plot maps
+    fig, ((ax1),(ax2),(ax3)) = plt.subplots(3,1,figsize=(9,25))
+
+    # parameters
+    title_fontsize = 30
+
+    # psi
+    im = ax1.imshow(M_psi, interpolation = 'nearest', extent=(L_x[0],L_x[-1],L_y[0],L_y[-1]))
+    fig.colorbar(im, ax=ax1)
+    ax1.set_title(r'Map of $\psi$',fontsize = title_fontsize)
+    # phi
+    im = ax2.imshow(M_phi, interpolation = 'nearest', extent=(L_x[0],L_x[-1],L_y[0],L_y[-1]))
+    fig.colorbar(im, ax=ax2)
+    ax2.set_title(r'Map of $\phi$',fontsize = title_fontsize)
+    # c
+    im = ax3.imshow(M_c, interpolation = 'nearest', extent=(L_x[0],L_x[-1],L_y[0],L_y[-1]))
+    fig.colorbar(im, ax=ax3)
+    ax3.set_title(r'Map of c',fontsize = title_fontsize)
+
+    fig.savefig('png/IC.png')
+    plt.close(fig)
+
+    # save in dicts
+    dict_sample['L_x'] = L_x
+    dict_sample['L_y'] = L_y
+    dict_sample['M_psi'] = M_psi
+    dict_sample['M_phi'] = M_phi
+    dict_sample['M_c'] = M_c
+
+    # Write data
+    file_to_write_psi = open('txt/psi.txt','w')
+    file_to_write_phi = open('txt/phi.txt','w')
+    file_to_write_c = open('txt/c.txt','w')
+    # x
+    file_to_write_psi.write('AXIS X\n')
+    file_to_write_phi.write('AXIS X\n')
+    file_to_write_c.write('AXIS X\n')
+    line = ''
+    for x in dict_sample['L_x']:
+        line = line + str(x)+ ' '
+    line = line + '\n'
+    file_to_write_psi.write(line)
+    file_to_write_phi.write(line)
+    file_to_write_c.write(line)
+    # y
+    file_to_write_psi.write('AXIS Y\n')
+    file_to_write_phi.write('AXIS Y\n')
+    file_to_write_c.write('AXIS Y\n')
+    line = ''
+    for y in dict_sample['L_y']:
+        line = line + str(y)+ ' '
+    line = line + '\n'
+    file_to_write_psi.write(line)
+    file_to_write_phi.write(line)
+    file_to_write_c.write(line)
+    # data
+    file_to_write_psi.write('DATA\n')
+    file_to_write_phi.write('DATA\n')
+    file_to_write_c.write('DATA\n')
+    for l in range(len(dict_sample['L_y'])):
+        for c in range(len(dict_sample['L_x'])):
+            file_to_write_psi.write(str(M_psi[-1-l][c])+'\n')
+            file_to_write_phi.write(str(M_phi[-1-l][c])+'\n')
+            file_to_write_c.write(str(M_c[-1-l][c])+'\n')
+    # close
+    file_to_write_psi.close()
+    file_to_write_phi.close()
+    file_to_write_c.close()
+</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="ic.check_overlap" href="#ic.check_overlap">check_overlap</a></code></li>
+<li><code><a title="ic.compute_virtual" href="#ic.compute_virtual">compute_virtual</a></code></li>
+<li><code><a title="ic.Insert_One_Grain_Seed" href="#ic.Insert_One_Grain_Seed">Insert_One_Grain_Seed</a></code></li>
+<li><code><a title="ic.Insert_One_Grain_Seed_Fixed" href="#ic.Insert_One_Grain_Seed_Fixed">Insert_One_Grain_Seed_Fixed</a></code></li>
+<li><code><a title="ic.Insert_Grains_Seed" href="#ic.Insert_Grains_Seed">Insert_Grains_Seed</a></code></li>
+<li><code><a title="ic.Insert_Powder_Seed" href="#ic.Insert_Powder_Seed">Insert_Powder_Seed</a></code></li>
+</ul>
+</li>
+</ul>
+<br>
+<a href="https://alexsacmorane.github.io/pf/cementation">Hydration of a cement-based material</a>
+<br>
+<a href="https://alexsacmorane.github.io">Home</a>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>
