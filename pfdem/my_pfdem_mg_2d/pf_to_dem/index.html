@@ -1,0 +1,754 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>User API documentation</title>
+<meta name="description" content="@author: Alexandre Sac--Morane
+alexandre.sac-morane@uclouvain.be …" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>pf_to_dem</code></h1>
+</header>
+<section id="section-intro">
+<p>@author: Alexandre Sac&ndash;Morane
+alexandre.sac-morane@uclouvain.be</p>
+<p>This is the file used to transmit data between phase field and dem.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+# -*- encoding=utf-8 -*-
+
+import pickle, math, os, shutil, random
+from pathlib import Path
+import numpy as np
+import matplotlib.pyplot as plt
+import vtk, skfmm
+from vtk.util.numpy_support import vtk_to_numpy
+from scipy.ndimage import label, binary_dilation
+
+# own
+import tools
+
+# -----------------------------------------------------------------------------#
+
+
+def index_to_str(j):
+    '''
+    Convert a integer into a string with the format XXX.
+    '''
+    if j < 10:
+        return '00'+str(j)
+    elif 10 <= j and j < 100:
+        return '0'+str(j)
+    else :
+        return str(j)
+
+# -----------------------------------------------------------------------------#
+
+def read_vtk(dict_user, dict_sample, j_str):
+    '''
+    Read the last vtk files to obtain data from MOOSE.
+    '''
+    if not dict_sample['Map_known']:
+        L_XYZ = []
+        L_L_i_XY = []
+
+    # iterate on the proccessors used
+    for i_proc in range(dict_user['n_proc']):
+        print('processor',i_proc+1,'/',dict_user['n_proc'])
+
+        # name of the file to load
+        namefile = 'vtk/pf_other_'+j_str+'_'+str(i_proc)+'.vtu'
+
+        # load a vtk file as input
+        reader = vtk.vtkXMLUnstructuredGridReader()
+        reader.SetFileName(namefile)
+        reader.Update()
+
+        # Grab a scalar from the vtk file
+        nodes_vtk_array = reader.GetOutput().GetPoints().GetData()
+        L_etai_vtk_array = []
+        for i_grain in range(len(dict_sample['L_phii_map'])):
+            L_etai_vtk_array.append(reader.GetOutput().GetPointData().GetArray("eta"+str(i_grain+1)))
+        c_vtk_array = reader.GetOutput().GetPointData().GetArray("c")
+
+        #Get the coordinates of the nodes and the scalar values
+        nodes_array = vtk_to_numpy(nodes_vtk_array)
+        L_etai_array = []
+        for i_grain in range(len(dict_sample['L_phii_map'])):
+            L_etai_array.append(vtk_to_numpy(L_etai_vtk_array[i_grain]))
+        c_array = vtk_to_numpy(c_vtk_array)
+
+        # map is not know
+        if not dict_sample['Map_known']:
+            # save the map
+            L_i_XY = []
+            # Must detect common zones between processors
+            for i_XYZ in range(len(nodes_array)) :
+                XYZ = nodes_array[i_XYZ]
+                # Do not consider twice a point
+                if list(XYZ) not in L_XYZ :
+                    # search node in the mesh
+                    L_search = list(abs(np.array(dict_sample['x_L']-list(XYZ)[0])))
+                    i_x = L_search.index(min(L_search))
+                    L_search = list(abs(np.array(dict_sample['y_L']-list(XYZ)[1])))
+                    i_y = L_search.index(min(L_search))
+                    # save map
+                    L_XYZ.append(list(XYZ))
+                    L_i_XY.append([i_x, i_y])
+                    # rewrite map
+                    for i_grain in range(len(dict_sample['L_phii_map'])):
+                        dict_sample['L_phii_map'][i_grain][-1-i_y, i_x] = L_etai_array[i_grain][i_XYZ]
+                    dict_sample['c_map'][-1-i_y, i_x] = c_array[i_XYZ]
+                else :
+                    L_i_XY.append(None)
+            # Here the algorithm can be help as the mapping is known
+            L_L_i_XY.append(L_i_XY)
+
+        # map is known
+        else :
+            # iterate on data
+            for i_XYZ in range(len(nodes_array)) :
+                # read
+                if dict_sample['L_L_i_XY_used'][i_proc][i_XYZ] != None :
+                    i_x = dict_sample['L_L_i_XY_used'][i_proc][i_XYZ][0]
+                    i_y = dict_sample['L_L_i_XY_used'][i_proc][i_XYZ][1]
+                    # rewrite map
+                    for i_grain in range(len(dict_sample['L_phii_map'])):
+                        dict_sample['L_phii_map'][i_grain][-1-i_y, i_x] = L_etai_array[i_grain][i_XYZ]
+                    dict_sample['c_map'][-1-i_y, i_x] = c_array[i_XYZ]
+    
+    if not dict_sample['Map_known']:
+        # the map is known
+        dict_sample['Map_known'] = True
+        dict_sample['L_L_i_XY_used'] = L_L_i_XY
+
+# -----------------------------------------------------------------------------#
+
+def compute_levelset(dict_user, dict_sample):
+    '''
+    From a phase map, compute level set function.
+    '''
+    L_sdf_i_map = []
+    L_x_L_i = []
+    L_y_L_i = []
+    L_rbm_to_apply = []
+    # iterate on the phase variable
+    for i_grain in range(len(dict_sample['L_etai_map'])):
+        # compute binary map
+        bin_i_map = np.array(-np.ones((dict_user['n_mesh_y'], dict_user['n_mesh_x'])))
+        
+        # iteration on x
+        for i_x in range(len(dict_sample['x_L'])):
+            # iteration on y
+            for i_y in range(len(dict_sample['y_L'])):
+                # grain 
+                if dict_sample['L_etai_map'][i_grain][-1-i_y, i_x] > 0.5:
+                    bin_i_map[-1-i_y, i_x] = 1
+        
+        
+        # look for dimensions of box    
+        # -x limit
+        i_x = 0
+        found = False
+        while (not found) and (i_x < bin_i_map.shape[0]):
+            if np.max(bin_i_map[:, i_x]) == -1:
+                i_x_min_lim = i_x
+            else :
+                found = True
+            i_x = i_x + 1
+        # +x limit
+        i_x = bin_i_map.shape[1]-1
+        found = False
+        while not found and 0 <= i_x:
+            if np.max(bin_i_map[:, i_x]) == -1:
+                i_x_max_lim = i_x
+            else :
+                found = True
+            i_x = i_x - 1
+        # number of nodes on x
+        n_nodes_x = i_x_max_lim-i_x_min_lim+1
+        # -y limit
+        i_y = 0
+        found = False
+        while not found and 0 <= i_y:
+            if np.max(bin_i_map[-1-i_y, :]) == -1:
+                i_y_min_lim = i_y
+            else :
+                found = True
+            i_y = i_y + 1
+        # +y limit
+        i_y = bin_i_map.shape[0]-1
+        found = False
+        while (not found) and (i_y < bin_i_map.shape[1]):
+            if np.max(bin_i_map[-1-i_y, :]) == -1:
+                i_y_max_lim = i_y
+            else :
+                found = True
+            i_y = i_y - 1
+        # number of nodes on y
+        n_nodes_y = i_y_max_lim-i_y_min_lim+1
+
+        # extraction of data
+        bin_i_map = bin_i_map[-1-i_y_max_lim:-1-i_y_min_lim+1,
+                              i_x_min_lim:i_x_max_lim+1] 
+        
+        # adaptation map
+        bin_i_map_adapt = -np.ones((bin_i_map.shape[1], bin_i_map.shape[0], dict_user['extrude_z']))
+        for i_y in range(bin_i_map.shape[0]):
+            for i_x in range(bin_i_map.shape[1]):
+                for i_z in range(dict_user['margins'], dict_user['extrude_z']-dict_user['margins']):
+                    bin_i_map_adapt[i_x, i_y, i_z] = bin_i_map[-1-i_y, i_x]
+         
+        # creation of sub mesh
+        m_size = dict_user['m_size']
+        x_L_i = np.arange(-m_size*(n_nodes_x-1)/2,
+                           m_size*(n_nodes_x-1)/2+0.1*m_size,
+                           m_size)
+        y_L_i = np.arange(-m_size*(n_nodes_y-1)/2,
+                           m_size*(n_nodes_y-1)/2+0.1*m_size,
+                           m_size)
+
+        # compute rbm to apply
+        rbm_to_apply = [dict_sample['x_L'][i_x_min_lim]-x_L_i[0],
+                        dict_sample['y_L'][i_y_min_lim]-y_L_i[0],
+                        0]
+
+        # compute signed distance function
+        sdf_i_map = -skfmm.distance(bin_i_map_adapt, dx=np.array([m_size, m_size, m_size]))
+
+        # save
+        L_sdf_i_map.append(sdf_i_map)
+        L_x_L_i.append(x_L_i)
+        L_y_L_i.append(y_L_i)
+        L_rbm_to_apply.append(rbm_to_apply)
+
+    # save data
+    dict_save = {
+    'L_sdf_i_map': L_sdf_i_map,
+    'L_rbm_to_apply': L_rbm_to_apply,
+    'L_x_L_i': L_x_L_i,
+    'L_y_L_i': L_y_L_i
+    }
+    with open('data/level_set.data', 'wb') as handle:
+        pickle.dump(dict_save, handle, protocol=pickle.HIGHEST_PROTOCOL)
+
+# -----------------------------------------------------------------------------#
+
+def extract_etas_from_phis(dict_user, dict_sample):
+    '''
+    Extract etas (grain description) from the phis (moose outputs).
+    '''
+    # iterate on eta
+    for eta_i in range(len(dict_sample['L_etai_map'])):
+        # look for phi and position
+        phi = 0
+        while eta_i not in dict_sample['L_phi_L_etas'][phi]:
+            phi = phi + 1
+        # extract boxs
+        box = dict_sample['L_phi_L_boxs'][phi][dict_sample['L_phi_L_etas'][phi].index(eta_i)]
+        # extend box
+        delta_x = box[1]-box[0]
+        i_x_min = max(0, box[1]-int(1.1*delta_x))
+        i_x_max = min(dict_user['n_mesh_x']-1, box[0]+int(1.1*delta_x))
+        delta_y = box[3]-box[2]
+        i_y_min = max(0, box[3]-int(1.1*delta_y))
+        i_y_max = min(dict_user['n_mesh_y']-1, box[2]+int(1.1*delta_y))
+
+        # segmentation
+        map_extract = dict_sample['L_phii_map'][phi][i_y_min:i_y_max+1, i_x_min:i_x_max+1].copy()
+        for i in range(map_extract.shape[0]):
+            for j in range(map_extract.shape[1]):
+                if map_extract[i, j] > dict_user['eta_contact_box_detection']:
+                    map_extract[i, j] = 1
+                else :
+                    map_extract[i, j] = 0
+        labelled_image, num_features = label(map_extract)
+        # at least two features
+        if num_features > 1:
+            # determine the largest domain
+            L_surf = [0]*num_features
+            for i in range(map_extract.shape[0]):
+                for j in range(map_extract.shape[1]):
+                    if labelled_image[i, j] != 0:
+                        L_surf[int(labelled_image[i,j]-1)] = L_surf[int(labelled_image[i,j]-1)] + 1
+            # compute the mask
+            mask_map = labelled_image == (L_surf.index(max(L_surf))+1)
+        else :
+            mask_map = np.ones(map_extract.shape)
+        # dilate mask
+        binary_structure = np.ones((2,2))
+        mask_map = binary_dilation(mask_map, binary_structure)
+
+        # write phase variables
+        for i_x in range(i_x_min, i_x_max+1):
+            for i_y in range(i_y_min, i_y_max+1):
+                dict_sample['L_etai_map'][eta_i][i_y, i_x] = dict_sample['L_phii_map'][phi][i_y, i_x]*mask_map[i_y-i_y_min, i_x-i_x_min]
+  
+# -----------------------------------------------------------------------------#
+
+def check_etas(dict_user, dict_sample):
+    '''
+    Check the integrity of the phase variables etas.
+
+    If the phase variable is not needed, it is deleted from the simulation (?).
+    '''
+    # iterate on the phase variables
+    eta_i = 0
+    while eta_i < len(dict_sample['L_etai_map']):
+        deleted = False
+        # compute bin
+        bin_map = dict_sample['L_etai_map'][eta_i].copy() > 0.5
+        # check if the variable is not needed 
+        if np.sum(bin_map) == 0 :
+            deleted = True
+            # delete in conjugate trackers
+            ij = 0
+            L_ij_tempo = []
+            for i_grain in range(len(dict_sample['L_etai_map'])-1):
+                for j_grain in range(i_grain+1, len(dict_sample['L_etai_map'])):
+                    if i_grain == eta_i or j_grain == eta_i: 
+                        L_ij_tempo.append(ij)  
+                    ij = ij + 1
+            L_ij_tempo.reverse()
+            for ij in L_ij_tempo:
+                dict_user['L_L_contact_volume'].pop(ij)
+                dict_user['L_L_contact_surface'].pop(ij)
+                dict_user['L_L_contact_pressure'].pop(ij)
+                dict_user['L_L_contact_as'].pop(ij)
+                dict_user['L_L_overlap'].pop(ij)
+                dict_user['L_L_normal_force'].pop(ij)
+            # delete in simple trackers
+            dict_user['L_L_sum_eta_i'].pop(eta_i)
+            dict_user['L_L_m_eta_i'].pop(eta_i)
+            dict_user['L_L_loss_move_pf_eta_i'].pop(eta_i)
+            dict_user['L_L_loss_kc_eta_i'].pop(eta_i)
+            dict_user['L_L_loss_pf_eta_i'].pop(eta_i)
+            # delete map
+            dict_sample['L_etai_map'].pop(eta_i)
+            # move initial shape in the tracker
+            m_eta_i = dict_user['L_initial_eta'].pop(eta_i)
+            dict_user['L_initial_eta'].append(m_eta_i)
+            
+        # next phase
+        if not deleted:
+            eta_i = eta_i + 1
+</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="pf_to_dem.index_to_str"><code class="name flex">
+<span>def <span class="ident">index_to_str</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p> Convert a integer into a string with the format XXX.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+  def index_to_str(j):
+      '''
+      Convert a integer into a string with the format XXX.
+      '''
+      if j < 10:
+          return '00'+str(j)
+      elif 10 <= j and j < 100:
+          return '0'+str(j)
+      else :
+          return str(j)
+</code></pre>
+</details>
+</dd>
+
+<dt id="pf_to_dem.read_vtk"><code class="name flex">
+<span>def <span class="ident">read_vtk</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p> Read the last vtk files to obtain data from MOOSE.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+
+def read_vtk(dict_user, dict_sample, j_str):
+    '''
+    Read the last vtk files to obtain data from MOOSE.
+    '''
+    if not dict_sample['Map_known']:
+        L_XYZ = []
+        L_L_i_XY = []
+
+    # iterate on the proccessors used
+    for i_proc in range(dict_user['n_proc']):
+        print('processor',i_proc+1,'/',dict_user['n_proc'])
+
+        # name of the file to load
+        namefile = 'vtk/pf_other_'+j_str+'_'+str(i_proc)+'.vtu'
+
+        # load a vtk file as input
+        reader = vtk.vtkXMLUnstructuredGridReader()
+        reader.SetFileName(namefile)
+        reader.Update()
+
+        # Grab a scalar from the vtk file
+        nodes_vtk_array = reader.GetOutput().GetPoints().GetData()
+        L_etai_vtk_array = []
+        for i_grain in range(len(dict_sample['L_phii_map'])):
+            L_etai_vtk_array.append(reader.GetOutput().GetPointData().GetArray("eta"+str(i_grain+1)))
+        c_vtk_array = reader.GetOutput().GetPointData().GetArray("c")
+
+        #Get the coordinates of the nodes and the scalar values
+        nodes_array = vtk_to_numpy(nodes_vtk_array)
+        L_etai_array = []
+        for i_grain in range(len(dict_sample['L_phii_map'])):
+            L_etai_array.append(vtk_to_numpy(L_etai_vtk_array[i_grain]))
+        c_array = vtk_to_numpy(c_vtk_array)
+
+        # map is not know
+        if not dict_sample['Map_known']:
+            # save the map
+            L_i_XY = []
+            # Must detect common zones between processors
+            for i_XYZ in range(len(nodes_array)) :
+                XYZ = nodes_array[i_XYZ]
+                # Do not consider twice a point
+                if list(XYZ) not in L_XYZ :
+                    # search node in the mesh
+                    L_search = list(abs(np.array(dict_sample['x_L']-list(XYZ)[0])))
+                    i_x = L_search.index(min(L_search))
+                    L_search = list(abs(np.array(dict_sample['y_L']-list(XYZ)[1])))
+                    i_y = L_search.index(min(L_search))
+                    # save map
+                    L_XYZ.append(list(XYZ))
+                    L_i_XY.append([i_x, i_y])
+                    # rewrite map
+                    for i_grain in range(len(dict_sample['L_phii_map'])):
+                        dict_sample['L_phii_map'][i_grain][-1-i_y, i_x] = L_etai_array[i_grain][i_XYZ]
+                    dict_sample['c_map'][-1-i_y, i_x] = c_array[i_XYZ]
+                else :
+                    L_i_XY.append(None)
+            # Here the algorithm can be help as the mapping is known
+            L_L_i_XY.append(L_i_XY)
+
+        # map is known
+        else :
+            # iterate on data
+            for i_XYZ in range(len(nodes_array)) :
+                # read
+                if dict_sample['L_L_i_XY_used'][i_proc][i_XYZ] != None :
+                    i_x = dict_sample['L_L_i_XY_used'][i_proc][i_XYZ][0]
+                    i_y = dict_sample['L_L_i_XY_used'][i_proc][i_XYZ][1]
+                    # rewrite map
+                    for i_grain in range(len(dict_sample['L_phii_map'])):
+                        dict_sample['L_phii_map'][i_grain][-1-i_y, i_x] = L_etai_array[i_grain][i_XYZ]
+                    dict_sample['c_map'][-1-i_y, i_x] = c_array[i_XYZ]
+    
+    if not dict_sample['Map_known']:
+        # the map is known
+        dict_sample['Map_known'] = True
+        dict_sample['L_L_i_XY_used'] = L_L_i_XY
+</code></pre>
+</details>
+</dd>
+
+<dt id="pf_to_dem.compute_levelset"><code class="name flex">
+<span>def <span class="ident">compute_levelset</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>From a phase map, compute level set function.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def compute_levelset(dict_user, dict_sample):
+    '''
+    From a phase map, compute level set function.
+    '''
+    L_sdf_i_map = []
+    L_x_L_i = []
+    L_y_L_i = []
+    L_rbm_to_apply = []
+    # iterate on the phase variable
+    for i_grain in range(len(dict_sample['L_etai_map'])):
+        # compute binary map
+        bin_i_map = np.array(-np.ones((dict_user['n_mesh_y'], dict_user['n_mesh_x'])))
+        
+        # iteration on x
+        for i_x in range(len(dict_sample['x_L'])):
+            # iteration on y
+            for i_y in range(len(dict_sample['y_L'])):
+                # grain 
+                if dict_sample['L_etai_map'][i_grain][-1-i_y, i_x] > 0.5:
+                    bin_i_map[-1-i_y, i_x] = 1
+        
+        
+        # look for dimensions of box    
+        # -x limit
+        i_x = 0
+        found = False
+        while (not found) and (i_x < bin_i_map.shape[0]):
+            if np.max(bin_i_map[:, i_x]) == -1:
+                i_x_min_lim = i_x
+            else :
+                found = True
+            i_x = i_x + 1
+        # +x limit
+        i_x = bin_i_map.shape[1]-1
+        found = False
+        while not found and 0 <= i_x:
+            if np.max(bin_i_map[:, i_x]) == -1:
+                i_x_max_lim = i_x
+            else :
+                found = True
+            i_x = i_x - 1
+        # number of nodes on x
+        n_nodes_x = i_x_max_lim-i_x_min_lim+1
+        # -y limit
+        i_y = 0
+        found = False
+        while not found and 0 <= i_y:
+            if np.max(bin_i_map[-1-i_y, :]) == -1:
+                i_y_min_lim = i_y
+            else :
+                found = True
+            i_y = i_y + 1
+        # +y limit
+        i_y = bin_i_map.shape[0]-1
+        found = False
+        while (not found) and (i_y < bin_i_map.shape[1]):
+            if np.max(bin_i_map[-1-i_y, :]) == -1:
+                i_y_max_lim = i_y
+            else :
+                found = True
+            i_y = i_y - 1
+        # number of nodes on y
+        n_nodes_y = i_y_max_lim-i_y_min_lim+1
+
+        # extraction of data
+        bin_i_map = bin_i_map[-1-i_y_max_lim:-1-i_y_min_lim+1,
+                              i_x_min_lim:i_x_max_lim+1] 
+        
+        # adaptation map
+        bin_i_map_adapt = -np.ones((bin_i_map.shape[1], bin_i_map.shape[0], dict_user['extrude_z']))
+        for i_y in range(bin_i_map.shape[0]):
+            for i_x in range(bin_i_map.shape[1]):
+                for i_z in range(dict_user['margins'], dict_user['extrude_z']-dict_user['margins']):
+                    bin_i_map_adapt[i_x, i_y, i_z] = bin_i_map[-1-i_y, i_x]
+         
+        # creation of sub mesh
+        m_size = dict_user['m_size']
+        x_L_i = np.arange(-m_size*(n_nodes_x-1)/2,
+                           m_size*(n_nodes_x-1)/2+0.1*m_size,
+                           m_size)
+        y_L_i = np.arange(-m_size*(n_nodes_y-1)/2,
+                           m_size*(n_nodes_y-1)/2+0.1*m_size,
+                           m_size)
+
+        # compute rbm to apply
+        rbm_to_apply = [dict_sample['x_L'][i_x_min_lim]-x_L_i[0],
+                        dict_sample['y_L'][i_y_min_lim]-y_L_i[0],
+                        0]
+
+        # compute signed distance function
+        sdf_i_map = -skfmm.distance(bin_i_map_adapt, dx=np.array([m_size, m_size, m_size]))
+
+        # save
+        L_sdf_i_map.append(sdf_i_map)
+        L_x_L_i.append(x_L_i)
+        L_y_L_i.append(y_L_i)
+        L_rbm_to_apply.append(rbm_to_apply)
+
+    # save data
+    dict_save = {
+    'L_sdf_i_map': L_sdf_i_map,
+    'L_rbm_to_apply': L_rbm_to_apply,
+    'L_x_L_i': L_x_L_i,
+    'L_y_L_i': L_y_L_i
+    }
+    with open('data/level_set.data', 'wb') as handle:
+        pickle.dump(dict_save, handle, protocol=pickle.HIGHEST_PROTOCOL)
+</code></pre>
+</details>
+</dd>
+
+<dt id="pf_to_dem.extract_etas_from_phis"><code class="name flex">
+<span>def <span class="ident">extract_etas_from_phis</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Extract etas (grain description) from the phis (moose outputs).</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def extract_etas_from_phis(dict_user, dict_sample):
+    '''
+    Extract etas (grain description) from the phis (moose outputs).
+    '''
+    # iterate on eta
+    for eta_i in range(len(dict_sample['L_etai_map'])):
+        # look for phi and position
+        phi = 0
+        while eta_i not in dict_sample['L_phi_L_etas'][phi]:
+            phi = phi + 1
+        # extract boxs
+        box = dict_sample['L_phi_L_boxs'][phi][dict_sample['L_phi_L_etas'][phi].index(eta_i)]
+        # extend box
+        delta_x = box[1]-box[0]
+        i_x_min = max(0, box[1]-int(1.1*delta_x))
+        i_x_max = min(dict_user['n_mesh_x']-1, box[0]+int(1.1*delta_x))
+        delta_y = box[3]-box[2]
+        i_y_min = max(0, box[3]-int(1.1*delta_y))
+        i_y_max = min(dict_user['n_mesh_y']-1, box[2]+int(1.1*delta_y))
+
+        # segmentation
+        map_extract = dict_sample['L_phii_map'][phi][i_y_min:i_y_max+1, i_x_min:i_x_max+1].copy()
+        for i in range(map_extract.shape[0]):
+            for j in range(map_extract.shape[1]):
+                if map_extract[i, j] > dict_user['eta_contact_box_detection']:
+                    map_extract[i, j] = 1
+                else :
+                    map_extract[i, j] = 0
+        labelled_image, num_features = label(map_extract)
+        # at least two features
+        if num_features > 1:
+            # determine the largest domain
+            L_surf = [0]*num_features
+            for i in range(map_extract.shape[0]):
+                for j in range(map_extract.shape[1]):
+                    if labelled_image[i, j] != 0:
+                        L_surf[int(labelled_image[i,j]-1)] = L_surf[int(labelled_image[i,j]-1)] + 1
+            # compute the mask
+            mask_map = labelled_image == (L_surf.index(max(L_surf))+1)
+        else :
+            mask_map = np.ones(map_extract.shape)
+        # dilate mask
+        binary_structure = np.ones((2,2))
+        mask_map = binary_dilation(mask_map, binary_structure)
+
+        # write phase variables
+        for i_x in range(i_x_min, i_x_max+1):
+            for i_y in range(i_y_min, i_y_max+1):
+                dict_sample['L_etai_map'][eta_i][i_y, i_x] = dict_sample['L_phii_map'][phi][i_y, i_x]*mask_map[i_y-i_y_min, i_x-i_x_min]
+</code></pre>
+</details>
+</dd>
+
+<dt id="pf_to_dem.check_etas"><code class="name flex">
+<span>def <span class="ident">check_etas</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Check the integrity of the phase variables etas.</p>
+<pre><code>If the phase variable is not needed, it is deleted from the simulation (?).</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def check_etas(dict_user, dict_sample):
+    '''
+    Check the integrity of the phase variables etas.
+
+    If the phase variable is not needed, it is deleted from the simulation (?).
+    '''
+    # iterate on the phase variables
+    eta_i = 0
+    while eta_i < len(dict_sample['L_etai_map']):
+        deleted = False
+        # compute bin
+        bin_map = dict_sample['L_etai_map'][eta_i].copy() > 0.5
+        # check if the variable is not needed 
+        if np.sum(bin_map) == 0 :
+            deleted = True
+            # delete in conjugate trackers
+            ij = 0
+            L_ij_tempo = []
+            for i_grain in range(len(dict_sample['L_etai_map'])-1):
+                for j_grain in range(i_grain+1, len(dict_sample['L_etai_map'])):
+                    if i_grain == eta_i or j_grain == eta_i: 
+                        L_ij_tempo.append(ij)  
+                    ij = ij + 1
+            L_ij_tempo.reverse()
+            for ij in L_ij_tempo:
+                dict_user['L_L_contact_volume'].pop(ij)
+                dict_user['L_L_contact_surface'].pop(ij)
+                dict_user['L_L_contact_pressure'].pop(ij)
+                dict_user['L_L_contact_as'].pop(ij)
+                dict_user['L_L_overlap'].pop(ij)
+                dict_user['L_L_normal_force'].pop(ij)
+            # delete in simple trackers
+            dict_user['L_L_sum_eta_i'].pop(eta_i)
+            dict_user['L_L_m_eta_i'].pop(eta_i)
+            dict_user['L_L_loss_move_pf_eta_i'].pop(eta_i)
+            dict_user['L_L_loss_kc_eta_i'].pop(eta_i)
+            dict_user['L_L_loss_pf_eta_i'].pop(eta_i)
+            # delete map
+            dict_sample['L_etai_map'].pop(eta_i)
+            # move initial shape in the tracker
+            m_eta_i = dict_user['L_initial_eta'].pop(eta_i)
+            dict_user['L_initial_eta'].append(m_eta_i)
+            
+        # next phase
+        if not deleted:
+            eta_i = eta_i + 1
+</code></pre>
+</details>
+</dd>
+
+</dl>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="pf_to_dem.index_to_str" href="#pf_to_dem.index_to_str">index_to_str</a></code></li>
+<li><code><a title="pf_to_dem.read_vtk" href="#pf_to_dem.read_vtk">read_vtk</a></code></li>
+<li><code><a title="pf_to_dem.compute_levelset" href="#pf_to_dem.compute_levelset">compute_levelset</a></code></li>
+<li><code><a title="pf_to_dem.extract_etas_from_phis" href="#pf_to_dem.extract_etas_from_phis">extract_etas_from_phis</a></code></li>
+<li><code><a title="pf_to_dem.check_etas" href="#pf_to_dem.check_etas">check_etas</a></code></li>
+</ul>
+</li>
+</ul>
+<br>
+<a href="https://alexsacmorane.github.io/pfdem/my_pfdem_mg_2d">MY_PFDEM_MG_2D</a>
+<br>
+<a href="https://alexsacmorane.github.io">Home</a>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>
