@@ -6,3 +6,4 @@
 - Add Article DEM debonding (state of stress)
 - Add Article DEM debonding (elastic properties)
 - Add Article PF cementation
+- Add PF/DIC/DEM/PFDEM balises in the pages
