@@ -6,5 +6,5 @@
 - Add Article DEM debonding (state of stress)
 - Add Article DEM debonding (elastic properties)
 - Add Article PF cementation
-- Add DIC/PFDEM balises in the pages
+- Add PFDEM balises in the pages
 - Add data and code of Tengattini 2023
