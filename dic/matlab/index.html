@@ -23,21 +23,15 @@ alexandre.sac-morane@uclouvain.be …" />
 <h1 class="title">Project <code>Digital Image Correlation</code></h1>
 </header>
 <section id="section-intro">
-<p>
+<p>Digital Image Correlation.<br>
 This script is about Digital Image Correlation. The displacement and the strain fields are computed.<br><br>
-
-To do so, the image (at t+1) is divided into samples. The sample is then searched in an extended zone (at t).
-<img src="../images/sample_searchZone.png" alt="Sample and Search Zone for DIC" width="480" height="270"><br>
-This displacement of the sample between the times t and t+1 is determined with a correlation function. <br>
-<img src="../images/correlation.png" alt="Map of the correlation for DIC" width="480" height="270"><br><br>
-
 Please cite the following:<br>
 Rattez H, Shi Y, Sac-Morane A, Klaeyle T, Mielniczuk B, Veveakis M (2022) Effect of grain size distribution on the shear band thickness evolution in sand. Géotechnique 72: 350-363. <a href="https://doi.org/10.1680/jgeot.20.P.120">https://doi.org/10.1680/jgeot.20.P.120</a><br><br>
 
 This script is also used in: <br>
 Li S, Sac-Morane A, Soete J, Claes H, Vanhulst J, Rattez H. (xxxx). Fines-Induced Shear Band Thickening in Gap-Graded Soils: Evidence from Digital Image and Volume Correlations. ?:?. <a href="https://doi.org/?">https://doi.org/?</a><br><br>
 
-In the following, a python script is presented. A Matlab version is available <a href="https://alexsacmorane.github.io/dic/matlab/">here</a>. <br><br>
+In the following, a Matlab script is presented. A Python version is available <a href="https://alexsacmorane.github.io/dic/">here</a>. <br><br>
 
 <a href="https://github.com/AlexSacMorane/DIC">The github project</a>
 </p>
@@ -45,36 +39,37 @@ In the following, a python script is presented. A Matlab version is available <a
 <section>
 <h2 class="section-modules" id="section-modules">Functions</h2>
 <ul>
-<li id="Generation">
-<p>
-<h3><a href="https://alexsacmorane.github.io/dic/generate_images">Generate_images</a><br></h3>
-A python script to generate a pattern and to apply a deformation.<br>
-</p>
-</li>
-<li id="Parameters">
-<p>
-<h3><a href="https://alexsacmorane.github.io/dic/dic_parameters">Parameters</a><br></h3>
-The python script where the parameters are defined.<br>
-</p>
-</li>
 <li id="Main">
 <p>
-<h3><a href="https://alexsacmorane.github.io/dic/dic_main">Main</a><br></h3>
-The main script where the dic algorithm is applied.<br>
+<h3><a href="https://alexsacmorane.github.io/dic/matlab/main">Main</a><br></h3>
+It is the Main function to run the algorithm. It calls Displacement2D.<br>
+</p>
+</li>
+<li id="Displacement2D">
+<p>
+<h3><a href="https://alexsacmorane.github.io/dic/matlab/displacement2d">Displacement2D</a><br></h3>
+It is the function where the algorithm is run.<br>
+</p>
+</li>
+<li id="Ent">
+<p>
+<h3><a href="https://alexsacmorane.github.io/dic/matlab/ent">Ent</a><br></h3>
+It is a function to convert a float to an integer.<br>
+</p>
+</li>
+<li id="PostProcessing">
+<p>
+<h3><a href="https://alexsacmorane.github.io/dic/matlab/postprocessing">PostProcessing</a><br></h3>
+It is a function to post-process the data.<br>
+</p>
+</li>
+<li id="DataControl">
+<p>
+<h3><a href="https://alexsacmorane.github.io/dic/matlab/datacontrol">DataControl</a><br></h3>
+It is a function to control (and correct) data if it is needed (not used called in the main file).<br>
 </p>
 </li>
 </ul>
-</section>
-<section>
-<h2 class="section-validation" id="section-validation">Validation</h2>
-
-Pure shearing<br>
-<img src="../images/dic_results_a.png" alt="Validation for pure shearing" width="480" height="270"><br>
-Block shearing in the x-direction<br>
-<img src="../images/dic_results_b.png" alt="Validation for block shearing" width="480" height="270"><br>
-Block shearing in the y-direction<br>
-<img src="../images/dic_results_c.png" alt="Validation for block shearing" width="480" height="270"><br>
-
 </section>
 </article>
 <nav id="sidebar">
@@ -83,10 +78,11 @@ Block shearing in the y-direction<br>
 <ul></ul>
 </div>
 <ul id="index">
-<li><h4><a href="#Generation">Generate_images</a></h4></li>
-<li><h4><a href="#Parameters">Parameters</a></h4></li>
 <li><h4><a href="#Main">Main</a></h4></li>
-<li><h4><a href="#section-validation">Validation</a></h4></li>
+<li><h4><a href="#Displacement2D">Displacement2D</a></h4></li>
+<li><h4><a href="#Ent">Ent</a></h4></li>
+<li><h4><a href="#PostProcessing">PostProcessing</a></h4></li>
+<li><h4><a href="#DataControl">DataControl</a></h4></li>
 </ul>
 <br>
 <a href="https://alexsacmorane.github.io">Home</a>
