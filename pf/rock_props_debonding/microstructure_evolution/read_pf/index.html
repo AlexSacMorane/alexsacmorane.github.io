@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>Rock properties during debonding API documentation</title>
+<meta name="description" content="@author: Alexandre Sac--Morane
+alexandre.sac-morane@enpc.fr …" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title"><code>Read_PF_outputs</code></h1>
+</header>
+<section id="section-intro">
+<p>@author: Alexandre Sac&ndash;Morane
+alexandre.sac-morane@enpc.fr</p>
+<p>This is file used to read the PF outputs.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">#-------------------------------------------------------------------------------
+# Librairies
+#-------------------------------------------------------------------------------
+
+import shutil, os, pickle, skfmm, math, vtk
+import numpy as np
+import matplotlib.pyplot as plt
+import pyvista as pv
+from pathlib import Path
+from PIL import Image
+from vtk.util.numpy_support import vtk_to_numpy
+
+#-------------------------------------------------------------------------------
+
+def Read_PF_csv(crit_res_pf):
+    '''
+    Read the csv output of the PF simulation.
+    '''
+    print('Read csv')
+
+    # read file
+    f = open('csv/PF_Dissolution_csv.csv', "r")
+    lines = f.readlines()
+    f.close()
+    # init data
+    time_pp = []
+    matter_pp = []
+
+    # iterate on lines
+    for line in lines[1:]:
+        line = line.replace("\n", "")
+        data = line.split(',')
+        # read data
+        time_pp.append(float(data[0]))
+        matter_pp.append(float(data[1]))
+    
+    # save
+    dict_save = {
+        'crit_res_pf': crit_res_pf,
+        'time': time_pp,
+        'matter': matter_pp
+    }
+    pickle.dump(dict_save, open('pp/hydration_csv/'+str(crit_res_pf)+'.dict','wb'))
+
+#-------------------------------------------------------------------------------
+
+def  Read_PF_vtk(iteration_str, dict_loading, dict_pf):
+    '''
+    Read the vtk outputs of the PF simulation.
+    '''
+    if iteration_str == '000':
+        print('Read vtk')
+
+    # template of the files read
+    template_file = 'vtk/PF_Dissolution_other_'
+    # name of the file
+    namefile = template_file+iteration_str+'.pvtu'
+
+    # read the .pvtu file 
+    dataset = pv.read(namefile)
+
+    # extract the points
+    L_points = dataset.points
+
+    # extract the material 
+    L_matter = dataset['matter']
+    
+    # Rebuild maps     
+    M_grain, M_cement = Map_from_list(dict_loading, dict_pf, L_points, L_matter)
+
+    return M_grain, M_cement
+
+    
+#-------------------------------------------------------------------------------
+
+def  Read_PF_vtk_old(iteration_str, dict_loading, dict_pf):
+    '''
+    Read the vtk outputs of the PF simulation.
+    '''
+    if iteration_str == '000':
+        print('Read vtk')
+
+    # template of the files read
+    template_file = 'vtk/PF_Dissolution_other_'
+
+    # initialization
+    L_matter = []
+
+    # Help the algorithm to know which node to used
+    if dict_loading['L_L_i_XYZ_not_used'] == []:
+        dict_loading['L_XYZ_used'] = []
+        know_map = False
+    else : 
+        know_map = True
+
+    # iterate on the proccessors used
+    for i_proc in range(dict_pf['n_proc']):
+        if iteration_str == '000':
+            print('proc', i_proc+1, '/', dict_pf['n_proc'])
+
+        # name of the file to load
+        namefile = template_file+iteration_str+'_'+str(i_proc)+'.vtu'
+
+        # load a vtk file as input
+        reader = vtk.vtkXMLUnstructuredGridReader()
+        reader.SetFileName(namefile)
+        reader.Update()
+
+        # Grab a scalar from the vtk file
+        nodes_vtk_array= reader.GetOutput().GetPoints().GetData()
+        matter_vtk_array = reader.GetOutput().GetPointData().GetArray("matter")
+        
+        #Get the coordinates of the nodes and the scalar values
+        nodes_array = vtk_to_numpy(nodes_vtk_array)
+        matter_array = vtk_to_numpy(matter_vtk_array)
+        
+        # Help the algorithm to know which nodes to use
+        if not know_map:
+            L_i_XYZ_not_used = []
+        
+        # First iteration must detect common zones between processors
+        if not know_map:
+            # iterate on the nodes
+            for i_XYZ in range(len(nodes_array)) :
+                XYZ = nodes_array[i_XYZ]
+                # Do not consider twice a point
+                if list(XYZ) not in dict_loading['L_XYZ_used'] :
+                    dict_loading['L_XYZ_used'].append(list(XYZ))
+                    L_matter.append(matter_array[i_XYZ])
+                # Help the algorithm to know which nodes to used
+                else :
+                    L_i_XYZ_not_used.append(i_XYZ)
+            # Help the algorithm to know which nodes to used
+            dict_loading['L_L_i_XYZ_not_used'].append(L_i_XYZ_not_used)
+        # Algorithm knows already where to look
+        else :
+            L_i_XYZ_not_used = dict_loading['L_L_i_XYZ_not_used'][i_proc]
+            # all data are considered
+            if L_i_XYZ_not_used == []:
+                L_matter = L_matter + list(matter_array)
+            # not all data are considered
+            else :
+                L_matter = L_matter + list(matter_array[:L_i_XYZ_not_used[0]])
+                
+    # Rebuild maps     
+    M_grain, M_cement = Map_from_list(dict_loading, dict_pf, L_matter)
+
+    return M_grain, M_cement
+
+#-------------------------------------------------------------------------------
+
+def Map_from_list(dict_loading, dict_pf, L_points, L_matter):
+    '''
+    Rebuild numpy array from a list of values.
+    '''
+    # initialization
+    M_matter = np.zeros((len(dict_pf['x_L']), len(dict_pf['y_L']), len(dict_pf['z_L'])))
+
+    # iterate on the domain
+    for i in range(len(L_points)):
+        # interpolate meshes
+        find_ix = abs(np.array(dict_pf['x_L'])-L_points[i][0])
+        find_iy = abs(np.array(dict_pf['y_L'])-L_points[i][1])
+        find_iz = abs(np.array(dict_pf['z_L'])-L_points[i][2])
+        i_x = list(find_ix).index(min(find_ix))
+        i_y = list(find_iy).index(min(find_iy))
+        i_z = list(find_iz).index(min(find_iz))
+        # rebuild
+        M_matter[i_x, i_y, i_z] = L_matter[i]
+
+    # Apply masks to retrieve grain and cement
+    M_grain, M_cement = Grain_Cement_from_Matter(M_matter, dict_pf)
+
+    return M_grain, M_cement
+
+#-------------------------------------------------------------------------------
+
+def Grain_Cement_from_Matter(M_matter, dict_pf):
+    '''
+    Apply the initial mask to retrieve grain and cement from matter.
+    '''
+    # initialization
+    M_cement = np.zeros(M_matter.shape)
+    M_grain = np.zeros(M_matter.shape)    
+    #M_matter_pp = np.zeros(M_matter.shape)
+    # iterate on the mesh
+    for i_x in range(M_matter.shape[0]):
+        for i_y in range(M_matter.shape[1]):
+            for i_z in range(M_matter.shape[2]):
+                if dict_pf['M_grain_0'][i_x, i_y, i_z] == 1 :
+                    M_grain[i_x, i_y, i_z] = 1
+                    #M_matter_pp[i_x, i_y, i_z] = 1
+                if dict_pf['M_cement_0'][i_x, i_y, i_z] == 1 and M_matter[i_x, i_y, i_z] > 0.5:
+                    M_cement[i_x, i_y, i_z] = 1   
+                    #M_matter_pp[i_x, i_y, i_z] = 0.5
+
+    return M_grain, M_cement
+</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="read_pf.read_pf_csv"><code class="name flex">
+<span>def <span class="ident">Read_PF_csv</span></span>()
+</code></dt>
+<dd>
+<div class="desc"><p>Read the csv output of the PF simulation.</p>
+</div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def Read_PF_csv(crit_res_pf):
+    '''
+    Read the csv output of the PF simulation.
+    '''
+    print('Read csv')
+
+    # read file
+    f = open('csv/PF_Dissolution_csv.csv', "r")
+    lines = f.readlines()
+    f.close()
+    # init data
+    time_pp = []
+    matter_pp = []
+
+    # iterate on lines
+    for line in lines[1:]:
+        line = line.replace("\n", "")
+        data = line.split(',')
+        # read data
+        time_pp.append(float(data[0]))
+        matter_pp.append(float(data[1]))
+    
+    # save
+    dict_save = {
+        'crit_res_pf': crit_res_pf,
+        'time': time_pp,
+        'matter': matter_pp
+    }
+    pickle.dump(dict_save, open('pp/hydration_csv/'+str(crit_res_pf)+'.dict','wb'))
+</code></pre>
+</details>
+</dd>
+<dt id="read_pf.read_pf_vtk"><code class="name flex">
+<span>def <span class="ident">Read_PF_vtk</span></span>()
+</code></dt>
+<dd>
+<div class="desc"><p>Read the vtk outputs of the PF simulation.</p>
+</div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def  Read_PF_vtk(iteration_str, dict_loading, dict_pf):
+    '''
+    Read the vtk outputs of the PF simulation.
+    '''
+    if iteration_str == '000':
+        print('Read vtk')
+
+    # template of the files read
+    template_file = 'vtk/PF_Dissolution_other_'
+    # name of the file
+    namefile = template_file+iteration_str+'.pvtu'
+
+    # read the .pvtu file 
+    dataset = pv.read(namefile)
+
+    # extract the points
+    L_points = dataset.points
+
+    # extract the material 
+    L_matter = dataset['matter']
+    
+    # Rebuild maps     
+    M_grain, M_cement = Map_from_list(dict_loading, dict_pf, L_points, L_matter)
+
+    return M_grain, M_cement
+</code></pre>
+</details>
+</dd>
+<dt id="read_pf.map_from_list"><code class="name flex">
+<span>def <span class="ident">Map_from_list</span></span>()
+</code></dt>
+<dd>
+<div class="desc"><p>Rebuild numpy array from a list of values.</p>
+</div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def Map_from_list(dict_loading, dict_pf, L_points, L_matter):
+    '''
+    Rebuild numpy array from a list of values.
+    '''
+    # initialization
+    M_matter = np.zeros((len(dict_pf['x_L']), len(dict_pf['y_L']), len(dict_pf['z_L'])))
+
+    # iterate on the domain
+    for i in range(len(L_points)):
+        # interpolate meshes
+        find_ix = abs(np.array(dict_pf['x_L'])-L_points[i][0])
+        find_iy = abs(np.array(dict_pf['y_L'])-L_points[i][1])
+        find_iz = abs(np.array(dict_pf['z_L'])-L_points[i][2])
+        i_x = list(find_ix).index(min(find_ix))
+        i_y = list(find_iy).index(min(find_iy))
+        i_z = list(find_iz).index(min(find_iz))
+        # rebuild
+        M_matter[i_x, i_y, i_z] = L_matter[i]
+
+    # Apply masks to retrieve grain and cement
+    M_grain, M_cement = Grain_Cement_from_Matter(M_matter, dict_pf)
+
+    return M_grain, M_cement
+</code></pre>
+</details>
+</dd>
+<dt id="read_pf.grain_cement_from_matter"><code class="name flex">
+<span>def <span class="ident">Grain_Cement_from_Matter</span></span>()
+</code></dt>
+<dd>
+<div class="desc"><p>Apply the initial mask to retrieve grain and cement from matter.</p>
+</div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def Grain_Cement_from_Matter(M_matter, dict_pf):
+    '''
+    Apply the initial mask to retrieve grain and cement from matter.
+    '''
+    # initialization
+    M_cement = np.zeros(M_matter.shape)
+    M_grain = np.zeros(M_matter.shape)    
+    #M_matter_pp = np.zeros(M_matter.shape)
+    # iterate on the mesh
+    for i_x in range(M_matter.shape[0]):
+        for i_y in range(M_matter.shape[1]):
+            for i_z in range(M_matter.shape[2]):
+                if dict_pf['M_grain_0'][i_x, i_y, i_z] == 1 :
+                    M_grain[i_x, i_y, i_z] = 1
+                    #M_matter_pp[i_x, i_y, i_z] = 1
+                if dict_pf['M_cement_0'][i_x, i_y, i_z] == 1 and M_matter[i_x, i_y, i_z] > 0.5:
+                    M_cement[i_x, i_y, i_z] = 1   
+                    #M_matter_pp[i_x, i_y, i_z] = 0.5
+
+    return M_grain, M_cement
+</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="read_pf.read_pf_csv" href="#read_pf.read_pf_csv">Read_PF_csv</a></code></li>
+<li><code><a title="read_pf.read_pf_vtk" href="#read_pf.read_pf_vtk">Read_PF_csv</a></code></li>
+<li><code><a title="read_pf.map_from_list" href="#read_pf.map_frol_list">Map_from_list</a></code></li>
+<li><code><a title="read_pf.grain_cement_from_matter" href="#read_pf.grain_cement_from_matter">Grain_Cement_from_Matter</a></code></li>
+</ul>
+</li>
+</ul>
+<br>
+<a href="https://alexsacmorane.github.io/pf/rock_props_debonding/microstructure_evolution">Microstructure evolution</a><br>
+<a href="https://alexsacmorane.github.io/pf/rock_props_debonding">Rock properties during debonding</a><br>
+<a href="https://alexsacmorane.github.io/pf">PF</a><br>
+<a href="https://alexsacmorane.github.io">Home</a>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>
