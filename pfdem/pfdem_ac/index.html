@@ -15,6 +15,7 @@ alexandre.sac-morane@enpc.fr …" />
 <style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
 <script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+<style>.legend_left {margin-left: 120px;}.legend_right {margin-left: 250px;}</style>
 </head>
 <body>
 <main>
@@ -26,7 +27,13 @@ alexandre.sac-morane@enpc.fr …" />
 <p>Phase-Field Discrete Element Modelisation applied to granular material.<br>
 This simulation is about a 2D test under oedometric conditions with an acid injection. The chain force and the k0 (= σ2/σ1) evolves with the material dissolution.<br>
 <img src="../../images/Oedometric_test_acid.png" alt="Scheme of the model: oedometer and acid injection" width="523" height="600"><br>
-<a href="https://youtu.be/9gg3L0vMaMQ">One movie of an example (dissolvable = disk)</a></iframe> or <a href="https://youtu.be/tK1UPa1D_fM">One movie of an example (dissolvable = square)</a></iframe><br><br>
+
+<span class="legend_left">dissolvable = disk</span>
+<span class="legend_right">dissolvable = square</span><br>
+<img src="Acid_Oedometer_Disks.gif" alt="Granular medium under oedometer sollicitation with spherical dissolvable grains" width="380" height="260">
+<img src="Acid_Oedometer_Square.gif" alt="Granular medium under oedometer sollicitation with square dissolvable grains" width="380" height="260">
+<br>
+
 
 This work is presented in the following paper: <br>
 Alexandre Sac-Morane, Manolis Veveakis, Hadrien Rattez. (2024). A Phase-Field Discrete Element Method to study chemo-mechanical coupling in granular materials. Computer Methods in Applied Mechanics and Engineering. https://doi.org/10.1016/j.cma.2024.116900<br><br>
