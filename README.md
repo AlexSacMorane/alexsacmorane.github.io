@@ -12,3 +12,4 @@
 - Add Article DEM/PF debonding (elastic properties)
 - Add Article PF cementation
 - Add chapter book Sage-Sand
+- Add article DIC/DVC
