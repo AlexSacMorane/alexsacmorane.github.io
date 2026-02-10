@@ -58,7 +58,7 @@ def distance_to_spiral(t, x, y, z, R_spiral, N, dim_sample):
     '''
     # init
     dist2 = []
-    # iterate over t
+    # iterate over t
     for ti in t:
         # compute the position along the spiral
         x_spiral = R_spiral*np.cos(ti) + dim_sample/2
@@ -107,7 +107,7 @@ while not controler:
     else:
         N += 1
 
-# initialize the list of t
+# initialize the list of t
 t = np.linspace(-2*np.pi, N*2*np.pi+2*np.pi, (N+1)*50)
 
 # generate the sample
@@ -173,12 +173,12 @@ for i_x in range(dim_sample):
 #plt.savefig('plot_microstructure.png')
 #plt.close()
 
-# save
+# save
 dict_fft = {'M_microstructure': Microstructure}
 with open('fft/spiral_dict_fft_'+sample_id, 'wb') as handle:
     pickle.dump(dict_fft, handle, protocol=pickle.HIGHEST_PROTOCOL)
 
-# vtk file
+# vtk file
 # change the array structure to verify the function
 Microstructure_vtk = np.transpose(Microstructure, (2, 1, 0))
 write_vtk_structured_points('vtk/spiral_'+sample_id+'.vtk', Microstructure_vtk, spacing=(1.0, 1.0, 1.0), origin=(0, 0, 0), binary=False)  
@@ -211,6 +211,43 @@ tau_z = compute_tortuosity_fast_marching(np.transpose(1-M_bin, (2, 0, 1)), extra
 print(f"tau_z={tau_z:.3f}")
 </code></pre>
 </details>
+
+<dt id="spiral.distance_to_spiral"><code class="name flex">
+<span>def <span class="ident">distance_to_spiral</span></span>()
+</code></dt>
+<dd>
+<div class="desc"><p>Compute the distance of a point (x,y,z) to a spiral parameterized by t and defined by a radius R_spiral, the number of turns N, and a height of dim_sample.</p>
+<pre><code>Several distances are obtained for different values of t. The minimum distance is returned.</code></pre>
+</div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def distance_to_spiral(t, x, y, z, R_spiral, N, dim_sample):
+    '''
+    Compute the distance of a point (x,y,z) to a spiral parameterized by t and defined by a radius R_spiral, the number of turns N, and a height of dim_sample.
+    
+    Several distances are obtained for different values of t. The minimum distance is returned.
+    '''
+    # init
+    dist2 = []
+    # iterate over t
+    for ti in t:
+        # compute the position along the spiral
+        x_spiral = R_spiral*np.cos(ti) + dim_sample/2
+        y_spiral = R_spiral*np.sin(ti) + dim_sample/2
+        z_spiral = (dim_sample/(2*np.pi*N))*ti
+        # compute the distance from the point to the spiral
+        dist_i2 = (x - x_spiral)**2 + (y - y_spiral)**2 + (z - z_spiral)**2
+        dist2.append(dist_i2)    
+
+    return min(dist2)**0.5
+</code></pre>
+</details>
+</dd>
+
+
 </dl>
 </section>
 <section>
@@ -218,10 +255,15 @@ print(f"tau_z={tau_z:.3f}")
 </article>
 <nav id="sidebar">
 <h1>Index</h1>
-<div class="toc">
+<div class="toc">    
 <ul></ul>
 </div>
-<ul id="index">
+<ul id="index"><li>
+<h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="spiral.distance_to_spiral" href="#spiral.distance_to_spiral">distance_to_spiral</a></code></li>
+</ul>
+</li>
 </ul>
 <br>
 <a href="https://alexsacmorane.github.io/gen_micro">Generation of microstructures</a><br>
