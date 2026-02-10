@@ -30,7 +30,8 @@ alexandre.sac-morane@enpc.fr</p>
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">#-------------------------------------------------------------------------------
+<pre><code class="python">
+#-------------------------------------------------------------------------------
 # Librairies
 #-------------------------------------------------------------------------------
 
@@ -51,7 +52,7 @@ def compute_minkowski(M_bin):
     M2 is the mean curvature.
     M3 is the Euler characteristic.
     '''
-    # extract size 
+    # extract size 
     dim_sample = M_bin.shape[0]
 
     # M0: porosity
@@ -70,7 +71,7 @@ def compute_minkowski(M_bin):
     M_local_thickness = ps.filters.local_thickness(M_bin, method='dt')
     # compute the distribution of the local thickness
     data = ps.metrics.pore_size_distribution(M_local_thickness, bins=20, log=False)    
-    # compute the average local thickness
+    # compute the average local thickness
     mean_local_thickness = np.sum(data.bin_centers*data.pdf)/np.sum(data.pdf)+data.bin_widths[-1]/2
     # normalize by the volume
     M2 = mean_local_thickness / (dim_sample**3)
