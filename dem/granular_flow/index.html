@@ -983,18 +983,151 @@ waitIfBatch()
 <section>
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
-<dt id="main.?"><code class="name flex">
-<span>def <span class="ident">?</span></span>()
+<dt id="main.mk_new_dir"><code class="name flex">
+<span>def <span class="ident">mk_new_dir</span></span>()
 </code></dt>
 <dd>
-<div class="desc"><p>description.</p>
+<div class="desc"><p>Create a new folder (erase the preexisting, if it exists).</p>
 </div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">
-??
+    def mk_new_dir(foldername):
+    '''
+    Create a new folder (erase the preexisting, if it exists).
+    '''
+    if Path(foldername).exists():
+    shutil.rmtree(foldername)
+    os.mkdir(foldername)
+</code></pre>
+</details>
+</dd>
+<dt id="main.report_material"><code class="name flex">
+<span>def <span class="ident">report_material</span></span>()
+</code></dt>
+<dd>
+<div class="desc"><p>Write in the report the materials randomly generated.</p>
+</div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def report_material(reportname, L_materials):
+    '''
+    Write in the report the materials randomly generated
+    '''
+    # open the report
+    simulation_report = open(reportname, 'a')
+    # write an introduction
+    simulation_report.write('List of the materials used:\n')
+    # prepare the list
+    L_young = []
+    L_frictionAngle = []
+    # iterate on the materials
+    for material_i in L_materials:
+        # prepare the sentence
+        sentence_i = material_i.label + ': young = ' +str(round(material_i.young/1e6, 0)) +\
+                                        ' MPa, poisson = ' +str(round(material_i.poisson, 2)) +\
+                                        ', friction angle = ' +str(round(material_i.frictionAngle/math.pi*180, 0)) +\
+                                        '°, density = ' +str(material_i.density) + ' kg/m3\n'
+        # save
+        L_young.append(material_i.young/1e6)
+        L_frictionAngle.append(material_i.frictionAngle/math.pi*180)
+        # write
+        simulation_report.write(sentence_i)
+    # add a skipped line
+    simulation_report.write('\n')
+    # close the report
+    simulation_report.close()
+    # plot
+    fig, (ax1, ax2) = plt.subplots(1,2,figsize=(16,9))
+    ax1.hist(L_young)
+    ax1.set_xlabel('Young modulus (MPa)')
+    ax2.hist(L_frictionAngle)
+    ax2.set_xlabel('Friction angle (°)')
+    fig.savefig('plot/'+O.tags['id']+'_distribution_properties.png')
+    plt.close()
+</details>
+</dd>
+<dt id="main.report_stat_material"><code class="name flex">
+<span>def <span class="ident">report_stat_material</span></span>()
+</code></dt>
+<dd>
+<div class="desc"><p>Write in the report the distribution of the materials assignement.</p>
+</div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def report_stat_material(reportname, L_p_materials):
+    '''
+    Write in the report the distribution of the materials assignement
+    '''
+    # open the report
+    simulation_report = open(reportname, 'a')
+    # write an introduction
+    simulation_report.write('Distribution of the materials assigned:\n')
+    # prepare the sentence
+    sentence = ''
+    # iterate on the materials
+    for material_id in range(len(L_p_materials)):
+        # prepare the sentence
+        sentence = sentence + 'mat'+str(material_id+1) +' ('+str(round(L_p_materials[material_id]*100,1))+'%) '
+    # write and add a skipped line
+    simulation_report.write(sentence + '\n\n')
+    # close the report
+    simulation_report.close()
+
+    # plot the distribution
+    fig, ax1 = plt.subplots(1,1,figsize=(16,9))
+    ax1.plot(L_p_materials, 'k')
+    fig.savefig('plot/'+O.tags['id']+'_distribution_materials.png')
+    plt.close()
+</code></pre>
+</details>
+</dd>
+<dt id="main.report_end_step"><code class="name flex">
+<span>def <span class="ident">report_end_step</span></span>()
+</code></dt>
+<dd>
+<div class="desc"><p>Write in the report the information of the finishing step.</p>
+</div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def report_end_step(reportname, stepname):
+    '''
+    Write in the report the information of the finishing step
+    '''
+    global tic
+    tac = time.perf_counter()
+    hours = (tac-tic)//(60*60)
+    minutes = (tac-tic -hours*60*60)//(60)
+    seconds = int(tac-tic -hours*60*60 -minutes*60)
+    tic = tac
+
+    # flag if the clumps are already generated
+    flag_clump = False
+    for b in O.bodies:
+        if not flag_clump and b.isClump:
+            flag_clump = True
+
+    # write
+    simulation_report = open(reportname, 'a')
+    simulation_report.write(stepname+" : "+str(hours)+" hours "+str(minutes)+" minutes "+str(seconds)+" seconds\n")
+    simulation_report.write(str(O.iter-iter_0)+' Iterations\n')
+    if flag_clump:
+        simulation_report.write(str(count_grains())+' / '+str(n_grains*4)+' grains\n\n')
+    else :
+        simulation_report.write(str(count_grains())+' / '+str(n_grains)+' grains\n\n')
+    simulation_report.close()
+    print(stepname+" : "+str(hours)+" hours "+str(minutes)+" minutes "+str(seconds)+" seconds\n")
 </code></pre>
 </details>
 </dd>
@@ -1011,7 +1144,10 @@ waitIfBatch()
 <li><h3><a href="#header-code">Code</a></h3>
 <li><h3><a href="#header-functions">Functions</a><h3>
 <ul class="">
-<li><code><a title="main.?" href="#main.?">?</a></code></li>
+<li><code><a title="main.mk_new_dir" href="#main.mk_new_dir">mk_new_dir</a></code></li>
+<li><code><a title="main.report_material" href="#main.report_material">report_material</a></code></li>
+<li><code><a title="main.report_stat_material" href="#main.report_stat_material">report_stat_material</a></code></li>
+<li><code><a title="main.report_end_step" href="#main.report_end_step">report_end_step</a></code></li>
 </ul>
 </li>
 </ul>
