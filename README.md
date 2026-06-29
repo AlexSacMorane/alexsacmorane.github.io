@@ -4,7 +4,7 @@
 # TO DO
 - finish add PF_Sintering
 
-- Add TC105 2RRA
+- finish add TC105 2RRA
 
 - Add Generation of microstructures
 
