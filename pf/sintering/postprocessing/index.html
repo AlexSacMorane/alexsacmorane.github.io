@@ -1,0 +1,1170 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>Sintering API documentation</title>
+<meta name="description" content="@author: Alexandre Sac--Morane
+alexandre.sac-morane@enpc.fr …" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>PostProcessing</code></h1>
+</header>
+<section id="section-intro">
+<p>@author: Alexandre Sac&ndash;Morane
+alexandre.sac-morane@enpc.fr</p>
+<p>This is the file to post-proccess the data.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+#-------------------------------------------------------------------------------
+# Librairies
+#-------------------------------------------------------------------------------
+
+import numpy as np
+import matplotlib.pyplot as plt
+import pyvista as pv
+import pickle, porespy, skimage, time
+
+# Own
+from main import index_to_str
+
+#-------------------------------------------------------------------------------
+# Functions
+#-------------------------------------------------------------------------------
+
+def pp(dict_user):
+    '''
+    Main function for the post-processing.    
+    '''
+    # compute performances
+    tic = time.perf_counter() 
+
+    # initialize the dict
+    dict_tempo = {
+        'L_M_Neck': [],
+        'L_freeSurface': [],
+        'L_M0': [],
+        'L_M1': [],
+        'L_M2': [],
+        'L_M3': [],
+        'map': None
+    }
+
+    # read and plot the .csv data.
+    ReadCSV(dict_user, dict_tempo)
+
+    print('\nread pvtu')
+    # determine the zone of interest for the porosity
+    # a box is generated from the lastest configuration (more dense)
+    # read the .pvtu
+    ReadPVTU(dict_user, dict_tempo, 'output/vtk/PF_Sintering_other_'+dict_user['last_j_str']+'.pvtu')     
+    # compute the zone of interest
+    RebuildMap_ZoneInterest(dict_user, dict_tempo)
+
+    # iterate on the .pvtu files
+    for i in range(dict_user['last_j']+1):
+        # flag the initial map (for plot)
+        if i == 0 :
+            dict_tempo['ic_flag'] = True
+        else:
+            dict_tempo['ic_flag'] = False
+
+        # read the .pvtu
+        ReadPVTU(dict_user, dict_tempo, 'output/vtk/PF_Sintering_other_'+index_to_str(i)+'.pvtu')
+
+        # Biswas, 2018
+        # compute the neck area
+        ComputeNeck(dict_tempo)
+        # compute the free surface area
+        ComputeFreeSurface(dict_tempo)
+    
+        # Guevel, 2022
+        RebuildMap(dict_user, dict_tempo)
+        ComputeMorphometers(dict_tempo)
+
+    # plot final map
+    PlotMap(dict_user, dict_tempo)
+
+    # Biswas, 2018
+    # plot the neck area
+    PlotNeck(dict_tempo)
+    # plot the free surface area
+    PlotFreeSurface(dict_tempo)
+
+    # Guevel, 2022
+    PlotMorphometers(dict_tempo)
+
+    # compute performances
+    tac = time.perf_counter()
+    hours = (tac-tic)//(60*60)
+    minutes = (tac-tic - hours*60*60)//(60)
+    seconds = int(tac-tic - hours*60*60 - minutes*60)
+    print("\nPost-processing time : "+str(hours)+" hours "+str(minutes)+" minutes "+str(seconds)+" seconds")
+    print('Post-processing ends')
+
+#-------------------------------------------------------------------------------
+
+def ReadCSV(dict_user, dict_tempo):
+    '''
+    Read the csv file generated with Moose (made by postprocessors).
+    '''
+    print('\nread csv')
+
+    # read file
+    f = open('output/PF_Sintering_csv.csv', "r")
+    lines = f.readlines()
+    f.close()
+    # init data
+    time_pp = []
+    c_pp = []
+    L_eta_pp = []
+    for i_grain in range(dict_user['n_eta']):
+        L_eta_pp.append([])
+
+    # iterate on lines
+    for line in lines[1:]:
+        line = line.replace("\n", "")
+        data = line.split(',')
+        # read data
+        time_pp.append(float(data[0]))
+        c_pp.append(float(data[1]))
+        for i_grain in range(dict_user['n_eta']):
+            L_eta_pp[i_grain].append(float(data[2+i_grain]))
+
+    # plot time-mass
+    fig, ax1 = plt.subplots(1,1,figsize=(16,9))
+    ax1.plot(time_pp, c_pp, linewidth=6)
+    ax1.set_xlabel('time (-)', fontsize=25)
+    ax1.set_ylabel('mean mass concentration (-)', fontsize=25)
+    ax1.tick_params(axis='both', labelsize=20, width=3, length=3)
+    fig.tight_layout()
+    fig.savefig('output/evol_time_mass.png')
+    plt.close(fig)
+    # output
+    print('conservation of the mass:')
+    print('mass min:', round(min(c_pp),3), '(delta', int(100*(np.mean(c_pp)-min(c_pp))/np.mean(c_pp)),'% of mean value)')
+    print('mass max:', round(max(c_pp),3), '(delta', int(100*(max(c_pp)-np.mean(c_pp))/np.mean(c_pp)),'% of mean value)')
+
+    # plot time-etas
+    fig, ax1 = plt.subplots(1,1,figsize=(16,9))
+    for i_grain in range(dict_user['n_eta']):
+        ax1.plot(time_pp, L_eta_pp[i_grain], linewidth=6)
+    ax1.set_xlabel('time (-)', fontsize=25)
+    ax1.set_ylabel('mean grain concentration (-)', fontsize=25)
+    ax1.tick_params(axis='both', labelsize=20, width=3, length=3)
+    fig.tight_layout()
+    fig.savefig('output/evol_time_etas.png')
+    plt.close(fig)
+
+    # extract time from the iterations saved
+    L_time_extracted = []
+    for ite in dict_user['L_ite_saved']:
+        L_time_extracted.append(time_pp[ite])
+    # save
+    dict_tempo['L_time_extracted'] = L_time_extracted
+
+#-------------------------------------------------------------------------------
+
+def ReadPVTU(dict_user, dict_tempo, filename):
+    '''
+    Read the PVTU file generated with Moose.
+    '''
+    # read the .pvtu file 
+    dataset = pv.read(filename)
+
+    # extract the points
+    L_points = dataset.points
+
+    # extract the concentration 
+    L_c = dataset['c']
+    
+    # extract the etas
+    L_L_eta = []
+    for i_grain in range(dict_user['n_eta']):
+        L_L_eta.append(dataset['eta'+str(i_grain)])
+
+    # save
+    dict_tempo['L_points'] = L_points
+    dict_tempo['L_c'] = L_c
+    dict_tempo['L_L_eta'] = L_L_eta
+
+#-------------------------------------------------------------------------------
+
+def ComputeNeck(dict_tempo):
+    '''
+    Compute the neck area.
+
+    Defined as the integral of the function eta_i*eta_j.
+    '''
+    # initialization
+    M_Neck = np.zeros((len(dict_tempo['L_L_eta']), len(dict_tempo['L_L_eta'])))
+    # iterate on the pairs
+    for i_grain in range(len(dict_tempo['L_L_eta'])-1):
+        for j_grain in range(i_grain+1,len(dict_tempo['L_L_eta'])):
+            L_eta_i_j = np.array(dict_tempo['L_L_eta'][i_grain])*np.array(dict_tempo['L_L_eta'][j_grain])
+            M_Neck[i_grain, j_grain] = np.mean(L_eta_i_j)
+    # save
+    dict_tempo['L_M_Neck'].append(M_Neck)
+
+#-------------------------------------------------------------------------------
+
+def PlotNeck(dict_tempo):
+    '''
+    Plot the neck area.
+
+    Defined as the integral of the function eta_i*eta_j.
+    '''
+    # open figure
+    fig, (ax1) = plt.subplots(1,1,figsize=(16,9))
+    # iterate on the pairs
+    for i_grain in range(len(dict_tempo['L_L_eta'])-1):
+        for j_grain in range(i_grain+1,len(dict_tempo['L_L_eta'])):
+            L_Neck_i_j = []
+            # extract the pair with time
+            for ite in range(len(dict_tempo['L_M_Neck'])):
+                L_Neck_i_j.append(dict_tempo['L_M_Neck'][ite][i_grain, j_grain])
+            # plot
+            ax1.plot(dict_tempo['L_time_extracted'], L_Neck_i_j, linewidth=6)
+    # close figure
+    ax1.set_xlabel('time (-)', fontsize=25)
+    ax1.set_ylabel('neck area (-)', fontsize=25)
+    ax1.tick_params(axis='both', labelsize=20, width=3, length=3)
+    fig.tight_layout()
+    fig.savefig('output/evol_time_neck.png')
+    plt.close(fig)
+
+#-------------------------------------------------------------------------------
+
+def ComputeFreeSurface(dict_tempo):
+    '''
+    Compute the free surface area.
+
+    Defined as the integral of the function c_int (=1 for  c in [0.45, 0.55]).
+    '''
+    # pp data
+    L_c_int = []
+    for c in dict_tempo['L_c']:
+        if 0.45 <= c and c <= 0.55:
+            L_c_int.append(1)
+        else :
+            L_c_int.append(0)
+    # save
+    dict_tempo['L_freeSurface'].append(np.mean(L_c_int))
+    
+#-------------------------------------------------------------------------------
+
+def PlotFreeSurface(dict_tempo):
+    '''
+    Plot the free surface area.
+
+    Defined as the integral of the function c_int (=1 for  c in [0.45, 0.55]).
+    '''
+    # open figure
+    fig, (ax1) = plt.subplots(1,1,figsize=(16,9))
+    ax1.plot(dict_tempo['L_time_extracted'], dict_tempo['L_freeSurface'], linewidth=6)
+    ax1.set_xlabel('time (-)', fontsize=25)
+    ax1.set_ylabel('free surface (-)', fontsize=25)
+    ax1.tick_params(axis='both', labelsize=20, width=3, length=3)
+    fig.tight_layout()
+    fig.savefig('output/evol_time_freesurface.png')
+    plt.close(fig)
+
+#-------------------------------------------------------------------------------
+
+def RebuildMap(dict_user, dict_tempo):
+    '''
+    Rebuild the map from the output of the pyvista.
+    '''
+    # initialization
+    M_void = np.zeros((len(dict_user['L_y']), len(dict_user['L_x'])))
+    M_solid = np.zeros((len(dict_user['L_y']), len(dict_user['L_x'])))
+
+    # the map is not know
+    if dict_tempo['map'] == None:
+        # init map
+        map = []
+        # iterate on the points
+        for i_point in range(len(dict_tempo['L_points'])):
+            # search node in the mesh
+            L_search = list(abs(np.array(dict_user['L_x']-list(dict_tempo['L_points'][i_point])[0])))
+            i_x = L_search.index(min(L_search))
+            L_search = list(abs(np.array(dict_user['L_y']-list(dict_tempo['L_points'][i_point])[1])))
+            i_y = L_search.index(min(L_search))
+            # save map
+            map.append([i_x, i_y])
+            # rebuild maps
+            if dict_tempo['L_c'][i_point] < 0.5:
+                M_void[-1-i_y, i_x] = 1
+            else:
+                M_solid[-1-i_y, i_x] = 1
+        # save map
+        dict_tempo['map'] = map
+
+    # the map is know
+    else:
+        # iterate on the points
+        for i_point in range(len(dict_tempo['L_points'])):
+            # read the map
+            i_x = dict_tempo['map'][i_point][0]
+            i_y = dict_tempo['map'][i_point][1]
+            # rebuild maps
+            if dict_tempo['L_c'][i_point] < 0.5:
+                M_void[-1-i_y, i_x] = 1
+            else:
+                M_solid[-1-i_y, i_x] = 1
+    
+    # extract maps (exclude void on the sides)
+    i_x_min = dict_tempo['zoneInterest'][0]
+    i_x_max = dict_tempo['zoneInterest'][1]
+    i_y_min = dict_tempo['zoneInterest'][2]
+    i_y_max = dict_tempo['zoneInterest'][3]
+
+    # save
+    dict_tempo['M_void'] = M_void.copy()
+    dict_tempo['M_void_extracted'] = M_void.copy()[i_y_min: i_y_max+1, i_x_min: i_x_max+1]
+    dict_tempo['M_solid'] = M_solid.copy()
+    dict_tempo['M_solid_extracted'] = M_solid.copy()[i_y_min: i_y_max+1, i_x_min: i_x_max+1]
+
+    # save ic 
+    if dict_tempo['ic_flag']:
+        dict_tempo['M_solid_ic'] = M_solid.copy()   
+
+#-------------------------------------------------------------------------------
+
+def RebuildMap_ZoneInterest(dict_user, dict_tempo):
+    '''
+    Rebuild the map from the output of the pyvista. And determine the zone of interest for the porosity estimation.
+    '''    
+    # initialization
+    M_solid = np.zeros((len(dict_user['L_y']), len(dict_user['L_x'])))
+
+    # the map is not know
+    if dict_tempo['map'] == None:
+        # init map
+        map = []
+        # iterate on the points
+        for i_point in range(len(dict_tempo['L_points'])):
+            # search node in the mesh
+            L_search = list(abs(np.array(dict_user['L_x']-list(dict_tempo['L_points'][i_point])[0])))
+            i_x = L_search.index(min(L_search))
+            L_search = list(abs(np.array(dict_user['L_y']-list(dict_tempo['L_points'][i_point])[1])))
+            i_y = L_search.index(min(L_search))
+            # save map
+            map.append([i_x, i_y])
+            # rebuild maps
+            if dict_tempo['L_c'][i_point] > 0.5:
+                M_solid[-1-i_y, i_x] = 1
+        # save map
+        dict_tempo['map'] = map
+
+    # the map is know
+    else:
+        # iterate on the points
+        for i_point in range(len(dict_tempo['L_points'])):
+            # read the map
+            i_x = dict_tempo['map'][i_point][0]
+            i_y = dict_tempo['map'][i_point][1]
+            # rebuild maps
+            if dict_tempo['L_c'][i_point] > 0.5:
+                M_solid[-1-i_y, i_x] = 1
+    
+    # extract maps (exclude void on the sides)
+    # find i_x_min
+    #i_x_min = 0
+    #while np.max(M_solid[:, i_x_min]) == 0:
+    #    i_x_min = i_x_min + 1
+    i_x_min = int(0.25*M_solid.shape[0])
+    # find i_x_max
+    #i_x_max = M_solid.shape[1]-1
+    #while np.max(M_solid[:, i_x_max]) == 0:
+    #    i_x_max = i_x_max - 1
+    i_x_max = int(0.75*M_solid.shape[0])
+    # find i_y_min
+    #i_y_min = 0
+    #while np.max(M_solid[i_y_min, :]) == 0:
+    #    i_y_min = i_y_min + 1
+    i_y_min = int(0.25*M_solid.shape[1])
+    # find i_y_max
+    #i_y_max = M_solid.shape[0]-1
+    #while np.max(M_solid[i_y_max, :]) == 0:
+    #    i_y_max = i_y_max - 1
+    i_y_max = int(0.75*M_solid.shape[1])
+
+    # save
+    dict_tempo['zoneInterest'] = [i_x_min, i_x_max, i_y_min, i_y_max]
+
+#-------------------------------------------------------------------------------
+
+def PlotMap(dict_user, dict_tempo):
+    '''
+    plot the current configuration.
+    '''
+    # Plot maps
+    fig, (ax1, ax2) = plt.subplots(1,2,figsize=(16,9))
+    # parameters
+    ax1.imshow(dict_tempo['M_solid_ic'], interpolation = 'nearest', extent=(dict_user['L_x'][0],dict_user['L_x'][-1],dict_user['L_y'][0],dict_user['L_x'][-1]))
+    ax1.set_title('ic', fontsize=30)
+    ax2.imshow(dict_tempo['M_solid'], interpolation = 'nearest', extent=(dict_user['L_x'][0],dict_user['L_x'][-1],dict_user['L_y'][0],dict_user['L_x'][-1]))
+    ax2.set_title('final', fontsize=30)
+    fig.tight_layout()
+    fig.savefig('output/map_c.png')
+    plt.close(fig)
+
+    # Plot delta
+    fig, ax1 = plt.subplots(1,1,figsize=(16,9))
+    # parameters
+    cax = ax1.imshow(dict_tempo['M_solid']-dict_tempo['M_solid_ic'], interpolation = 'nearest', extent=(dict_user['L_x'][0],dict_user['L_x'][-1],dict_user['L_y'][0],dict_user['L_x'][-1]), cmap='bwr')
+    cbar = fig.colorbar(cax, ticks=[1, -1])
+    cbar.ax.set_yticklabels(['precipitation', 'dissolution'])
+    cbar.ax.tick_params(labelsize=20)
+    ax1.set_title('final-ic', fontsize=30)
+    fig.tight_layout()
+    fig.savefig('output/map_deltac.png')
+    plt.close(fig)
+
+#-------------------------------------------------------------------------------
+
+def ComputeMorphometers(dict_tempo):
+    '''
+    Compute the morphometers.
+
+    see Guével, 2022
+    '''
+    # M0 porosity
+    M0 = porespy.metrics.porosity(dict_tempo['M_void_extracted'])
+    
+    # M1 perimeter
+    M1 = skimage.measure.perimeter(dict_tempo['M_solid'])
+    
+    # M2 grain size
+    # this morphometer requires more lines
+    # an algorithm is called to determine the size of the grains
+    sizes = porespy.filters.local_thickness(dict_tempo['M_solid'])
+    # then a size distribution is called  
+    data = porespy.metrics.pore_size_distribution(sizes, log=False, bins=20)
+    # finally the mean (weighted by the probability) is computed
+    M2 = 0
+    counter = 0
+    for i_bin in range(len(data.bin_centers)):
+        M2 = M2 + data.pdf[i_bin]*data.bin_centers[i_bin]
+        counter = counter + data.pdf[i_bin]
+    M2 = M2 / counter
+    
+    # M3 Euler
+    M3 = skimage.measure.euler_number(dict_tempo['M_solid'])
+
+    # save
+    dict_tempo['L_M0'].append(M0)
+    dict_tempo['L_M1'].append(M1)
+    dict_tempo['L_M2'].append(M2)
+    dict_tempo['L_M3'].append(M3)
+
+#-------------------------------------------------------------------------------
+
+def PlotMorphometers(dict_tempo):
+    '''
+    Plot the morphometers.
+
+    see Guevel, 2022.
+    '''
+    # open figure
+    fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2,2,figsize=(2*16,2*9))
+    # M0
+    ax1.plot(dict_tempo['L_time_extracted'], dict_tempo['L_M0'], linewidth=6)
+    ax1.set_xlabel('time (-)', fontsize=25)
+    ax1.set_ylabel('M0 porosity (-)', fontsize=25)
+    ax1.tick_params(axis='both', labelsize=20, width=3, length=3)
+    # M1
+    ax2.plot(dict_tempo['L_time_extracted'], dict_tempo['L_M1'], linewidth=6)
+    ax2.set_xlabel('time (-)', fontsize=25)
+    ax2.set_ylabel('M1 perimeter (-)', fontsize=25)
+    ax2.tick_params(axis='both', labelsize=20, width=3, length=3)
+    # M2
+    ax3.plot(dict_tempo['L_time_extracted'], dict_tempo['L_M2'], linewidth=6)
+    ax3.set_xlabel('time (-)', fontsize=25)
+    ax3.set_ylabel('M2 grain size (-)', fontsize=25)
+    ax3.tick_params(axis='both', labelsize=20, width=3, length=3)
+    # M3
+    ax4.plot(dict_tempo['L_time_extracted'], dict_tempo['L_M3'], linewidth=6)
+    ax4.set_xlabel('time (-)', fontsize=25)
+    ax4.set_ylabel('M3 euler (-)', fontsize=25)
+    ax4.tick_params(axis='both', labelsize=20, width=3, length=3)
+    # close
+    fig.tight_layout()
+    fig.savefig('output/evol_time_morphometers.png')
+    plt.close(fig)
+
+#-------------------------------------------------------------------------------
+# MAIN code
+#-------------------------------------------------------------------------------
+
+if __name__ == '__main__':
+
+    # load dict_user
+    with open('output/dict_user', 'rb') as handle:
+        dict_user = pickle.load(handle)
+
+    # call pp function
+    pp(dict_user)
+</code>
+</pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+
+<dt id="pp.pp"><code class="name flex">
+<span>def <span class="ident">pp</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Main function for the post-processing.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def pp(dict_user):
+    '''
+    Main function for the post-processing.    
+    '''
+    # compute performances
+    tic = time.perf_counter() 
+
+    # initialize the dict
+    dict_tempo = {
+        'L_M_Neck': [],
+        'L_freeSurface': [],
+        'L_M0': [],
+        'L_M1': [],
+        'L_M2': [],
+        'L_M3': [],
+        'map': None
+    }
+
+    # read and plot the .csv data.
+    ReadCSV(dict_user, dict_tempo)
+
+    print('\nread pvtu')
+    # determine the zone of interest for the porosity
+    # a box is generated from the lastest configuration (more dense)
+    # read the .pvtu
+    ReadPVTU(dict_user, dict_tempo, 'output/vtk/PF_Sintering_other_'+dict_user['last_j_str']+'.pvtu')     
+    # compute the zone of interest
+    RebuildMap_ZoneInterest(dict_user, dict_tempo)
+
+    # iterate on the .pvtu files
+    for i in range(dict_user['last_j']+1):
+        # flag the initial map (for plot)
+        if i == 0 :
+            dict_tempo['ic_flag'] = True
+        else:
+            dict_tempo['ic_flag'] = False
+
+        # read the .pvtu
+        ReadPVTU(dict_user, dict_tempo, 'output/vtk/PF_Sintering_other_'+index_to_str(i)+'.pvtu')
+
+        # Biswas, 2018
+        # compute the neck area
+        ComputeNeck(dict_tempo)
+        # compute the free surface area
+        ComputeFreeSurface(dict_tempo)
+    
+        # Guevel, 2022
+        RebuildMap(dict_user, dict_tempo)
+        ComputeMorphometers(dict_tempo)
+
+    # plot final map
+    PlotMap(dict_user, dict_tempo)
+
+    # Biswas, 2018
+    # plot the neck area
+    PlotNeck(dict_tempo)
+    # plot the free surface area
+    PlotFreeSurface(dict_tempo)
+
+    # Guevel, 2022
+    PlotMorphometers(dict_tempo)
+
+    # compute performances
+    tac = time.perf_counter()
+    hours = (tac-tic)//(60*60)
+    minutes = (tac-tic - hours*60*60)//(60)
+    seconds = int(tac-tic - hours*60*60 - minutes*60)
+    print("\nPost-processing time : "+str(hours)+" hours "+str(minutes)+" minutes "+str(seconds)+" seconds")
+    print('Post-processing ends')
+</code></pre>
+</details>
+</dd>
+
+<dt id="pp.ReadCSV"><code class="name flex">
+<span>def <span class="ident">ReadCSV</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Read the csv file generated with Moose (made by postprocessors).</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def ReadCSV(dict_user, dict_tempo):
+    '''
+    Read the csv file generated with Moose (made by postprocessors).
+    '''
+    print('\nread csv')
+
+    # read file
+    f = open('output/PF_Sintering_csv.csv', "r")
+    lines = f.readlines()
+    f.close()
+    # init data
+    time_pp = []
+    c_pp = []
+    L_eta_pp = []
+    for i_grain in range(dict_user['n_eta']):
+        L_eta_pp.append([])
+
+    # iterate on lines
+    for line in lines[1:]:
+        line = line.replace("\n", "")
+        data = line.split(',')
+        # read data
+        time_pp.append(float(data[0]))
+        c_pp.append(float(data[1]))
+        for i_grain in range(dict_user['n_eta']):
+            L_eta_pp[i_grain].append(float(data[2+i_grain]))
+
+    # plot time-mass
+    fig, ax1 = plt.subplots(1,1,figsize=(16,9))
+    ax1.plot(time_pp, c_pp, linewidth=6)
+    ax1.set_xlabel('time (-)', fontsize=25)
+    ax1.set_ylabel('mean mass concentration (-)', fontsize=25)
+    ax1.tick_params(axis='both', labelsize=20, width=3, length=3)
+    fig.tight_layout()
+    fig.savefig('output/evol_time_mass.png')
+    plt.close(fig)
+    # output
+    print('conservation of the mass:')
+    print('mass min:', round(min(c_pp),3), '(delta', int(100*(np.mean(c_pp)-min(c_pp))/np.mean(c_pp)),'% of mean value)')
+    print('mass max:', round(max(c_pp),3), '(delta', int(100*(max(c_pp)-np.mean(c_pp))/np.mean(c_pp)),'% of mean value)')
+
+    # plot time-etas
+    fig, ax1 = plt.subplots(1,1,figsize=(16,9))
+    for i_grain in range(dict_user['n_eta']):
+        ax1.plot(time_pp, L_eta_pp[i_grain], linewidth=6)
+    ax1.set_xlabel('time (-)', fontsize=25)
+    ax1.set_ylabel('mean grain concentration (-)', fontsize=25)
+    ax1.tick_params(axis='both', labelsize=20, width=3, length=3)
+    fig.tight_layout()
+    fig.savefig('output/evol_time_etas.png')
+    plt.close(fig)
+
+    # extract time from the iterations saved
+    L_time_extracted = []
+    for ite in dict_user['L_ite_saved']:
+        L_time_extracted.append(time_pp[ite])
+    # save
+    dict_tempo['L_time_extracted'] = L_time_extracted
+</code></pre>
+</details>
+</dd>
+
+<dt id="pp.ReadPVTU"><code class="name flex">
+<span>def <span class="ident">ReadPVTU</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Read the PVTU file generated with Moose.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def ReadPVTU(dict_user, dict_tempo, filename):
+    '''
+    Read the PVTU file generated with Moose.
+    '''
+    # read the .pvtu file 
+    dataset = pv.read(filename)
+
+    # extract the points
+    L_points = dataset.points
+
+    # extract the concentration 
+    L_c = dataset['c']
+    
+    # extract the etas
+    L_L_eta = []
+    for i_grain in range(dict_user['n_eta']):
+        L_L_eta.append(dataset['eta'+str(i_grain)])
+
+    # save
+    dict_tempo['L_points'] = L_points
+    dict_tempo['L_c'] = L_c
+    dict_tempo['L_L_eta'] = L_L_eta
+</code></pre>
+</details>
+</dd>
+
+<dt id="pp.ComputeNeck"><code class="name flex">
+<span>def <span class="ident">ComputeNeck</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Compute the neck area.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def ComputeNeck(dict_tempo):
+    '''
+    Compute the neck area.
+
+    Defined as the integral of the function eta_i*eta_j.
+    '''
+    # initialization
+    M_Neck = np.zeros((len(dict_tempo['L_L_eta']), len(dict_tempo['L_L_eta'])))
+    # iterate on the pairs
+    for i_grain in range(len(dict_tempo['L_L_eta'])-1):
+        for j_grain in range(i_grain+1,len(dict_tempo['L_L_eta'])):
+            L_eta_i_j = np.array(dict_tempo['L_L_eta'][i_grain])*np.array(dict_tempo['L_L_eta'][j_grain])
+            M_Neck[i_grain, j_grain] = np.mean(L_eta_i_j)
+    # save
+    dict_tempo['L_M_Neck'].append(M_Neck)
+</code></pre>
+</details>
+</dd>
+
+<dt id="pp.PlotNeck"><code class="name flex">
+<span>def <span class="ident">PlotNeck</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Plot the neck area.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def PlotNeck(dict_tempo):
+    '''
+    Plot the neck area.
+
+    Defined as the integral of the function eta_i*eta_j.
+    '''
+    # open figure
+    fig, (ax1) = plt.subplots(1,1,figsize=(16,9))
+    # iterate on the pairs
+    for i_grain in range(len(dict_tempo['L_L_eta'])-1):
+        for j_grain in range(i_grain+1,len(dict_tempo['L_L_eta'])):
+            L_Neck_i_j = []
+            # extract the pair with time
+            for ite in range(len(dict_tempo['L_M_Neck'])):
+                L_Neck_i_j.append(dict_tempo['L_M_Neck'][ite][i_grain, j_grain])
+            # plot
+            ax1.plot(dict_tempo['L_time_extracted'], L_Neck_i_j, linewidth=6)
+    # close figure
+    ax1.set_xlabel('time (-)', fontsize=25)
+    ax1.set_ylabel('neck area (-)', fontsize=25)
+    ax1.tick_params(axis='both', labelsize=20, width=3, length=3)
+    fig.tight_layout()
+    fig.savefig('output/evol_time_neck.png')
+    plt.close(fig)
+</code></pre>
+</details>
+</dd>
+
+<dt id="pp.ComputeFreeSurface"><code class="name flex">
+<span>def <span class="ident">ComputeFreeSurface</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Compute the free surface area.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def ComputeFreeSurface(dict_tempo):
+    '''
+    Compute the free surface area.
+
+    Defined as the integral of the function c_int (=1 for  c in [0.45, 0.55]).
+    '''
+    # pp data
+    L_c_int = []
+    for c in dict_tempo['L_c']:
+        if 0.45 <= c and c <= 0.55:
+            L_c_int.append(1)
+        else :
+            L_c_int.append(0)
+    # save
+    dict_tempo['L_freeSurface'].append(np.mean(L_c_int))
+</code></pre>
+</details>
+</dd>
+
+<dt id="pp.PlotFreeSurface"><code class="name flex">
+<span>def <span class="ident">PlotFreeSurface</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Plot the free surface area.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def PlotFreeSurface(dict_tempo):
+    '''
+    Plot the free surface area.
+
+    Defined as the integral of the function c_int (=1 for  c in [0.45, 0.55]).
+    '''
+    # open figure
+    fig, (ax1) = plt.subplots(1,1,figsize=(16,9))
+    ax1.plot(dict_tempo['L_time_extracted'], dict_tempo['L_freeSurface'], linewidth=6)
+    ax1.set_xlabel('time (-)', fontsize=25)
+    ax1.set_ylabel('free surface (-)', fontsize=25)
+    ax1.tick_params(axis='both', labelsize=20, width=3, length=3)
+    fig.tight_layout()
+    fig.savefig('output/evol_time_freesurface.png')
+    plt.close(fig)
+</code></pre>
+</details>
+</dd>
+
+<dt id="pp.RebuildMap"><code class="name flex">
+<span>def <span class="ident">RebuildMap</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Rebuild the map from the output of the pyvista.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def RebuildMap(dict_user, dict_tempo):
+    '''
+    Rebuild the map from the output of the pyvista.
+    '''
+    # initialization
+    M_void = np.zeros((len(dict_user['L_y']), len(dict_user['L_x'])))
+    M_solid = np.zeros((len(dict_user['L_y']), len(dict_user['L_x'])))
+
+    # the map is not know
+    if dict_tempo['map'] == None:
+        # init map
+        map = []
+        # iterate on the points
+        for i_point in range(len(dict_tempo['L_points'])):
+            # search node in the mesh
+            L_search = list(abs(np.array(dict_user['L_x']-list(dict_tempo['L_points'][i_point])[0])))
+            i_x = L_search.index(min(L_search))
+            L_search = list(abs(np.array(dict_user['L_y']-list(dict_tempo['L_points'][i_point])[1])))
+            i_y = L_search.index(min(L_search))
+            # save map
+            map.append([i_x, i_y])
+            # rebuild maps
+            if dict_tempo['L_c'][i_point] < 0.5:
+                M_void[-1-i_y, i_x] = 1
+            else:
+                M_solid[-1-i_y, i_x] = 1
+        # save map
+        dict_tempo['map'] = map
+
+    # the map is know
+    else:
+        # iterate on the points
+        for i_point in range(len(dict_tempo['L_points'])):
+            # read the map
+            i_x = dict_tempo['map'][i_point][0]
+            i_y = dict_tempo['map'][i_point][1]
+            # rebuild maps
+            if dict_tempo['L_c'][i_point] < 0.5:
+                M_void[-1-i_y, i_x] = 1
+            else:
+                M_solid[-1-i_y, i_x] = 1
+    
+    # extract maps (exclude void on the sides)
+    i_x_min = dict_tempo['zoneInterest'][0]
+    i_x_max = dict_tempo['zoneInterest'][1]
+    i_y_min = dict_tempo['zoneInterest'][2]
+    i_y_max = dict_tempo['zoneInterest'][3]
+
+    # save
+    dict_tempo['M_void'] = M_void.copy()
+    dict_tempo['M_void_extracted'] = M_void.copy()[i_y_min: i_y_max+1, i_x_min: i_x_max+1]
+    dict_tempo['M_solid'] = M_solid.copy()
+    dict_tempo['M_solid_extracted'] = M_solid.copy()[i_y_min: i_y_max+1, i_x_min: i_x_max+1]
+
+    # save ic 
+    if dict_tempo['ic_flag']:
+        dict_tempo['M_solid_ic'] = M_solid.copy()   
+</code></pre>
+</details>
+</dd>
+
+<dt id="pp.RebuildMap_ZoneInterest"><code class="name flex">
+<span>def <span class="ident">RebuildMap_ZoneInterest</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Rebuild the map from the output of the pyvista. And determine the zone of interest for the porosity estimation.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def RebuildMap_ZoneInterest(dict_user, dict_tempo):
+    '''
+    Rebuild the map from the output of the pyvista. And determine the zone of interest for the porosity estimation.
+    '''    
+    # initialization
+    M_solid = np.zeros((len(dict_user['L_y']), len(dict_user['L_x'])))
+
+    # the map is not know
+    if dict_tempo['map'] == None:
+        # init map
+        map = []
+        # iterate on the points
+        for i_point in range(len(dict_tempo['L_points'])):
+            # search node in the mesh
+            L_search = list(abs(np.array(dict_user['L_x']-list(dict_tempo['L_points'][i_point])[0])))
+            i_x = L_search.index(min(L_search))
+            L_search = list(abs(np.array(dict_user['L_y']-list(dict_tempo['L_points'][i_point])[1])))
+            i_y = L_search.index(min(L_search))
+            # save map
+            map.append([i_x, i_y])
+            # rebuild maps
+            if dict_tempo['L_c'][i_point] > 0.5:
+                M_solid[-1-i_y, i_x] = 1
+        # save map
+        dict_tempo['map'] = map
+
+    # the map is know
+    else:
+        # iterate on the points
+        for i_point in range(len(dict_tempo['L_points'])):
+            # read the map
+            i_x = dict_tempo['map'][i_point][0]
+            i_y = dict_tempo['map'][i_point][1]
+            # rebuild maps
+            if dict_tempo['L_c'][i_point] > 0.5:
+                M_solid[-1-i_y, i_x] = 1
+    
+    # extract maps (exclude void on the sides)
+    # find i_x_min
+    #i_x_min = 0
+    #while np.max(M_solid[:, i_x_min]) == 0:
+    #    i_x_min = i_x_min + 1
+    i_x_min = int(0.25*M_solid.shape[0])
+    # find i_x_max
+    #i_x_max = M_solid.shape[1]-1
+    #while np.max(M_solid[:, i_x_max]) == 0:
+    #    i_x_max = i_x_max - 1
+    i_x_max = int(0.75*M_solid.shape[0])
+    # find i_y_min
+    #i_y_min = 0
+    #while np.max(M_solid[i_y_min, :]) == 0:
+    #    i_y_min = i_y_min + 1
+    i_y_min = int(0.25*M_solid.shape[1])
+    # find i_y_max
+    #i_y_max = M_solid.shape[0]-1
+    #while np.max(M_solid[i_y_max, :]) == 0:
+    #    i_y_max = i_y_max - 1
+    i_y_max = int(0.75*M_solid.shape[1])
+
+    # save
+    dict_tempo['zoneInterest'] = [i_x_min, i_x_max, i_y_min, i_y_max]
+</code></pre>
+</details>
+</dd>
+
+<dt id="pp.PlotMap"><code class="name flex">
+<span>def <span class="ident">PlotMap</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>plot the current configuration.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def PlotMap(dict_user, dict_tempo):
+    '''
+    plot the current configuration.
+    '''
+    # Plot maps
+    fig, (ax1, ax2) = plt.subplots(1,2,figsize=(16,9))
+    # parameters
+    ax1.imshow(dict_tempo['M_solid_ic'], interpolation = 'nearest', extent=(dict_user['L_x'][0],dict_user['L_x'][-1],dict_user['L_y'][0],dict_user['L_x'][-1]))
+    ax1.set_title('ic', fontsize=30)
+    ax2.imshow(dict_tempo['M_solid'], interpolation = 'nearest', extent=(dict_user['L_x'][0],dict_user['L_x'][-1],dict_user['L_y'][0],dict_user['L_x'][-1]))
+    ax2.set_title('final', fontsize=30)
+    fig.tight_layout()
+    fig.savefig('output/map_c.png')
+    plt.close(fig)
+
+    # Plot delta
+    fig, ax1 = plt.subplots(1,1,figsize=(16,9))
+    # parameters
+    cax = ax1.imshow(dict_tempo['M_solid']-dict_tempo['M_solid_ic'], interpolation = 'nearest', extent=(dict_user['L_x'][0],dict_user['L_x'][-1],dict_user['L_y'][0],dict_user['L_x'][-1]), cmap='bwr')
+    cbar = fig.colorbar(cax, ticks=[1, -1])
+    cbar.ax.set_yticklabels(['precipitation', 'dissolution'])
+    cbar.ax.tick_params(labelsize=20)
+    ax1.set_title('final-ic', fontsize=30)
+    fig.tight_layout()
+    fig.savefig('output/map_deltac.png')
+    plt.close(fig)
+</code></pre>
+</details>
+</dd>
+
+<dt id="pp.ComputeMorphometers"><code class="name flex">
+<span>def <span class="ident">ComputeMorphometers</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Compute the morphometers.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def ComputeMorphometers(dict_tempo):
+    '''
+    Compute the morphometers.
+
+    see Guével, 2022
+    '''
+    # M0 porosity
+    M0 = porespy.metrics.porosity(dict_tempo['M_void_extracted'])
+    
+    # M1 perimeter
+    M1 = skimage.measure.perimeter(dict_tempo['M_solid'])
+    
+    # M2 grain size
+    # this morphometer requires more lines
+    # an algorithm is called to determine the size of the grains
+    sizes = porespy.filters.local_thickness(dict_tempo['M_solid'])
+    # then a size distribution is called  
+    data = porespy.metrics.pore_size_distribution(sizes, log=False, bins=20)
+    # finally the mean (weighted by the probability) is computed
+    M2 = 0
+    counter = 0
+    for i_bin in range(len(data.bin_centers)):
+        M2 = M2 + data.pdf[i_bin]*data.bin_centers[i_bin]
+        counter = counter + data.pdf[i_bin]
+    M2 = M2 / counter
+    
+    # M3 Euler
+    M3 = skimage.measure.euler_number(dict_tempo['M_solid'])
+
+    # save
+    dict_tempo['L_M0'].append(M0)
+    dict_tempo['L_M1'].append(M1)
+    dict_tempo['L_M2'].append(M2)
+    dict_tempo['L_M3'].append(M3)
+</code></pre>
+</details>
+</dd>
+
+<dt id="pp.PlotMorphometers"><code class="name flex">
+<span>def <span class="ident">PlotMorphometers</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Plot the morphometers.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def PlotMorphometers(dict_tempo):
+    '''
+    Plot the morphometers.
+
+    see Guevel, 2022.
+    '''
+    # open figure
+    fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2,2,figsize=(2*16,2*9))
+    # M0
+    ax1.plot(dict_tempo['L_time_extracted'], dict_tempo['L_M0'], linewidth=6)
+    ax1.set_xlabel('time (-)', fontsize=25)
+    ax1.set_ylabel('M0 porosity (-)', fontsize=25)
+    ax1.tick_params(axis='both', labelsize=20, width=3, length=3)
+    # M1
+    ax2.plot(dict_tempo['L_time_extracted'], dict_tempo['L_M1'], linewidth=6)
+    ax2.set_xlabel('time (-)', fontsize=25)
+    ax2.set_ylabel('M1 perimeter (-)', fontsize=25)
+    ax2.tick_params(axis='both', labelsize=20, width=3, length=3)
+    # M2
+    ax3.plot(dict_tempo['L_time_extracted'], dict_tempo['L_M2'], linewidth=6)
+    ax3.set_xlabel('time (-)', fontsize=25)
+    ax3.set_ylabel('M2 grain size (-)', fontsize=25)
+    ax3.tick_params(axis='both', labelsize=20, width=3, length=3)
+    # M3
+    ax4.plot(dict_tempo['L_time_extracted'], dict_tempo['L_M3'], linewidth=6)
+    ax4.set_xlabel('time (-)', fontsize=25)
+    ax4.set_ylabel('M3 euler (-)', fontsize=25)
+    ax4.tick_params(axis='both', labelsize=20, width=3, length=3)
+    # close
+    fig.tight_layout()
+    fig.savefig('output/evol_time_morphometers.png')
+    plt.close(fig)
+</code></pre>
+</details>
+</dd>
+
+</dl>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="pp.pp" href="#pp.pp">pp</a></code></li>
+<li><code><a title="pp.ReadCSV" href="#pp.ReadCSV">ReadCSV</a></code></li>
+<li><code><a title="pp.ReadPVTU" href="#pp.ReadPVTU">ReadPVTU</a></code></li>
+<li><code><a title="pp.ComputeNeck" href="#pp.ComputeNeck">ComputeNeck</a></code></li>
+<li><code><a title="pp.PlotNeck" href="#pp.PlotNeck">PlotNeck</a></code></li>
+<li><code><a title="pp.ComputeFreeSurface" href="#pp.ComputeFreeSurface">ComputeFreeSurface</a></code></li>
+<li><code><a title="pp.PlotFreeSurface" href="#pp.PlotFreeSurface">PlotFreeSurface</a></code></li>
+<li><code><a title="pp.RebuildMap" href="#pp.RebuildMap">RebuildMap</a></code></li>
+<li><code><a title="pp.RebuildMap_ZoneInterest" href="#pp.RebuildMap_ZoneInterest">RebuildMap_ZoneInterest</a></code></li>
+<li><code><a title="pp.PlotMap" href="#pp.PlotMap">PlotMap</a></code></li>
+<li><code><a title="pp.ComputeMorphometers" href="#pp.ComputeMorphometers">ComputeMorphometers</a></code></li>
+<li><code><a title="pp.PlotMorphometers" href="#pp.PlotMorphometers">PlotMorphometers</a></code></li>
+</ul>
+</li>
+</ul>
+<br>
+<a href="https://alexsacmorane.github.io/pf/sintering">Sintering</a><br>
+<a href="https://alexsacmorane.github.io/pf">PF</a><br>
+<a href="https://alexsacmorane.github.io">Home</a>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>
