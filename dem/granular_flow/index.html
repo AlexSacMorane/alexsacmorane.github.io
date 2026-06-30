@@ -1131,6 +1131,837 @@ def report_end_step(reportname, stepname):
 </code></pre>
 </details>
 </dd>
+<dt id="main.count_grains"><code class="name flex">
+<span>def <span class="ident">count_grains</span></span>()
+</code></dt>
+<dd>
+<div class="desc"><p>Count the number of grains in the simulation.</p>
+</div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def count_grains():
+    '''
+    Count the number of grains in the simulation.
+    '''
+    counter_grains = 0
+    for b in O.bodies :
+        if isinstance(b.shape, Sphere):
+            counter_grains = counter_grains + 1
+    return counter_grains
+</code></pre>
+</details>
+</dd>
+<dt id="main.grain_in_domain"><code class="name flex">
+<span>def <span class="ident">grain_in_domain</span></span>()
+</code></dt>
+<dd>
+<div class="desc"><p>Delete grains if they are lower than the plate or upper than the box.</p>
+</div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def grain_in_domain():
+    '''
+    Delete grains if they are lower than the plate or upper than the box.
+    '''
+    #detect grain outside the box
+    L_id_to_delete = []
+    for b in O.bodies :
+        if isinstance(b.shape, Sphere):
+            # limit x, y, z
+            if  b.state.pos[0] < -100e-3 or 0 < b.state.pos[0] or\
+                b.state.pos[1] < -50e-3 or 50e-3 < b.state.pos[1] or\
+                b.state.pos[2] < 10e-3 or 400e-3 < b.state.pos[2] :    
+                L_id_to_delete.append(b.id)
+    if L_id_to_delete != []:
+        #delete grain detected
+        for id in L_id_to_delete:
+            O.bodies.erase(id)
+        #print and report
+        simulation_report = open(simulation_report_name, 'a')
+        simulation_report.write(str(len(L_id_to_delete))+" grains erased (outside of the box)\n")
+        simulation_report.close()
+        print("\n"+str(len(L_id_to_delete))+" grains erased (outside of the box) -> "+\
+              str(count_grains())+" grains in the domain\n")
+</code></pre>
+</details>
+</dd>
+<dt id="main.checkUnbalanced_ir_ic"><code class="name flex">
+<span>def <span class="ident">checkUnbalanced_ir_ic</span></span>()
+</code></dt>
+<dd>
+<div class="desc"><p>Increase particle radius until a steady-state is found.</p>
+</div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def checkUnbalanced_ir_ic():
+    '''
+    Increase particle radius until a steady-state is found.
+    '''
+    # the rest will be run only if unbalanced is < .1 (stabilized packing)
+    # Compute the ratio of mean summary force on bodies and mean force magnitude on interactions.
+    if unbalancedForce() > .1:
+        return
+    # increase the radius of particles
+    if int(O.tags['Step ic']) < n_steps_ic :
+        print('IC step '+O.tags['Step ic']+'/'+str(n_steps_ic)+' done')
+        O.tags['Step ic'] = str(int(O.tags['Step ic'])+1)
+        i_L_r = 0
+        for b in O.bodies :
+            if isinstance(b.shape, Sphere):
+                growParticle(b.id, int(O.tags['Step ic'])/n_steps_ic*L_r[i_L_r]/b.shape.radius)
+                i_L_r = i_L_r + 1
+        # update the dt as the radii change
+        #O.dt = factor_dt_crit_ic * PWaveTimeStep()
+        return
+    print('IC step '+O.tags['Step ic']+'/'+str(n_steps_ic)+' done\n')
+
+    # report
+    report_end_step(simulation_report_name, 'IC Generated')
+    print('application of the gravity, can be long...\n')
+    
+    # print configuration
+    vtkExporter.exportSpheres(what={mat_id:'b.mat.id'})
+
+    # next time, do not call this function anymore, but the next one instead
+    global iter_0
+    iter_0 = O.iter
+    checker.command = 'checkUnbalanced_gravity_ic()'
+    checker.iterPeriod = 500
+
+    # prepare next phase
+    global L_cog_z, L_coordination, L_unbalanced, L_Ec
+    L_cog_z = []
+    L_coordination = []
+    L_unbalanced = []
+    L_Ec = []
+    # apply gravity
+    Newton.gravity = (0, 0, -9.81)
+    # write report
+    simulation_report = open(simulation_report_name, 'a')
+    simulation_report.write('Application of the gravity\n')
+    simulation_report.close()
+</code></pre>
+</details>
+</dd>
+<dt id="main.compute_center_of_gravity"><code class="name flex">
+<span>def <span class="ident">compute_center_of_gravity</span></span>()
+</code></dt>
+<dd>
+<div class="desc"><p>Compute the center of gravity of all the grains.</p>
+</div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def compute_center_of_gravity():
+    '''
+    Compute the center of gravity of all the grains.
+    '''
+    Center = np.array([0,0,0])
+    Mass = 0
+    for b in O.bodies:
+        if isinstance(b.shape, Sphere):
+            Center = Center + b.state.mass*np.array(b.state.pos)
+            Mass = Mass + b.state.mass
+    return Center/Mass
+</code></pre>
+</details>
+</dd>
+<dt id="main.plot_trackers_ic"><code class="name flex">
+<span>def <span class="ident">plot_trackers_ic</span></span>()
+</code></dt>
+<dd>
+<div class="desc"><p>Plot the evolution of the various trackers.</p>
+</div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def plot_trackers_ic(L_cog_z, L_coordination, L_unbalanced, L_Ec, n_window):
+    '''
+    Plot the evolution of the various trackers.
+    '''
+    fig, ((ax1,ax2), (ax3, ax4)) = plt.subplots(2, 2, figsize=(16,9))
+    
+    # coordinate z of the gravity center
+    ax1.plot(L_cog_z, color='k')
+    if len(L_cog_z)>=n_window:
+        ax1.plot(list(range(len(L_cog_z)-n_window, len(L_cog_z))), L_cog_z[-n_window:], color='r')
+        ax1.text((len(L_cog_z)-1)*0.5, (np.max(L_cog_z)+np.min(L_cog_z))/2,\
+            'max-min='+str(max(L_cog_z[-n_window:])-min(L_cog_z[-n_window:])), color='r')
+    ax1.set_ylabel('Coordinate z of the gravity center')
+    
+    # coordination number
+    ax2.plot(L_coordination, color='k')
+    if len(L_coordination)>=n_window:
+        ax2.plot(list(range(len(L_coordination)-n_window, len(L_coordination))), L_coordination[-n_window:], color='r')
+        ax2.text((len(L_coordination)-1)*0.5, (np.max(L_coordination)+np.min(L_coordination))/2,\
+            'max-min='+str(max(L_coordination[-n_window:])-min(L_coordination[-n_window:])), color='r')
+        ax2.text((len(L_coordination)-1)*0.5, (np.max(L_coordination)+3*np.min(L_coordination))/4,\
+            'mean='+str(np.mean(L_coordination[-n_window:])), color='r')
+    ax2.set_ylabel('Coordination number')
+
+    # unbalanced force ratio
+    ax3.plot(L_unbalanced, color='k')
+    if len(L_unbalanced)>=n_window:
+        ax3.plot(list(range(len(L_unbalanced)-n_window, len(L_unbalanced))), L_unbalanced[-n_window:], color='r')
+        ax3.text((len(L_unbalanced)-1)*0.5, (np.max(L_unbalanced)+np.min(L_unbalanced))/2,\
+            'max-min='+str(max(L_unbalanced[-n_window:])-min(L_unbalanced[-n_window:])), color='r')
+        ax3.text((len(L_unbalanced)-1)*0.5, (np.max(L_unbalanced)+3*np.min(L_unbalanced))/4,\
+            'mean='+str(np.mean(L_unbalanced[-n_window:])), color='r')
+    ax3.set_ylabel('Unbalanced ratio')
+
+    # unbalanced force ratio
+    ax4.plot(L_Ec, color='k')
+    if len(L_Ec)>=n_window:
+        ax4.plot(list(range(len(L_Ec)-n_window, len(L_Ec))), L_Ec[-n_window:], color='r')
+        ax4.text((len(L_Ec)-1)*0.5, (np.max(L_Ec)+np.min(L_Ec))/2,\
+            'max-min='+str(max(L_Ec[-n_window:])-min(L_Ec[-n_window:])), color='r')
+        ax4.text((len(L_Ec)-1)*0.5, (np.max(L_Ec)+3*np.min(L_Ec))/4,\
+            'mean='+str(np.mean(L_Ec[-n_window:])), color='r')
+    ax4.set_ylabel('Kinetic energy')
+    
+    # close
+    fig.tight_layout()
+    fig.savefig('plot/'+O.tags['id']+'_ic_trackers.png')
+    plt.close()
+</code></pre>
+</details>
+</dd>
+<dt id="main.checkUnbalanced_gravity_ic"><code class="name flex">
+<span>def <span class="ident">checkUnbalanced_gravity_ic</span></span>()
+</code></dt>
+<dd>
+<div class="desc"><p>Apply the gravity to settle the particles.</p>
+</div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def checkUnbalanced_gravity_ic():
+    '''
+    Apply the gravity to settle the particles.
+    '''
+    global iter_0
+    global L_cog_z, L_coordination, L_unbalanced, L_Ec
+    # define the criteria for steady-state
+    n_window = 20
+    delta_cog_z = 0.00005
+
+    # read the center of gravity of the granular sample
+    cog = compute_center_of_gravity()
+    # save trackers 
+    L_cog_z.append(cog[2]) # coordinate z of the center of gravity
+    L_coordination.append(avgNumInteractions()) # coordination number
+    L_unbalanced.append(unbalancedForce()) # unbalanced force ratio
+    L_Ec.append(kineticEnergy()) # mean kinetic energy  
+    # plot trackers
+    plot_trackers_ic(L_cog_z, L_coordination, L_unbalanced, L_Ec, n_window)
+
+    # repeat at least a certain amount of times
+    if O.iter-iter_0 < checker.iterPeriod*n_window:
+        return
+    # check that the center of gravity has not moved
+    if max(L_cog_z[-n_window:])-min(L_cog_z[-n_window:]) > delta_cog_z:
+        return 
+
+    # report
+    report_end_step(simulation_report_name, 'Gravity Applied')
+    # print configuration
+    vtkExporter.exportSpheres(what={mat_id:'b.mat.id'})
+
+    # next time, do not call this function anymore, but the next one instead
+    if count_grains() < n_grains:
+        # Need to reinsert grains
+        reinsert_grains_ic(n_grains-count_grains())
+        # refind an equilibrium
+        L_cog_z = []
+        L_coordination = []
+        L_unbalanced = []
+        L_Ec = []
+        iter_0 = O.iter
+        checker.iterPeriod = 500
+    else :
+        # generate the clump
+        generateClump()
+        # print configuration
+        vtkExporter.exportSpheres(what={mat_id:'b.mat.id'})
+        # refind an equilibrium
+        L_cog_z = []
+        L_coordination = []
+        L_unbalanced = []
+        L_Ec = []
+        iter_0 = O.iter
+        checker.iterPeriod = 500
+        checker.command = 'checkUnbalanced_clump_ic()'
+</code></pre>
+</details>
+</dd>
+<dt id="main.reinsert_grains_ic"><code class="name flex">
+<span>def <span class="ident">reinsert_grains_ic</span></span>()
+</code></dt>
+<dd>
+<div class="desc"><p>Reinsert grains that have been deleted.</p>
+</div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def reinsert_grains_ic(n_grains_reinsert):
+    '''
+    Reinsert grains that have been deleted.
+    '''
+    # write report
+    print('Reinsert grains')
+    simulation_report = open(simulation_report_name, 'a')
+    simulation_report.write('Reinsert grains\n')
+    simulation_report.close()
+
+    # definition of the domain (based on the presence of grains)
+    min_center_z = 0
+    for b in O.bodies:
+        if isinstance(b.shape, Sphere):
+            # compare the z coordinate with the domain
+            if b.state.pos[2] + b.shape.radius > min_center_z:
+                min_center_z = b.state.pos[2] + b.shape.radius
+    
+    # determination of the seed
+    n_seed_dim = int(100e-3/(((math.sqrt(6)+4)/4*3.101e-3)*2*2))
+    dim_seed = (100e-3)/n_seed_dim
+
+    # generation of the grains
+    for i_seed in range(n_grains_reinsert):
+        # determine the z of the seed and adapt i_seed
+        z_seed_i = i_seed//(n_seed_dim*n_seed_dim)
+        i_seed = i_seed-z_seed_i*(n_seed_dim*n_seed_dim)
+        # determine the x and y of the seed
+        x_seed_i = i_seed%n_seed_dim
+        y_seed_i = i_seed//n_seed_dim
+
+        # definition of the radius
+        radius = (math.sqrt(6)+4)/4 *3.101e-3
+        # definition of the position
+        center_x = random.uniform(-100e-3 +x_seed_i*dim_seed +radius, -100e-3 +(x_seed_i+1)*dim_seed -radius)
+        center_y = random.uniform(-50e-3 +y_seed_i*dim_seed +radius, -50e-3 +(y_seed_i+1)*dim_seed -radius)
+        center_z = min_center_z +z_seed_i*2*radius +radius
+        
+        # determination of the material
+        mat_id = random.randint(1, n_mat_part)
+        # generation of the particle
+        O.bodies.append(sphere(center=[center_x, center_y, center_z], radius=radius, material='mat'+str(mat_id)))
+
+    # recompute the distribution of the material
+    L_p_mat = np.zeros(n_mat_part)
+    for b in O.bodies:
+        if isinstance(b.shape, Sphere):
+            L_p_mat[b.mat.id-1] = L_p_mat[b.mat.id-1] + 1/n_grains 
+    # write in the report
+    report_stat_material(simulation_report_name, L_p_mat)
+
+    # report
+    simulation_report = open(simulation_report_name, 'a')
+    simulation_report.write('Application of the gravity\n')
+    simulation_report.close()
+</code></pre>
+</details>
+</dd>
+<dt id="main.generateClump"><code class="name flex">
+<span>def <span class="ident">generateClump</span></span>()
+</code></dt>
+<dd>
+<div class="desc"><p>Generate the clumps from the preliminary grains.</p>
+</div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def generateClump():
+    '''
+    Generate the clumps from the preliminary grains.
+    '''
+    # iteration on the grain
+    n_grains0 = count_grains()
+    counter = 0
+    for b in list(O.bodies)[:n_grains0+8]:
+        if isinstance(b.shape, Sphere):
+            counter = counter + 1
+            # read material
+            label_mat = b.mat.label
+            # definition of the radius
+            radius = 3.101e-3
+            # define the elementary spheres
+            center_1 = np.array([radius/2, math.sqrt(3)*radius/6, math.sqrt(6)*radius/3])
+            center_2 = np.array([       0,                     0,                     0])
+            center_3 = np.array([  radius,                     0,                     0])
+            center_4 = np.array([radius/2, math.sqrt(3)*radius/2,                     0])
+            # compute the center of the clum
+            center_clump = (center_1+center_2+center_3+center_4)/4
+            # recompute the coordinate of the elementary spheres relative to this center
+            center_1 = center_1 - center_clump
+            center_2 = center_2 - center_clump
+            center_3 = center_3 - center_clump
+            center_4 = center_4 - center_clump
+            # generate random rotations d'Euler
+            phi = random.random()*2*math.pi
+            psi = random.random()*2*math.pi
+            theta = random.random()*2*math.pi
+            # compute the rotation matrice
+            M_rot = np.array([[math.cos(psi)*math.cos(phi)-math.sin(psi)*math.cos(theta)*math.sin(phi), -math.cos(psi)*math.sin(phi)-math.sin(psi)*math.cos(theta)*math.cos(phi),  math.sin(psi)*math.sin(theta)],
+                              [math.sin(psi)*math.cos(phi)+math.cos(psi)*math.cos(theta)*math.sin(phi), -math.sin(psi)*math.sin(phi)+math.cos(psi)*math.cos(theta)*math.cos(phi), -math.cos(psi)*math.sin(theta)],
+                              [                                          math.sin(theta)*math.sin(phi),                                            math.sin(theta)*math.cos(phi),                math.cos(theta)]])
+            # rotate the spheres
+            center_1 = np.linalg.solve(M_rot, center_1)
+            center_2 = np.linalg.solve(M_rot, center_2)
+            center_3 = np.linalg.solve(M_rot, center_3)
+            center_4 = np.linalg.solve(M_rot, center_4)
+            # translate the spheres
+            center_1 = center_1 + np.array(b.state.pos)
+            center_2 = center_2 + np.array(b.state.pos)
+            center_3 = center_3 + np.array(b.state.pos)
+            center_4 = center_4 + np.array(b.state.pos)
+            # generate the clump
+            O.bodies.appendClumped([sphere(center=center_1, radius=radius, material=label_mat),
+                                    sphere(center=center_2, radius=radius, material=label_mat),
+                                    sphere(center=center_3, radius=radius, material=label_mat),
+                                    sphere(center=center_4, radius=radius, material=label_mat)])
+    
+    # erase the grains
+    for b in list(O.bodies)[:n_grains0+8]:
+        if isinstance(b.shape, Sphere):
+            O.bodies.erase(b.id)
+    # erase the existing interactions
+    O.interactions.clear()
+
+    # update the time step as the particles change
+    #O.dt = factor_dt_crit_ic * PWaveTimeStep()
+    #O.dt = 1e-5
+    O.dt = 5e-6
+
+    # report and user
+    simulation_report = open(simulation_report_name, 'a')
+    simulation_report.write('Generation of the clump\n\n')
+    simulation_report.write('Application of the gravity\n')
+    simulation_report.close()
+
+    print('Generation of the clump and application of the gravity, can be long...\n')
+</code></pre>
+</details>
+</dd>
+<dt id="main.checkUnbalanced_clump_ic"><code class="name flex">
+<span>def <span class="ident">checkUnbalanced_clump_ic</span></span>()
+</code></dt>
+<dd>
+<div class="desc"><p>Apply the gravity to settle the cumpled particles.</p>
+</div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def checkUnbalanced_clump_ic():
+    '''
+    Apply the gravity to settle the cumpled particles.
+    '''
+    global iter_0
+    global L_cog_z, L_coordination, L_unbalanced, L_Ec
+    # define the criteria for steady-state
+    n_window = 20
+    delta_cog_z = 0.00002
+
+    # read the center of gravity of the granular sample
+    cog = compute_center_of_gravity()
+    # save trackers 
+    L_cog_z.append(cog[2]) # coordinate z of the center of gravity
+    L_coordination.append(avgNumInteractions()) # coordination number
+    L_unbalanced.append(unbalancedForce()) # unbalanced force ratio
+    L_Ec.append(kineticEnergy()) # mean kinetic energy  
+    # plot trackers
+    plot_trackers_ic(L_cog_z, L_coordination, L_unbalanced, L_Ec, n_window)
+
+    # repeat at least a certain amount of times
+    if O.iter-iter_0 < checker.iterPeriod*n_window:
+        return
+    # check that the center of gravity has not moved
+    if max(L_cog_z[-n_window:])-min(L_cog_z[-n_window:]) > delta_cog_z:
+        return 
+
+    # report
+    report_end_step(simulation_report_name, 'Gravity Applied')
+    # print configuration
+    vtkExporter.exportSpheres(what={mat_id:'b.mat.id'})
+
+    # write data for input
+
+    # report and user
+    simulation_report = open(simulation_report_name, 'a')
+    simulation_report.write('The initial condition is reached, the sample is ready for the granular flow\n\n')
+    simulation_report.close()
+    print('The initial condition is reached, the sample is ready for the granular flow\n')
+
+    # export the data
+    exportData(True)
+
+    # prepare the next step
+    iter_0 = O.iter
+    checker.iterPeriod = 5000
+                        
+    checker.command = 'checkUnbalanced_granularFlow()'
+    # reduce the time step for the main simulation
+    #O.dt = factor_dt_crit * PWaveTimeStep()
+    # reduce strongly the damping
+    Newton.damping = 0.00
+    # cancel the grain_in_domain() verification 
+    O.engines = O.engines[1:]
+    # add the control of the trap
+    O.bodies[1].state.vel = (0, 0, 6.45e-2)
+</code></pre>
+</details>
+</dd>
+<dt id="main.checkUnbalanced_granularFlow"><code class="name flex">
+<span>def <span class="ident">checkUnbalanced_granularFlow</span></span>()
+</code></dt>
+<dd>
+<div class="desc"><p>Look for the steady-state and save data of the simulation.</p>
+</div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def checkUnbalanced_granularFlow():
+    '''
+    Look for the steady-state and save data of the simulation
+    '''
+    # save config
+    vtkExporter.exportSpheres(what={mat_id:'b.mat.id'})
+
+    # plot XY view
+    plot_XY_view()
+
+    # add data
+    addPlotData()
+
+    # look for the steady state
+    n_window = 5
+    # minimum size of the data
+    if len(plot.data['m_pos_x']) < n_window:
+        return
+    
+    # miminum displacement on x
+    if plot.data['m_pos_x'][-1] < -0.025:
+        return
+    
+    # small variation in the displacement on x
+    if max(plot.data['m_pos_x'][-n_window:])-min(plot.data['m_pos_x'][-n_window:]) > 0.00002:
+        return
+    
+    # check ratio of the force
+    if unbalancedForce() > 1e-6:
+        return
+
+    # check the kinetic energy
+    if kineticEnergy() > 0.0003:
+        return
+    
+    # prepare the next step
+    stopLoad()
+</code></pre>
+</details>
+</dd>
+<dt id="main.addPlotData"><code class="name flex">
+<span>def <span class="ident">addPlotData</span></span>()
+</code></dt>
+<dd>
+<div class="desc"><p>Save data in plot.</p>
+</div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def addPlotData():
+    """
+    Save data in plot.
+    """
+    # find the extrema and the mean position
+    mean_center = np.array([0, 0, 0])
+    Mass = 0
+    y_min = 0
+    y_max = 0
+    x_max = 0
+    for b in O.bodies:
+        if isinstance(b.shape, Sphere):
+            # compute the mean
+            mean_center = mean_center + b.state.mass*np.array(b.state.pos)
+            Mass = Mass + b.state.mass
+            # compute extrema
+            if x_max < b.state.pos[0]:
+                x_max = b.state.pos[0]
+            if y_max < b.state.pos[1]:
+                y_max = b.state.pos[1]
+            if b.state.pos[1] < y_min :
+                y_min = b.state.pos[1]
+    # compute the mean position
+    mean_center = mean_center/Mass
+    # add data
+    plot.addData(i=O.iter-iter_0, coordination=avgNumInteractions(), unbalanced=unbalancedForce(), Ec=kineticEnergy(),\
+                 m_pos_x=mean_center[0], m_pos_y=mean_center[1], m_pos_z=mean_center[2],\
+                 x_max=x_max, y_min=y_min, y_max=y_max,\
+                )
+    # plot the data
+    saveData()
+</code></pre>
+</details>
+</dd>
+<dt id="main.saveData"><code class="name flex">
+<span>def <span class="ident">saveData</span></span>()
+</code></dt>
+<dd>
+<div class="desc"><p>Save data in .txt file.</p>
+</div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def saveData():
+    """
+    Save data in .txt file.
+    """
+    # save data
+    plot.saveDataTxt('plot/data_'+O.tags['d.id']+'.txt')
+    # prepare plot
+    L_ite = []
+    L_cog_x = []
+    L_max_x = []
+    L_max_y = []
+    L_min_y = []
+    L_coordination = []
+    L_unbalanced = []
+    L_Ec = []
+
+    # read data
+    file = 'plot/data_'+O.tags['d.id']+'.txt'
+    data = np.genfromtxt(file, skip_header=1)
+    file_read = open(file, 'r')
+    lines = file_read.readlines()
+    file_read.close()
+    if len(lines) >= 3:
+        for i in range(len(data)):
+            L_Ec.append(data[i][0])
+            L_coordination.append(data[i][1])
+            L_ite.append(data[i][2])
+            L_cog_x.append(data[i][3])
+            L_unbalanced.append(data[i][6])
+            L_max_x.append(data[i][7])
+            L_max_y.append(data[i][8])
+            L_min_y.append(data[i][9])
+
+        # plot
+        n_window = 5
+        fig, ((ax1, ax2, ax3), (ax4, ax5, ax6)) = plt.subplots(2,3, figsize=(20,10),num=1)
+
+        # coordinate x of the gravity center
+        ax1.plot(L_cog_x, color='k')
+        if len(L_cog_x)>=n_window:
+            ax1.plot(list(range(len(L_cog_x)-n_window, len(L_cog_x))), L_cog_x[-n_window:], color='r')
+            ax1.text((len(L_cog_x)-1)*0.5, (np.max(L_cog_x)+np.min(L_cog_x))/2,\
+                'max-min='+str(max(L_cog_x[-n_window:])-min(L_cog_x[-n_window:])), color='r')
+        ax1.set_ylabel('Coordinate x of the gravity center')
+        
+        # coordinate x of the maximum
+        ax2.plot(L_max_x, color='k')
+        if len(L_max_x)>=n_window:
+            ax2.plot(list(range(len(L_max_x)-n_window, len(L_max_x))), L_max_x[-n_window:], color='r')
+            ax2.text((len(L_max_x)-1)*0.5, (np.max(L_max_x)+np.min(L_max_x))/2,\
+                'max-min='+str(max(L_max_x[-n_window:])-min(L_max_x[-n_window:])), color='r')
+        ax2.set_ylabel('Boundary x of the grains')
+        
+        # coordinates x of the extrema
+        ax3.plot(L_max_y, color='k')
+        ax3.plot(L_min_y, color='k')
+        if len(L_max_y)>=n_window:
+            ax3.plot(list(range(len(L_max_y)-n_window, len(L_max_y))), L_max_y[-n_window:], color='r')
+            ax3.text((len(L_max_y)-1)*0.5, (np.max(L_max_y)+np.min(L_max_y))/2,\
+                'max-min='+str(max(L_max_y[-n_window:])-min(L_max_y[-n_window:])), color='r')
+            ax3.plot(list(range(len(L_min_y)-n_window, len(L_min_y))), L_min_y[-n_window:], color='r')
+            ax3.text((len(L_min_y)-1)*0.5, (np.max(L_min_y)+np.min(L_min_y))/2,\
+                'max-min='+str(max(L_min_y[-n_window:])-min(L_min_y[-n_window:])), color='r')
+        ax3.set_ylabel('Boundaries y of the grains')  
+
+        # coordination number
+        ax4.plot(L_coordination, color='k')
+        if len(L_coordination)>=n_window:
+            ax4.plot(list(range(len(L_coordination)-n_window, len(L_coordination))), L_coordination[-n_window:], color='r')
+            ax4.text((len(L_coordination)-1)*0.5, (np.max(L_coordination)+np.min(L_coordination))/2,\
+                'max-min='+str(max(L_coordination[-n_window:])-min(L_coordination[-n_window:])), color='r')
+            ax4.text((len(L_coordination)-1)*0.5, (np.max(L_coordination)+3*np.min(L_coordination))/4,\
+                'mean='+str(np.mean(L_coordination[-n_window:])), color='r')
+        ax4.set_ylabel('Coordination number')
+
+        # unbalanced force ratio
+        ax5.plot(L_unbalanced, color='k')
+        if len(L_unbalanced)>=n_window:
+            ax5.plot(list(range(len(L_unbalanced)-n_window, len(L_unbalanced))), L_unbalanced[-n_window:], color='r')
+            ax5.text((len(L_unbalanced)-1)*0.5, (np.max(L_unbalanced)+np.min(L_unbalanced))/2,\
+                'max-min='+str(max(L_unbalanced[-n_window:])-min(L_unbalanced[-n_window:])), color='r')
+            ax5.text((len(L_unbalanced)-1)*0.5, (np.max(L_unbalanced)+3*np.min(L_unbalanced))/4,\
+                'mean='+str(np.mean(L_unbalanced[-n_window:])), color='r')
+        ax5.set_ylabel('Unbalanced ratio')
+
+        # unbalanced force ratio
+        ax6.plot(L_Ec, color='k')
+        if len(L_Ec)>=n_window:
+            ax6.plot(list(range(len(L_Ec)-n_window, len(L_Ec))), L_Ec[-n_window:], color='r')
+            ax6.text((len(L_Ec)-1)*0.5, (np.max(L_Ec)+np.min(L_Ec))/2,\
+                'max-min='+str(max(L_Ec[-n_window:])-min(L_Ec[-n_window:])), color='r')
+            ax6.text((len(L_Ec)-1)*0.5, (np.max(L_Ec)+3*np.min(L_Ec))/4,\
+                'mean='+str(np.mean(L_Ec[-n_window:])), color='r')
+        ax6.set_ylabel('Kinetic energy')
+
+        fig.tight_layout()
+        fig.savefig('plot/'+O.tags['d.id']+'_trackers.png')
+        plt.close()
+</code></pre>
+</details>
+</dd>
+<dt id="main.plot_XY_view"><code class="name flex">
+<span>def <span class="ident">plot_XY_view</span></span>()
+</code></dt>
+<dd>
+<div class="desc"><p>Plot the XY view of the clump centers.</p>
+</div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def plot_XY_view():
+    '''
+    Plot the XY view of the clump centers.
+    '''
+    # prepare the plot
+    L_x_center = []
+    L_y_center = []
+    # iterate on the grains
+    for b in O.bodies:
+        if isinstance(b.shape, Clump):
+            L_x_center.append(b.state.pos[0])
+            L_y_center.append(b.state.pos[1])
+    
+    # plot
+    fig, (ax1) = plt.subplots(1,1, figsize=(16,9),num=1)
+    ax1.scatter(L_x_center, L_y_center, color='k')
+    ax1.plot([0, -100e-3, -100e-3, 0, 0], [50e-3, 50e-3, -50e-3, -50e-3, 50e-3], color='gray')
+    ax1.set_xlabel('Coordinate x')
+    ax1.set_ylabel('Coordinate y')
+    ax1.set_aspect('equal')
+    fig.savefig('plot/'+O.tags['d.id']+'_XY_view.png')
+    plt.close()
+</code></pre>
+</details>
+</dd>
+<dt id="main.stopLoad"><code class="name flex">
+<span>def <span class="ident">stopLoad</span></span>()
+</code></dt>
+<dd>
+<div class="desc"><p>Close simulation.</p>
+</div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def stopLoad():
+    """
+    Close simulation.
+    """
+    # write output for submission
+    exportData(False)
+
+    # close yade
+    O.pause()
+    # report
+    report_end_step(simulation_report_name, 'Granular flow')
+    # characterize the simulation
+    tac = time.perf_counter()
+    hours = (tac-tic_0)//(60*60)
+    minutes = (tac-tic_0 -hours*60*60)//(60)
+    seconds = int(tac-tic_0 -hours*60*60 -minutes*60)
+    # report
+    simulation_report = open(simulation_report_name, 'a')
+    simulation_report.write("Simulation time : "+str(hours)+" hours "+str(minutes)+" minutes "+str(seconds)+" seconds\n\n")
+    simulation_report.close()
+    print("\nSimulation time : "+str(hours)+" hours "+str(minutes)+" minutes "+str(seconds)+" seconds\n")
+
+    # save simulation
+    os.mkdir('data/'+O.tags['d.id'])
+    shutil.copytree('plot','data/'+O.tags['d.id']+'/plot')
+    shutil.copytree('vtk','data/'+O.tags['d.id']+'/vtk')
+    shutil.copytree('report', 'data/'+O.tags['d.id']+'/report')
+    shutil.copy('TC105_2RRA_ASM.py','data/'+O.tags['d.id']+'/TC105_2RRA_ASM.py')
+</code></pre>
+</details>
+</dd>
+<dt id="main.exportData"><code class="name flex">
+<span>def <span class="ident">exportData</span></span>()
+</code></dt>
+<dd>
+<div class="desc"><p>Export the data required (idi, xi, yi, zi) for the 14.140 grains.</p>
+</div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def exportData(flag_start):
+    '''
+    Export the data required (idi, xi, yi, zi) for the 14.140 grains.
+    carriage return at end of each line
+    separate coordinate value with a comma
+    coordinate value in single or double precision floating point
+    position in millimeters
+    '''
+    # the name of the file depends on the start or end state
+    if flag_start:
+        filename = 'report/start'+O.tags['d.id']+'.dat'
+    else :
+        filename = 'report/end'+O.tags['d.id']+'.dat'
+    # open file
+    file = open(filename, 'w')
+    
+    # iterate on the grains
+    id_g = 0
+    for b in O.bodies:
+        if isinstance(b.shape, Sphere):
+            id_g = id_g + 1
+            # prepare the line
+            line = str(id_g)+', '+\
+                   str(b.state.pos[0]*1e3)+', '+\
+                   str(b.state.pos[1]*1e3)+', '+\
+                   str(b.state.pos[2]*1e3)+'\r'
+            # write
+            file.write(line)
+
+    # close the file
+    file.close()
+</code></pre>
+</details>
+</dd>
 </dl>
 </section>
 <section></section>
@@ -1148,6 +1979,21 @@ def report_end_step(reportname, stepname):
 <li><code><a title="main.report_material" href="#main.report_material">report_material</a></code></li>
 <li><code><a title="main.report_stat_material" href="#main.report_stat_material">report_stat_material</a></code></li>
 <li><code><a title="main.report_end_step" href="#main.report_end_step">report_end_step</a></code></li>
+<li><code><a title="main.count_grains" href="#main.count_grains">count_grains</a></code></li>
+<li><code><a title="main.grain_in_domain" href="#main.grain_in_domain">grain_in_domain</a></code></li>
+<li><code><a title="main.checkUnbalanced_ir_ic" href="#main.checkUnbalanced_ir_ic">checkUnbalanced_ir_ic</a></code></li>
+<li><code><a title="main.compute_center_of_gravity" href="#main.compute_center_of_gravity">compute_center_of_gravity</a></code></li>
+<li><code><a title="main.plot_trackers_ic" href="#main.plot_trackers_ic">plot_trackers_ic</a></code></li>
+<li><code><a title="main.checkUnbalanced_gravity_ic" href="#main.checkUnbalanced_gravity_ic">checkUnbalanced_gravity_ic</a></code></li>
+<li><code><a title="main.reinsert_grains_ic" href="#main.reinsert_grains_ic">reinsert_grains_ic</a></code></li>
+<li><code><a title="main.generateClump" href="#main.generateClump">generateClump</a></code></li>
+<li><code><a title="main.checkUnbalanced_clump_ic" href="#main.checkUnbalanced_clump_ic">checkUnbalanced_clump_ic</a></code></li>
+<li><code><a title="main.checkUnbalanced_granularFlow" href="#main.checkUnbalanced_granularFlow">checkUnbalanced_granularFlow</a></code></li>
+<li><code><a title="main.addPlotData" href="#main.addPlotData">addPlotData</a></code></li>
+<li><code><a title="main.saveData" href="#main.saveData">saveData</a></code></li>
+<li><code><a title="main.plot_XY_view" href="#main.plot_XY_view">plot_XY_view</a></code></li>
+<li><code><a title="main.stopLoad" href="#main.stopLoad">stopLoad</a></code></li>
+<li><code><a title="main.exportData" href="#main.exportData">exportData</a></code></li>
 </ul>
 </li>
 </ul>
