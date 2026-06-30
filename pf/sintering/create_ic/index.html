@@ -1,0 +1,1051 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>Sintering API documentation</title>
+<meta name="description" content="@author: Alexandre Sac--Morane
+alexandre.sac-morane@enpc.fr …" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>CreateIC</code></h1>
+</header>
+<section id="section-intro">
+<p>@author: Alexandre Sac&ndash;Morane
+alexandre.sac-morane@enpc.fr</p>
+<p>This is the file to prepare the initial conditions.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+#-------------------------------------------------------------------------------
+# Librairies
+#-------------------------------------------------------------------------------
+
+import numpy as np
+import matplotlib.pyplot as plt
+import random, skfmm, math, scipy, pickle, os
+
+#-------------------------------------------------------------------------------
+# Functions
+#-------------------------------------------------------------------------------
+
+def generate_pos_dem(dict_user):
+    '''
+    Use the DEM to generate a microstructure.
+    '''
+    print('call dem to generate a granular configuration')
+
+    # write data 
+    dict_ic = {'n_grain': dict_user['n_grains']}
+    with open('data/dict_ic', 'wb') as handle:
+        pickle.dump(dict_ic, handle, protocol=pickle.HIGHEST_PROTOCOL)
+
+    # call DEM code
+    os.system('yade dem_ic.py')
+
+    # load data 
+    with open('data/dict_ic', 'rb') as handle:
+        dict_ic = pickle.load(handle)
+    L_pos_dem = dict_ic['L_pos']
+    L_radius_dem = dict_ic['L_radius']
+
+    # increase steeply the zone of interest
+    d_zone = 0.5
+    L_pos_grains, L_radius_grains = extract_grain_zone(L_pos_dem, L_radius_dem, d_zone)
+    while len(L_pos_grains) < dict_user['n_grains'] and d_zone < 1:
+        d_zone = d_zone + 0.05
+        L_pos_grains, L_radius_grains = extract_grain_zone(L_pos_dem, L_radius_dem, d_zone)
+
+    # print
+    print(len(L_pos_grains), 'grains generated')
+
+    # extrapolation
+    factor = (dict_user['x_max']-dict_user['x_min'] - 2*dict_user['n_margins']*dict_user['d_mesh'])/d_zone
+    for i_grain in range(len(L_pos_grains)):
+        L_pos_grains[i_grain][0] = (L_pos_grains[i_grain][0]-0.5)*factor + (dict_user['x_max']+dict_user['x_min'])/2
+        L_pos_grains[i_grain][1] = (L_pos_grains[i_grain][1]-0.5)*factor + (dict_user['y_max']+dict_user['y_min'])/2
+        L_radius_grains[i_grain] = L_radius_grains[i_grain]*factor
+
+    return L_pos_grains, L_radius_grains
+
+#-------------------------------------------------------------------------------
+
+def extract_grain_zone(L_pos, L_radius, d_zone):
+    '''
+    Extract grains in the zone of interest.
+
+    Grains should be entirely included.
+    '''
+    L_pos_extracted = []
+    L_radius_extracted = []
+    # iterate on the grains
+    for i_grain in range(len(L_pos)):
+        # compute grain box
+        x_min = L_pos[i_grain][0]-L_radius[i_grain]
+        x_max = L_pos[i_grain][0]+L_radius[i_grain]
+        y_min = L_pos[i_grain][1]-L_radius[i_grain]
+        y_max = L_pos[i_grain][1]+L_radius[i_grain]
+        # check that the grain in included
+        if (0.5-d_zone/2<x_min) and (x_max<0.5+d_zone/2) and \
+           (0.5-d_zone/2<y_min) and (y_max<0.5+d_zone/2) :
+            L_pos_extracted.append(L_pos[i_grain])
+            L_radius_extracted.append(L_radius[i_grain])
+
+    return L_pos_extracted, L_radius_extracted
+
+#-------------------------------------------------------------------------------
+
+def generate_pos_own(dict_user):
+    '''
+    Use an own method to generate a microstructure.
+
+    This method is DEM inspired.
+    '''
+    # Insert grains
+    L_pos_grains = []
+    L_radius_grains = []
+    i_grain = 0
+    # check conditions
+    while i_grain < dict_user['n_grains'] :
+        # Random radius of the grain
+        R_try = max(dict_user['mean_R']*(1+dict_user['var_R']*(random.random()-0.5)*2), dict_user['d_mesh']*5)
+        # Random position of the grain center
+        x_try = random.uniform(dict_user['x_min']+dict_user['n_margins']*dict_user['d_mesh']+R_try, dict_user['x_max']-dict_user['n_margins']*dict_user['d_mesh']-R_try)
+        y_try = random.uniform(dict_user['y_min']+dict_user['n_margins']*dict_user['d_mesh']+R_try, dict_user['y_max']-dict_user['n_margins']*dict_user['d_mesh']-R_try)
+        # Save grain
+        L_pos_grains.append(np.array([x_try, y_try]))
+        L_radius_grains.append(R_try)
+        # prepare next grains
+        i_grain = i_grain + 1
+
+    # compute the configuration
+    for i_steps in range(1, dict_user['n_steps']+1):
+        print('Increase radius step',i_steps,'/',dict_user['n_steps'])
+
+        # compute tempo radius at this step
+        L_radius_grains_step = []
+        for radius in L_radius_grains:
+            L_radius_grains_step.append(radius*i_steps/dict_user['n_steps'])
+
+        # check if there is no overlap
+        overlap, L_overlap = check_overlap(L_radius_grains_step, L_pos_grains)
+        while overlap:
+            # save old positions
+            L_pos_grains_old = L_pos_grains.copy()
+            # iterate on overlap list to move problematic grains
+            overlap = L_overlap[0]
+            # get indices
+            i_g = overlap[0]
+            j_g = overlap[1]
+            # get radius
+            r_i = L_radius_grains_step[i_g]
+            r_j = L_radius_grains_step[j_g]
+            # get displacement vector (i->j)
+            u_ij = np.array(L_pos_grains[j_g] - L_pos_grains[i_g])
+            u_ij = u_ij/np.linalg.norm(u_ij)
+            # move grain
+            L_pos_grains[i_g] = L_pos_grains_old[j_g] - u_ij*(r_i+r_j)
+            L_pos_grains[j_g] = L_pos_grains_old[i_g] + u_ij*(r_i+r_j)
+            
+            # check position of grain after displacement
+            for i_grain in range(len(L_pos_grains)):
+                # - x limit
+                if L_pos_grains[i_grain][0] < dict_user['x_min'] + L_radius_grains_step[i_grain] + dict_user['n_margins']*dict_user['d_mesh']:
+                    L_pos_grains[i_grain][0] = dict_user['x_min'] + (1+random.random()*2)*L_radius_grains_step[i_grain] + dict_user['n_margins']*dict_user['d_mesh']
+                # + x limit
+                if dict_user['x_max'] - L_radius_grains_step[i_grain] - dict_user['n_margins']*dict_user['d_mesh'] < L_pos_grains[i_grain][0]:
+                    L_pos_grains[i_grain][0] = dict_user['x_max'] - (1+random.random()*2)*L_radius_grains_step[i_grain] - dict_user['n_margins']*dict_user['d_mesh']
+                # - y limit
+                if L_pos_grains[i_grain][1] < dict_user['y_min'] + L_radius_grains_step[i_grain] + dict_user['n_margins']*dict_user['d_mesh']:
+                    L_pos_grains[i_grain][1] = dict_user['y_min'] + (1+random.random()*2)*L_radius_grains_step[i_grain] + dict_user['n_margins']*dict_user['d_mesh']
+                # + y limit
+                if dict_user['y_max'] - L_radius_grains_step[i_grain] - dict_user['n_margins']*dict_user['d_mesh'] < L_pos_grains[i_grain][1]:
+                    L_pos_grains[i_grain][1] = dict_user['y_max'] - (1+random.random()*2)*L_radius_grains_step[i_grain] - dict_user['n_margins']*dict_user['d_mesh']
+
+            # look if overlap exists
+            overlap, L_overlap = check_overlap(L_radius_grains_step, L_pos_grains)
+
+    # magnetism to the closer grain to ensure at least one contact per grain
+    for i_grain in range(len(L_pos_grains)-1):
+        # compute the distance to the closer grain
+        min_distance = None
+        for j_grain in range(len(L_pos_grains)):
+            if i_grain != j_grain:
+                if min_distance == None:
+                    distance = np.linalg.norm(L_pos_grains[i_grain] - L_pos_grains[j_grain]) - (L_radius_grains[i_grain]+L_radius_grains[j_grain])
+                    min_distance = distance
+                    j_min = j_grain
+                else :
+                    distance = np.linalg.norm(L_pos_grains[i_grain] - L_pos_grains[j_grain]) - (L_radius_grains[i_grain]+L_radius_grains[j_grain]) 
+                    if distance < min_distance:
+                        min_distance = distance
+                    j_min = j_grain
+        # adapt the position to ensure contact
+        L_pos_grains[i_grain] = L_pos_grains[i_grain] + min_distance*(L_pos_grains[j_min] - L_pos_grains[i_grain])/np.linalg.norm(L_pos_grains[i_grain] - L_pos_grains[j_grain])
+
+    return L_pos_grains, L_radius_grains
+
+#-------------------------------------------------------------------------------
+
+def check_overlap(L_radius_grains, L_pos_grains):
+    '''
+    Determine if grains are overlapping.
+
+    Used in Insert_Grains() function.
+    '''
+    overlap = False
+    # real - real
+    L_overlap = []
+    for i_g in range(len(L_radius_grains)-1):
+        # radius of grains
+        radius_i = L_radius_grains[i_g]
+        # position of grains
+        pos_i = L_pos_grains[i_g]
+        for j_g in range(i_g+1, len(L_radius_grains)):
+            # radius of grains
+            radius_j = L_radius_grains[j_g]
+            # position of grains
+            pos_j = L_pos_grains[j_g]
+            # check distance
+            if np.linalg.norm(pos_i-pos_j)<radius_i+radius_j:
+                overlap = True
+                L_overlap.append((i_g, j_g))
+    return overlap, L_overlap
+
+#-------------------------------------------------------------------------------
+
+def generate_microstructure(dict_user):
+    '''
+    Insert n_grains grains in the domain. The grains are circle defined by a radius (uniform distribution).
+    The position of the grains is randomly set, avoiding overlap between particules.
+    A maximum number of tries is done per grain insertion.
+
+    Map of etai and c are generated.
+    '''
+    # Initialize the mesh lists
+    L_x = np.arange(dict_user['x_min'], dict_user['x_max'] +0.1*dict_user['d_mesh'], dict_user['d_mesh'])
+    L_y = np.arange(dict_user['y_min'], dict_user['y_max'] +0.1*dict_user['d_mesh'], dict_user['d_mesh'])
+
+    # initialize the list of grain maps
+    L_M_eta = []
+
+    # compute configuration
+    L_pos_grains, L_radius_grains = generate_pos_dem(dict_user)
+
+    for i_grain in range(len(L_pos_grains)):
+        # initialize the map of the grain
+        L_M_eta.append(np.zeros((len(L_y),len(L_x))))
+
+    print('\ncompute maps')
+    # Initialize the arrays
+    M_c = np.zeros((len(L_y),len(L_x)))
+    M_etas_plot = np.zeros((len(L_y),len(L_x)))
+    # iterate on grains
+    for i_grain in range(len(L_pos_grains)):
+        x_grain = L_pos_grains[i_grain][0]
+        y_grain = L_pos_grains[i_grain][1]
+        Center_grain = np.array([x_grain, y_grain])
+        r_grain = L_radius_grains[i_grain]
+        # find the nearest node of the center
+        L_search = list(abs(np.array(L_x-x_grain)))
+        i_x_center = L_search.index(min(L_search))
+        L_search = list(abs(np.array(L_y-y_grain)))
+        i_y_center = L_search.index(min(L_search))
+        # compute the number of node (depending on the radius)
+        n_nodes = int(r_grain/(L_x[1]-L_x[0]))+4
+        for i_x in range(max(0,i_x_center-n_nodes),min(i_x_center+n_nodes+1,len(L_x))):
+            for i_y in range(max(0,i_y_center-n_nodes),min(i_y_center+n_nodes+1,len(L_y))):
+                x = L_x[i_x]
+                y = L_y[i_y]
+                Point = np.array([x, y])
+                distance = np.linalg.norm(Point-Center_grain)
+                # Update map etas
+                if distance <= r_grain:
+                    L_M_eta[i_grain][-1-i_y, i_x] = 1
+                    M_c[-1-i_y, i_x] = M_c[-1-i_y, i_x] + 1
+                    if M_etas_plot[-1-i_y, i_x] == 0: # do not erase data
+                        M_etas_plot[-1-i_y, i_x] = i_grain+1
+                elif distance >= r_grain:
+                    L_M_eta[i_grain][-1-i_y, i_x] = 0
+
+    # print maps
+    fig, (ax1, ax2) = plt.subplots(1,2,figsize=(16,9))
+    im = ax1.imshow(M_etas_plot, interpolation = 'nearest', extent=(L_x[0],L_x[-1],L_y[0],L_y[-1]))
+    ax1.set_title(r'Map of $\eta$s',fontsize = 30)
+    im = ax2.imshow(M_c, interpolation = 'nearest', extent=(L_x[0],L_x[-1],L_y[0],L_y[-1]))
+    ax2.set_title(r'Map of $c$',fontsize = 30)
+    fig.tight_layout()
+    fig.savefig('output/IC_maps_bin.png')
+    plt.close(fig)
+
+    # prepare map for plot
+    M_etas_plot = np.zeros((len(L_y),len(L_x)))
+    # iterate on the grains
+    for i_grain in range(len(L_M_eta)):
+        # adapt eta maps
+        L_M_eta[i_grain] = L_M_eta[i_grain] - 0.5
+
+        # compute the signed distance functions
+        sd_eta = skfmm.distance(L_M_eta[i_grain], dx = np.array([L_x[1]-L_x[0],L_y[1]-L_y[0]]))
+        
+        # compute the phase field variables
+        for i_x in range(len(L_x)):
+            for i_y in range(len(L_y)):
+                if sd_eta[i_y, i_x] > dict_user['w_int']/2: # inside the grain
+                    L_M_eta[i_grain][i_y, i_x] = 1
+                    if M_etas_plot[i_y, i_x] == 0: # do not erase data
+                        M_etas_plot[i_y, i_x] = i_grain + 1
+                elif sd_eta[i_y, i_x] < -dict_user['w_int']/2: # outside the grain
+                    L_M_eta[i_grain][i_y, i_x] = 0
+                else : # in the interface
+                    L_M_eta[i_grain][i_y, i_x] = 0.5*(1+math.cos(math.pi*(-sd_eta[i_y, i_x]+dict_user['w_int']/2)/(dict_user['w_int'])))
+                    if M_etas_plot[i_y, i_x] == 0: # do not erase data
+                        M_etas_plot[i_y, i_x] = i_grain + L_M_eta[i_grain][i_y, i_x]
+
+    # adapt the concentration map
+    M_c = M_c - 0.5
+
+    # compute the signed distance functions
+    sd_c = skfmm.distance(M_c, dx = np.array([L_x[1]-L_x[0],L_y[1]-L_y[0]]))
+        
+    # compute the phase field variables
+    for i_x in range(len(L_x)):
+        for i_y in range(len(L_y)):
+            if sd_c[i_y, i_x] > dict_user['w_int']/2: # inside the grain
+                M_c[i_y, i_x] = 1
+            elif sd_c[i_y, i_x] < -dict_user['w_int']/2: # outside the grain
+                M_c[i_y, i_x] = 0
+            else : # in the interface
+                M_c[i_y, i_x] = 0.5*(1+math.cos(math.pi*(-sd_c[i_y, i_x]+dict_user['w_int']/2)/(dict_user['w_int'])))
+
+    # Plot maps
+    #fig, (ax1, ax2) = plt.subplots(1,2,figsize=(16,9))
+    # parameters
+    #ax1.imshow(M_etas_plot, interpolation = 'nearest', extent=(L_x[0],L_x[-1],L_y[0],L_y[-1]))
+    #ax1.set_title(r'Map of $\eta$s',fontsize = 30)
+    #ax2.imshow(M_c, interpolation = 'nearest', extent=(L_x[0],L_x[-1],L_y[0],L_y[-1]))
+    #ax2.set_title(r'Map of c',fontsize = 30)
+    #fig.tight_layout()
+    #fig.savefig('output/IC_maps_pf.png')
+    #plt.close(fig)
+
+    # assign phase field variable
+    L_i_eta_phi = assign_pf(L_M_eta)
+
+    # prepare map for plot
+    L_M_phi = []
+    M_phis_plot = np.zeros((len(L_y),len(L_x)))
+    # iterate on the grains
+    for i_phi in range(len(L_i_eta_phi)):
+        M_phi = np.zeros((len(L_y),len(L_x)))
+        for i_eta in L_i_eta_phi[i_phi]:
+            M_phis_plot = M_phis_plot + (i_phi+1)*L_M_eta[i_eta]
+            M_phi = M_phi + L_M_eta[i_eta]
+        # save 
+        L_M_phi.append(M_phi)
+    
+    # print maps
+    fig, (ax1) = plt.subplots(1,1,figsize=(16,9))
+    im = ax1.imshow(M_phis_plot, interpolation = 'nearest', extent=(L_x[0],L_x[-1],L_y[0],L_y[-1]))
+    ax1.set_title(r'Map of $\phi$',fontsize = 30)
+    fig.tight_layout()
+    fig.savefig('output/IC_map_phi.png')
+    plt.close(fig)
+
+    # save in dicts
+    dict_user['L_x'] = L_x
+    dict_user['L_y'] = L_y
+    dict_user['n_eta'] = len(L_M_phi)
+
+    print('write data')
+    # iterate on grains
+    for i_grain in range(len(L_M_phi)):
+        # Write phase variables
+        file_to_write_etai = open('data/eta'+str(i_grain)+'.txt','w')
+        # x
+        file_to_write_etai.write('AXIS X\n')
+        line = ''
+        for x in dict_user['L_x']:
+            line = line + str(x)+ ' '
+        line = line + '\n'
+        file_to_write_etai.write(line)
+        # y
+        file_to_write_etai.write('AXIS Y\n')
+        line = ''
+        for y in dict_user['L_y']:
+            line = line + str(y)+ ' '
+        line = line + '\n'
+        file_to_write_etai.write(line)
+        # data
+        file_to_write_etai.write('DATA\n')
+        for l in range(len(dict_user['L_y'])):
+            for c in range(len(dict_user['L_x'])):
+                file_to_write_etai.write(str(L_M_phi[i_grain][-1-l][c])+'\n')
+        # close
+        file_to_write_etai.close()
+
+    # write the concentration
+    file_to_write_c = open('data/c.txt','w')
+    # x
+    file_to_write_c.write('AXIS X\n')
+    line = ''
+    for x in dict_user['L_x']:
+        line = line + str(x)+ ' '
+    line = line + '\n'
+    file_to_write_c.write(line)
+    # y
+    file_to_write_c.write('AXIS Y\n')
+    line = ''
+    for y in dict_user['L_y']:
+        line = line + str(y)+ ' '
+    line = line + '\n'
+    file_to_write_c.write(line)
+    # data
+    file_to_write_c.write('DATA\n')
+    for l in range(len(dict_user['L_y'])):
+        for c in range(len(dict_user['L_x'])):
+            file_to_write_c.write(str(M_c[-1-l][c])+'\n')
+    # close
+    file_to_write_c.close()
+
+#-------------------------------------------------------------------------------
+
+def assign_pf(L_M_eta):
+    '''
+    Assign multiple grains to phase-field variable.
+    '''
+    print('assign phase variable')
+
+    # prepare the output
+    L_L_neighbor = []
+    for i_eta in range(len(L_M_eta)):
+        L_L_neighbor.append([])
+    # iterate on the pf variable
+    for i_M_eta in range(len(L_M_eta)-1):
+        M_eta_i = L_M_eta[i_M_eta].copy()
+        M_bin_i = np.zeros(M_eta_i.shape)
+        # binearization
+        for l in range(M_eta_i.shape[0]):
+            for c in range(M_eta_i.shape[0]):
+                if M_eta_i[l, c] >= 0.5:
+                    M_bin_i[l, c] = 1
+                else: 
+                    M_bin_i[l, c] = 0
+        # extension of the phase
+        M_struc = np.ones((20,20))
+        M_bin_dil = scipy.ndimage.binary_dilation(M_bin_i.copy(), M_struc)
+        # iterate on the other pf variable
+        for j_M_eta in range(i_M_eta+1, len(L_M_eta)):
+            M_eta_j = L_M_eta[j_M_eta].copy()
+            M_bin_j = np.zeros(M_eta_i.shape)
+            # binearization
+            for l in range(M_eta_j.shape[0]):
+                for c in range(M_eta_j.shape[0]):
+                    if M_eta_j[l, c] >= 0.5:
+                        M_bin_j[l, c] = 1
+                    else: 
+                        M_bin_j[l, c] = 0
+            # detect overlap
+            M_bin_ij = M_bin_dil*M_bin_j
+            if np.sum(M_bin_ij) >= 1:
+                L_L_neighbor[i_M_eta].append(j_M_eta)
+                L_L_neighbor[j_M_eta].append(i_M_eta)
+    
+    # generate phase variables
+    L_i_eta_phi = [[0]]
+    L_neighbor_phi = [L_L_neighbor[0]]
+    for i_eta in range(1, len(L_M_eta)):
+        j_phi = 0
+        while j_phi < len(L_i_eta_phi) and (i_eta in L_neighbor_phi[j_phi]):
+            j_phi = j_phi + 1
+        if j_phi == len(L_i_eta_phi):
+            L_i_eta_phi.append([i_eta])
+            L_neighbor_phi.append(L_L_neighbor[i_eta])
+        else:
+            L_i_eta_phi[j_phi].append(i_eta)
+            for neighbor in L_L_neighbor[i_eta]:
+               L_neighbor_phi[j_phi].append(neighbor)
+
+    # print result
+    print(len(L_i_eta_phi), 'phase variables')
+    line = ''
+    for i_phi in range(len(L_i_eta_phi)):
+        line = line + str(len(L_i_eta_phi[i_phi]))
+        if i_phi != len(L_i_eta_phi)-1:
+            line = line + ' - '
+    print(line)
+
+    return L_i_eta_phi
+</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+
+<dt id="createic.generate_pos_dem"><code class="name flex">
+<span>def <span class="ident">generate_pos_dem</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Use the DEM to generate a microstructure.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def generate_pos_dem(dict_user):
+    '''
+    Use the DEM to generate a microstructure.
+    '''
+    print('call dem to generate a granular configuration')
+
+    # write data 
+    dict_ic = {'n_grain': dict_user['n_grains']}
+    with open('data/dict_ic', 'wb') as handle:
+        pickle.dump(dict_ic, handle, protocol=pickle.HIGHEST_PROTOCOL)
+
+    # call DEM code
+    os.system('yade dem_ic.py')
+
+    # load data 
+    with open('data/dict_ic', 'rb') as handle:
+        dict_ic = pickle.load(handle)
+    L_pos_dem = dict_ic['L_pos']
+    L_radius_dem = dict_ic['L_radius']
+
+    # increase steeply the zone of interest
+    d_zone = 0.5
+    L_pos_grains, L_radius_grains = extract_grain_zone(L_pos_dem, L_radius_dem, d_zone)
+    while len(L_pos_grains) < dict_user['n_grains'] and d_zone < 1:
+        d_zone = d_zone + 0.05
+        L_pos_grains, L_radius_grains = extract_grain_zone(L_pos_dem, L_radius_dem, d_zone)
+
+    # print
+    print(len(L_pos_grains), 'grains generated')
+
+    # extrapolation
+    factor = (dict_user['x_max']-dict_user['x_min'] - 2*dict_user['n_margins']*dict_user['d_mesh'])/d_zone
+    for i_grain in range(len(L_pos_grains)):
+        L_pos_grains[i_grain][0] = (L_pos_grains[i_grain][0]-0.5)*factor + (dict_user['x_max']+dict_user['x_min'])/2
+        L_pos_grains[i_grain][1] = (L_pos_grains[i_grain][1]-0.5)*factor + (dict_user['y_max']+dict_user['y_min'])/2
+        L_radius_grains[i_grain] = L_radius_grains[i_grain]*factor
+
+    return L_pos_grains, L_radius_grains
+</code></pre>
+</details>
+</dd>
+
+<dt id="createic.extract_grain_zone"><code class="name flex">
+<span>def <span class="ident">extract_grain_zone</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Extract grains in the zone of interest.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def extract_grain_zone(L_pos, L_radius, d_zone):
+    '''
+    Extract grains in the zone of interest.
+
+    Grains should be entirely included.
+    '''
+    L_pos_extracted = []
+    L_radius_extracted = []
+    # iterate on the grains
+    for i_grain in range(len(L_pos)):
+        # compute grain box
+        x_min = L_pos[i_grain][0]-L_radius[i_grain]
+        x_max = L_pos[i_grain][0]+L_radius[i_grain]
+        y_min = L_pos[i_grain][1]-L_radius[i_grain]
+        y_max = L_pos[i_grain][1]+L_radius[i_grain]
+        # check that the grain in included
+        if (0.5-d_zone/ 2< x_min) and (x_max < 0.5+d_zone /2) and (0.5-d_zone/2 < y_min) and (y_max < 0.5+d_zone/2) :
+            L_pos_extracted.append(L_pos[i_grain])
+            L_radius_extracted.append(L_radius[i_grain])
+
+    return L_pos_extracted, L_radius_extracted
+</code></pre>
+</details>
+</dd>
+
+<dt id="createic.generate_pos_own"><code class="name flex">
+<span>def <span class="ident">generate_pos_own</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Use an own method to generate a microstructure.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def generate_pos_own(dict_user):
+    '''
+    Use an own method to generate a microstructure.
+
+    This method is DEM inspired.
+    '''
+    # Insert grains
+    L_pos_grains = []
+    L_radius_grains = []
+    i_grain = 0
+    # check conditions
+    while i_grain < dict_user['n_grains'] :
+        # Random radius of the grain
+        R_try = max(dict_user['mean_R']*(1+dict_user['var_R']*(random.random()-0.5)*2), dict_user['d_mesh']*5)
+        # Random position of the grain center
+        x_try = random.uniform(dict_user['x_min']+dict_user['n_margins']*dict_user['d_mesh']+R_try, dict_user['x_max']-dict_user['n_margins']*dict_user['d_mesh']-R_try)
+        y_try = random.uniform(dict_user['y_min']+dict_user['n_margins']*dict_user['d_mesh']+R_try, dict_user['y_max']-dict_user['n_margins']*dict_user['d_mesh']-R_try)
+        # Save grain
+        L_pos_grains.append(np.array([x_try, y_try]))
+        L_radius_grains.append(R_try)
+        # prepare next grains
+        i_grain = i_grain + 1
+
+    # compute the configuration
+    for i_steps in range(1, dict_user['n_steps']+1):
+        print('Increase radius step',i_steps,'/',dict_user['n_steps'])
+
+        # compute tempo radius at this step
+        L_radius_grains_step = []
+        for radius in L_radius_grains:
+            L_radius_grains_step.append(radius*i_steps/dict_user['n_steps'])
+
+        # check if there is no overlap
+        overlap, L_overlap = check_overlap(L_radius_grains_step, L_pos_grains)
+        while overlap:
+            # save old positions
+            L_pos_grains_old = L_pos_grains.copy()
+            # iterate on overlap list to move problematic grains
+            overlap = L_overlap[0]
+            # get indices
+            i_g = overlap[0]
+            j_g = overlap[1]
+            # get radius
+            r_i = L_radius_grains_step[i_g]
+            r_j = L_radius_grains_step[j_g]
+            # get displacement vector (i->j)
+            u_ij = np.array(L_pos_grains[j_g] - L_pos_grains[i_g])
+            u_ij = u_ij/np.linalg.norm(u_ij)
+            # move grain
+            L_pos_grains[i_g] = L_pos_grains_old[j_g] - u_ij*(r_i+r_j)
+            L_pos_grains[j_g] = L_pos_grains_old[i_g] + u_ij*(r_i+r_j)
+            
+            # check position of grain after displacement
+            for i_grain in range(len(L_pos_grains)):
+                # - x limit
+                if L_pos_grains[i_grain][0] < dict_user['x_min'] + L_radius_grains_step[i_grain] + dict_user['n_margins']*dict_user['d_mesh']:
+                    L_pos_grains[i_grain][0] = dict_user['x_min'] + (1+random.random()*2)*L_radius_grains_step[i_grain] + dict_user['n_margins']*dict_user['d_mesh']
+                # + x limit
+                if dict_user['x_max'] - L_radius_grains_step[i_grain] - dict_user['n_margins']*dict_user['d_mesh'] < L_pos_grains[i_grain][0]:
+                    L_pos_grains[i_grain][0] = dict_user['x_max'] - (1+random.random()*2)*L_radius_grains_step[i_grain] - dict_user['n_margins']*dict_user['d_mesh']
+                # - y limit
+                if L_pos_grains[i_grain][1] < dict_user['y_min'] + L_radius_grains_step[i_grain] + dict_user['n_margins']*dict_user['d_mesh']:
+                    L_pos_grains[i_grain][1] = dict_user['y_min'] + (1+random.random()*2)*L_radius_grains_step[i_grain] + dict_user['n_margins']*dict_user['d_mesh']
+                # + y limit
+                if dict_user['y_max'] - L_radius_grains_step[i_grain] - dict_user['n_margins']*dict_user['d_mesh'] < L_pos_grains[i_grain][1]:
+                    L_pos_grains[i_grain][1] = dict_user['y_max'] - (1+random.random()*2)*L_radius_grains_step[i_grain] - dict_user['n_margins']*dict_user['d_mesh']
+
+            # look if overlap exists
+            overlap, L_overlap = check_overlap(L_radius_grains_step, L_pos_grains)
+
+    # magnetism to the closer grain to ensure at least one contact per grain
+    for i_grain in range(len(L_pos_grains)-1):
+        # compute the distance to the closer grain
+        min_distance = None
+        for j_grain in range(len(L_pos_grains)):
+            if i_grain != j_grain:
+                if min_distance == None:
+                    distance = np.linalg.norm(L_pos_grains[i_grain] - L_pos_grains[j_grain]) - (L_radius_grains[i_grain]+L_radius_grains[j_grain])
+                    min_distance = distance
+                    j_min = j_grain
+                else :
+                    distance = np.linalg.norm(L_pos_grains[i_grain] - L_pos_grains[j_grain]) - (L_radius_grains[i_grain]+L_radius_grains[j_grain]) 
+                    if distance < min_distance:
+                        min_distance = distance
+                    j_min = j_grain
+        # adapt the position to ensure contact
+        L_pos_grains[i_grain] = L_pos_grains[i_grain] + min_distance*(L_pos_grains[j_min] - L_pos_grains[i_grain])/np.linalg.norm(L_pos_grains[i_grain] - L_pos_grains[j_grain])
+
+    return L_pos_grains, L_radius_grains
+</code></pre>
+</details>
+</dd>
+
+<dt id="createic.check_overlap"><code class="name flex">
+<span>def <span class="ident">check_overlap</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Determine if grains are overlapping.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def check_overlap(L_radius_grains, L_pos_grains):
+    '''
+    Determine if grains are overlapping.
+
+    Used in Insert_Grains() function.
+    '''
+    overlap = False
+    # real - real
+    L_overlap = []
+    for i_g in range(len(L_radius_grains)-1):
+        # radius of grains
+        radius_i = L_radius_grains[i_g]
+        # position of grains
+        pos_i = L_pos_grains[i_g]
+        for j_g in range(i_g+1, len(L_radius_grains)):
+            # radius of grains
+            radius_j = L_radius_grains[j_g]
+            # position of grains
+            pos_j = L_pos_grains[j_g]
+            # check distance
+            if np.linalg.norm(pos_i-pos_j) < radius_i+radius_j:
+                overlap = True
+                L_overlap.append((i_g, j_g))
+    return overlap, L_overlap
+</code></pre>
+</details>
+</dd>
+
+<dt id="createic.generate_microstructure"><code class="name flex">
+<span>def <span class="ident">generate_microstructure</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Insert n_grains grains in the domain The grains are circle defined by a radius (uniform distribution).</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def generate_microstructure(dict_user):
+    '''
+    Insert n_grains grains in the domain. The grains are circle defined by a radius (uniform distribution).
+    The position of the grains is randomly set, avoiding overlap between particules.
+    A maximum number of tries is done per grain insertion.
+
+    Map of etai and c are generated.
+    '''
+    # Initialize the mesh lists
+    L_x = np.arange(dict_user['x_min'], dict_user['x_max'] +0.1*dict_user['d_mesh'], dict_user['d_mesh'])
+    L_y = np.arange(dict_user['y_min'], dict_user['y_max'] +0.1*dict_user['d_mesh'], dict_user['d_mesh'])
+
+    # initialize the list of grain maps
+    L_M_eta = []
+
+    # compute configuration
+    L_pos_grains, L_radius_grains = generate_pos_dem(dict_user)
+
+    for i_grain in range(len(L_pos_grains)):
+        # initialize the map of the grain
+        L_M_eta.append(np.zeros((len(L_y),len(L_x))))
+
+    print('\ncompute maps')
+    # Initialize the arrays
+    M_c = np.zeros((len(L_y),len(L_x)))
+    M_etas_plot = np.zeros((len(L_y),len(L_x)))
+    # iterate on grains
+    for i_grain in range(len(L_pos_grains)):
+        x_grain = L_pos_grains[i_grain][0]
+        y_grain = L_pos_grains[i_grain][1]
+        Center_grain = np.array([x_grain, y_grain])
+        r_grain = L_radius_grains[i_grain]
+        # find the nearest node of the center
+        L_search = list(abs(np.array(L_x-x_grain)))
+        i_x_center = L_search.index(min(L_search))
+        L_search = list(abs(np.array(L_y-y_grain)))
+        i_y_center = L_search.index(min(L_search))
+        # compute the number of node (depending on the radius)
+        n_nodes = int(r_grain/(L_x[1]-L_x[0]))+4
+        for i_x in range(max(0,i_x_center-n_nodes),min(i_x_center+n_nodes+1,len(L_x))):
+            for i_y in range(max(0,i_y_center-n_nodes),min(i_y_center+n_nodes+1,len(L_y))):
+                x = L_x[i_x]
+                y = L_y[i_y]
+                Point = np.array([x, y])
+                distance = np.linalg.norm(Point-Center_grain)
+                # Update map etas
+                if distance <= r_grain:
+                    L_M_eta[i_grain][-1-i_y, i_x] = 1
+                    M_c[-1-i_y, i_x] = M_c[-1-i_y, i_x] + 1
+                    if M_etas_plot[-1-i_y, i_x] == 0: # do not erase data
+                        M_etas_plot[-1-i_y, i_x] = i_grain+1
+                elif distance >= r_grain:
+                    L_M_eta[i_grain][-1-i_y, i_x] = 0
+
+    # print maps
+    fig, (ax1, ax2) = plt.subplots(1,2,figsize=(16,9))
+    im = ax1.imshow(M_etas_plot, interpolation = 'nearest', extent=(L_x[0],L_x[-1],L_y[0],L_y[-1]))
+    ax1.set_title(r'Map of $\eta$s',fontsize = 30)
+    im = ax2.imshow(M_c, interpolation = 'nearest', extent=(L_x[0],L_x[-1],L_y[0],L_y[-1]))
+    ax2.set_title(r'Map of $c$',fontsize = 30)
+    fig.tight_layout()
+    fig.savefig('output/IC_maps_bin.png')
+    plt.close(fig)
+
+    # prepare map for plot
+    M_etas_plot = np.zeros((len(L_y),len(L_x)))
+    # iterate on the grains
+    for i_grain in range(len(L_M_eta)):
+        # adapt eta maps
+        L_M_eta[i_grain] = L_M_eta[i_grain] - 0.5
+
+        # compute the signed distance functions
+        sd_eta = skfmm.distance(L_M_eta[i_grain], dx = np.array([L_x[1]-L_x[0],L_y[1]-L_y[0]]))
+        
+        # compute the phase field variables
+        for i_x in range(len(L_x)):
+            for i_y in range(len(L_y)):
+                if sd_eta[i_y, i_x] > dict_user['w_int']/2: # inside the grain
+                    L_M_eta[i_grain][i_y, i_x] = 1
+                    if M_etas_plot[i_y, i_x] == 0: # do not erase data
+                        M_etas_plot[i_y, i_x] = i_grain + 1
+                elif sd_eta[i_y, i_x] < -dict_user['w_int']/2: # outside the grain
+                    L_M_eta[i_grain][i_y, i_x] = 0
+                else : # in the interface
+                    L_M_eta[i_grain][i_y, i_x] = 0.5*(1+math.cos(math.pi*(-sd_eta[i_y, i_x]+dict_user['w_int']/2)/(dict_user['w_int'])))
+                    if M_etas_plot[i_y, i_x] == 0: # do not erase data
+                        M_etas_plot[i_y, i_x] = i_grain + L_M_eta[i_grain][i_y, i_x]
+
+    # adapt the concentration map
+    M_c = M_c - 0.5
+
+    # compute the signed distance functions
+    sd_c = skfmm.distance(M_c, dx = np.array([L_x[1]-L_x[0],L_y[1]-L_y[0]]))
+        
+    # compute the phase field variables
+    for i_x in range(len(L_x)):
+        for i_y in range(len(L_y)):
+            if sd_c[i_y, i_x] > dict_user['w_int']/2: # inside the grain
+                M_c[i_y, i_x] = 1
+            elif sd_c[i_y, i_x] < -dict_user['w_int']/2: # outside the grain
+                M_c[i_y, i_x] = 0
+            else : # in the interface
+                M_c[i_y, i_x] = 0.5*(1+math.cos(math.pi*(-sd_c[i_y, i_x]+dict_user['w_int']/2)/(dict_user['w_int'])))
+
+    # Plot maps
+    #fig, (ax1, ax2) = plt.subplots(1,2,figsize=(16,9))
+    # parameters
+    #ax1.imshow(M_etas_plot, interpolation = 'nearest', extent=(L_x[0],L_x[-1],L_y[0],L_y[-1]))
+    #ax1.set_title(r'Map of $\eta$s',fontsize = 30)
+    #ax2.imshow(M_c, interpolation = 'nearest', extent=(L_x[0],L_x[-1],L_y[0],L_y[-1]))
+    #ax2.set_title(r'Map of c',fontsize = 30)
+    #fig.tight_layout()
+    #fig.savefig('output/IC_maps_pf.png')
+    #plt.close(fig)
+
+    # assign phase field variable
+    L_i_eta_phi = assign_pf(L_M_eta)
+
+    # prepare map for plot
+    L_M_phi = []
+    M_phis_plot = np.zeros((len(L_y),len(L_x)))
+    # iterate on the grains
+    for i_phi in range(len(L_i_eta_phi)):
+        M_phi = np.zeros((len(L_y),len(L_x)))
+        for i_eta in L_i_eta_phi[i_phi]:
+            M_phis_plot = M_phis_plot + (i_phi+1)*L_M_eta[i_eta]
+            M_phi = M_phi + L_M_eta[i_eta]
+        # save 
+        L_M_phi.append(M_phi)
+    
+    # print maps
+    fig, (ax1) = plt.subplots(1,1,figsize=(16,9))
+    im = ax1.imshow(M_phis_plot, interpolation = 'nearest', extent=(L_x[0],L_x[-1],L_y[0],L_y[-1]))
+    ax1.set_title(r'Map of $\phi$',fontsize = 30)
+    fig.tight_layout()
+    fig.savefig('output/IC_map_phi.png')
+    plt.close(fig)
+
+    # save in dicts
+    dict_user['L_x'] = L_x
+    dict_user['L_y'] = L_y
+    dict_user['n_eta'] = len(L_M_phi)
+
+    print('write data')
+    # iterate on grains
+    for i_grain in range(len(L_M_phi)):
+        # Write phase variables
+        file_to_write_etai = open('data/eta'+str(i_grain)+'.txt','w')
+        # x
+        file_to_write_etai.write('AXIS X\n')
+        line = ''
+        for x in dict_user['L_x']:
+            line = line + str(x)+ ' '
+        line = line + '\n'
+        file_to_write_etai.write(line)
+        # y
+        file_to_write_etai.write('AXIS Y\n')
+        line = ''
+        for y in dict_user['L_y']:
+            line = line + str(y)+ ' '
+        line = line + '\n'
+        file_to_write_etai.write(line)
+        # data
+        file_to_write_etai.write('DATA\n')
+        for l in range(len(dict_user['L_y'])):
+            for c in range(len(dict_user['L_x'])):
+                file_to_write_etai.write(str(L_M_phi[i_grain][-1-l][c])+'\n')
+        # close
+        file_to_write_etai.close()
+
+    # write the concentration
+    file_to_write_c = open('data/c.txt','w')
+    # x
+    file_to_write_c.write('AXIS X\n')
+    line = ''
+    for x in dict_user['L_x']:
+        line = line + str(x)+ ' '
+    line = line + '\n'
+    file_to_write_c.write(line)
+    # y
+    file_to_write_c.write('AXIS Y\n')
+    line = ''
+    for y in dict_user['L_y']:
+        line = line + str(y)+ ' '
+    line = line + '\n'
+    file_to_write_c.write(line)
+    # data
+    file_to_write_c.write('DATA\n')
+    for l in range(len(dict_user['L_y'])):
+        for c in range(len(dict_user['L_x'])):
+            file_to_write_c.write(str(M_c[-1-l][c])+'\n')
+    # close
+    file_to_write_c.close()
+</code></pre>
+</details>
+</dd>
+
+<dt id="createic.assign_pf"><code class="name flex">
+<span>def <span class="ident">assign_pf</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Assign multiple grains to phase-field variable.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def assign_pf(L_M_eta):
+    '''
+    Assign multiple grains to phase-field variable.
+    '''
+    print('assign phase variable')
+
+    # prepare the output
+    L_L_neighbor = []
+    for i_eta in range(len(L_M_eta)):
+        L_L_neighbor.append([])
+    # iterate on the pf variable
+    for i_M_eta in range(len(L_M_eta)-1):
+        M_eta_i = L_M_eta[i_M_eta].copy()
+        M_bin_i = np.zeros(M_eta_i.shape)
+        # binearization
+        for l in range(M_eta_i.shape[0]):
+            for c in range(M_eta_i.shape[0]):
+                if M_eta_i[l, c] >= 0.5:
+                    M_bin_i[l, c] = 1
+                else: 
+                    M_bin_i[l, c] = 0
+        # extension of the phase
+        M_struc = np.ones((20,20))
+        M_bin_dil = scipy.ndimage.binary_dilation(M_bin_i.copy(), M_struc)
+        # iterate on the other pf variable
+        for j_M_eta in range(i_M_eta+1, len(L_M_eta)):
+            M_eta_j = L_M_eta[j_M_eta].copy()
+            M_bin_j = np.zeros(M_eta_i.shape)
+            # binearization
+            for l in range(M_eta_j.shape[0]):
+                for c in range(M_eta_j.shape[0]):
+                    if M_eta_j[l, c] >= 0.5:
+                        M_bin_j[l, c] = 1
+                    else: 
+                        M_bin_j[l, c] = 0
+            # detect overlap
+            M_bin_ij = M_bin_dil*M_bin_j
+            if np.sum(M_bin_ij) >= 1:
+                L_L_neighbor[i_M_eta].append(j_M_eta)
+                L_L_neighbor[j_M_eta].append(i_M_eta)
+    
+    # generate phase variables
+    L_i_eta_phi = [[0]]
+    L_neighbor_phi = [L_L_neighbor[0]]
+    for i_eta in range(1, len(L_M_eta)):
+        j_phi = 0
+        while j_phi < len(L_i_eta_phi) and (i_eta in L_neighbor_phi[j_phi]):
+            j_phi = j_phi + 1
+        if j_phi == len(L_i_eta_phi):
+            L_i_eta_phi.append([i_eta])
+            L_neighbor_phi.append(L_L_neighbor[i_eta])
+        else:
+            L_i_eta_phi[j_phi].append(i_eta)
+            for neighbor in L_L_neighbor[i_eta]:
+               L_neighbor_phi[j_phi].append(neighbor)
+
+    # print result
+    print(len(L_i_eta_phi), 'phase variables')
+    line = ''
+    for i_phi in range(len(L_i_eta_phi)):
+        line = line + str(len(L_i_eta_phi[i_phi]))
+        if i_phi != len(L_i_eta_phi)-1:
+            line = line + ' - '
+    print(line)
+
+    return L_i_eta_phi
+</code></pre>
+</details>
+</dd>
+
+</dl>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="createic.generate_pos_dem" href="#createic.generate_pos_dem">generate_pos_dem</a></code></li>
+<li><code><a title="createic.extract_grain_zone" href="#createic.extract_grain_zone">extract_grain_zone</a></code></li>
+<li><code><a title="createic.generate_pos_own" href="#createic.generate_pos_own">generate_pos_own</a></code></li>
+<li><code><a title="createic.check_overlap" href="#createic.check_overlap">check_overlap</a></code></li>
+<li><code><a title="createic.generate_microstructure" href="#createic.generate_microstructure">generate_microstructure</a></code></li>
+<li><code><a title="createic.assign_pf" href="#createic.assign_pf">assign_pf</a></code></li>
+</ul>
+</li>
+</ul>
+<br>
+<a href="https://alexsacmorane.github.io/pf/sintering">Sintering</a><br>
+<a href="https://alexsacmorane.github.io/pf">PF</a><br>
+<a href="https://alexsacmorane.github.io">Home</a>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>
