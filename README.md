@@ -10,3 +10,4 @@
 # Article to add
 - TC105 2RRA
 - DEM/PF debonding (elastic properties)
+- tortuosity
