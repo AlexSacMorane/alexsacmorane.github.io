@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>Sintering API documentation</title>
+<meta name="description" content="@author: Alexandre Sac--Morane
+alexandre.sac-morane@enpc.fr …" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>DEMIC</code></h1>
+</header>
+<section id="section-intro">
+<p>@author: Alexandre Sac&ndash;Morane
+alexandre.sac-morane@enpc.fr</p>
+<p>This is the Discrete Element Modelization employed during the generation of the initial configuration.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+#-------------------------------------------------------------------------------
+#Librairies
+#-------------------------------------------------------------------------------
+
+from yade import pack, plot, export
+import numpy as np
+import matplotlib.pyplot as plt
+import math, random, pickle
+
+#-------------------------------------------------------------------------------
+#User
+#-------------------------------------------------------------------------------
+
+# load data 
+with open('data/dict_ic', 'rb') as handle:
+    dict_ic = pickle.load(handle)
+
+# PSD
+n_grains = dict_ic['n_grain']*4
+L_dr = []
+
+# Box
+Dx = 1
+Dy = 1
+Dz = 1
+
+# time step
+factor_dt_crit = 0.6
+
+# steady-state detection
+unbalancedForce_criteria = 0.1
+
+#-------------------------------------------------------------------------------
+#Initialisation
+#-------------------------------------------------------------------------------
+
+# define wall material (no friction)
+O.materials.append(CohFrictMat(young=1, poisson=0.25, frictionAngle=0, density=2650, isCohesive=False, momentRotationLaw=False))
+# create box and grains
+O.bodies.append(aabbWalls([Vector3(0,0,0),Vector3(Dx,Dy,Dz)], thickness=0., oversizeFactor=1))
+# a list of 6 boxes Bodies enclosing the packing, in the order minX, maxX, minY, maxY, minZ, maxZ
+
+# define grain material
+O.materials.append(CohFrictMat(young=1, poisson=0.25, frictionAngle=atan(0.05), density=2650,\
+                               isCohesive=False, momentRotationLaw=False))
+# generate grain
+for i in range(n_grains):  
+    # define kinetics
+    dradius = random.uniform(math.sqrt((0.5*Dx*Dy)/(n_grains*math.pi))/400, math.sqrt((0.5*Dx*Dy)/(n_grains*math.pi))/100)
+    center_x = random.uniform(0+dradius*30, Dx-dradius*30)
+    center_y = random.uniform(0+dradius*30, Dy-dradius*30)
+    center_z = 0
+    O.bodies.append(sphere(center=[center_x, center_y, center_z], radius=dradius*30))
+    O.bodies[-1].state.blockedDOFs = 'zXY'
+    L_dr.append(dradius)
+
+# yade algorithm
+O.engines = [
+        ForceResetter(),
+        # sphere, wall
+        InsertionSortCollider([Bo1_Sphere_Aabb(), Bo1_Box_Aabb()]),
+        InteractionLoop(
+                # need to handle sphere+sphere and sphere+wall
+                # Ig : compute contact point. Ig2_Sphere (3DOF) or Ig2_Sphere6D (6DOF)
+                # Ip : compute parameters needed
+                # Law : compute contact law with parameters from Ip
+                [Ig2_Sphere_Sphere_ScGeom6D(), Ig2_Box_Sphere_ScGeom6D()],
+                [Ip2_CohFrictMat_CohFrictMat_CohFrictPhys()],
+                [Law2_ScGeom6D_CohFrictPhys_CohesionMoment(always_use_moment_law=True)]
+        ),
+        NewtonIntegrator(gravity=(0, 0, 0), damping=0.1, label = 'Newton'),
+        PyRunner(command='checkUnbalanced_ir_ic()', iterPeriod = 200, label='checker')
+]
+# time step
+O.dt = factor_dt_crit * PWaveTimeStep()
+
+#-------------------------------------------------------------------------------
+
+def compute_ratio_overlap_radius():
+    '''
+    Compute the mean ratio of the overlap and radius.
+    '''
+    overlap_average = 0
+    radius_average = 0
+    n_average = 0
+    # iterate on interactions
+    for i in O.interactions:
+        # only grain-grain contact can be cemented
+        if isinstance(O.bodies[i.id1].shape, Sphere) and isinstance(O.bodies[i.id2].shape, Sphere) :
+            # compute overlap of this interaction
+            b1_x = O.bodies[i.id1].state.pos[0]
+            b1_y = O.bodies[i.id1].state.pos[1]
+            b2_x = O.bodies[i.id2].state.pos[0]
+            b2_y = O.bodies[i.id2].state.pos[1]
+            dist = math.sqrt((b1_x-b2_x)**2+(b1_y-b2_y)**2)
+            overlap = O.bodies[i.id1].shape.radius + O.bodies[i.id2].shape.radius - dist
+            # compute mean value
+            overlap_average = overlap_average + overlap
+            radius_average = radius_average + (O.bodies[i.id1].shape.radius+O.bodies[i.id2].shape.radius)/2
+            n_average = n_average + 1
+    if n_average > 0:
+        # plot and return the average
+        overlap_average = overlap_average/n_average
+        radius_average = radius_average/n_average
+        return overlap_average/radius_average
+    else :
+        return 1
+    
+#-------------------------------------------------------------------------------
+
+def checkUnbalanced_ir_ic():
+    '''
+    Increase particle radius until a steady-state is found.
+    '''
+    # the rest will be run only if unbalanced is < .1 (stabilized packing)
+    # Compute the ratio of mean summary force on bodies and mean force magnitude on interactions.
+    if (2<=avgNumInteractions()) and (avgNumInteractions()<=4) and (unbalancedForce() > unbalancedForce_criteria) :
+        return
+
+    if (avgNumInteractions()<4):   
+        # increase the radius of particles
+        i_L_r = 0
+        for b in O.bodies :
+            if isinstance(b.shape, Sphere):
+                growParticle(b.id, (b.shape.radius+L_dr[i_L_r])/b.shape.radius)
+                i_L_r = i_L_r + 1
+        # update the dt as the radii change
+        O.dt = factor_dt_crit * PWaveTimeStep()
+        return
+        
+    # plot the psd
+    binsSizes, binsProc, binsSumCum = psd(bins=10)
+    plotPSD(binsSizes, binsProc)
+    
+    # close the simulation
+    stopLoad()
+    
+#-------------------------------------------------------------------------------
+
+def saveData():
+    """
+    Save data in .txt file during the ic.
+    """
+    # pp data
+    L_pos = []
+    L_radius = []
+    for b in O.bodies :
+        if isinstance(b.shape, Sphere):
+            L_pos.append([b.state.pos[0], b.state.pos[1]])
+            L_radius.append(b.shape.radius)
+
+    # create dict
+    dict_ic = {'L_pos': L_pos, 'L_radius': L_radius}
+
+    # save
+    with open('data/dict_ic', 'wb') as handle:
+        pickle.dump(dict_ic, handle, protocol=pickle.HIGHEST_PROTOCOL)
+
+#-------------------------------------------------------------------------------
+
+def stopLoad():
+    """
+    Close simulation.
+    """
+    # save at the converged iteration
+    saveData()
+    # close yade
+    O.pause()
+
+    # give order to the user
+    print("\nyou can type 'quit()' in the terminal")
+
+#-------------------------------------------------------------------------------
+
+def plotPSD(binsSizes, binsProc):
+    """
+    This function can be called to plot the evolution of the psd.
+    """
+    plt.figure(1, figsize=(16,9))
+    plt.plot(binsSizes, binsProc)
+    plt.title('Particle Size Distribution')
+    plt.savefig('output/PSD.png')
+    plt.close()
+
+#-------------------------------------------------------------------------------
+# start simulation
+#-------------------------------------------------------------------------------
+
+O.run()
+</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+
+<dt id="demic.compute_ratio_overlap_radius"><code class="name flex">
+<span>def <span class="ident">compute_ratio_overlap_radius</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Compute the mean ratio of the overlap and radius.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def compute_ratio_overlap_radius():
+    '''
+    Compute the mean ratio of the overlap and radius.
+    '''
+    overlap_average = 0
+    radius_average = 0
+    n_average = 0
+    # iterate on interactions
+    for i in O.interactions:
+        # only grain-grain contact can be cemented
+        if isinstance(O.bodies[i.id1].shape, Sphere) and isinstance(O.bodies[i.id2].shape, Sphere) :
+            # compute overlap of this interaction
+            b1_x = O.bodies[i.id1].state.pos[0]
+            b1_y = O.bodies[i.id1].state.pos[1]
+            b2_x = O.bodies[i.id2].state.pos[0]
+            b2_y = O.bodies[i.id2].state.pos[1]
+            dist = math.sqrt((b1_x-b2_x)**2+(b1_y-b2_y)**2)
+            overlap = O.bodies[i.id1].shape.radius + O.bodies[i.id2].shape.radius - dist
+            # compute mean value
+            overlap_average = overlap_average + overlap
+            radius_average = radius_average + (O.bodies[i.id1].shape.radius+O.bodies[i.id2].shape.radius)/2
+            n_average = n_average + 1
+    if n_average > 0:
+        # plot and return the average
+        overlap_average = overlap_average/n_average
+        radius_average = radius_average/n_average
+        return overlap_average/radius_average
+    else :
+        return 1
+</code></pre>
+</details>
+</dd>
+
+<dt id="demic.checkUnbalanced_ir_ic"><code class="name flex">
+<span>def <span class="ident">checkUnbalanced_ir_ic</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Increase particle radius until a steady-state is found.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def checkUnbalanced_ir_ic():
+    '''
+    Increase particle radius until a steady-state is found.
+    '''
+    # the rest will be run only if unbalanced is < .1 (stabilized packing)
+    # Compute the ratio of mean summary force on bodies and mean force magnitude on interactions.
+    if (2<=avgNumInteractions()) and (avgNumInteractions()<=4) and (unbalancedForce() > unbalancedForce_criteria) :
+        return
+
+    if (avgNumInteractions()<4):   
+        # increase the radius of particles
+        i_L_r = 0
+        for b in O.bodies :
+            if isinstance(b.shape, Sphere):
+                growParticle(b.id, (b.shape.radius+L_dr[i_L_r])/b.shape.radius)
+                i_L_r = i_L_r + 1
+        # update the dt as the radii change
+        O.dt = factor_dt_crit * PWaveTimeStep()
+        return
+        
+    # plot the psd
+    binsSizes, binsProc, binsSumCum = psd(bins=10)
+    plotPSD(binsSizes, binsProc)
+    
+    # close the simulation
+    stopLoad()
+</code></pre>
+</details>
+</dd>
+
+<dt id="demic.saveData"><code class="name flex">
+<span>def <span class="ident">saveData</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Save data in .txt file during the ic.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def saveData():
+    """
+    Save data in .txt file during the ic.
+    """
+    # pp data
+    L_pos = []
+    L_radius = []
+    for b in O.bodies :
+        if isinstance(b.shape, Sphere):
+            L_pos.append([b.state.pos[0], b.state.pos[1]])
+            L_radius.append(b.shape.radius)
+
+    # create dict
+    dict_ic = {'L_pos': L_pos, 'L_radius': L_radius}
+
+    # save
+    with open('data/dict_ic', 'wb') as handle:
+        pickle.dump(dict_ic, handle, protocol=pickle.HIGHEST_PROTOCOL)
+</code></pre>
+</details>
+</dd>
+
+<dt id="demic.stopLoad"><code class="name flex">
+<span>def <span class="ident">stopLoad</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Close simulation.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def stopLoad():
+    """
+    Close simulation.
+    """
+    # save at the converged iteration
+    saveData()
+    # close yade
+    O.pause()
+
+    # give order to the user
+    print("\nyou can type 'quit()' in the terminal")
+</code></pre>
+</details>
+</dd>
+
+<dt id="demic.plotPSD"><code class="name flex">
+<span>def <span class="ident">plotPSD</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>This function can be called to plot the evolution of the psd.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+def plotPSD(binsSizes, binsProc):
+    """
+    This function can be called to plot the evolution of the psd.
+    """
+    plt.figure(1, figsize=(16,9))
+    plt.plot(binsSizes, binsProc)
+    plt.title('Particle Size Distribution')
+    plt.savefig('output/PSD.png')
+    plt.close()
+</code></pre>
+</details>
+</dd>
+
+</dl>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="demic.compute_ratio_overlap_radius" href="#demic.compute_ratio_overlap_radius">compute_ratio_overlap_radius</a></code></li>
+<li><code><a title="demic.checkUnbalanced_ir_ic" href="#demic.checkUnbalanced_ir_ic">checkUnbalanced_ir_ic</a></code></li>
+<li><code><a title="demic.saveData" href="#demic.saveData">saveData</a></code></li>
+<li><code><a title="demic.stopLoad" href="#demic.stopLoad">stopLoad</a></code></li>
+</ul>
+</li>
+</ul>
+<br>
+<a href="https://alexsacmorane.github.io/pf/sintering">Sintering</a><br>
+<a href="https://alexsacmorane.github.io/pf">PF</a><br>
+<a href="https://alexsacmorane.github.io">Home</a>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>
