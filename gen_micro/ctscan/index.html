@@ -1,0 +1,760 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>CT-scans API documentation</title>
+<meta name="description" content="@author: Alexandre Sac--Morane
+alexandre.sac-morane@enpc.fr …" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title"><code>CT-scans</code></h1>
+</header>
+<section id="section-intro">
+<p>@author: Alexandre Sac&ndash;Morane
+alexandre.sac-morane@enpc.fr</p>
+<img src="../SandAtlas.gif" alt="Visualization of a microstructure from a CT-Scans" width="742" height="300"><br>
+<p>Use CT-scans to generate a synthetic microstructure.<br>
+These images can be processed to increase/reduce artificially the phases.</p>
+<p>Example with a CT-scan from the database <a href="https://sand-atlas.scigem.com/">SandAtlas</a>.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+#-------------------------------------------------------------------------------
+# Librairies
+#-------------------------------------------------------------------------------
+
+import skfmm, pickle
+import numpy as np
+import matplotlib.pyplot as plt
+from skimage import io
+
+from scipy.ndimage import label
+
+#-------------------------------------------------------------------------------
+# Functions
+#-------------------------------------------------------------------------------
+
+from fast_marching_tortuosity import compute_tortuosity_fast_marching
+from numpy_to_vtk import write_vtk_structured_points
+from compute_minkowski import compute_minkowski
+
+#-------------------------------------------------------------------------------
+# User
+#-------------------------------------------------------------------------------
+
+dim_sample = 150 # -
+dim_interface = 8 # -
+
+# couscous, hotsun, leca
+type_im = 'hotsun'
+
+sample_id = '00'
+
+#-------------------------------------------------------------------------------
+# Read ct-scans
+#-------------------------------------------------------------------------------
+
+image = io.imread('SandAtlas/SandAtlas_'+type_im+'.tif')
+    
+#-------------------------------------------------------------------------------
+# Segmentation
+#-------------------------------------------------------------------------------
+
+if False : # set False if not necessary
+    fig, ax1 = plt.subplots(1, 1, figsize=[16, 9])
+    ax1.hist(image.flatten(), bins=25, edgecolor='k')
+    ax1.set_title('Histogram of the Image')
+    plt.savefig('SandAtlas/hist_'+type_im+'.png')
+    plt.close()
+
+
+# define the threshold for the segmentation
+threshold = 35000
+
+# binearization
+M_bin = np.zeros(image.shape, dtype='bool')
+M_bin[image < threshold] = 0
+M_bin[image >= threshold] = 1
+
+#-------------------------------------------------------------------------------
+# Extract and Plot
+#-------------------------------------------------------------------------------
+
+fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2,2, figsize=(16,9), num=1)
+ax1.imshow(M_bin[100:-100, 280:-280, int(M_bin.shape[2]/2)])
+ax2.imshow(M_bin[100:-100, int(M_bin.shape[2]/2), 280:-280])
+ax3.imshow(M_bin[int(M_bin.shape[2]/2), 280:-280, 280:-280])
+plt.savefig('SandAtlas/plot_'+type_im+'.png')
+plt.close()
+
+M_bin = M_bin[100:-100, 280:-280, 280:-280]
+
+print(M_bin.shape)
+
+#-------------------------------------------------------------------------------
+# Reduce the size of the array for a 150x150x150
+#-------------------------------------------------------------------------------
+
+reduction_factor = min(M_bin.shape[0]/150, M_bin.shape[1]/150, M_bin.shape[2]/150)
+reduction_factor = int(reduction_factor)
+
+i_start = int((M_bin.shape[0]/reduction_factor-150)/2)
+j_start = int((M_bin.shape[1]/reduction_factor-150)/2)
+k_start = int((M_bin.shape[1]/reduction_factor-150)/2)
+
+M_bin_cond = np.zeros((150, 150, 150), dtype='float')
+for i in range(150):
+    for j in range(150):
+        for k in range(150):
+            M_extract = M_bin[i_start+i*reduction_factor:i_start+(i+1)*reduction_factor,
+                              j_start+j*reduction_factor:j_start+(j+1)*reduction_factor,
+                              k_start+k*reduction_factor:k_start+(k+1)*reduction_factor]
+            if np.mean(M_extract) > 0.5:
+                M_bin_cond[i, j, k] = 1
+            else: 
+                M_bin_cond[i, j, k] = 0 
+
+fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2,2, figsize=(16,9), num=1)
+ax1.imshow(M_bin_cond[:, :, int(M_bin_cond.shape[2]/2)])
+ax2.imshow(M_bin_cond[:, int(M_bin_cond.shape[2]/2), :])
+ax3.imshow(M_bin_cond[int(M_bin_cond.shape[2]/2), :, :])
+plt.savefig('SandAtlas/plot_cond_'+type_im+'.png')
+plt.close()
+
+print(M_bin_cond.shape)
+
+#-------------------------------------------------------------------------------
+# Read the binary microstructure
+#-------------------------------------------------------------------------------
+
+M_bin = M_bin_cond.copy()
+
+#-------------------------------------------------------------------------------
+# Compute the sdf 
+#-------------------------------------------------------------------------------
+
+M_sd = skfmm.distance(M_bin-0.5, dx = np.array([1, 1, 1]))
+
+#-------------------------------------------------------------------------------
+# Compute the microstructure
+#-------------------------------------------------------------------------------
+
+Microstructure = np.zeros((dim_sample, dim_sample, dim_sample))
+for i_x in range(dim_sample):
+    for i_y in range(dim_sample):
+        for i_z in range(dim_sample):
+            if M_sd[i_x, i_y, i_z] > dim_interface/2: # inside the grain
+                Microstructure[i_x, i_y, i_z] = 1
+            elif M_sd[i_x, i_y, i_z] < -dim_interface/2: # outside the grain
+                Microstructure[i_x, i_y, i_z] = 0
+            else : # in the interface
+                Microstructure[i_x, i_y, i_z] = 0.5 + M_sd[i_x, i_y, i_z]/dim_interface
+                
+#-------------------------------------------------------------------------------
+# Output
+#-------------------------------------------------------------------------------
+
+# plot
+#fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2,2, figsize=(16,9),num=1)
+#ax1.imshow(Microstructure[int(dim_sample//2), :, :], cmap='Greys', vmin=0, vmax=1)
+#ax1.set_xlabel('Z axis')
+#ax1.set_ylabel('Y axis')
+#ax2.imshow(Microstructure[:, int(dim_sample//2), :], cmap='Greys', vmin=0, vmax=1)
+#ax2.set_xlabel('Z axis')
+#ax2.set_ylabel('X axis')
+#ax3.imshow(Microstructure[:, :, int(dim_sample//2)], cmap='Greys', vmin=0, vmax=1)
+#ax3.set_xlabel('Y axis')
+#ax3.set_ylabel('X axis')
+#plt.savefig('plot_microstructure.png')
+#plt.close()
+
+# save
+dict_fft = {'M_microstructure': Microstructure}
+#with open('fft/SandAtlas/sa_'+ type_im +'_' + sample_id, 'wb') as handle:
+with open('fft/SandAtlas/gs_'+ str(dim_interface), 'wb') as handle:
+    pickle.dump(dict_fft, handle, protocol=pickle.HIGHEST_PROTOCOL)
+
+
+raise ValueError('stop')
+# vtk file
+# change the array structure to verify the function
+Microstructure_vtk = np.transpose(Microstructure, (2, 1, 0))
+write_vtk_structured_points('vtk/SandAtlas/sa_'+ type_im +'_' + sample_id + '.vtk', Microstructure_vtk, spacing=(1.0, 1.0, 1.0), origin=(0, 0, 0), binary=False)  
+
+#-------------------------------------------------------------------------------
+# Check the connectivity and extract the connected pores
+#-------------------------------------------------------------------------------
+
+print("Check the pore connectivity")
+
+# Extension of the sample (considering the periodic condition)
+# this operation is conducted on the 3 axes
+M_bin_extended_x = np.zeros((dim_sample, dim_sample+2*dim_sample, dim_sample+2*dim_sample))
+for c in range(3):
+    for h in range(3):
+        M_bin_extended_x[:, c*dim_sample:(c+1)*dim_sample, h*dim_sample:(h+1)*dim_sample] = M_bin
+M_bin_extended_y = np.zeros((dim_sample+2*dim_sample, dim_sample, dim_sample+2*dim_sample))
+for l in range(3):
+    for h in range(3):
+        M_bin_extended_y[l*dim_sample:(l+1)*dim_sample, :, h*dim_sample:(h+1)*dim_sample] = M_bin
+M_bin_extended_z = np.zeros((dim_sample+2*dim_sample, dim_sample+2*dim_sample, dim_sample))
+for l in range(3):
+    for c in range(3):
+        M_bin_extended_z[l*dim_sample:(l+1)*dim_sample, c*dim_sample:(c+1)*dim_sample, :] = M_bin
+
+# label the pores in the extended samples
+labelled_image_x, num_features = label(1-M_bin_extended_x)
+labelled_image_y, num_features = label(1-M_bin_extended_y)
+labelled_image_z, num_features = label(1-M_bin_extended_z)
+
+# extract sample from the labelled images
+extracted_labelled_image_x = labelled_image_x[:, dim_sample:2*dim_sample, dim_sample:2*dim_sample]
+extracted_labelled_image_y = labelled_image_y[dim_sample:2*dim_sample, :, dim_sample:2*dim_sample]
+extracted_labelled_image_z = labelled_image_z[dim_sample:2*dim_sample, dim_sample:2*dim_sample, :]
+
+# extract the faces
+face_xm = extracted_labelled_image_x[0, :, :]
+face_xp = extracted_labelled_image_x[-1, :, :]
+face_ym = extracted_labelled_image_y[:, 0, :]
+face_yp = extracted_labelled_image_y[:, -1, :]
+face_zm = extracted_labelled_image_z[:, :, 0]
+face_zp = extracted_labelled_image_z[:, :, -1]
+
+# read the unique values on each face (ignore the background 0)
+# check if a common id is present on each pair of faces
+# create a microstructure with only the connected pores
+M_inv_bin_extended_connected_x = np.zeros_like(M_bin_extended_x)
+connected_x = False
+for id_m in np.unique(face_xm)[1:]:
+    if id_m in np.unique(face_xp)[1:]:
+        connected_x = True
+        M_inv_bin_extended_connected_x = M_inv_bin_extended_connected_x + (labelled_image_x == id_m).astype(int)
+M_inv_bin_extended_connected_y = np.zeros_like(M_bin_extended_y)
+connected_y = False
+for id_m in np.unique(face_ym)[1:]:
+    if id_m in np.unique(face_yp)[1:]:
+        connected_y = True
+        M_inv_bin_extended_connected_y = M_inv_bin_extended_connected_y + (labelled_image_y == id_m).astype(int)
+M_inv_bin_extended_connected_z = np.zeros_like(M_bin_extended_z)
+connected_z = False
+for id_m in np.unique(face_zm)[1:]:
+    if id_m in np.unique(face_zp)[1:]:
+        connected_z = True  
+        M_inv_bin_extended_connected_z = M_inv_bin_extended_connected_z + (labelled_image_z == id_m).astype(int)
+if not(connected_x and connected_y and connected_z):
+    print('not connected pores in all directions')
+
+#-------------------------------------------------------------------------------
+# Check the connectivity and extract the connected solids
+#-------------------------------------------------------------------------------
+
+print("Check the solid connectivity")
+
+# label the solids in the extended samples
+labelled_image_x, num_features = label(M_bin_extended_x)
+labelled_image_y, num_features = label(M_bin_extended_y)
+labelled_image_z, num_features = label(M_bin_extended_z)
+
+# extract sample from the labelled images
+extracted_labelled_image_x = labelled_image_x[:, dim_sample:2*dim_sample, dim_sample:2*dim_sample]
+extracted_labelled_image_y = labelled_image_y[dim_sample:2*dim_sample, :, dim_sample:2*dim_sample]
+extracted_labelled_image_z = labelled_image_z[dim_sample:2*dim_sample, dim_sample:2*dim_sample, :]
+
+# extract the faces
+face_xm = extracted_labelled_image_x[0, :, :]
+face_xp = extracted_labelled_image_x[-1, :, :]
+face_ym = extracted_labelled_image_y[:, 0, :]
+face_yp = extracted_labelled_image_y[:, -1, :]
+face_zm = extracted_labelled_image_z[:, :, 0]
+face_zp = extracted_labelled_image_z[:, :, -1]
+
+# read the unique values on each face (ignore the background 0)
+# check if a common id is present on each pair of faces
+# create a microstructure with only the connected solids
+M_bin_extended_connected_x = np.zeros_like(M_bin_extended_x)
+connected_x = False
+for id_m in np.unique(face_xm)[1:]:
+    if id_m in np.unique(face_xp)[1:]:
+        connected_x = True
+        M_bin_extended_connected_x = M_bin_extended_connected_x + (labelled_image_x == id_m).astype(int)
+M_bin_extended_connected_y = np.zeros_like(M_bin_extended_y)
+connected_y = False
+for id_m in np.unique(face_ym)[1:]:
+    if id_m in np.unique(face_yp)[1:]:
+        connected_y = True
+        M_bin_extended_connected_y = M_bin_extended_connected_y + (labelled_image_y == id_m).astype(int)
+M_bin_extended_connected_z = np.zeros_like(M_bin_extended_z)
+connected_z = False
+for id_m in np.unique(face_zm)[1:]:
+    if id_m in np.unique(face_zp)[1:]:
+        connected_z = True  
+        M_bin_extended_connected_z = M_bin_extended_connected_z + (labelled_image_z == id_m).astype(int)
+if not(connected_x and connected_y and connected_z):
+    print('not connected solids in all directions')
+
+#-------------------------------------------------------------------------------
+# Minkowski functionals
+#-------------------------------------------------------------------------------
+
+print("Computing the Minkowski functionals")
+
+M0, M1, M2, M3 = compute_minkowski(M_bin)
+
+print(f'M0 (porosity) = {M0:.3f}, M1 (specific surface area) = {M1:.3e}, M2 (mean grain size) = {M2:.3e}, M3 (Euler characteristic) = {M3:.3e} \n')
+
+#-------------------------------------------------------------------------------
+# fmm
+#-------------------------------------------------------------------------------
+
+# compute the geometrical tortuosities 
+print("Computing tortuosity on x for solid")
+tau_x = compute_tortuosity_fast_marching(M_bin_extended_connected_x, extraction=[dim_sample, 2*dim_sample, dim_sample, 2*dim_sample], dx=1.0, neighborhood=6) 
+print("Computing tortuosity on y for solid")
+tau_y = compute_tortuosity_fast_marching(np.transpose(M_bin_extended_connected_y, (1, 2, 0)), extraction=[dim_sample, 2*dim_sample, dim_sample, 2*dim_sample], dx=1.0, neighborhood=6) 
+print("Computing tortuosity on z for solid")
+tau_z = compute_tortuosity_fast_marching(np.transpose(M_bin_extended_connected_z, (2, 0, 1)), extraction=[dim_sample, 2*dim_sample, dim_sample, 2*dim_sample], dx=1.0, neighborhood=6) 
+print(f"tau_x={tau_x:.3f}, tau_y={tau_y:.3f}, tau_z={tau_z:.3f}\n")
+
+print("Computing tortuosity on x for pore")
+tau_x = compute_tortuosity_fast_marching(M_inv_bin_extended_connected_x, extraction=[dim_sample, 2*dim_sample, dim_sample, 2*dim_sample], dx=1.0, neighborhood=6) 
+print("Computing tortuosity on y for pore")
+tau_y = compute_tortuosity_fast_marching(np.transpose(M_inv_bin_extended_connected_y, (1, 2, 0)), extraction=[dim_sample, 2*dim_sample, dim_sample, 2*dim_sample], dx=1.0, neighborhood=6) 
+print("Computing tortuosity on z for pore")
+tau_z = compute_tortuosity_fast_marching(np.transpose(M_inv_bin_extended_connected_z, (2, 0, 1)), extraction=[dim_sample, 2*dim_sample, dim_sample, 2*dim_sample], dx=1.0, neighborhood=6) 
+print(f"tau_x={tau_x:.3f}, tau_y={tau_y:.3f}, tau_z={tau_z:.3f}")
+</code></pre>
+</details>
+
+<p>Example with a CT-scan from the database <a href="https://www.imperial.ac.uk/earth-science/research/research-groups/pore-scale-modelling/micro-ct-images-and-networks/">Imperial</a>.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">
+#-------------------------------------------------------------------------------
+# Librairies
+#-------------------------------------------------------------------------------
+
+import skfmm, pickle, scipy
+import numpy as np
+import matplotlib.pyplot as plt
+import SimpleITK as sitk
+
+from scipy.ndimage import label
+
+#-------------------------------------------------------------------------------
+# Functions
+#-------------------------------------------------------------------------------
+
+from fast_marching_tortuosity import compute_tortuosity_fast_marching
+from numpy_to_vtk import write_vtk_structured_points
+from compute_minkowski import compute_minkowski
+
+#-------------------------------------------------------------------------------
+
+def load_itk(filename):
+    '''
+    This funciton reads a '.mhd' file using SimpleITK and return the image array, origin and spacing of the image.
+
+    # Source - https://stackoverflow.com/a/42594949
+    # Posted by savfod
+    # Retrieved 2026-03-11, License - CC BY-SA 3.0
+    '''
+    # Reads the image using SimpleITK
+    itkimage = sitk.ReadImage(filename)
+
+    # Convert the image to a  numpy array first and then shuffle the dimensions to get axis in the order z,y,x
+    ct_scan = sitk.GetArrayFromImage(itkimage)
+
+    # Read the origin of the ct_scan, will be used to convert the coordinates from world to voxel and vice versa.
+    origin = np.array(list(reversed(itkimage.GetOrigin())))
+
+    # Read the spacing along each dimension
+    spacing = np.array(list(reversed(itkimage.GetSpacing())))
+
+    return ct_scan, origin, spacing
+
+#-------------------------------------------------------------------------------
+# User
+#-------------------------------------------------------------------------------
+
+#database available
+#https://www.imperial.ac.uk/earth-science/research/research-groups/pore-scale-modelling/micro-ct-images-and-networks/ 
+
+dim_sample = 150 # -
+dim_interface = 4 # -
+
+namefile = 'Bentheimer_1000c_3p0035um'
+sample_id = '00'
+
+inv = True # if True, the microstructure is inverted (solid phase becomes pore and vice versa)
+
+# modify the microsctructure to obtain a given porosity
+pp = True 
+if pp:
+    porosity = 0.8
+
+#-------------------------------------------------------------------------------
+# Read ct-scans
+#-------------------------------------------------------------------------------
+
+M_bin, origin, spacing = load_itk('Imperial/'+namefile+'.mhd')
+
+print(M_bin.shape)
+
+#-------------------------------------------------------------------------------
+# Extract and Plot
+#-------------------------------------------------------------------------------
+
+if not pp:
+    fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2,2, figsize=(16,9), num=1)
+    ax1.imshow(M_bin[:, :, int(M_bin.shape[2]/2)])
+    ax2.imshow(M_bin[:, int(M_bin.shape[2]/2), :])
+    ax3.imshow(M_bin[int(M_bin.shape[2]/2), :, :])
+    plt.savefig('Imperial/plot_'+namefile+'.png')
+    plt.close()
+
+#-------------------------------------------------------------------------------
+# Reduce the size of the array for a 150x150x150
+#-------------------------------------------------------------------------------
+
+reduction_factor = min(M_bin.shape[0]/150, M_bin.shape[1]/150, M_bin.shape[2]/150)
+reduction_factor = int(reduction_factor)
+
+i_start = int((M_bin.shape[0]/reduction_factor-150)/2)
+j_start = int((M_bin.shape[1]/reduction_factor-150)/2)
+k_start = int((M_bin.shape[1]/reduction_factor-150)/2)
+
+M_bin_cond = np.zeros((150, 150, 150), dtype='float')
+for i in range(150):
+    for j in range(150):
+        for k in range(150):
+            M_extract = M_bin[i_start+i*reduction_factor:i_start+(i+1)*reduction_factor,
+                              j_start+j*reduction_factor:j_start+(j+1)*reduction_factor,
+                              k_start+k*reduction_factor:k_start+(k+1)*reduction_factor]
+            if np.mean(M_extract) > 0.5:
+                M_bin_cond[i, j, k] = 1
+            else: 
+                M_bin_cond[i, j, k] = 0 
+
+if not pp:
+    fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2,2, figsize=(16,9), num=1)
+    ax1.imshow(M_bin_cond[:, :, int(M_bin_cond.shape[2]/2)])
+    ax2.imshow(M_bin_cond[:, int(M_bin_cond.shape[2]/2), :])
+    ax3.imshow(M_bin_cond[int(M_bin_cond.shape[2]/2), :, :])
+    plt.savefig('Imperial/plot_cond_'+namefile+'.png')
+    plt.close()
+
+print(M_bin_cond.shape)
+
+#-------------------------------------------------------------------------------
+# Read the binary microstructure
+#-------------------------------------------------------------------------------
+
+M_bin = M_bin_cond.copy()
+
+if inv:
+    M_bin = 1 - M_bin
+
+#-------------------------------------------------------------------------------
+# Apply erosion/dilation algorithm to reach a given porosity
+#-------------------------------------------------------------------------------
+
+if pp:
+    # define the elementary structure
+    struct = np.array(np.ones((2,2,2)))
+    counter = 0
+
+    # erosion
+    if 1 - np.sum(M_bin)/dim_sample**3 < porosity:
+        while 1 - np.sum(M_bin)/dim_sample**3 < porosity:
+            M_bin_eroded = scipy.ndimage.binary_erosion(M_bin, structure=struct, border_value=1).astype(M_bin.dtype)
+            M_available = M_bin-M_bin_eroded # map of available seed 
+            i_x, i_y, i_z = np.where(M_available==1) # extract the seed
+            L_i = np.random.choice(np.arange(len(i_x)), size=100,replace=False) # pick randomly a seed
+            for i in L_i:
+                M_bin[i_x[i], i_y[i], i_z[i]] = 0 # erode
+            counter = counter + 1
+            if counter % 500 == 0:
+                print("Erosion operations:", counter, " Current porosity:", round(1-np.sum(M_bin)/(dim_sample**3),2),'/', porosity)
+        print(counter, 'erosion operations to reach the porosity')
+    # dilation
+    else :
+        while porosity < 1 - np.sum(M_bin)/dim_sample**3:
+            M_bin_dilated = scipy.ndimage.binary_dilation(M_bin, structure=struct).astype(M_bin.dtype)
+            M_available = M_bin_dilated-M_bin # map of available seed 
+            i_x, i_y, i_z = np.where(M_available==1) # extract the seed
+            L_i = np.random.choice(np.arange(len(i_x)), size=100,replace=False) # pick randomly a seed
+            for i in L_i:
+                M_bin[i_x[i], i_y[i], i_z[i]] = 1 # dilate
+            counter = counter + 1
+            if counter % 500 == 0:
+                print("Dilation operations:", counter, " Current porosity:", round(1-np.sum(M_bin)/(dim_sample**3),2),'/', porosity)
+        print(counter, 'dilation operations to reach the porosity')
+    
+#-------------------------------------------------------------------------------
+# Compute the sdf 
+#-------------------------------------------------------------------------------
+
+M_sd = skfmm.distance(M_bin-0.5, dx = np.array([1, 1, 1]))
+
+#-------------------------------------------------------------------------------
+# Compute the microstructure
+#-------------------------------------------------------------------------------
+
+Microstructure = np.zeros((dim_sample, dim_sample, dim_sample))
+for i_x in range(dim_sample):
+    for i_y in range(dim_sample):
+        for i_z in range(dim_sample):
+            if M_sd[i_x, i_y, i_z] > dim_interface/2: # inside the grain
+                Microstructure[i_x, i_y, i_z] = 1
+            elif M_sd[i_x, i_y, i_z] < -dim_interface/2: # outside the grain
+                Microstructure[i_x, i_y, i_z] = 0
+            else : # in the interface
+                Microstructure[i_x, i_y, i_z] = 0.5 + M_sd[i_x, i_y, i_z]/dim_interface
+
+print("porosity corrected:", round(1-np.sum(Microstructure)/dim_sample**3,2)) 
+              
+#-------------------------------------------------------------------------------
+# Output
+#-------------------------------------------------------------------------------
+
+# plot
+#fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2,2, figsize=(16,9),num=1)
+#ax1.imshow(Microstructure[int(dim_sample//2), :, :], cmap='Greys', vmin=0, vmax=1)
+#ax1.set_xlabel('Z axis')
+#ax1.set_ylabel('Y axis')
+#ax2.imshow(Microstructure[:, int(dim_sample//2), :], cmap='Greys', vmin=0, vmax=1)
+#ax2.set_xlabel('Z axis')
+#ax2.set_ylabel('X axis')
+#ax3.imshow(Microstructure[:, :, int(dim_sample//2)], cmap='Greys', vmin=0, vmax=1)
+#ax3.set_xlabel('Y axis')
+#ax3.set_ylabel('X axis')
+#plt.savefig('plot_microstructure.png')
+#plt.close()
+
+if not pp and not inv:
+    # save
+    dict_fft = {'M_microstructure': Microstructure}
+    with open('fft/Imperial/dict_fft_'+ sample_id, 'wb') as handle:
+        pickle.dump(dict_fft, handle, protocol=pickle.HIGHEST_PROTOCOL)
+
+    # vtk file
+    # change the array structure to verify the function
+    Microstructure_vtk = np.transpose(Microstructure, (2, 1, 0))
+    write_vtk_structured_points('vtk/Imperial/imp_'+ namefile +'_' + sample_id + '.vtk', Microstructure_vtk, spacing=(1.0, 1.0, 1.0), origin=(0, 0, 0), binary=False)  
+
+elif not pp and inv:
+    # save
+    dict_fft = {'M_microstructure': Microstructure}
+    with open('fft/Imperial_inv/dict_fft_'+ sample_id, 'wb') as handle:
+        pickle.dump(dict_fft, handle, protocol=pickle.HIGHEST_PROTOCOL)
+
+    # vtk file
+    # change the array structure to verify the function
+    Microstructure_vtk = np.transpose(Microstructure, (2, 1, 0))
+    write_vtk_structured_points('vtk/Imperial_inv/imp_inv_'+ namefile +'_' + sample_id + '.vtk', Microstructure_vtk, spacing=(1.0, 1.0, 1.0), origin=(0, 0, 0), binary=False)  
+
+elif pp and not inv:
+    # save
+    dict_fft = {'M_microstructure': Microstructure}
+    with open('fft/Imperial_pp/dict_fft_'+ sample_id, 'wb') as handle:
+        pickle.dump(dict_fft, handle, protocol=pickle.HIGHEST_PROTOCOL)
+
+    # vtk file
+    # change the array structure to verify the function
+    Microstructure_vtk = np.transpose(Microstructure, (2, 1, 0))
+    write_vtk_structured_points('vtk/Imperial_pp/imp_pp_'+ namefile +'_' + sample_id + '.vtk', Microstructure_vtk, spacing=(1.0, 1.0, 1.0), origin=(0, 0, 0), binary=False)  
+
+elif pp and inv:
+    # save
+    dict_fft = {'M_microstructure': Microstructure}
+    with open('fft/Imperial_pp_inv/dict_fft_'+ sample_id, 'wb') as handle:
+        pickle.dump(dict_fft, handle, protocol=pickle.HIGHEST_PROTOCOL)
+
+    # vtk file
+    # change the array structure to verify the function
+    Microstructure_vtk = np.transpose(Microstructure, (2, 1, 0))
+    write_vtk_structured_points('vtk/Imperial_pp_inv/imp_pp_inv_'+ namefile +'_' + sample_id + '.vtk', Microstructure_vtk, spacing=(1.0, 1.0, 1.0), origin=(0, 0, 0), binary=False)  
+
+
+#-------------------------------------------------------------------------------
+# Check the connectivity and extract the connected pores
+#-------------------------------------------------------------------------------
+
+print("Check the pore connectivity")
+
+# Extension of the sample (considering the periodic condition)
+# this operation is conducted on the 3 axes
+M_bin_extended_x = np.zeros((dim_sample, dim_sample+2*dim_sample, dim_sample+2*dim_sample))
+for c in range(3):
+    for h in range(3):
+        M_bin_extended_x[:, c*dim_sample:(c+1)*dim_sample, h*dim_sample:(h+1)*dim_sample] = M_bin
+M_bin_extended_y = np.zeros((dim_sample+2*dim_sample, dim_sample, dim_sample+2*dim_sample))
+for l in range(3):
+    for h in range(3):
+        M_bin_extended_y[l*dim_sample:(l+1)*dim_sample, :, h*dim_sample:(h+1)*dim_sample] = M_bin
+M_bin_extended_z = np.zeros((dim_sample+2*dim_sample, dim_sample+2*dim_sample, dim_sample))
+for l in range(3):
+    for c in range(3):
+        M_bin_extended_z[l*dim_sample:(l+1)*dim_sample, c*dim_sample:(c+1)*dim_sample, :] = M_bin
+
+# label the pores in the extended samples
+labelled_image_x, num_features = label(1-M_bin_extended_x)
+labelled_image_y, num_features = label(1-M_bin_extended_y)
+labelled_image_z, num_features = label(1-M_bin_extended_z)
+
+# extract sample from the labelled images
+extracted_labelled_image_x = labelled_image_x[:, dim_sample:2*dim_sample, dim_sample:2*dim_sample]
+extracted_labelled_image_y = labelled_image_y[dim_sample:2*dim_sample, :, dim_sample:2*dim_sample]
+extracted_labelled_image_z = labelled_image_z[dim_sample:2*dim_sample, dim_sample:2*dim_sample, :]
+
+# extract the faces
+face_xm = extracted_labelled_image_x[0, :, :]
+face_xp = extracted_labelled_image_x[-1, :, :]
+face_ym = extracted_labelled_image_y[:, 0, :]
+face_yp = extracted_labelled_image_y[:, -1, :]
+face_zm = extracted_labelled_image_z[:, :, 0]
+face_zp = extracted_labelled_image_z[:, :, -1]
+
+# read the unique values on each face (ignore the background 0)
+# check if a common id is present on each pair of faces
+# create a microstructure with only the connected pores
+M_inv_bin_extended_connected_x = np.zeros_like(M_bin_extended_x)
+connected_x = False
+for id_m in np.unique(face_xm)[1:]:
+    if id_m in np.unique(face_xp)[1:]:
+        connected_x = True
+        M_inv_bin_extended_connected_x = M_inv_bin_extended_connected_x + (labelled_image_x == id_m).astype(int)
+M_inv_bin_extended_connected_y = np.zeros_like(M_bin_extended_y)
+connected_y = False
+for id_m in np.unique(face_ym)[1:]:
+    if id_m in np.unique(face_yp)[1:]:
+        connected_y = True
+        M_inv_bin_extended_connected_y = M_inv_bin_extended_connected_y + (labelled_image_y == id_m).astype(int)
+M_inv_bin_extended_connected_z = np.zeros_like(M_bin_extended_z)
+connected_z = False
+for id_m in np.unique(face_zm)[1:]:
+    if id_m in np.unique(face_zp)[1:]:
+        connected_z = True  
+        M_inv_bin_extended_connected_z = M_inv_bin_extended_connected_z + (labelled_image_z == id_m).astype(int)
+if not(connected_x and connected_y and connected_z):
+    print('not connected pores in all directions')
+
+#-------------------------------------------------------------------------------
+# Check the connectivity and extract the connected solids
+#-------------------------------------------------------------------------------
+
+print("Check the solid connectivity")
+
+# label the solids in the extended samples
+labelled_image_x, num_features = label(M_bin_extended_x)
+labelled_image_y, num_features = label(M_bin_extended_y)
+labelled_image_z, num_features = label(M_bin_extended_z)
+
+# extract sample from the labelled images
+extracted_labelled_image_x = labelled_image_x[:, dim_sample:2*dim_sample, dim_sample:2*dim_sample]
+extracted_labelled_image_y = labelled_image_y[dim_sample:2*dim_sample, :, dim_sample:2*dim_sample]
+extracted_labelled_image_z = labelled_image_z[dim_sample:2*dim_sample, dim_sample:2*dim_sample, :]
+
+# extract the faces
+face_xm = extracted_labelled_image_x[0, :, :]
+face_xp = extracted_labelled_image_x[-1, :, :]
+face_ym = extracted_labelled_image_y[:, 0, :]
+face_yp = extracted_labelled_image_y[:, -1, :]
+face_zm = extracted_labelled_image_z[:, :, 0]
+face_zp = extracted_labelled_image_z[:, :, -1]
+
+# read the unique values on each face (ignore the background 0)
+# check if a common id is present on each pair of faces
+# create a microstructure with only the connected solids
+M_bin_extended_connected_x = np.zeros_like(M_bin_extended_x)
+connected_x = False
+for id_m in np.unique(face_xm)[1:]:
+    if id_m in np.unique(face_xp)[1:]:
+        connected_x = True
+        M_bin_extended_connected_x = M_bin_extended_connected_x + (labelled_image_x == id_m).astype(int)
+M_bin_extended_connected_y = np.zeros_like(M_bin_extended_y)
+connected_y = False
+for id_m in np.unique(face_ym)[1:]:
+    if id_m in np.unique(face_yp)[1:]:
+        connected_y = True
+        M_bin_extended_connected_y = M_bin_extended_connected_y + (labelled_image_y == id_m).astype(int)
+M_bin_extended_connected_z = np.zeros_like(M_bin_extended_z)
+connected_z = False
+for id_m in np.unique(face_zm)[1:]:
+    if id_m in np.unique(face_zp)[1:]:
+        connected_z = True  
+        M_bin_extended_connected_z = M_bin_extended_connected_z + (labelled_image_z == id_m).astype(int)
+if not(connected_x and connected_y and connected_z):
+    print('not connected solids in all directions')
+
+#-------------------------------------------------------------------------------
+# Minkowski functionals
+#-------------------------------------------------------------------------------
+
+print("Computing the Minkowski functionals")
+
+M0, M1, M2, M3 = compute_minkowski(M_bin)
+
+print(f'M0 (porosity) = {M0:.3f}, M1 (specific surface area) = {M1:.3e}, M2 (mean grain size) = {M2:.3e}, M3 (Euler characteristic) = {M3:.3e} \n')
+
+#-------------------------------------------------------------------------------
+# fmm
+#-------------------------------------------------------------------------------
+
+# compute the geometrical tortuosities 
+print("Computing tortuosity on x for solid")
+tau_x = compute_tortuosity_fast_marching(M_bin_extended_connected_x, extraction=[dim_sample, 2*dim_sample, dim_sample, 2*dim_sample], dx=1.0, neighborhood=6) 
+print("Computing tortuosity on y for solid")
+tau_y = compute_tortuosity_fast_marching(np.transpose(M_bin_extended_connected_y, (1, 2, 0)), extraction=[dim_sample, 2*dim_sample, dim_sample, 2*dim_sample], dx=1.0, neighborhood=6) 
+print("Computing tortuosity on z for solid")
+tau_z = compute_tortuosity_fast_marching(np.transpose(M_bin_extended_connected_z, (2, 0, 1)), extraction=[dim_sample, 2*dim_sample, dim_sample, 2*dim_sample], dx=1.0, neighborhood=6) 
+print(f"tau_x={tau_x:.3f}, tau_y={tau_y:.3f}, tau_z={tau_z:.3f}\n")
+
+print("Computing tortuosity on x for pore")
+tau_x = compute_tortuosity_fast_marching(M_inv_bin_extended_connected_x, extraction=[dim_sample, 2*dim_sample, dim_sample, 2*dim_sample], dx=1.0, neighborhood=6) 
+print("Computing tortuosity on y for pore")
+tau_y = compute_tortuosity_fast_marching(np.transpose(M_inv_bin_extended_connected_y, (1, 2, 0)), extraction=[dim_sample, 2*dim_sample, dim_sample, 2*dim_sample], dx=1.0, neighborhood=6) 
+print("Computing tortuosity on z for pore")
+tau_z = compute_tortuosity_fast_marching(np.transpose(M_inv_bin_extended_connected_z, (2, 0, 1)), extraction=[dim_sample, 2*dim_sample, dim_sample, 2*dim_sample], dx=1.0, neighborhood=6) 
+print(f"tau_x={tau_x:.3f}, tau_y={tau_y:.3f}, tau_z={tau_z:.3f}")
+</code></pre>
+</details>
+
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+</ul>
+<br>
+<a href="https://alexsacmorane.github.io/gen_micro">Generation of microstructures</a><br>
+<a href="https://alexsacmorane.github.io">Home</a>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>
