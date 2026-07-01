@@ -2,7 +2,6 @@
 [Personnal website](https://alexsacmorane.github.io)
 
 # WEBSITE to finish
-- Add Generation of microstructures
 - Add data and code of Tengattini 2023
 - add teaching section
 - see with Maria to add the fft ? 
