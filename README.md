@@ -5,9 +5,13 @@
 - Add data and code of Tengattini 2023
 - Add code for the cyclic loading
 - Add links to the website of Redback (for PF and PFDEM)
+- Add code for Proswell 2D
+- Add code for Tortuosity
+- Add code for Hertz
 
 # Article to add
 - Redback
 - TC105 2RRA
 - DEM/PF debonding (elastic properties)
 - Tortuosity
+- Hertz
